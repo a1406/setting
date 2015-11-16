@@ -292,6 +292,12 @@
   (bc-bookmarks-restore)
   )
 
+(defun bc-save ()
+  "save."
+  (interactive)
+  (bc-bookmarks-save)
+  )
+
 (defun bc-file (arg)
   "Prompt user to enter a file path, with file name completion and input history support."
   (interactive (list (read-file-name "Open directory:")) )
@@ -563,7 +569,7 @@ It's the position (point) for normal buffer and (info-node-name point) for Info 
         (insert "- ------- ------------  ---------------------------------\n")
         (mapc
          (lambda (bookmark)
-           (insert (format " %s%-7s %-12s  %s\n"
+           (insert (format " %s%-10s %-12s  %s\n"
                            (cond ((eq index *bc-current*) ">") (t " "))
                            (symbol-name (bc-bookmark-type bookmark))
                            (bc-bookmark-position-to-str bookmark) 
