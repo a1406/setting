@@ -1,8 +1,17 @@
 * ngx_stream_proxy_process
 ** 使用场景
 *** ngx_stream_proxy_handler[412]  if (ngx_stream_proxy_process(s, 0, 0) != NGX_OK) {
-接受连接，注册读事件
+    接受连接，注册读事件
 *** ngx_stream_proxy_init_upstream[566] if (ngx_stream_proxy_process(s, 1, 0) != NGX_OK) {
+    upstream连接成功的时候调用
 *** ngx_stream_proxy_init_upstream[570] ngx_stream_proxy_process(s, 0, 1);
+    upstream连接成功的时候调用
 *** ngx_stream_proxy_process_connection[948] ngx_stream_proxy_process(s, from_upstream, ev->write);
-接受数据
+    接受数据
+
+* ngx_stream_proxy_connect  向upstream发起连接
+**  连接的时候，完成的回调在 ngx_stream_proxy_connect_handler
+    如果连接成功，那么调用ngx_stream_proxy_init_upstream
+
+** ngx_stream_proxy_init_upstream
+    将读写事件的回调设置成ngx_stream_proxy_upstream_handler; 然后调用ngx_stream_proxy_process
