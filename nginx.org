@@ -1,3 +1,54 @@
+* 事件定义
+** 事件列表
+总共有如下事件
+#define ngx_process_events   ngx_event_actions.process_events
+#define ngx_done_events      ngx_event_actions.done
+
+#define ngx_add_event        ngx_event_actions.add
+#define ngx_del_event        ngx_event_actions.del
+#define ngx_add_conn         ngx_event_actions.add_conn
+#define ngx_del_conn         ngx_event_actions.del_conn
+
+#define ngx_notify           ngx_event_actions.notify
+
+#define ngx_add_timer        ngx_event_add_timer
+#define ngx_del_timer        ngx_event_del_timer
+
+** ngx_process_events
+处理事件的主逻辑循环，被ngx_process_events_and_timers调用
+
+** ngx_done_events
+无处使用
+** ngx_add_event
+添加事件
+** ngx_del_event
+删除事件
+** ngx_add_conn
+   添加连接, 如果有该接口，框架就不会调用ngx_add_event了
+** ngx_del_conn
+连接断开, 如果有该接口，框架就不会调用ngx_del_event了
+** ngx_notify
+多线程使用
+** ngx_add_timer
+添加定时器事件
+** ngx_del_timer
+删除定时器事件
+
+* io接口
+** io接口列表
+有如下io接口
+#define ngx_recv             ngx_io.recv
+#define ngx_recv_chain       ngx_io.recv_chain
+#define ngx_udp_recv         ngx_io.udp_recv
+#define ngx_send             ngx_io.send
+#define ngx_send_chain       ngx_io.send_chain
+
+** ngx_recv
+** ngx_recv_chain
+** ngx_udp_recv
+** ngx_send
+** ngx_send_chain
+
 * 监听网络
 ** 调用ngx_create_listening向cycle->listening.elts数组添加元素，之后ngx_event_process_init函数便会listen，
 ** 并且注册ngx_event_accept;为read的handle，这样在有连接进来的时候，就会调用ngx_event_accept了,如下
@@ -37,6 +88,9 @@
 #3  0x0000000000439226 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
 #4  0x000000000040395b in main (argc=5, argv=0x7fffffffe388) at src/core/nginx.c:354
 
+** 在连接完成后，会调用ngx_listening_t的handler，如下
+        ls->handler(c);
+该handler应该在ngx_create_listening完成的时候设置, 在handler里面要做诸如注册新fd的读事件等事情, 如ngx_stream_init_connection
 
 * 接收数据
 ** 在ngx_event_accept中注册读写接口
@@ -64,7 +118,6 @@
 #8  0x000000000042d2f2 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
 #9  0x0000000000439226 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
 #10 0x000000000040395b in main (argc=5, argv=0x7fffffffe388) at src/core/nginx.c:354
-
 
 
 * 发送数据
