@@ -21,4 +21,59 @@
 #8  0x000000000041ca62 in ngx_init_cycle (old_cycle=0x7fffffffe090) at src/core/ngx_cycle.c:268
 #9  0x00000000004035aa in main (argc=5, argv=0x7fffffffe388) at src/core/nginx.c:266
 
+* 接受连接
+** 在ngx_event_process_init中注册了读事件以及读事件的回调，如下
+            rev->handler = ngx_event_accept;
 
+            if (ngx_use_accept_mutex) {
+                continue;
+            }
+
+            if (ngx_add_event(rev, NGX_READ_EVENT, 0) == NGX_ERROR) {
+
+#0  ngx_event_accept (ev=0x747210) at src/event/ngx_event_accept.c:20
+#1  0x000000000043cad7 in ngx_epoll_process_events (cycle=0x7261c0, timer=18446744073709551615, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#2  0x000000000042d2f2 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#3  0x0000000000439226 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#4  0x000000000040395b in main (argc=5, argv=0x7fffffffe388) at src/core/nginx.c:354
+
+
+* 接收数据
+** 在ngx_event_accept中注册读写接口
+        c->recv = ngx_recv;
+        c->send = ngx_send;
+
+#0  ngx_unix_recv (c=0x7ffff7fac1b0, buf=0x72a180 "abc", size=16384) at src/os/unix/ngx_recv.c:136
+#1  0x00000000004d3a15 in ngx_stream_proxy_process (s=0x7254e0, from_upstream=0, do_write=0) at src/stream/ngx_stream_proxy_module.c:1108
+#2  0x00000000004d35a8 in ngx_stream_proxy_process_connection (ev=0x7472d0, from_upstream=0) at src/stream/ngx_stream_proxy_module.c:948
+#3  0x00000000004d335d in ngx_stream_proxy_downstream_handler (ev=0x7472d0) at src/stream/ngx_stream_proxy_module.c:877
+#4  0x000000000043cad7 in ngx_epoll_process_events (cycle=0x7261c0, timer=600000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#5  0x000000000042d2f2 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#6  0x0000000000439226 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#7  0x000000000040395b in main (argc=5, argv=0x7fffffffe388) at src/core/nginx.c:354
+
+** 还注册了读事件
+#0  ngx_epoll_add_event (ev=0x7472d0, event=8193, flags=2147483648) at src/event/modules/ngx_epoll_module.c:510
+#1  0x000000000042d3de in ngx_handle_read_event (rev=0x7472d0, flags=0) at src/event/ngx_event.c:271
+#2  0x00000000004d3c40 in ngx_stream_proxy_process (s=0x7254e0, from_upstream=0, do_write=0) at src/stream/ngx_stream_proxy_module.c:1158
+#3  0x00000000004d2aa3 in ngx_stream_proxy_handler (s=0x7254e0) at src/stream/ngx_stream_proxy_module.c:412
+#4  0x00000000004d1325 in ngx_stream_init_session (c=0x7ffff7fac1b0) at src/stream/ngx_stream_handler.c:231
+#5  0x00000000004d1276 in ngx_stream_init_connection (c=0x7ffff7fac1b0) at src/stream/ngx_stream_handler.c:210
+#6  0x0000000000430730 in ngx_event_accept (ev=0x747210) at src/event/ngx_event_accept.c:356
+#7  0x000000000043cad7 in ngx_epoll_process_events (cycle=0x7261c0, timer=18446744073709551615, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#8  0x000000000042d2f2 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#9  0x0000000000439226 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#10 0x000000000040395b in main (argc=5, argv=0x7fffffffe388) at src/core/nginx.c:354
+
+
+
+* 发送数据
+** 
+#0  ngx_unix_send (c=0x7ffff7fac280, buf=0x72a180 "dsf", size=3) at src/os/unix/ngx_send.c:20
+#1  0x00000000004d3880 in ngx_stream_proxy_process (s=0x7254e0, from_upstream=0, do_write=1) at src/stream/ngx_stream_proxy_module.c:1070
+#2  0x00000000004d35a8 in ngx_stream_proxy_process_connection (ev=0x7472d0, from_upstream=0) at src/stream/ngx_stream_proxy_module.c:948
+#3  0x00000000004d335d in ngx_stream_proxy_downstream_handler (ev=0x7472d0) at src/stream/ngx_stream_proxy_module.c:877
+#4  0x000000000043cad7 in ngx_epoll_process_events (cycle=0x7261c0, timer=600000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#5  0x000000000042d2f2 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#6  0x0000000000439226 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#7  0x000000000040395b in main (argc=5, argv=0x7fffffffe388) at src/core/nginx.c:354
