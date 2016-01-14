@@ -1,3 +1,71 @@
+* http状态
+typedef enum {
+    NGX_HTTP_INITING_REQUEST_STATE = 0,
+    NGX_HTTP_READING_REQUEST_STATE,
+    NGX_HTTP_PROCESS_REQUEST_STATE,
+
+    NGX_HTTP_CONNECT_UPSTREAM_STATE,
+    NGX_HTTP_WRITING_UPSTREAM_STATE,
+    NGX_HTTP_READING_UPSTREAM_STATE,
+
+    NGX_HTTP_WRITING_REQUEST_STATE,
+    NGX_HTTP_LINGERING_CLOSE_STATE,
+    NGX_HTTP_KEEPALIVE_STATE
+} ngx_http_state_e;
+
+**     NGX_HTTP_READING_REQUEST_STATE
+*** 设置： ngx_http_create_request
+*** 来源  ngx_http_wait_request_handler
+
+**     NGX_HTTP_PROCESS_REQUEST_STATE
+*** 设置  ngx_http_process_request_headers
+*** 来源  ngx_http_process_request_line
+*** 后续
+            r->http_state = NGX_HTTP_PROCESS_REQUEST_STATE;
+
+            rc = ngx_http_process_request_header(r);
+
+            if (rc != NGX_OK) {
+                return;
+            }
+
+            ngx_http_process_request(r);
+
+**     NGX_HTTP_WRITING_REQUEST_STATE
+*** 设置 ngx_http_set_write_handler
+*** 来源 ngx_http_finalize_request
+*** 后续
+    r->http_state = NGX_HTTP_WRITING_REQUEST_STATE;
+
+    r->read_event_handler = r->discard_body ?
+                                ngx_http_discarded_request_body_handler:
+                                ngx_http_test_reading;
+    r->write_event_handler = ngx_http_writer;
+
+#if (NGX_HTTP_V2)
+    if (r->stream) {
+        return NGX_OK;
+    }
+#endif
+
+    wev = r->connection->write;
+
+    if (wev->ready && wev->delayed) {
+        return NGX_OK;
+    }
+
+    clcf = ngx_http_get_module_loc_conf(r, ngx_http_core_module);
+    if (!wev->delayed) {
+        ngx_add_timer(wev, clcf->send_timeout);
+    }
+
+    if (ngx_handle_write_event(wev, clcf->send_lowat) != NGX_OK) {
+        ngx_http_close_request(r, 0);
+        return NGX_ERROR;
+    }
+
+
+
 * 监听网络
 #0  ngx_create_listening (cf=0x7fffffffdee0, sockaddr=0x72ab40, socklen=16) at src/core/ngx_connection.c:27
 #1  0x0000000000441216 in ngx_http_add_listening (cf=0x7fffffffdee0, addr=0x72ab40) at src/http/ngx_http.c:1766
@@ -8,3 +76,19 @@
 #6  0x00000000004207c2 in ngx_conf_parse (cf=0x7fffffffdee0, filename=0x726370) at src/core/ngx_conf_file.c:283
 #7  0x000000000041ca56 in ngx_init_cycle (old_cycle=0x7fffffffe0b0) at src/core/ngx_cycle.c:268
 #8  0x00000000004035aa in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:266
+
+
+* ngx_http_init_connection(ngx_connection_t *c)
+    rev = c->read;
+    rev->handler = ngx_http_wait_request_handler;
+    c->write->handler = ngx_http_empty_handler;
+
+* ngx_http_wait_request_handler
+    c->data = ngx_http_create_request(c);
+    if (c->data == NULL) {
+        ngx_http_close_connection(c);
+        return;
+    }
+
+    rev->handler = ngx_http_process_request_line;
+    ngx_http_process_request_line(rev);
