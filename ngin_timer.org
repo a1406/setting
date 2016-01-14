@@ -1,0 +1,17 @@
+* ngx_event_add_timer
+** 计算时间，设置进event的timer.key字段, timer是一个红黑树节点对象
+** 将event插入红黑树ngx_event_timer_rbtree
+** 设置event的timer_set标志
+
+* ngx_event_timer_rbtree
+** 全局变量 
+** ngx_event_expire_timers中找到所有超时event，调用event的事件
+        ev->timer_set = 0;
+
+        ev->timedout = 1;
+
+        ev->handler(ev);
+** ngx_event_expire_timers被ngx_process_events_and_timers调用
+   每次先通过ngx_event_find_timer计算要等待的时间，然后以此做参数调用ngx_process_events
+
+
