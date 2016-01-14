@@ -1,0 +1,7 @@
+* 接受连接
+** ngx_mail_init_connection
+** ngx_mail_init_session
+    c->write->handler = ngx_mail_send;
+
+    cscf->protocol->init_session(s, c);
+
