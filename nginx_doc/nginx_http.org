@@ -92,3 +92,168 @@ typedef enum {
 
     rev->handler = ngx_http_process_request_line;
     ngx_http_process_request_line(rev);
+
+* 发送数据
+  ngx_http_request_handler
+
+
+* todo
+#0  ngx_epoll_add_connection (c=0x7ffff7fac280) at src/event/modules/ngx_epoll_module.c:622
+#1  0x0000000000430f15 in ngx_event_connect_peer (pc=0x72c9d0) at src/event/ngx_event_connect.c:108
+#2  0x000000000046bfc7 in ngx_http_upstream_connect (r=0x72b9e0, u=0x72c9c0) at src/http/ngx_http_upstream.c:1346
+#3  0x000000000046abf3 in ngx_http_upstream_init_request (r=0x72b9e0) at src/http/ngx_http_upstream.c:755
+#4  0x000000000046a116 in ngx_http_upstream_init (r=0x72b9e0) at src/http/ngx_http_upstream.c:506
+#5  0x000000000045e6e7 in ngx_http_read_client_request_body (r=0x72b9e0, post_handler=0x46a02c <ngx_http_upstream_init>) at src/http/ngx_http_request_body.c:89
+#6  0x00000000004a0aec in ngx_http_proxy_handler (r=0x72b9e0) at src/http/modules/ngx_http_proxy_module.c:913
+#7  0x000000000044360b in ngx_http_core_content_phase (r=0x72b9e0, ph=0x73f510) at src/http/ngx_http_core_module.c:1363
+#8  0x0000000000442015 in ngx_http_core_run_phases (r=0x72b9e0) at src/http/ngx_http_core_module.c:840
+#9  0x0000000000441f83 in ngx_http_handler (r=0x72b9e0) at src/http/ngx_http_core_module.c:823
+#10 0x00000000004511a0 in ngx_http_process_request (r=0x72b9e0) at src/http/ngx_http_request.c:1911
+#11 0x000000000044fd67 in ngx_http_process_request_headers (rev=0x744168) at src/http/ngx_http_request.c:1342
+#12 0x000000000044f147 in ngx_http_process_request_line (rev=0x744168) at src/http/ngx_http_request.c:1022
+#13 0x0000000000453968 in ngx_http_keepalive_handler (rev=0x744168) at src/http/ngx_http_request.c:3196
+#14 0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=28100, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#15 0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#16 0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#17 0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
+
+* ngx_http_run_posted_requests
+** ngx_http_process_request
+#0  ngx_http_run_posted_requests (c=0x7ffff7fac0e0) at src/http/ngx_http_request.c:2210
+#1  0x00000000004511ac in ngx_http_process_request (r=0x72b9e0) at src/http/ngx_http_request.c:1913
+#2  0x000000000044fd67 in ngx_http_process_request_headers (rev=0x744168) at src/http/ngx_http_request.c:1342
+#3  0x000000000044f147 in ngx_http_process_request_line (rev=0x744168) at src/http/ngx_http_request.c:1022
+#4  0x000000000044e8a8 in ngx_http_wait_request_handler (rev=0x744168) at src/http/ngx_http_request.c:499
+#5  0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#6  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#7  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#8  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
+
+** ngx_http_run_posted_requests
+#0  ngx_http_run_posted_requests (c=0x7ffff7fac0e0) at src/http/ngx_http_request.c:2210
+#1  0x0000000000451719 in ngx_http_request_handler (ev=0x744168) at src/http/ngx_http_request.c:2198
+#2  0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#3  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#4  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#5  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
+*** 
+(gdb) p ev->write
+$1 = 0
+(gdb) p r->read_event_handler
+$2 = (ngx_http_event_handler_pt) 0x46b988 <ngx_http_upstream_rd_check_broken_connection>
+(gdb) p r->write_event_handler
+$3 = (ngx_http_event_handler_pt) 0x4521e8 <ngx_http_terminate_handler>
+
+** ngx_http_process_request
+#0  ngx_http_run_posted_requests (c=0x7ffff7fac0e0) at src/http/ngx_http_request.c:2210
+#1  0x00000000004511ac in ngx_http_process_request (r=0x72b9e0) at src/http/ngx_http_request.c:1913
+#2  0x000000000044fd67 in ngx_http_process_request_headers (rev=0x744168) at src/http/ngx_http_request.c:1342
+#3  0x000000000044f147 in ngx_http_process_request_line (rev=0x744168) at src/http/ngx_http_request.c:1022
+#4  0x000000000044e8a8 in ngx_http_wait_request_handler (rev=0x744168) at src/http/ngx_http_request.c:499
+#5  0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#6  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#7  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#8  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
+
+** ngx_http_run_posted_requests
+#0  ngx_http_run_posted_requests (c=0x7ffff7fac0e0) at src/http/ngx_http_request.c:2210
+#1  0x0000000000451719 in ngx_http_request_handler (ev=0x75e178) at src/http/ngx_http_request.c:2198
+#2  0x000000000043cc2c in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:848
+#3  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#4  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#5  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
+*** 
+(gdb) p ev->write
+$11 = 1
+(gdb) p r->write_event_handler
+$12 = (ngx_http_event_handler_pt) 0x46b9b1 <ngx_http_upstream_wr_check_broken_connection>
+(gdb) p r->read_event_handler
+$13 = (ngx_http_event_handler_pt) 0x46b988 <ngx_http_upstream_rd_check_broken_connection>
+
+** ngx_http_run_posted_requests
+#0  ngx_http_run_posted_requests (c=0x7ffff7fac0e0) at src/http/ngx_http_request.c:2210
+#1  0x000000000046b986 in ngx_http_upstream_handler (ev=0x75e1e0) at src/http/ngx_http_upstream.c:1113
+#2  0x000000000043cc2c in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:848
+#3  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#4  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#5  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
+*** 
+(gdb) p ev->write
+$14 = 1
+(gdb) p u->write_event_handler
+$15 = (ngx_http_upstream_handler_pt) 0x47122c <ngx_http_upstream_dummy_handler>
+(gdb) p u->read_event_handler
+$16 = (ngx_http_upstream_handler_pt) 0x46cfe3 <ngx_http_upstream_process_header>
+
+** ngx_http_run_posted_requests
+#0  ngx_http_run_posted_requests (c=0x7ffff7fac0e0) at src/http/ngx_http_request.c:2210
+#1  0x000000000046b986 in ngx_http_upstream_handler (ev=0x7441d0) at src/http/ngx_http_upstream.c:1113
+#2  0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#3  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#4  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#5  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
+
+*** 
+(gdb) p ev->write
+$17 = 0
+(gdb) p u->read_event_handler
+$18 = (ngx_http_upstream_handler_pt) 0x470924 <ngx_http_upstream_process_upstream>
+(gdb) p u->write_event_handler
+$19 = (ngx_http_upstream_handler_pt) 0x47122c <ngx_http_upstream_dummy_handler>
+
+** ngx_http_run_posted_requests
+#0  ngx_http_run_posted_requests (c=0x7ffff7fac0e0) at src/http/ngx_http_request.c:2210
+#1  0x00000000004511ac in ngx_http_process_request (r=0x72b9e0) at src/http/ngx_http_request.c:1913
+#2  0x000000000044fd67 in ngx_http_process_request_headers (rev=0x744168) at src/http/ngx_http_request.c:1342
+#3  0x000000000044f147 in ngx_http_process_request_line (rev=0x744168) at src/http/ngx_http_request.c:1022
+#4  0x0000000000453968 in ngx_http_keepalive_handler (rev=0x744168) at src/http/ngx_http_request.c:3196
+#5  0x000000000042f923 in ngx_event_process_posted (cycle=0x7261c0, posted=0x716320 <ngx_posted_events>) at src/event/ngx_event_posted.c:33
+#6  0x000000000042d379 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:259
+#7  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#8  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
+
+** ngx_http_run_posted_requests
+#0  ngx_http_run_posted_requests (c=0x7ffff7fac0e0) at src/http/ngx_http_request.c:2210
+#1  0x0000000000451719 in ngx_http_request_handler (ev=0x75e178) at src/http/ngx_http_request.c:2198
+#2  0x000000000043cc2c in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:848
+#3  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#4  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#5  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
+*** 
+(gdb) p ev->write
+$20 = 1
+(gdb) p r->write_event_handler
+$21 = (ngx_http_event_handler_pt) 0x46b9b1 <ngx_http_upstream_wr_check_broken_connection>
+(gdb) p r->read_event_handler
+$22 = (ngx_http_event_handler_pt) 0x46b988 <ngx_http_upstream_rd_check_broken_connection>
+
+** ngx_http_run_posted_requests
+#0  ngx_http_run_posted_requests (c=0x7ffff7fac0e0) at src/http/ngx_http_request.c:2210
+#1  0x000000000046b986 in ngx_http_upstream_handler (ev=0x75e1e0) at src/http/ngx_http_upstream.c:1113
+#2  0x000000000043cc2c in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:848
+#3  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#4  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#5  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
+*** 
+(gdb) p ev->write
+$23 = 1
+(gdb) p u->write_event_handler
+$24 = (ngx_http_upstream_handler_pt) 0x47122c <ngx_http_upstream_dummy_handler>
+(gdb) p u->read_event_handler
+$25 = (ngx_http_upstream_handler_pt) 0x46cfe3 <ngx_http_upstream_process_header>
+
+** ngx_http_run_posted_requests
+#0  ngx_http_run_posted_requests (c=0x7ffff7fac0e0) at src/http/ngx_http_request.c:2210
+#1  0x000000000046b986 in ngx_http_upstream_handler (ev=0x7441d0) at src/http/ngx_http_upstream.c:1113
+#2  0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#3  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#4  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#5  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
+*** 
+(gdb) p ev->write
+$26 = 0
+(gdb) p u->write_event_handler
+$27 = (ngx_http_upstream_handler_pt) 0x47122c <ngx_http_upstream_dummy_handler>
+(gdb) p u->read_event_handler
+$28 = (ngx_http_upstream_handler_pt) 0x470924 <ngx_http_upstream_process_upstream>
+
