@@ -257,3 +257,32 @@ $27 = (ngx_http_upstream_handler_pt) 0x47122c <ngx_http_upstream_dummy_handler>
 (gdb) p u->read_event_handler
 $28 = (ngx_http_upstream_handler_pt) 0x470924 <ngx_http_upstream_process_upstream>
 
+
+* ngx_http_core_run_phases
+** 在ngx_http_init_phase_handlers里面初始化
+(gdb) p ph[0].checker
+$3 = (ngx_http_phase_handler_pt) 0x442148 <ngx_http_core_rewrite_phase>
+(gdb) p ph[1].checker
+$6 = (ngx_http_phase_handler_pt) 0x44220e <ngx_http_core_find_config_phase>
+(gdb) p ph[2].checker
+$7 = (ngx_http_phase_handler_pt) 0x442148 <ngx_http_core_rewrite_phase>
+(gdb) p ph[3].checker
+$8 = (ngx_http_phase_handler_pt) 0x442665 <ngx_http_core_post_rewrite_phase>
+(gdb) p ph[4].checker
+$9 = (ngx_http_phase_handler_pt) 0x442055 <ngx_http_core_generic_phase>
+(gdb) p ph[5].checker
+$10 = (ngx_http_phase_handler_pt) 0x442055 <ngx_http_core_generic_phase>
+(gdb) p ph[6].checker
+$11 = (ngx_http_phase_handler_pt) 0x442851 <ngx_http_core_access_phase>
+(gdb) p ph[7].checker
+$12 = (ngx_http_phase_handler_pt) 0x442851 <ngx_http_core_access_phase>
+(gdb) p ph[8].checker
+$13 = (ngx_http_phase_handler_pt) 0x442a65 <ngx_http_core_post_access_phase>
+(gdb) p ph[9].checker
+$14 = (ngx_http_phase_handler_pt) 0x4435cb <ngx_http_core_content_phase>
+(gdb) p ph[10].checker
+$15 = (ngx_http_phase_handler_pt) 0x4435cb <ngx_http_core_content_phase>
+(gdb) p ph[11].checker
+$16 = (ngx_http_phase_handler_pt) 0x4435cb <ngx_http_core_content_phase>
+(gdb) p ph[12].checker
+$17 = (ngx_http_phase_handler_pt) 0x0

@@ -1,1 +1,2 @@
 * ngx_log_debug3
+** ngx_log_set_levels

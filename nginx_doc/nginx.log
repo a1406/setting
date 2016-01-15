@@ -1,0 +1,568 @@
+2016/01/15 18:18:26 [debug] 18096#0: epoll: fd:7 ev:0001 d:00007FFFF7FAC010
+2016/01/15 18:18:26 [debug] 18096#0: accept on 0.0.0.0:8001, ready: 0
+2016/01/15 18:18:26 [debug] 18096#0: posix_memalign: 0000000000725420:512 @16
+2016/01/15 18:18:26 [debug] 18096#0: *1 accept: 192.168.1.222:13966 fd:9
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer add: 9: 60000:1452853166070
+2016/01/15 18:18:26 [debug] 18096#0: *1 reusable connection: 1
+2016/01/15 18:18:26 [debug] 18096#0: *1 epoll add event: fd:9 op:1 ev:80002001
+2016/01/15 18:18:26 [debug] 18096#0: timer delta: 9337
+2016/01/15 18:18:26 [debug] 18096#0: worker cycle
+2016/01/15 18:18:26 [debug] 18096#0: epoll timer: 60000
+2016/01/15 18:18:26 [debug] 18096#0: epoll: fd:7 ev:0001 d:00007FFFF7FAC010
+2016/01/15 18:18:26 [debug] 18096#0: accept on 0.0.0.0:8001, ready: 0
+2016/01/15 18:18:26 [debug] 18096#0: posix_memalign: 00000000007428A0:512 @16
+2016/01/15 18:18:26 [debug] 18096#0: *2 accept: 192.168.1.222:13967 fd:10
+2016/01/15 18:18:26 [debug] 18096#0: *2 event timer add: 10: 60000:1452853166074
+2016/01/15 18:18:26 [debug] 18096#0: *2 reusable connection: 1
+2016/01/15 18:18:26 [debug] 18096#0: *2 epoll add event: fd:10 op:1 ev:80002001
+2016/01/15 18:18:26 [debug] 18096#0: timer delta: 4
+2016/01/15 18:18:26 [debug] 18096#0: worker cycle
+2016/01/15 18:18:26 [debug] 18096#0: epoll timer: 59996
+2016/01/15 18:18:26 [debug] 18096#0: epoll: fd:9 ev:0001 d:00007FFFF7FAC0E0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http wait request handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 malloc: 0000000000742AB0:1024
+2016/01/15 18:18:26 [debug] 18096#0: *1 recv: fd:9 462 of 1024
+2016/01/15 18:18:26 [debug] 18096#0: *1 reusable connection: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 posix_memalign: 000000000072B990:4096 @16
+2016/01/15 18:18:26 [debug] 18096#0: *1 http process request line
+2016/01/15 18:18:26 [debug] 18096#0: *1 http request line: "GET / HTTP/1.1"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http uri: "/"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http args: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http exten: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http process request header line
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Host: 192.168.1.250:8001"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Connection: keep-alive"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Cache-Control: max-age=0"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Accept-Encoding: gzip,deflate,sdch"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Accept-Language: zh-CN,zh;q=0.8,en;q=0.6"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header done
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer del: 9: 1452853166070
+2016/01/15 18:18:26 [debug] 18096#0: *1 rewrite phase: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 test location: "/"
+2016/01/15 18:18:26 [debug] 18096#0: *1 using configuration "/"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http cl:-1 max:1048576
+2016/01/15 18:18:26 [debug] 18096#0: *1 rewrite phase: 2
+2016/01/15 18:18:26 [debug] 18096#0: *1 post rewrite phase: 3
+2016/01/15 18:18:26 [debug] 18096#0: *1 generic phase: 4
+2016/01/15 18:18:26 [debug] 18096#0: *1 generic phase: 5
+2016/01/15 18:18:26 [debug] 18096#0: *1 access phase: 6
+2016/01/15 18:18:26 [debug] 18096#0: *1 access phase: 7
+2016/01/15 18:18:26 [debug] 18096#0: *1 post access phase: 8
+2016/01/15 18:18:26 [debug] 18096#0: *1 posix_memalign: 000000000072C9A0:4096 @16
+2016/01/15 18:18:26 [debug] 18096#0: *1 http init upstream, client timer: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 epoll add event: fd:9 op:3 ev:80002005
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: "Host: "
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script var: "192.168.1.251"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: "
+"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: "Connection: close
+"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Cache-Control: max-age=0"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Accept-Encoding: gzip,deflate,sdch"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Accept-Language: zh-CN,zh;q=0.8,en;q=0.6"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header:
+"GET / HTTP/1.0
+Host: 192.168.1.251
+Connection: close
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
+Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080
+
+"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http cleanup add: 000000000072D198
+2016/01/15 18:18:26 [debug] 18096#0: *1 get rr peer, try: 1
+2016/01/15 18:18:26 [debug] 18096#0: *1 socket 11
+2016/01/15 18:18:26 [debug] 18096#0: *1 epoll add connection: fd:11 ev:80002005
+2016/01/15 18:18:26 [debug] 18096#0: *1 connect to 192.168.1.251:80, fd:11 #3
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream connect: -2
+2016/01/15 18:18:26 [debug] 18096#0: *1 posix_memalign: 0000000000725290:128 @16
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer add: 11: 60000:1452853166076
+2016/01/15 18:18:26 [debug] 18096#0: *1 http finalize request: -4, "/?" a:1, c:2
+2016/01/15 18:18:26 [debug] 18096#0: *1 http request count:2 blk:0
+2016/01/15 18:18:26 [debug] 18096#0: timer delta: 2
+2016/01/15 18:18:26 [debug] 18096#0: worker cycle
+2016/01/15 18:18:26 [debug] 18096#0: epoll timer: 59998
+2016/01/15 18:18:26 [debug] 18096#0: epoll: fd:9 ev:0004 d:00007FFFF7FAC0E0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http run request: "/?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream check client, write event:1, "/"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream recv(): -1 (11: Resource temporarily unavailable)
+2016/01/15 18:18:26 [debug] 18096#0: timer delta: 1
+2016/01/15 18:18:26 [debug] 18096#0: worker cycle
+2016/01/15 18:18:26 [debug] 18096#0: epoll timer: 59997
+2016/01/15 18:18:26 [debug] 18096#0: epoll: fd:11 ev:0004 d:00007FFFF7FAC280
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream request: "/?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream send request handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream send request
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream send request body
+2016/01/15 18:18:26 [debug] 18096#0: *1 chain writer buf fl:1 s:452
+2016/01/15 18:18:26 [debug] 18096#0: *1 chain writer in: 000000000072C980
+2016/01/15 18:18:26 [debug] 18096#0: *1 writev: 452 of 452
+2016/01/15 18:18:26 [debug] 18096#0: *1 chain writer out: 0000000000000000
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer del: 11: 1452853166076
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer add: 11: 60000:1452853166077
+2016/01/15 18:18:26 [debug] 18096#0: timer delta: 0
+2016/01/15 18:18:26 [debug] 18096#0: worker cycle
+2016/01/15 18:18:26 [debug] 18096#0: epoll timer: 59997
+2016/01/15 18:18:26 [debug] 18096#0: epoll: fd:11 ev:0005 d:00007FFFF7FAC280
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream request: "/?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream process header
+2016/01/15 18:18:26 [debug] 18096#0: *1 malloc: 000000000072D9B0:4096
+2016/01/15 18:18:26 [debug] 18096#0: *1 recv: fd:11 1448 of 4096
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy status 200 "200 OK"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Date: Fri, 15 Jan 2016 10:18:38 GMT"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Server: Apache/2.4.7 (Ubuntu)"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Last-Modified: Fri, 15 Aug 2014 06:46:30 GMT"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "ETag: "2cf6-500a561919761-gzip""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Accept-Ranges: bytes"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Vary: Accept-Encoding"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Content-Encoding: gzip"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Content-Length: 3256"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Connection: close"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Content-Type: text/html"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header done
+2016/01/15 18:18:26 [debug] 18096#0: *1 HTTP/1.1 200 OK
+Server: nginx/1.9.9
+Date: Fri, 15 Jan 2016 10:18:26 GMT
+Content-Type: text/html
+Content-Length: 3256
+Connection: keep-alive
+Last-Modified: Fri, 15 Aug 2014 06:46:30 GMT
+ETag: "2cf6-500a561919761-gzip"
+Accept-Ranges: bytes
+Vary: Accept-Encoding
+Content-Encoding: gzip
+
+2016/01/15 18:18:26 [debug] 18096#0: *1 write new buf t:1 f:0 000000000072D6B8, pos 000000000072D6B8, size: 296 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter: l:0 f:0 s:296
+2016/01/15 18:18:26 [debug] 18096#0: *1 http cacheable: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy filter init s:200 h:0 c:0 l:3256
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream process upstream
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe read upstream: 1
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe preread: 1147
+2016/01/15 18:18:26 [debug] 18096#0: *1 readv: 1, last:2648
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe recv chain: 2109
+2016/01/15 18:18:26 [debug] 18096#0: *1 readv: 1, last:539
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe recv chain: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe buf free s:0 t:1 f:0 000000000072D9B0, pos 000000000072DADD, size: 3256 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe length: 3256
+2016/01/15 18:18:26 [debug] 18096#0: *1 input buf #0
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe write downstream: 1
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe write downstream flush in
+2016/01/15 18:18:26 [debug] 18096#0: *1 http output filter "/?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http copy filter: "/?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 posix_memalign: 000000000072E9C0:4096 @16
+2016/01/15 18:18:26 [debug] 18096#0: *1 http footer body filter
+2016/01/15 18:18:26 [debug] 18096#0: *1 http postpone filter "/?" 000000000072D8F8
+2016/01/15 18:18:26 [debug] 18096#0: *1 write old buf t:1 f:0 000000000072D6B8, pos 000000000072D6B8, size: 296 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 write new buf t:1 f:0 000000000072D9B0, pos 000000000072DADD, size: 3256 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter: l:0 f:0 s:3552
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter limit 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 writev: 3552 of 3552
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter 0000000000000000
+2016/01/15 18:18:26 [debug] 18096#0: *1 http copy filter: 0 "/?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe write downstream done
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer del: 11: 1452853166077
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream exit: 0000000000000000
+2016/01/15 18:18:26 [debug] 18096#0: *1 finalize http upstream request: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 finalize http proxy request
+2016/01/15 18:18:26 [debug] 18096#0: *1 free rr peer 1 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 close http upstream connection: 11
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 0000000000725290, unused: 48
+2016/01/15 18:18:26 [debug] 18096#0: *1 reusable connection: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream temp fd: -1
+2016/01/15 18:18:26 [debug] 18096#0: *1 http output filter "/?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http copy filter: "/?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http footer body filter
+2016/01/15 18:18:26 [debug] 18096#0: *1 http postpone filter "/?" 00007FFFFFFFDDC0
+2016/01/15 18:18:26 [debug] 18096#0: *1 write new buf t:0 f:0 0000000000000000, pos 0000000000000000, size: 0 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter: l:1 f:0 s:0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http copy filter: 0 "/?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http finalize request: 0, "/?" a:1, c:1
+2016/01/15 18:18:26 [debug] 18096#0: *1 set http keepalive handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 http close request
+2016/01/15 18:18:26 [debug] 18096#0: *1 http log handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 000000000072D9B0
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 000000000072B990, unused: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 000000000072C9A0, unused: 72
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 000000000072E9C0, unused: 3658
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 0000000000742AB0
+2016/01/15 18:18:26 [debug] 18096#0: *1 hc free: 0000000000000000 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 hc busy: 0000000000000000 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 tcp_nodelay
+2016/01/15 18:18:26 [debug] 18096#0: *1 reusable connection: 1
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer add: 9: 75000:1452853181080
+2016/01/15 18:18:26 [debug] 18096#0: *1 post event 0000000000744168
+2016/01/15 18:18:26 [debug] 18096#0: timer delta: 3
+2016/01/15 18:18:26 [debug] 18096#0: posted event 0000000000744168
+2016/01/15 18:18:26 [debug] 18096#0: *1 delete posted event 0000000000744168
+2016/01/15 18:18:26 [debug] 18096#0: *1 http keepalive handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 malloc: 0000000000742AB0:1024
+2016/01/15 18:18:26 [debug] 18096#0: *1 recv: fd:9 -1 of 1024
+2016/01/15 18:18:26 [debug] 18096#0: *1 recv() not ready (11: Resource temporarily unavailable)
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 0000000000742AB0
+2016/01/15 18:18:26 [debug] 18096#0: worker cycle
+2016/01/15 18:18:26 [debug] 18096#0: epoll timer: 59994
+2016/01/15 18:18:26 [debug] 18096#0: epoll: fd:9 ev:0005 d:00007FFFF7FAC0E0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http keepalive handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 malloc: 0000000000742AB0:1024
+2016/01/15 18:18:26 [debug] 18096#0: *1 recv: fd:9 552 of 1024
+2016/01/15 18:18:26 [debug] 18096#0: *1 reusable connection: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 posix_memalign: 000000000072B990:4096 @16
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer del: 9: 1452853181080
+2016/01/15 18:18:26 [debug] 18096#0: *1 http process request line
+2016/01/15 18:18:26 [debug] 18096#0: *1 http request line: "GET /icons/ubuntu-logo.png HTTP/1.1"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http uri: "/icons/ubuntu-logo.png"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http args: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http exten: "png"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http process request header line
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Host: 192.168.1.250:8001"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Connection: keep-alive"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Cache-Control: max-age=0"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Accept: image/webp,*/*;q=0.8"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Referer: http://192.168.1.250:8001/"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Accept-Encoding: gzip,deflate,sdch"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Accept-Language: zh-CN,zh;q=0.8,en;q=0.6"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "If-None-Match: "d4c-4f6227456a900""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "If-Modified-Since: Thu, 03 Apr 2014 12:22:28 GMT"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header done
+2016/01/15 18:18:26 [debug] 18096#0: *1 rewrite phase: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 test location: "/"
+2016/01/15 18:18:26 [debug] 18096#0: *1 using configuration "/"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http cl:-1 max:1048576
+2016/01/15 18:18:26 [debug] 18096#0: *1 rewrite phase: 2
+2016/01/15 18:18:26 [debug] 18096#0: *1 post rewrite phase: 3
+2016/01/15 18:18:26 [debug] 18096#0: *1 generic phase: 4
+2016/01/15 18:18:26 [debug] 18096#0: *1 generic phase: 5
+2016/01/15 18:18:26 [debug] 18096#0: *1 access phase: 6
+2016/01/15 18:18:26 [debug] 18096#0: *1 access phase: 7
+2016/01/15 18:18:26 [debug] 18096#0: *1 post access phase: 8
+2016/01/15 18:18:26 [debug] 18096#0: *1 posix_memalign: 000000000072C9A0:4096 @16
+2016/01/15 18:18:26 [debug] 18096#0: *1 http init upstream, client timer: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: "Host: "
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script var: "192.168.1.251"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: "
+"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: "Connection: close
+"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Cache-Control: max-age=0"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Accept: image/webp,*/*;q=0.8"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Referer: http://192.168.1.250:8001/"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Accept-Encoding: gzip,deflate,sdch"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Accept-Language: zh-CN,zh;q=0.8,en;q=0.6"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "If-None-Match: "d4c-4f6227456a900""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "If-Modified-Since: Thu, 03 Apr 2014 12:22:28 GMT"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header:
+"GET /icons/ubuntu-logo.png HTTP/1.0
+Host: 192.168.1.251
+Connection: close
+Cache-Control: max-age=0
+Accept: image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36
+Referer: http://192.168.1.250:8001/
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
+Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080
+If-None-Match: "d4c-4f6227456a900"
+If-Modified-Since: Thu, 03 Apr 2014 12:22:28 GMT
+
+"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http cleanup add: 000000000072D210
+2016/01/15 18:18:26 [debug] 18096#0: *1 get rr peer, try: 1
+2016/01/15 18:18:26 [debug] 18096#0: *1 socket 11
+2016/01/15 18:18:26 [debug] 18096#0: *1 epoll add connection: fd:11 ev:80002005
+2016/01/15 18:18:26 [debug] 18096#0: *1 connect to 192.168.1.251:80, fd:11 #4
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream connect: -2
+2016/01/15 18:18:26 [debug] 18096#0: *1 posix_memalign: 0000000000725290:128 @16
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer add: 11: 60000:1452853166097
+2016/01/15 18:18:26 [debug] 18096#0: *1 http finalize request: -4, "/icons/ubuntu-logo.png?" a:1, c:2
+2016/01/15 18:18:26 [debug] 18096#0: *1 http request count:2 blk:0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http run request: "/icons/ubuntu-logo.png?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream check client, write event:1, "/icons/ubuntu-logo.png"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream recv(): -1 (11: Resource temporarily unavailable)
+2016/01/15 18:18:26 [debug] 18096#0: timer delta: 17
+2016/01/15 18:18:26 [debug] 18096#0: worker cycle
+2016/01/15 18:18:26 [debug] 18096#0: epoll timer: 59977
+2016/01/15 18:18:26 [debug] 18096#0: epoll: fd:11 ev:0004 d:00007FFFF7FAC281
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream request: "/icons/ubuntu-logo.png?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream send request handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream send request
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream send request body
+2016/01/15 18:18:26 [debug] 18096#0: *1 chain writer buf fl:1 s:542
+2016/01/15 18:18:26 [debug] 18096#0: *1 chain writer in: 000000000072D248
+2016/01/15 18:18:26 [debug] 18096#0: *1 writev: 542 of 542
+2016/01/15 18:18:26 [debug] 18096#0: *1 chain writer out: 0000000000000000
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer del: 11: 1452853166097
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer add: 11: 60000:1452853166098
+2016/01/15 18:18:26 [debug] 18096#0: timer delta: 1
+2016/01/15 18:18:26 [debug] 18096#0: worker cycle
+2016/01/15 18:18:26 [debug] 18096#0: epoll timer: 59976
+2016/01/15 18:18:26 [debug] 18096#0: epoll: fd:11 ev:2005 d:00007FFFF7FAC281
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream request: "/icons/ubuntu-logo.png?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream process header
+2016/01/15 18:18:26 [debug] 18096#0: *1 malloc: 000000000072D9B0:4096
+2016/01/15 18:18:26 [debug] 18096#0: *1 recv: fd:11 143 of 4096
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy status 304 "304 Not Modified"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Date: Fri, 15 Jan 2016 10:18:38 GMT"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Server: Apache/2.4.7 (Ubuntu)"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Connection: close"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "ETag: "d4c-4f6227456a900""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header done
+2016/01/15 18:18:26 [debug] 18096#0: *1 HTTP/1.1 304 Not Modified
+Server: nginx/1.9.9
+Date: Fri, 15 Jan 2016 10:18:26 GMT
+Connection: keep-alive
+ETag: "d4c-4f6227456a900"
+
+2016/01/15 18:18:26 [debug] 18096#0: *1 write new buf t:1 f:0 000000000072D4D0, pos 000000000072D4D0, size: 138 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter: l:0 f:0 s:138
+2016/01/15 18:18:26 [debug] 18096#0: *1 http cacheable: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy filter init s:304 h:0 c:0 l:-1
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream process upstream
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe read upstream: 1
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe preread: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 readv: 1, last:3953
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe recv chain: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe buf free s:0 t:1 f:0 000000000072D9B0, pos 000000000072DA3F, size: 0 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe length: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe write downstream: 1
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe write downstream done
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer del: 11: 1452853166098
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream exit: 0000000000000000
+2016/01/15 18:18:26 [debug] 18096#0: *1 finalize http upstream request: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 finalize http proxy request
+2016/01/15 18:18:26 [debug] 18096#0: *1 free rr peer 1 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 close http upstream connection: 11
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 0000000000725290, unused: 48
+2016/01/15 18:18:26 [debug] 18096#0: *1 reusable connection: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream temp fd: -1
+2016/01/15 18:18:26 [debug] 18096#0: *1 http output filter "/icons/ubuntu-logo.png?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http copy filter: "/icons/ubuntu-logo.png?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http footer body filter
+2016/01/15 18:18:26 [debug] 18096#0: *1 http postpone filter "/icons/ubuntu-logo.png?" 00007FFFFFFFDDC0
+2016/01/15 18:18:26 [debug] 18096#0: *1 write old buf t:1 f:0 000000000072D4D0, pos 000000000072D4D0, size: 138 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 write new buf t:0 f:0 0000000000000000, pos 0000000000000000, size: 0 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter: l:1 f:0 s:138
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter limit 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 writev: 138 of 138
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter 0000000000000000
+2016/01/15 18:18:26 [debug] 18096#0: *1 http copy filter: 0 "/icons/ubuntu-logo.png?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http finalize request: 0, "/icons/ubuntu-logo.png?" a:1, c:1
+2016/01/15 18:18:26 [debug] 18096#0: *1 set http keepalive handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 http close request
+2016/01/15 18:18:26 [debug] 18096#0: *1 http log handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 000000000072D9B0
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 000000000072B990, unused: 8
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 000000000072C9A0, unused: 372
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 0000000000742AB0
+2016/01/15 18:18:26 [debug] 18096#0: *1 hc free: 0000000000000000 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 hc busy: 0000000000000000 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 reusable connection: 1
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer add: 9: 75000:1452853181113
+2016/01/15 18:18:26 [debug] 18096#0: *1 post event 0000000000744168
+2016/01/15 18:18:26 [debug] 18096#0: timer delta: 15
+2016/01/15 18:18:26 [debug] 18096#0: posted event 0000000000744168
+2016/01/15 18:18:26 [debug] 18096#0: *1 delete posted event 0000000000744168
+2016/01/15 18:18:26 [debug] 18096#0: *1 http keepalive handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 malloc: 0000000000742AB0:1024
+2016/01/15 18:18:26 [debug] 18096#0: *1 recv: fd:9 -1 of 1024
+2016/01/15 18:18:26 [debug] 18096#0: *1 recv() not ready (11: Resource temporarily unavailable)
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 0000000000742AB0
+2016/01/15 18:18:26 [debug] 18096#0: worker cycle
+2016/01/15 18:18:26 [debug] 18096#0: epoll timer: 59961
+2016/01/15 18:18:26 [debug] 18096#0: epoll: fd:9 ev:0005 d:00007FFFF7FAC0E0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http keepalive handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 malloc: 0000000000742AB0:1024
+2016/01/15 18:18:26 [debug] 18096#0: *1 recv: fd:9 376 of 1024
+2016/01/15 18:18:26 [debug] 18096#0: *1 reusable connection: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 posix_memalign: 000000000072B990:4096 @16
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer del: 9: 1452853181113
+2016/01/15 18:18:26 [debug] 18096#0: *1 http process request line
+2016/01/15 18:18:26 [debug] 18096#0: *1 http request line: "GET /favicon.ico HTTP/1.1"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http uri: "/favicon.ico"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http args: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http exten: "ico"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http process request header line
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Host: 192.168.1.250:8001"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Connection: keep-alive"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Accept: */*"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Accept-Encoding: gzip,deflate,sdch"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Accept-Language: zh-CN,zh;q=0.8,en;q=0.6"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header: "Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http header done
+2016/01/15 18:18:26 [debug] 18096#0: *1 rewrite phase: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 test location: "/"
+2016/01/15 18:18:26 [debug] 18096#0: *1 using configuration "/"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http cl:-1 max:1048576
+2016/01/15 18:18:26 [debug] 18096#0: *1 rewrite phase: 2
+2016/01/15 18:18:26 [debug] 18096#0: *1 post rewrite phase: 3
+2016/01/15 18:18:26 [debug] 18096#0: *1 generic phase: 4
+2016/01/15 18:18:26 [debug] 18096#0: *1 generic phase: 5
+2016/01/15 18:18:26 [debug] 18096#0: *1 access phase: 6
+2016/01/15 18:18:26 [debug] 18096#0: *1 access phase: 7
+2016/01/15 18:18:26 [debug] 18096#0: *1 post access phase: 8
+2016/01/15 18:18:26 [debug] 18096#0: *1 posix_memalign: 000000000072C9A0:4096 @16
+2016/01/15 18:18:26 [debug] 18096#0: *1 http init upstream, client timer: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: "Host: "
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script var: "192.168.1.251"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: "
+"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: "Connection: close
+"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http script copy: ""
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Accept: */*"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Accept-Encoding: gzip,deflate,sdch"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Accept-Language: zh-CN,zh;q=0.8,en;q=0.6"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header:
+"GET /favicon.ico HTTP/1.0
+Host: 192.168.1.251
+Connection: close
+Accept: */*
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
+Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080
+
+"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http cleanup add: 000000000072C978
+2016/01/15 18:18:26 [debug] 18096#0: *1 get rr peer, try: 1
+2016/01/15 18:18:26 [debug] 18096#0: *1 socket 11
+2016/01/15 18:18:26 [debug] 18096#0: *1 epoll add connection: fd:11 ev:80002005
+2016/01/15 18:18:26 [debug] 18096#0: *1 connect to 192.168.1.251:80, fd:11 #5
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream connect: -2
+2016/01/15 18:18:26 [debug] 18096#0: *1 posix_memalign: 0000000000725290:128 @16
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer add: 11: 60000:1452853166833
+2016/01/15 18:18:26 [debug] 18096#0: *1 http finalize request: -4, "/favicon.ico?" a:1, c:2
+2016/01/15 18:18:26 [debug] 18096#0: *1 http request count:2 blk:0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http run request: "/favicon.ico?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream check client, write event:1, "/favicon.ico"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream recv(): -1 (11: Resource temporarily unavailable)
+2016/01/15 18:18:26 [debug] 18096#0: timer delta: 720
+2016/01/15 18:18:26 [debug] 18096#0: worker cycle
+2016/01/15 18:18:26 [debug] 18096#0: epoll timer: 59241
+2016/01/15 18:18:26 [debug] 18096#0: epoll: fd:11 ev:0004 d:00007FFFF7FAC280
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream request: "/favicon.ico?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream send request handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream send request
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream send request body
+2016/01/15 18:18:26 [debug] 18096#0: *1 chain writer buf fl:1 s:366
+2016/01/15 18:18:26 [debug] 18096#0: *1 chain writer in: 000000000072D160
+2016/01/15 18:18:26 [debug] 18096#0: *1 writev: 366 of 366
+2016/01/15 18:18:26 [debug] 18096#0: *1 chain writer out: 0000000000000000
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer del: 11: 1452853166833
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer add: 11: 60000:1452853166834
+2016/01/15 18:18:26 [debug] 18096#0: timer delta: 1
+2016/01/15 18:18:26 [debug] 18096#0: worker cycle
+2016/01/15 18:18:26 [debug] 18096#0: epoll timer: 59240
+2016/01/15 18:18:26 [debug] 18096#0: epoll: fd:11 ev:2005 d:00007FFFF7FAC280
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream request: "/favicon.ico?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream process header
+2016/01/15 18:18:26 [debug] 18096#0: *1 malloc: 000000000072D9B0:4096
+2016/01/15 18:18:26 [debug] 18096#0: *1 recv: fd:11 466 of 4096
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy status 404 "404 Not Found"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Date: Fri, 15 Jan 2016 10:18:39 GMT"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Server: Apache/2.4.7 (Ubuntu)"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Content-Length: 287"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Connection: close"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header: "Content-Type: text/html; charset=iso-8859-1"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy header done
+2016/01/15 18:18:26 [debug] 18096#0: *1 HTTP/1.1 404 Not Found
+Server: nginx/1.9.9
+Date: Fri, 15 Jan 2016 10:18:26 GMT
+Content-Type: text/html; charset=iso-8859-1
+Content-Length: 287
+Connection: keep-alive
+
+2016/01/15 18:18:26 [debug] 18096#0: *1 write new buf t:1 f:0 000000000072D420, pos 000000000072D420, size: 174 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter: l:0 f:0 s:174
+2016/01/15 18:18:26 [debug] 18096#0: *1 http cacheable: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http proxy filter init s:404 h:0 c:0 l:287
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream process upstream
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe read upstream: 1
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe preread: 287
+2016/01/15 18:18:26 [debug] 18096#0: *1 readv: 1, last:3630
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe recv chain: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe buf free s:0 t:1 f:0 000000000072D9B0, pos 000000000072DA63, size: 287 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe length: 287
+2016/01/15 18:18:26 [debug] 18096#0: *1 input buf #0
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe write downstream: 1
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe write downstream flush in
+2016/01/15 18:18:26 [debug] 18096#0: *1 http output filter "/favicon.ico?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http copy filter: "/favicon.ico?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http footer body filter
+2016/01/15 18:18:26 [debug] 18096#0: *1 http postpone filter "/favicon.ico?" 000000000072D5E8
+2016/01/15 18:18:26 [debug] 18096#0: *1 write old buf t:1 f:0 000000000072D420, pos 000000000072D420, size: 174 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 write new buf t:1 f:0 000000000072D9B0, pos 000000000072DA63, size: 287 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter: l:0 f:0 s:461
+2016/01/15 18:18:26 [debug] 18096#0: *1 http copy filter: 0 "/favicon.ico?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 pipe write downstream done
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer del: 11: 1452853166834
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream exit: 0000000000000000
+2016/01/15 18:18:26 [debug] 18096#0: *1 finalize http upstream request: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 finalize http proxy request
+2016/01/15 18:18:26 [debug] 18096#0: *1 free rr peer 1 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 close http upstream connection: 11
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 0000000000725290, unused: 48
+2016/01/15 18:18:26 [debug] 18096#0: *1 reusable connection: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http upstream temp fd: -1
+2016/01/15 18:18:26 [debug] 18096#0: *1 http output filter "/favicon.ico?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http copy filter: "/favicon.ico?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http footer body filter
+2016/01/15 18:18:26 [debug] 18096#0: *1 http postpone filter "/favicon.ico?" 00007FFFFFFFDDC0
+2016/01/15 18:18:26 [debug] 18096#0: *1 write old buf t:1 f:0 000000000072D420, pos 000000000072D420, size: 174 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 write old buf t:1 f:0 000000000072D9B0, pos 000000000072DA63, size: 287 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 write new buf t:0 f:0 0000000000000000, pos 0000000000000000, size: 0 file: 0, size: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter: l:1 f:0 s:461
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter limit 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 writev: 461 of 461
+2016/01/15 18:18:26 [debug] 18096#0: *1 http write filter 0000000000000000
+2016/01/15 18:18:26 [debug] 18096#0: *1 http copy filter: 0 "/favicon.ico?"
+2016/01/15 18:18:26 [debug] 18096#0: *1 http finalize request: 0, "/favicon.ico?" a:1, c:1
+2016/01/15 18:18:26 [debug] 18096#0: *1 set http keepalive handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 http close request
+2016/01/15 18:18:26 [debug] 18096#0: *1 http log handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 000000000072D9B0
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 000000000072B990, unused: 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 000000000072C9A0, unused: 423
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 0000000000742AB0
+2016/01/15 18:18:26 [debug] 18096#0: *1 hc free: 0000000000000000 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 hc busy: 0000000000000000 0
+2016/01/15 18:18:26 [debug] 18096#0: *1 reusable connection: 1
+2016/01/15 18:18:26 [debug] 18096#0: *1 event timer add: 9: 75000:1452853181835
+2016/01/15 18:18:26 [debug] 18096#0: *1 post event 0000000000744168
+2016/01/15 18:18:26 [debug] 18096#0: timer delta: 1
+2016/01/15 18:18:26 [debug] 18096#0: posted event 0000000000744168
+2016/01/15 18:18:26 [debug] 18096#0: *1 delete posted event 0000000000744168
+2016/01/15 18:18:26 [debug] 18096#0: *1 http keepalive handler
+2016/01/15 18:18:26 [debug] 18096#0: *1 malloc: 0000000000742AB0:1024
+2016/01/15 18:18:26 [debug] 18096#0: *1 recv: fd:9 -1 of 1024
+2016/01/15 18:18:26 [debug] 18096#0: *1 recv() not ready (11: Resource temporarily unavailable)
+2016/01/15 18:18:26 [debug] 18096#0: *1 free: 0000000000742AB0
+2016/01/15 18:18:26 [debug] 18096#0: worker cycle
+2016/01/15 18:18:26 [debug] 18096#0: epoll timer: 59239
