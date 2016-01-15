@@ -312,91 +312,186 @@ Accept-Ranges: bytes
 Vary: Accept-Encoding
 Content-Encoding: gzip
 
-[debug]  *1 write new buf t:1 f:0 000000000072D6B8, pos 000000000072D6B8, size: 296 file: 0, size: 0
-[debug]  *1 http write filter: l:0 f:0 s:296
-[debug]  *1 http cacheable: 0
-[debug]  *1 http proxy filter init s:200 h:0 c:0 l:3256
-[debug]  *1 http upstream process upstream
-[debug]  *1 pipe read upstream: 1
-[debug]  *1 pipe preread: 1147
-[debug]  *1 readv: 1, last:2648
+* [debug]  *1 write new buf t:1 f:0 000000000072D6B8, pos 000000000072D6B8, size: 296 file: 0, size: 0
+ngx_http_write_filter
+
+* [debug]  *1 http write filter: l:0 f:0 s:296
+ngx_http_write_filter
+
+* [debug]  *1 http cacheable: 0
+ngx_http_upstream_send_response
+
+* [debug]  *1 http proxy filter init s:200 h:0 c:0 l:3256
+ngx_http_proxy_input_filter_init
+
+* [debug]  *1 http upstream process upstream
+ngx_http_upstream_process_upstream
+
+* [debug]  *1 pipe read upstream: 1
+ngx_event_pipe_read_upstream
+
+* [debug]  *1 pipe preread: 1147
+ngx_event_pipe_read_upstream
+
+* [debug]  *1 readv: 1, last:2648
+ngx_readv_chain
+
 [debug]  *1 pipe recv chain: 2109
-[debug]  *1 readv: 1, last:539
-[debug]  *1 pipe recv chain: 0
-[debug]  *1 pipe buf free s:0 t:1 f:0 000000000072D9B0, pos 000000000072DADD, size: 3256 file: 0, size: 0
-[debug]  *1 pipe length: 3256
-[debug]  *1 input buf #0
-[debug]  *1 pipe write downstream: 1
-[debug]  *1 pipe write downstream flush in
-[debug]  *1 http output filter "/?"
-[debug]  *1 http copy filter: "/?"
-[debug]  *1 posix_memalign: 000000000072E9C0:4096 @16
-[debug]  *1 http footer body filter
-[debug]  *1 http postpone filter "/?" 000000000072D8F8
-[debug]  *1 write old buf t:1 f:0 000000000072D6B8, pos 000000000072D6B8, size: 296 file: 0, size: 0
-[debug]  *1 write new buf t:1 f:0 000000000072D9B0, pos 000000000072DADD, size: 3256 file: 0, size: 0
-[debug]  *1 http write filter: l:0 f:0 s:3552
-[debug]  *1 http write filter limit 0
-[debug]  *1 writev: 3552 of 3552
-[debug]  *1 http write filter 0000000000000000
-[debug]  *1 http copy filter: 0 "/?"
-[debug]  *1 pipe write downstream done
-[debug]  *1 event timer del: 11: 1452853166077
-[debug]  *1 http upstream exit: 0000000000000000
-[debug]  *1 finalize http upstream request: 0
-[debug]  *1 finalize http proxy request
-[debug]  *1 free rr peer 1 0
-[debug]  *1 close http upstream connection: 11
-[debug]  *1 free: 0000000000725290, unused: 48
-[debug]  *1 reusable connection: 0
-[debug]  *1 http upstream temp fd: -1
-[debug]  *1 http output filter "/?"
-[debug]  *1 http copy filter: "/?"
-[debug]  *1 http footer body filter
-[debug]  *1 http postpone filter "/?" 00007FFFFFFFDDC0
-[debug]  *1 write new buf t:0 f:0 0000000000000000, pos 0000000000000000, size: 0 file: 0, size: 0
-[debug]  *1 http write filter: l:1 f:0 s:0
-[debug]  *1 http copy filter: 0 "/?"
-[debug]  *1 http finalize request: 0, "/?" a:1, c:1
-[debug]  *1 set http keepalive handler
-[debug]  *1 http close request
-[debug]  *1 http log handler
-[debug]  *1 free: 000000000072D9B0
-[debug]  *1 free: 000000000072B990, unused: 0
-[debug]  *1 free: 000000000072C9A0, unused: 72
-[debug]  *1 free: 000000000072E9C0, unused: 3658
-[debug]  *1 free: 0000000000742AB0
-[debug]  *1 hc free: 0000000000000000 0
-[debug]  *1 hc busy: 0000000000000000 0
-[debug]  *1 tcp_nodelay
-[debug]  *1 reusable connection: 1
-[debug]  *1 event timer add: 9: 75000:1452853181080
-[debug]  *1 post event 0000000000744168
-[debug]  timer delta: 3
-[debug]  posted event 0000000000744168
-[debug]  *1 delete posted event 0000000000744168
-[debug]  *1 http keepalive handler
-[debug]  *1 malloc: 0000000000742AB0:1024
-[debug]  *1 recv: fd:9 -1 of 1024
-[debug]  *1 recv() not ready (11: Resource temporarily unavailable)
-[debug]  *1 free: 0000000000742AB0
-[debug]  worker cycle
-[debug]  epoll timer: 59994
-[debug]  epoll: fd:9 ev:0005 d:00007FFFF7FAC0E0
-[debug]  *1 http keepalive handler
-[debug]  *1 malloc: 0000000000742AB0:1024
-[debug]  *1 recv: fd:9 552 of 1024
-[debug]  *1 reusable connection: 0
-[debug]  *1 posix_memalign: 000000000072B990:4096 @16
-[debug]  *1 event timer del: 9: 1452853181080
-[debug]  *1 http process request line
-[debug]  *1 http request line: "GET /icons/ubuntu-logo.png HTTP/1.1"
-[debug]  *1 http uri: "/icons/ubuntu-logo.png"
-[debug]  *1 http args: ""
-[debug]  *1 http exten: "png"
-[debug]  *1 http process request header line
-[debug]  *1 http header: "Host: 192.168.1.250:8001"
-[debug]  *1 http header: "Connection: keep-alive"
+ngx_event_pipe_read_upstream
+
+* [debug]  *1 readv: 1, last:539
+* [debug]  *1 pipe recv chain: 0
+
+* [debug]  *1 pipe buf free s:0 t:1 f:0 000000000072D9B0, pos 000000000072DADD, size: 3256 file: 0, size: 0
+ngx_event_pipe_read_upstream
+
+* [debug]  *1 pipe length: 3256
+ngx_event_pipe_read_upstream
+
+* [debug]  *1 input buf #0
+ngx_http_proxy_copy_filter or ngx_event_pipe_copy_input_filter
+
+* [debug]  *1 pipe write downstream: 1
+ngx_event_pipe_write_to_downstream
+
+* [debug]  *1 pipe write downstream flush in
+ngx_event_pipe_write_to_downstream
+
+* [debug]  *1 http output filter "/?"
+ngx_http_output_filter
+
+* [debug]  *1 http copy filter: "/?"
+ngx_http_copy_filter
+
+* [debug]  *1 posix_memalign: 000000000072E9C0:4096 @16
+* [debug]  *1 http footer body filter
+?
+
+* [debug]  *1 http postpone filter "/?" 000000000072D8F8
+ngx_http_postpone_filter
+
+* [debug]  *1 write old buf t:1 f:0 000000000072D6B8, pos 000000000072D6B8, size: 296 file: 0, size: 0
+ngx_http_write_filter
+
+* [debug]  *1 write new buf t:1 f:0 000000000072D9B0, pos 000000000072DADD, size: 3256 file: 0, size: 0
+ngx_http_write_filter
+
+* [debug]  *1 http write filter: l:0 f:0 s:3552
+ngx_http_write_filter
+
+* [debug]  *1 http write filter limit 0
+ngx_http_write_filter
+
+* [debug]  *1 writev: 3552 of 3552
+ngx_writev
+
+* [debug]  *1 http write filter 0000000000000000
+ngx_http_write_filter
+
+* [debug]  *1 http copy filter: 0 "/?"
+ngx_http_copy_filter
+
+* [debug]  *1 pipe write downstream done
+ngx_event_pipe_write_to_downstream
+
+* [debug]  *1 event timer del: 11: 1452853166077
+* [debug]  *1 http upstream exit: 0000000000000000
+ngx_http_upstream_process_request
+
+* [debug]  *1 finalize http upstream request: 0
+ngx_http_upstream_finalize_request
+
+* [debug]  *1 finalize http proxy request
+ngx_http_proxy_finalize_request
+
+* [debug]  *1 free rr peer 1 0
+ngx_http_upstream_free_round_robin_peer
+
+* [debug]  *1 close http upstream connection: 11
+ngx_http_upstream_next or ngx_http_upstream_finalize_request
+
+* [debug]  *1 free: 0000000000725290, unused: 48
+ngx_destroy_pool
+
+* [debug]  *1 reusable connection: 0
+ngx_reusable_connection
+
+* [debug]  *1 http upstream temp fd: -1
+ngx_http_upstream_finalize_request
+
+* [debug]  *1 http output filter "/?"
+* [debug]  *1 http copy filter: "/?"
+* [debug]  *1 http footer body filter
+* [debug]  *1 http postpone filter "/?" 00007FFFFFFFDDC0
+* [debug]  *1 write new buf t:0 f:0 0000000000000000, pos 0000000000000000, size: 0 file: 0, size: 0
+* [debug]  *1 http write filter: l:1 f:0 s:0
+* [debug]  *1 http copy filter: 0 "/?"
+* [debug]  *1 http finalize request: 0, "/?" a:1, c:1
+ngx_http_finalize_request
+
+* [debug]  *1 set http keepalive handler
+ngx_http_set_keepalive
+
+* [debug]  *1 http close request
+ngx_http_free_request
+
+* [debug]  *1 http log handler
+ngx_http_log_handler
+
+* [debug]  *1 free: 000000000072D9B0
+ngx_pfree
+
+* [debug]  *1 free: 000000000072B990, unused: 0
+* [debug]  *1 free: 000000000072C9A0, unused: 72
+* [debug]  *1 free: 000000000072E9C0, unused: 3658
+* [debug]  *1 free: 0000000000742AB0
+* [debug]  *1 hc free: 0000000000000000 0
+ngx_http_set_keepalive
+
+* [debug]  *1 hc busy: 0000000000000000 0
+ngx_http_set_keepalive
+
+* [debug]  *1 tcp_nodelay
+ngx_http_upstream_send_request_body
+
+* [debug]  *1 reusable connection: 1
+ngx_reusable_connection
+
+* [debug]  *1 event timer add: 9: 75000:1452853181080
+* [debug]  *1 post event 0000000000744168
+ngx_post_event
+
+* [debug]  timer delta: 3
+* [debug]  posted event 0000000000744168
+ngx_event_process_posted
+
+* [debug]  *1 delete posted event 0000000000744168
+ngx_delete_posted_event
+
+* [debug]  *1 http keepalive handler
+* [debug]  *1 malloc: 0000000000742AB0:1024
+* [debug]  *1 recv: fd:9 -1 of 1024
+* [debug]  *1 recv() not ready (11: Resource temporarily unavailable)
+?
+
+* [debug]  *1 free: 0000000000742AB0
+* [debug]  worker cycle
+* [debug]  epoll timer: 59994
+* [debug]  epoll: fd:9 ev:0005 d:00007FFFF7FAC0E0
+* [debug]  *1 http keepalive handler
+* [debug]  *1 malloc: 0000000000742AB0:1024
+* [debug]  *1 recv: fd:9 552 of 1024
+* [debug]  *1 reusable connection: 0
+* [debug]  *1 posix_memalign: 000000000072B990:4096 @16
+* [debug]  *1 event timer del: 9: 1452853181080
+* [debug]  *1 http process request line
+* [debug]  *1 http request line: "GET /icons/ubuntu-logo.png HTTP/1.1"
+* [debug]  *1 http uri: "/icons/ubuntu-logo.png"
+* [debug]  *1 http args: ""
+* [debug]  *1 http exten: "png"
+* [debug]  *1 http process request header line
+* [debug]  *1 http header: "Host: 192.168.1.250:8001"
+* [debug]  *1 http header: "Connection: keep-alive"
 [debug]  *1 http header: "Cache-Control: max-age=0"
 [debug]  *1 http header: "Accept: image/webp,*/*;q=0.8"
 [debug]  *1 http header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
