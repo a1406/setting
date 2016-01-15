@@ -336,7 +336,7 @@ ngx_event_pipe_read_upstream
 * [debug]  *1 readv: 1, last:2648
 ngx_readv_chain
 
-[debug]  *1 pipe recv chain: 2109
+* [debug]  *1 pipe recv chain: 2109
 ngx_event_pipe_read_upstream
 
 * [debug]  *1 readv: 1, last:539
