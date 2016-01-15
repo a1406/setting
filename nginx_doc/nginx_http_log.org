@@ -1,13 +1,34 @@
-[debug]  epoll: fd:7 ev:0001 d:00007FFFF7FAC010
-[debug]  accept on 0.0.0.0:8001, ready: 0
-[debug]  posix_memalign: 0000000000725420:512 @16
-[debug]  *1 accept: 192.168.1.222:13966 fd:9
-[debug]  *1 event timer add: 9: 60000:1452853166070
-[debug]  *1 reusable connection: 1
-[debug]  *1 epoll add event: fd:9 op:1 ev:80002001
-[debug]  timer delta: 9337
-[debug]  worker cycle
-[debug]  epoll timer: 60000
+* [debug]  epoll: fd:7 ev:0001 d:00007FFFF7FAC010
+ngx_epoll_process_events 
+
+* [debug]  accept on 0.0.0.0:8001, ready: 0
+ngx_event_accept
+
+* [debug]  posix_memalign: 0000000000725420:512 @16
+ngx_memalign
+
+* [debug]  *1 accept: 192.168.1.222:13966 fd:9
+ngx_event_accept
+
+* [debug]  *1 event timer add: 9: 60000:1452853166070
+ngx_event_add_timer
+
+* [debug]  *1 reusable connection: 1
+ngx_reusable_connection
+
+* [debug]  *1 epoll add event: fd:9 op:1 ev:80002001
+ngx_epoll_add_event
+
+* [debug]  timer delta: 9337
+ngx_process_events_and_timers
+
+* [debug]  worker cycle
+ngx_single_process_cycle
+
+* [debug]  epoll timer: 60000
+ngx_epoll_process_events
+
+* 新的连接，fd是10
 [debug]  epoll: fd:7 ev:0001 d:00007FFFF7FAC010
 [debug]  accept on 0.0.0.0:8001, ready: 0
 [debug]  posix_memalign: 00000000007428A0:512 @16
@@ -18,59 +39,142 @@
 [debug]  timer delta: 4
 [debug]  worker cycle
 [debug]  epoll timer: 59996
-[debug]  epoll: fd:9 ev:0001 d:00007FFFF7FAC0E0
-[debug]  *1 http wait request handler
-[debug]  *1 malloc: 0000000000742AB0:1024
-[debug]  *1 recv: fd:9 462 of 1024
-[debug]  *1 reusable connection: 0
-[debug]  *1 posix_memalign: 000000000072B990:4096 @16
-[debug]  *1 http process request line
-[debug]  *1 http request line: "GET / HTTP/1.1"
-[debug]  *1 http uri: "/"
-[debug]  *1 http args: ""
-[debug]  *1 http exten: ""
-[debug]  *1 http process request header line
-[debug]  *1 http header: "Host: 192.168.1.250:8001"
-[debug]  *1 http header: "Connection: keep-alive"
-[debug]  *1 http header: "Cache-Control: max-age=0"
-[debug]  *1 http header: "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
-[debug]  *1 http header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
-[debug]  *1 http header: "Accept-Encoding: gzip,deflate,sdch"
-[debug]  *1 http header: "Accept-Language: zh-CN,zh;q=0.8,en;q=0.6"
-[debug]  *1 http header: "Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080"
-[debug]  *1 http header done
-[debug]  *1 event timer del: 9: 1452853166070
-[debug]  *1 rewrite phase: 0
-[debug]  *1 test location: "/"
-[debug]  *1 using configuration "/"
-[debug]  *1 http cl:-1 max:1048576
-[debug]  *1 rewrite phase: 2
-[debug]  *1 post rewrite phase: 3
-[debug]  *1 generic phase: 4
-[debug]  *1 generic phase: 5
-[debug]  *1 access phase: 6
-[debug]  *1 access phase: 7
-[debug]  *1 post access phase: 8
-[debug]  *1 posix_memalign: 000000000072C9A0:4096 @16
-[debug]  *1 http init upstream, client timer: 0
-[debug]  *1 epoll add event: fd:9 op:3 ev:80002005
-[debug]  *1 http script copy: "Host: "
-[debug]  *1 http script var: "192.168.1.251"
-[debug]  *1 http script copy: "
+
+* [debug]  epoll: fd:9 ev:0001 d:00007FFFF7FAC0E0
+ngx_epoll_process_events 
+
+* [debug]  *1 http wait request handler
+ngx_http_wait_request_handler
+
+* [debug]  *1 malloc: 0000000000742AB0:1024
+ngx_alloc
+
+* [debug]  *1 recv: fd:9 462 of 1024
+ngx_unix_recv
+
+* [debug]  *1 reusable connection: 0
+ngx_reusable_connection
+
+* [debug]  *1 posix_memalign: 000000000072B990:4096 @16
+ngx_memalign
+
+* [debug]  *1 http process request line
+ngx_http_process_request_line
+
+* [debug]  *1 http request line: "GET / HTTP/1.1"
+ngx_http_process_request_line
+
+* [debug]  *1 http uri: "/"
+ngx_http_process_request_uri
+
+* [debug]  *1 http args: ""
+ngx_http_process_request_uri
+
+* [debug]  *1 http exten: ""
+ngx_http_process_request_uri
+
+* [debug]  *1 http process request header line
+ngx_http_process_request_headers
+
+* [debug]  *1 http header: "Host: 192.168.1.250:8001"
+ngx_http_process_request_headers
+
+* [debug]  *1 http header: "Connection: keep-alive"
+ngx_http_process_request_headers
+
+* [debug]  *1 http header: "Cache-Control: max-age=0"
+ngx_http_process_request_headers
+
+* [debug]  *1 http header: "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+ngx_http_process_request_headers
+
+* [debug]  *1 http header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+ngx_http_process_request_headers
+
+* [debug]  *1 http header: "Accept-Encoding: gzip,deflate,sdch"
+ngx_http_process_request_headers
+
+* [debug]  *1 http header: "Accept-Language: zh-CN,zh;q=0.8,en;q=0.6"
+ngx_http_process_request_headers
+
+* [debug]  *1 http header: "Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080"
+ngx_http_process_request_headers
+
+* [debug]  *1 http header done
+ngx_http_process_request_headers
+
+* [debug]  *1 event timer del: 9: 1452853166070
+ngx_event_expire_timers or ngx_event_del_timer
+
+* [debug]  *1 rewrite phase: 0
+ngx_http_core_rewrite_phase
+
+* [debug]  *1 test location: "/"
+ngx_http_named_location
+
+* [debug]  *1 using configuration "/"
+ngx_http_core_find_config_phase
+
+* [debug]  *1 http cl:-1 max:1048576
+ngx_http_core_find_config_phase
+
+* [debug]  *1 rewrite phase: 2
+ngx_http_core_rewrite_phase
+
+* [debug]  *1 post rewrite phase: 3
+ngx_http_core_post_rewrite_phase
+
+* [debug]  *1 generic phase: 4
+ngx_http_core_generic_phase
+
+* [debug]  *1 generic phase: 5
+ngx_http_core_generic_phase
+
+* [debug]  *1 access phase: 6
+ngx_http_core_access_phase
+
+* [debug]  *1 access phase: 7
+ngx_http_core_access_phase
+
+* [debug]  *1 post access phase: 8
+ngx_http_core_post_access_phase
+
+* [debug]  *1 posix_memalign: 000000000072C9A0:4096 @16
+ngx_memalign
+
+* [debug]  *1 http init upstream, client timer: 0
+ngx_http_upstream_init
+
+* [debug]  *1 epoll add event: fd:9 op:3 ev:80002005
+ngx_epoll_add_event
+
+* [debug]  *1 http script copy: "Host: "
+ngx_http_script_copy_code
+
+* [debug]  *1 http script var: "192.168.1.251"
+ngx_http_script_var_code
+
+* [debug]  *1 http script copy: "
 "
-[debug]  *1 http script copy: "Connection: close
+ngx_http_script_copy_code
+
+* [debug]  *1 http script copy: "Connection: close
 "
-[debug]  *1 http script copy: ""
-[debug]  *1 http script copy: ""
-[debug]  *1 http script copy: ""
-[debug]  *1 http script copy: ""
-[debug]  *1 http proxy header: "Cache-Control: max-age=0"
-[debug]  *1 http proxy header: "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
-[debug]  *1 http proxy header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
-[debug]  *1 http proxy header: "Accept-Encoding: gzip,deflate,sdch"
-[debug]  *1 http proxy header: "Accept-Language: zh-CN,zh;q=0.8,en;q=0.6"
-[debug]  *1 http proxy header: "Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080"
-[debug]  *1 http proxy header:
+ngx_http_script_copy_code
+
+* [debug]  *1 http script copy: ""
+* [debug]  *1 http script copy: ""
+* [debug]  *1 http script copy: ""
+* [debug]  *1 http script copy: ""
+
+* [debug]  *1 http proxy header: "Cache-Control: max-age=0"
+ngx_http_proxy_create_request 1411
+* [debug]  *1 http proxy header: "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+* [debug]  *1 http proxy header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+* [debug]  *1 http proxy header: "Accept-Encoding: gzip,deflate,sdch"
+* [debug]  *1 http proxy header: "Accept-Language: zh-CN,zh;q=0.8,en;q=0.6"
+* [debug]  *1 http proxy header: "Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080"
+* [debug]  *1 http proxy header:
 "GET / HTTP/1.0
 Host: 192.168.1.251
 Connection: close
@@ -82,58 +186,121 @@ Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
 Cookie: JSESSIONID.61466988=s4rsngdz53wt1je4uaqvfof1w; screenResolution=1920x1080
 
 "
-[debug]  *1 http cleanup add: 000000000072D198
-[debug]  *1 get rr peer, try: 1
-[debug]  *1 socket 11
-[debug]  *1 epoll add connection: fd:11 ev:80002005
-[debug]  *1 connect to 192.168.1.251:80, fd:11 #3
-[debug]  *1 http upstream connect: -2
-[debug]  *1 posix_memalign: 0000000000725290:128 @16
-[debug]  *1 event timer add: 11: 60000:1452853166076
-[debug]  *1 http finalize request: -4, "/?" a:1, c:2
-[debug]  *1 http request count:2 blk:0
-[debug]  timer delta: 2
-[debug]  worker cycle
-[debug]  epoll timer: 59998
-[debug]  epoll: fd:9 ev:0004 d:00007FFFF7FAC0E0
-[debug]  *1 http run request: "/?"
-[debug]  *1 http upstream check client, write event:1, "/"
-[debug]  *1 http upstream recv(): -1 (11: Resource temporarily unavailable)
-[debug]  timer delta: 1
-[debug]  worker cycle
-[debug]  epoll timer: 59997
-[debug]  epoll: fd:11 ev:0004 d:00007FFFF7FAC280
-[debug]  *1 http upstream request: "/?"
-[debug]  *1 http upstream send request handler
-[debug]  *1 http upstream send request
-[debug]  *1 http upstream send request body
-[debug]  *1 chain writer buf fl:1 s:452
-[debug]  *1 chain writer in: 000000000072C980
-[debug]  *1 writev: 452 of 452
-[debug]  *1 chain writer out: 0000000000000000
-[debug]  *1 event timer del: 11: 1452853166076
-[debug]  *1 event timer add: 11: 60000:1452853166077
-[debug]  timer delta: 0
-[debug]  worker cycle
-[debug]  epoll timer: 59997
-[debug]  epoll: fd:11 ev:0005 d:00007FFFF7FAC280
-[debug]  *1 http upstream request: "/?"
-[debug]  *1 http upstream process header
-[debug]  *1 malloc: 000000000072D9B0:4096
-[debug]  *1 recv: fd:11 1448 of 4096
-[debug]  *1 http proxy status 200 "200 OK"
-[debug]  *1 http proxy header: "Date: Fri, 15 Jan 2016 10:18:38 GMT"
-[debug]  *1 http proxy header: "Server: Apache/2.4.7 (Ubuntu)"
-[debug]  *1 http proxy header: "Last-Modified: Fri, 15 Aug 2014 06:46:30 GMT"
-[debug]  *1 http proxy header: "ETag: "2cf6-500a561919761-gzip""
-[debug]  *1 http proxy header: "Accept-Ranges: bytes"
-[debug]  *1 http proxy header: "Vary: Accept-Encoding"
-[debug]  *1 http proxy header: "Content-Encoding: gzip"
-[debug]  *1 http proxy header: "Content-Length: 3256"
-[debug]  *1 http proxy header: "Connection: close"
-[debug]  *1 http proxy header: "Content-Type: text/html"
-[debug]  *1 http proxy header done
-[debug]  *1 HTTP/1.1 200 OK
+ngx_http_proxy_create_request 1435
+
+* [debug]  *1 http cleanup add: 000000000072D198
+ngx_http_cleanup_add
+
+* [debug]  *1 get rr peer, try: 1
+ngx_http_upstream_get_round_robin_peer
+
+* [debug]  *1 socket 11
+ngx_event_connect_peer
+
+* [debug]  *1 epoll add connection: fd:11 ev:80002005
+ngx_epoll_add_connection
+
+* [debug]  *1 connect to 192.168.1.251:80, fd:11 #3
+ngx_event_connect_peer
+
+* [debug]  *1 http upstream connect: -2
+ngx_http_upstream_connect
+
+* [debug]  *1 posix_memalign: 0000000000725290:128 @16
+ngx_memalign
+
+* [debug]  *1 event timer add: 11: 60000:1452853166076
+ngx_event_add_timer
+
+* [debug]  *1 http finalize request: -4, "/?" a:1, c:2
+ngx_http_finalize_request
+
+* [debug]  *1 http request count:2 blk:0
+ngx_http_close_request
+
+* [debug]  timer delta: 2
+ngx_process_events_and_timers
+
+* [debug]  worker cycle
+* [debug]  epoll timer: 59998
+
+* [debug]  epoll: fd:9 ev:0004 d:00007FFFF7FAC0E0
+ngx_epoll_process_events  
+#define EPOLLOUT       0x004
+
+* [debug]  *1 http run request: "/?"
+ngx_http_request_handler
+
+* [debug]  *1 http upstream check client, write event:1, "/"
+ngx_http_upstream_check_broken_connection
+
+* [debug]  *1 http upstream recv(): -1 (11: Resource temporarily unavailable)
+ngx_http_upstream_check_broken_connection
+
+* [debug]  timer delta: 1
+* [debug]  worker cycle
+* [debug]  epoll timer: 59997
+
+* [debug]  epoll: fd:11 ev:0004 d:00007FFFF7FAC280
+ngx_epoll_process_events  
+
+* [debug]  *1 http upstream request: "/?"
+ngx_http_upstream_handler
+
+* [debug]  *1 http upstream send request handler
+ngx_http_upstream_send_request_handler
+
+* [debug]  *1 http upstream send request
+ngx_http_upstream_send_request
+
+* [debug]  *1 http upstream send request body
+ngx_http_upstream_send_request_body
+
+* [debug]  *1 chain writer buf fl:1 s:452
+ngx_chain_writer
+
+* [debug]  *1 chain writer in: 000000000072C980
+ngx_chain_writer
+
+* [debug]  *1 writev: 452 of 452
+ngx_writev
+
+* [debug]  *1 chain writer out: 0000000000000000
+ngx_chain_writer
+
+* [debug]  *1 event timer del: 11: 1452853166076
+* [debug]  *1 event timer add: 11: 60000:1452853166077
+* [debug]  timer delta: 0
+* [debug]  worker cycle
+* [debug]  epoll timer: 59997
+* [debug]  epoll: fd:11 ev:0005 d:00007FFFF7FAC280
+* [debug]  *1 http upstream request: "/?"
+ngx_http_upstream_handler
+
+* [debug]  *1 http upstream process header
+ngx_http_upstream_process_header
+
+* [debug]  *1 malloc: 000000000072D9B0:4096
+* [debug]  *1 recv: fd:11 1448 of 4096
+* [debug]  *1 http proxy status 200 "200 OK"
+ngx_http_proxy_process_status_line
+
+* [debug]  *1 http proxy header: "Date: Fri, 15 Jan 2016 10:18:38 GMT"
+ngx_http_proxy_process_header 1814
+
+* [debug]  *1 http proxy header: "Server: Apache/2.4.7 (Ubuntu)"
+* [debug]  *1 http proxy header: "Last-Modified: Fri, 15 Aug 2014 06:46:30 GMT"
+* [debug]  *1 http proxy header: "ETag: "2cf6-500a561919761-gzip""
+* [debug]  *1 http proxy header: "Accept-Ranges: bytes"
+* [debug]  *1 http proxy header: "Vary: Accept-Encoding"
+* [debug]  *1 http proxy header: "Content-Encoding: gzip"
+* [debug]  *1 http proxy header: "Content-Length: 3256"
+* [debug]  *1 http proxy header: "Connection: close"
+* [debug]  *1 http proxy header: "Content-Type: text/html"
+* [debug]  *1 http proxy header done
+ngx_http_proxy_process_header
+
+* [debug]  *1 HTTP/1.1 200 OK
 Server: nginx/1.9.9
 Date: Fri, 15 Jan 2016 10:18:26 GMT
 Content-Type: text/html
