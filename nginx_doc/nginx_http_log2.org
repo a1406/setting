@@ -1,0 +1,211 @@
+* [debug] : bind() 0.0.0.0:8001 #7 
+* [notice] : using the "epoll" event method
+* [notice] : nginx/1.9.9
+* [notice] : built by gcc 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04) 
+* [notice] : OS: Linux 3.13.0-24-generic
+* [notice] : getrlimit(RLIMIT_NOFILE): 32768:65536
+* [debug] : write: 8, 00007FFFFFFFE030, 6, 0
+* [debug] : notify eventfd: 8
+* [debug] : malloc: 000000000072A180:6144
+* [debug] : malloc: 00007FFFF7FAC010:212992
+* [debug] : malloc: 0000000000744000:106496
+* [debug] : malloc: 000000000075E010:106496
+* [debug] : epoll add event: fd:7 op:1 ev:00002001
+* [debug] : worker cycle
+* [debug] : epoll timer: -1
+* [debug] : epoll: fd:7 ev:0001 d:00007FFFF7FAC010
+* [debug] : accept on 0.0.0.0:8001, ready: 0
+* [debug] : posix_memalign: 0000000000725420:512 @16
+* [debug] : *1 accept: 192.168.1.222:44457 fd:9
+* [debug] : *1 event timer add: 9: 60000:1452949126370
+* [debug] : *1 reusable connection: 1
+* [debug] : *1 epoll add event: fd:9 op:1 ev:80002001
+* [debug] : timer delta: 19142
+* [debug] : worker cycle
+* [debug] : epoll timer: 60000
+* [debug] : epoll: fd:9 ev:0001 d:00007FFFF7FAC0E0
+* [debug] : *1 http wait request handler
+* [debug] : *1 malloc: 00000000007427A0:1024
+* [debug] : *1 recv: fd:9 483 of 1024
+* [debug] : *1 reusable connection: 0
+* [debug] : *1 posix_memalign: 000000000072B990:4096 @16
+* [debug] : *1 http process request line
+* [debug] : *1 http request line: "GET /1.txt HTTP/1.1"
+* [debug] : *1 http uri: "/1.txt"
+* [debug] : *1 http args: ""
+* [debug] : *1 http exten: "txt"
+* [debug] : *1 http process request header line
+* [debug] : *1 http header: "Host: 192.168.1.250:8001"
+* [debug] : *1 http header: "Connection: keep-alive"
+* [debug] : *1 http header: "Cache-Control: no-cache"
+* [debug] : *1 http header: "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+* [debug] : *1 http header: "Pragma: no-cache"
+* [debug] : *1 http header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+* [debug] : *1 http header: "Accept-Encoding: gzip,deflate,sdch"
+* [debug] : *1 http header: "Accept-Language: zh-CN,zh;q=0.8,en;q=0.6"
+* [debug] : *1 http header: "Cookie: JSESSIONID.61466988=5untl1qfvyv2esxocekssf0m; screenResolution=1920x1080"
+* [debug] : *1 http header done
+* [debug] : *1 event timer del: 9: 1452949126370
+* [debug] : *1 rewrite phase: 0
+* [debug] : *1 test location: "/"
+* [debug] : *1 using configuration "/"
+* [debug] : *1 http cl:-1 max:1048576
+* [debug] : *1 rewrite phase: 2
+* [debug] : *1 post rewrite phase: 3
+* [debug] : *1 generic phase: 4
+* [debug] : *1 generic phase: 5
+* [debug] : *1 access phase: 6
+* [debug] : *1 access phase: 7
+* [debug] : *1 post access phase: 8
+* [debug] : *1 content phase: 9
+* [debug] : *1 content phase: 10
+* [debug] : *1 content phase: 11
+* [debug] : *1 http filename: "/home/jack/www/html/1.txt"
+* [debug] : *1 add cleanup: 000000000072C8E8
+* [debug] : *1 http static fd: 10
+* [debug] : *1 http set discard body
+* [debug] : *1 posix_memalign: 000000000072C9A0:4096 @16
+* [debug] : *1 HTTP/1.1 200 OK
+Server: nginx/1.9.9
+Date: Sat, 16 Jan 2016 12:57:46 GMT
+Content-Type: text/plain
+Content-Length: 6
+Last-Modified: Sat, 16 Jan 2016 12:56:35 GMT
+Connection: keep-alive
+ETag: "569a3e03-6"
+Accept-Ranges: bytes
+
+* [debug] : *1 write new buf t:1 f:0 000000000072CB28, pos 000000000072CB28, size: 234 file: 0, size: 0
+* [debug] : *1 http write filter: l:0 f:0 s:234
+* [debug] : *1 http output filter "/1.txt?"
+* [debug] : *1 http copy filter: "/1.txt?"
+* [debug] : *1 read: 10, 000000000072C968, 6, 0
+* [debug] : *1 http footer body filter
+* [debug] : *1 http postpone filter "/1.txt?" 000000000072C970
+* [debug] : *1 write old buf t:1 f:0 000000000072CB28, pos 000000000072CB28, size: 234 file: 0, size: 0
+* [debug] : *1 write new buf t:1 f:0 000000000072C968, pos 000000000072C968, size: 6 file: 0, size: 0
+* [debug] : *1 http write filter: l:1 f:0 s:240
+* [debug] : *1 http write filter limit 0
+* [debug] : *1 writev: 240 of 240
+* [debug] : *1 http write filter 0000000000000000
+* [debug] : *1 http copy filter: 0 "/1.txt?"
+* [debug] : *1 http finalize request: 0, "/1.txt?" a:1, c:1
+* [debug] : *1 set http keepalive handler
+* [debug] : *1 http close request
+* [debug] : *1 http log handler
+* [debug] : *1 run cleanup: 000000000072C8E8
+* [debug] : *1 file cleanup: fd:10
+* [debug] : *1 free: 000000000072B990, unused: 0
+* [debug] : *1 free: 000000000072C9A0, unused: 3037
+* [debug] : *1 free: 00000000007427A0
+* [debug] : *1 hc free: 0000000000000000 0
+* [debug] : *1 hc busy: 0000000000000000 0
+* [debug] : *1 tcp_nodelay
+* [debug] : *1 reusable connection: 1
+* [debug] : *1 event timer add: 9: 75000:1452949141372
+* [debug] : *1 post event 0000000000744068
+* [debug] : timer delta: 2
+* [debug] : posted event 0000000000744068
+* [debug] : *1 delete posted event 0000000000744068
+* [debug] : *1 http keepalive handler
+* [debug] : *1 malloc: 00000000007427A0:1024
+* [debug] : *1 recv: fd:9 -1 of 1024
+* [debug] : *1 recv() not ready (11: Resource temporarily unavailable)
+* [debug] : *1 free: 00000000007427A0
+* [debug] : worker cycle
+* [debug] : epoll timer: 75000
+* [debug] : epoll: fd:9 ev:0001 d:00007FFFF7FAC0E0
+* [debug] : *1 http keepalive handler
+* [debug] : *1 malloc: 00000000007427A0:1024
+* [debug] : *1 recv: fd:9 375 of 1024
+* [debug] : *1 reusable connection: 0
+* [debug] : *1 posix_memalign: 000000000072B990:4096 @16
+* [debug] : *1 event timer del: 9: 1452949141372
+* [debug] : *1 http process request line
+* [debug] : *1 http request line: "GET /favicon.ico HTTP/1.1"
+* [debug] : *1 http uri: "/favicon.ico"
+* [debug] : *1 http args: ""
+* [debug] : *1 http exten: "ico"
+* [debug] : *1 http process request header line
+* [debug] : *1 http header: "Host: 192.168.1.250:8001"
+* [debug] : *1 http header: "Connection: keep-alive"
+* [debug] : *1 http header: "Accept: */*"
+* [debug] : *1 http header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
+* [debug] : *1 http header: "Accept-Encoding: gzip,deflate,sdch"
+* [debug] : *1 http header: "Accept-Language: zh-CN,zh;q=0.8,en;q=0.6"
+* [debug] : *1 http header: "Cookie: JSESSIONID.61466988=5untl1qfvyv2esxocekssf0m; screenResolution=1920x1080"
+* [debug] : *1 http header done
+* [debug] : *1 rewrite phase: 0
+* [debug] : *1 test location: "/"
+* [debug] : *1 using configuration "/"
+* [debug] : *1 http cl:-1 max:1048576
+* [debug] : *1 rewrite phase: 2
+* [debug] : *1 post rewrite phase: 3
+* [debug] : *1 generic phase: 4
+* [debug] : *1 generic phase: 5
+* [debug] : *1 access phase: 6
+* [debug] : *1 access phase: 7
+* [debug] : *1 post access phase: 8
+* [debug] : *1 content phase: 9
+* [debug] : *1 content phase: 10
+* [debug] : *1 content phase: 11
+* [debug] : *1 http filename: "/home/jack/www/html/favicon.ico"
+* [debug] : *1 add cleanup: 000000000072C8D8
+* [error] : *1 open() "/home/jack/www/html/favicon.ico" failed (2: No such file or directory), client: 192.168.1.222, server: , request: "GET /favicon.ico HTTP/1.1", host: "192.168.1.250:8001"
+* [debug] : *1 http finalize request: 404, "/favicon.ico?" a:1, c:1
+* [debug] : *1 http special response: 404, "/favicon.ico?"
+* [debug] : *1 http set discard body
+* [debug] : *1 posix_memalign: 000000000072C9A0:4096 @16
+* [debug] : *1 HTTP/1.1 404 Not Found
+Server: nginx/1.9.9
+Date: Sat, 16 Jan 2016 12:57:46 GMT
+Content-Type: text/html
+Content-Length: 570
+Connection: keep-alive
+
+* [debug] : *1 write new buf t:1 f:0 000000000072C9C0, pos 000000000072C9C0, size: 154 file: 0, size: 0
+* [debug] : *1 http write filter: l:0 f:0 s:154
+* [debug] : *1 http output filter "/favicon.ico?"
+* [debug] : *1 http copy filter: "/favicon.ico?"
+* [debug] : *1 http footer body filter
+* [debug] : *1 http postpone filter "/favicon.ico?" 000000000072C968
+* [debug] : *1 write old buf t:1 f:0 000000000072C9C0, pos 000000000072C9C0, size: 154 file: 0, size: 0
+* [debug] : *1 write new buf t:0 f:0 0000000000000000, pos 00000000007044E0, size: 116 file: 0, size: 0
+* [debug] : *1 write new buf t:0 f:0 0000000000000000, pos 0000000000703DE0, size: 52 file: 0, size: 0
+* [debug] : *1 write new buf t:0 f:0 0000000000000000, pos 0000000000703E60, size: 402 file: 0, size: 0
+* [debug] : *1 http write filter: l:1 f:0 s:724
+* [debug] : *1 http write filter limit 0
+* [debug] : *1 writev: 724 of 724
+* [debug] : *1 http write filter 0000000000000000
+* [debug] : *1 http copy filter: 0 "/favicon.ico?"
+* [debug] : *1 http finalize request: 0, "/favicon.ico?" a:1, c:1
+* [debug] : *1 set http keepalive handler
+* [debug] : *1 http close request
+* [debug] : *1 http log handler
+* [debug] : *1 free: 000000000072B990, unused: 8
+* [debug] : *1 free: 000000000072C9A0, unused: 3247
+* [debug] : *1 free: 00000000007427A0
+* [debug] : *1 hc free: 0000000000000000 0
+* [debug] : *1 hc busy: 0000000000000000 0
+* [debug] : *1 reusable connection: 1
+* [debug] : *1 event timer add: 9: 75000:1452949141416
+* [debug] : *1 post event 0000000000744068
+* [debug] : timer delta: 44
+* [debug] : posted event 0000000000744068
+* [debug] : *1 delete posted event 0000000000744068
+* [debug] : *1 http keepalive handler
+* [debug] : *1 malloc: 00000000007427A0:1024
+* [debug] : *1 recv: fd:9 -1 of 1024
+* [debug] : *1 recv() not ready (11: Resource temporarily unavailable)
+* [debug] : *1 free: 00000000007427A0
+* [debug] : worker cycle
+* [debug] : epoll timer: 75000
+* [debug] : timer delta: 75076
+* [debug] : *1 event timer del: 9: 1452949141416
+* [debug] : *1 http keepalive handler
+* [debug] : *1 close http connection: 9
+* [debug] : *1 reusable connection: 0
+* [debug] : *1 free: 0000000000000000
+* [debug] : *1 free: 0000000000725420, unused: 144
+* [debug] : worker cycle
+* [debug] : epoll timer: -1
