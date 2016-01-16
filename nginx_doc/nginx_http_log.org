@@ -54,18 +54,46 @@ ngx_unix_recv
 
 * [debug]  *1 reusable connection: 0
 ngx_reusable_connection
+#0  ngx_reusable_connection (c=0x7ffff7fac0e0, reusable=1) at src/core/ngx_connection.c:1116
+#1  0x000000000044e36c in ngx_http_init_connection (c=0x7ffff7fac0e0) at src/http/ngx_http_request.c:364
+#2  0x000000000043072b in ngx_event_accept (ev=0x744100) at src/event/ngx_event_accept.c:356
+#3  0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=18446744073709551615, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#4  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#5  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#6  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
 
 * [debug]  *1 posix_memalign: 000000000072B990:4096 @16
 ngx_memalign
+#0  ngx_memalign (alignment=16, size=4096, log=0x725480) at src/os/unix/ngx_alloc.c:57
+#1  0x0000000000406dd7 in ngx_create_pool (size=4096, log=0x725480) at src/core/ngx_palloc.c:21
+#2  0x000000000044e917 in ngx_http_create_request (c=0x7ffff7fac0e0) at src/http/ngx_http_request.c:521
+#3  0x000000000044e86f in ngx_http_wait_request_handler (rev=0x744168) at src/http/ngx_http_request.c:492
+#4  0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#5  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#6  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#7  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
 
 * [debug]  *1 http process request line
 ngx_http_process_request_line
+#0  ngx_http_process_request_line (rev=0x744168) at src/http/ngx_http_request.c:922
+#1  0x000000000044e8a8 in ngx_http_wait_request_handler (rev=0x744168) at src/http/ngx_http_request.c:499
+#2  0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#3  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#4  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#5  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
 
 * [debug]  *1 http request line: "GET / HTTP/1.1"
 ngx_http_process_request_line
 
 * [debug]  *1 http uri: "/"
 ngx_http_process_request_uri
+#0  ngx_http_process_request_uri (r=0x72b9e0) at src/http/ngx_http_request.c:1067
+#1  0x000000000044ef5e in ngx_http_process_request_line (rev=0x744168) at src/http/ngx_http_request.c:967
+#2  0x000000000044e8a8 in ngx_http_wait_request_handler (rev=0x744168) at src/http/ngx_http_request.c:499
+#3  0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#4  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#5  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#6  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
 
 * [debug]  *1 http args: ""
 ngx_http_process_request_uri
@@ -75,6 +103,13 @@ ngx_http_process_request_uri
 
 * [debug]  *1 http process request header line
 ngx_http_process_request_headers
+#0  ngx_http_process_request_headers (rev=0x744168) at src/http/ngx_http_request.c:1193
+#1  0x000000000044f147 in ngx_http_process_request_line (rev=0x744168) at src/http/ngx_http_request.c:1022
+#2  0x000000000044e8a8 in ngx_http_wait_request_handler (rev=0x744168) at src/http/ngx_http_request.c:499
+#3  0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#4  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#5  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#6  0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
 
 * [debug]  *1 http header: "Host: 192.168.1.250:8001"
 ngx_http_process_request_headers
@@ -108,6 +143,17 @@ ngx_event_expire_timers or ngx_event_del_timer
 
 * [debug]  *1 rewrite phase: 0
 ngx_http_core_rewrite_phase
+#0  ngx_http_core_rewrite_phase (r=0x72b9e0, ph=0x73f438) at src/http/ngx_http_core_module.c:891
+#1  0x0000000000442015 in ngx_http_core_run_phases (r=0x72b9e0) at src/http/ngx_http_core_module.c:840
+#2  0x0000000000441f83 in ngx_http_handler (r=0x72b9e0) at src/http/ngx_http_core_module.c:823
+#3  0x00000000004511a0 in ngx_http_process_request (r=0x72b9e0) at src/http/ngx_http_request.c:1911
+#4  0x000000000044fd67 in ngx_http_process_request_headers (rev=0x744168) at src/http/ngx_http_request.c:1342
+#5  0x000000000044f147 in ngx_http_process_request_line (rev=0x744168) at src/http/ngx_http_request.c:1022
+#6  0x000000000044e8a8 in ngx_http_wait_request_handler (rev=0x744168) at src/http/ngx_http_request.c:499
+#7  0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#8  0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#9  0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#10 0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
 
 * [debug]  *1 test location: "/"
 ngx_http_named_location
@@ -141,15 +187,63 @@ ngx_http_core_post_access_phase
 
 * [debug]  *1 posix_memalign: 000000000072C9A0:4096 @16
 ngx_memalign
+#0  ngx_memalign (alignment=16, size=4096, log=0x725480) at src/os/unix/ngx_alloc.c:57
+#1  0x00000000004072a1 in ngx_palloc_block (pool=0x72b990, size=992) at src/core/ngx_palloc.c:188
+#2  0x00000000004071a3 in ngx_palloc (pool=0x72b990, size=992) at src/core/ngx_palloc.c:142
+#3  0x00000000004075d9 in ngx_pcalloc (pool=0x72b990, size=992) at src/core/ngx_palloc.c:304
+#4  0x0000000000469fb6 in ngx_http_upstream_create (r=0x72b9e0) at src/http/ngx_http_upstream.c:452
+#5  0x00000000004a0756 in ngx_http_proxy_handler (r=0x72b9e0) at src/http/modules/ngx_http_proxy_module.c:835
+#6  0x000000000044360b in ngx_http_core_content_phase (r=0x72b9e0, ph=0x73f510) at src/http/ngx_http_core_module.c:1363
+#7  0x0000000000442015 in ngx_http_core_run_phases (r=0x72b9e0) at src/http/ngx_http_core_module.c:840
+#8  0x0000000000441f83 in ngx_http_handler (r=0x72b9e0) at src/http/ngx_http_core_module.c:823
+#9  0x00000000004511a0 in ngx_http_process_request (r=0x72b9e0) at src/http/ngx_http_request.c:1911
+#10 0x000000000044fd67 in ngx_http_process_request_headers (rev=0x744168) at src/http/ngx_http_request.c:1342
+#11 0x000000000044f147 in ngx_http_process_request_line (rev=0x744168) at src/http/ngx_http_request.c:1022
+#12 0x000000000044e8a8 in ngx_http_wait_request_handler (rev=0x744168) at src/http/ngx_http_request.c:499
+#13 0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#14 0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#15 0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#16 0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
 
 * [debug]  *1 http init upstream, client timer: 0
 ngx_http_upstream_init
+#0  ngx_http_upstream_init (r=0x72b9e0) at src/http/ngx_http_upstream.c:478
+#1  0x000000000045e6e7 in ngx_http_read_client_request_body (r=0x72b9e0, post_handler=0x46a02c <ngx_http_upstream_init>) at src/http/ngx_http_request_body.c:89
+#2  0x00000000004a0aec in ngx_http_proxy_handler (r=0x72b9e0) at src/http/modules/ngx_http_proxy_module.c:913
+#3  0x000000000044360b in ngx_http_core_content_phase (r=0x72b9e0, ph=0x73f510) at src/http/ngx_http_core_module.c:1363
+#4  0x0000000000442015 in ngx_http_core_run_phases (r=0x72b9e0) at src/http/ngx_http_core_module.c:840
+#5  0x0000000000441f83 in ngx_http_handler (r=0x72b9e0) at src/http/ngx_http_core_module.c:823
+#6  0x00000000004511a0 in ngx_http_process_request (r=0x72b9e0) at src/http/ngx_http_request.c:1911
+#7  0x000000000044fd67 in ngx_http_process_request_headers (rev=0x744168) at src/http/ngx_http_request.c:1342
+#8  0x000000000044f147 in ngx_http_process_request_line (rev=0x744168) at src/http/ngx_http_request.c:1022
+#9  0x000000000044e8a8 in ngx_http_wait_request_handler (rev=0x744168) at src/http/ngx_http_request.c:499
+#10 0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#11 0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#12 0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#13 0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
 
 * [debug]  *1 epoll add event: fd:9 op:3 ev:80002005
 ngx_epoll_add_event
 
 * [debug]  *1 http script copy: "Host: "
 ngx_http_script_copy_code
+#0  ngx_http_script_copy_code (e=0x7fffffffda80) at src/http/ngx_http_script.c:741
+#1  0x00000000004a2104 in ngx_http_proxy_create_request (r=0x72b9e0) at src/http/modules/ngx_http_proxy_module.c:1369
+#2  0x000000000046a36f in ngx_http_upstream_init_request (r=0x72b9e0) at src/http/ngx_http_upstream.c:579
+#3  0x000000000046a116 in ngx_http_upstream_init (r=0x72b9e0) at src/http/ngx_http_upstream.c:506
+#4  0x000000000045e6e7 in ngx_http_read_client_request_body (r=0x72b9e0, post_handler=0x46a02c <ngx_http_upstream_init>) at src/http/ngx_http_request_body.c:89
+#5  0x00000000004a0aec in ngx_http_proxy_handler (r=0x72b9e0) at src/http/modules/ngx_http_proxy_module.c:913
+#6  0x000000000044360b in ngx_http_core_content_phase (r=0x72b9e0, ph=0x73f510) at src/http/ngx_http_core_module.c:1363
+#7  0x0000000000442015 in ngx_http_core_run_phases (r=0x72b9e0) at src/http/ngx_http_core_module.c:840
+#8  0x0000000000441f83 in ngx_http_handler (r=0x72b9e0) at src/http/ngx_http_core_module.c:823
+#9  0x00000000004511a0 in ngx_http_process_request (r=0x72b9e0) at src/http/ngx_http_request.c:1911
+#10 0x000000000044fd67 in ngx_http_process_request_headers (rev=0x744168) at src/http/ngx_http_request.c:1342
+#11 0x000000000044f147 in ngx_http_process_request_line (rev=0x744168) at src/http/ngx_http_request.c:1022
+#12 0x000000000044e8a8 in ngx_http_wait_request_handler (rev=0x744168) at src/http/ngx_http_request.c:499
+#13 0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=60000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#14 0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#15 0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#16 0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
 
 * [debug]  *1 http script var: "192.168.1.251"
 ngx_http_script_var_code
@@ -169,6 +263,23 @@ ngx_http_script_copy_code
 
 * [debug]  *1 http proxy header: "Cache-Control: max-age=0"
 ngx_http_proxy_create_request 1411
+#0  ngx_http_proxy_create_request (r=0x72b9e0) at src/http/modules/ngx_http_proxy_module.c:1147
+#1  0x000000000046a36f in ngx_http_upstream_init_request (r=0x72b9e0) at src/http/ngx_http_upstream.c:579
+#2  0x000000000046a116 in ngx_http_upstream_init (r=0x72b9e0) at src/http/ngx_http_upstream.c:506
+#3  0x000000000045e6e7 in ngx_http_read_client_request_body (r=0x72b9e0, post_handler=0x46a02c <ngx_http_upstream_init>) at src/http/ngx_http_request_body.c:89
+#4  0x00000000004a0aec in ngx_http_proxy_handler (r=0x72b9e0) at src/http/modules/ngx_http_proxy_module.c:913
+#5  0x000000000044360b in ngx_http_core_content_phase (r=0x72b9e0, ph=0x73f510) at src/http/ngx_http_core_module.c:1363
+#6  0x0000000000442015 in ngx_http_core_run_phases (r=0x72b9e0) at src/http/ngx_http_core_module.c:840
+#7  0x0000000000441f83 in ngx_http_handler (r=0x72b9e0) at src/http/ngx_http_core_module.c:823
+#8  0x00000000004511a0 in ngx_http_process_request (r=0x72b9e0) at src/http/ngx_http_request.c:1911
+#9  0x000000000044fd67 in ngx_http_process_request_headers (rev=0x744168) at src/http/ngx_http_request.c:1342
+#10 0x000000000044f147 in ngx_http_process_request_line (rev=0x744168) at src/http/ngx_http_request.c:1022
+#11 0x0000000000453968 in ngx_http_keepalive_handler (rev=0x744168) at src/http/ngx_http_request.c:3196
+#12 0x000000000043ca88 in ngx_epoll_process_events (cycle=0x7261c0, timer=75000, flags=1) at src/event/modules/ngx_epoll_module.c:822
+#13 0x000000000042d2e6 in ngx_process_events_and_timers (cycle=0x7261c0) at src/event/ngx_event.c:242
+#14 0x0000000000439201 in ngx_single_process_cycle (cycle=0x7261c0) at src/os/unix/ngx_process_cycle.c:309
+#15 0x000000000040395b in main (argc=3, argv=0x7fffffffe3a8) at src/core/nginx.c:354
+
 * [debug]  *1 http proxy header: "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
 * [debug]  *1 http proxy header: "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36"
 * [debug]  *1 http proxy header: "Accept-Encoding: gzip,deflate,sdch"
