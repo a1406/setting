@@ -372,3 +372,12 @@ ngx_http_core_content_phase(ngx_http_request_t *r,
     }
 
 其中， r->content_handler(r));指向ngx_http_proxy_handler
+如果对应的是个静态页面，那么指向ngx_http_static_handler
+如果是个动态cgi页面, 那么指向ngx_http_index_handler, 如下
+#0  ngx_http_fastcgi_create_request (r=0xb21a10) at src/http/modules/ngx_http_fastcgi_module.c:830
+#1  0x000000000046a4aa in ngx_http_upstream_init_request (r=0xb21a10) at src/http/ngx_http_upstream.c:579
+#2  0x000000000046a251 in ngx_http_upstream_init (r=0xb21a10) at src/http/ngx_http_upstream.c:506
+#3  0x000000000045e822 in ngx_http_read_client_request_body (r=0xb21a10, post_handler=0x46a167 <ngx_http_upstream_init>) at src/http/ngx_http_request_body.c:89
+#4  0x00000000004a9948 in ngx_http_fastcgi_handler (r=0xb21a10) at src/http/modules/ngx_http_fastcgi_module.c:725
+#5  0x0000000000443746 in ngx_http_core_content_phase (r=0xb21a10, ph=0xb33730) at src/http/ngx_http_core_module.c:1364
+
