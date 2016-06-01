@@ -2,7 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("sentinelCommand" 0 15
+(#1=(#("loadServerConfigFromString" 0 26
+      (bmkp-full-record #1#))
+    (filename . "~/source/redis/redis-3.2.0/src/config.c")
+    (buffer-name . "config.c")
+    (front-context-string . "ing(char *config")
+    (rear-context-string . "verConfigFromStr")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(22350 44675 776648 51000))
+    (created . #2#)
+    (position . 5339))
+#1=(#("sentinelCommand" 0 15
       (bmkp-full-record #1#))
     (filename . "~/source/redis/redis-3.2.0/src/sentinel.c")
     (buffer-name . "sentinel.c")
@@ -10,9 +22,9 @@
     (rear-context-string . " sentinelCommand")
     (front-context-region-string)
     (rear-context-region-string)
-    (visits . 0)
-    (time . #2=(22350 43435 802814 721000))
-    (created . #2#)
+    (visits . 1)
+    (time 22350 43686 904648 166000)
+    (created 22350 43435 802814 721000)
     (position . 112200))
 #1=(#("replicationFeedSlaves" 0 21
       (bmkp-full-record #1#))
