@@ -9,7 +9,7 @@
 **** sentinelRefreshInstanceInfo  处理从master发来的info命令
 
 **** sentinelSendPeriodicCommands 周期性的发送info命令给master和slaver
-定期发送PING INFO PUBLISH命令
+定期发送PING INFO PUBLISH命令, 在此之前调用sentinelReconnectInstance保证连接
 
 ** sentinelEvent
 记录日志，已经发送消息给订阅者
