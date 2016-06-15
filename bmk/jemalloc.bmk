@@ -2,4 +2,28 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-()
+(#1=(#("je_free" 0 7
+      (bmkp-full-record #1#))
+    (filename . "~/gitroot/jemalloc/src/jemalloc.c")
+    (buffer-name . "jemalloc.c")
+    (front-context-string . "(void *ptr)\n{\n\n	")
+    (rear-context-string . "_NOTHROW\nje_free")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(22351 34912 419453 16000))
+    (created . #2#)
+    (position . 44200))
+#1=(#("je_malloc" 0 9
+      (bmkp-full-record #1#))
+    (filename . "~/gitroot/jemalloc/src/jemalloc.c")
+    (buffer-name . "jemalloc.c")
+    (front-context-string . "(size_t size)\n{\n")
+    (rear-context-string . "IZE(1)\nje_malloc")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 1)
+    (time 22351 34896 275610 710000)
+    (created 22351 34891 28557 151000)
+    (position . 35439))
+)
