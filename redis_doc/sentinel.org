@@ -1,3 +1,15 @@
 * monitor  sentinel命令，指向master
 ** createSentinelRedisInstance
+创建一个对象，并加入sentinel.masters
+把该对象的info_refresh设置成0
+*** info_refresh
+记录了收到info命令的时间, 会影响定期发送info，
+相关的宏定义是SENTINEL_INFO_PERIOD和SENTINEL_PING_PERIOD
+还会影响slave的选择，在函数sentinelSelectSlave中被使用
+**** sentinelRefreshInstanceInfo  处理从master发来的info命令
+
+**** sentinelSendPeriodicCommands 周期性的发送info命令给master和slaver
+定期发送PING INFO PUBLISH命令
+
 ** sentinelEvent
+记录日志，已经发送消息给订阅者
