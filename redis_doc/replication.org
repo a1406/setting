@@ -1,6 +1,7 @@
 * slaveof  配置master节点的地址
 读取配置，并把server的状态设置成REPL_STATE_CONNECT
 
+
 * Slave replication state. 
 Used in server.repl_state for slaves to remember what to do next.
 
@@ -10,38 +11,62 @@ Used in server.repl_state for slaves to remember what to do next.
 
 *** initServerConfig
 
+
 ** REPL_STATE_CONNECT 状态
 需要连接master
+connectWithMaster后状态变为REPL_STATE_CONNECTING
+
 
 ** REPL_STATE_CONNECTING 状态
 正在连接master
+连接成功后，syncWithMaster中状态变成REPL_STATE_RECEIVE_PONG并且发送PING给master
+
 
 ** REPL_STATE_RECEIVE_PONG 状态
 等待 PING 的返回
+收到PONG后，syncWithMaster中状态变成REPL_STATE_SEND_PORT
+
 
 ** REPL_STATE_SEND_PORT 状态
-发送 REPLCONF 监听对应的端口
+发送 REPLCONF, 参数是监听的端口号
+状态变成REPL_STATE_RECEIVE_PORT
+
 
 ** REPL_STATE_RECEIVE_PORT 状态
 等待 REPLCONF 的返回
+状态变成REPL_STATE_SEND_CAPA;
+
 
 ** REPL_STATE_SEND_CAPA 状态
-发送 REPLCONF 的数据
+发送 REPLCONF 的命令，参数是capa eof
+状态变成REPL_STATE_RECEIVE_CAPA
+
 
 ** REPL_STATE_RECEIVE_CAPA 状态
 等待 REPLCONF 数据的返回
+状态变成REPL_STATE_SEND_PSYNC
+
 
 ** REPL_STATE_SEND_PSYNC 状态
-发送 PSYNC
+调用 slaveTryPartialResynchronization 发送 PSYNC
+状态变成REPL_STATE_RECEIVE_PSYNC
+
 
 ** REPL_STATE_RECEIVE_PSYNC 状态
 等待 PSYNC 的返回
+调用slaveTryPartialResynchronization
+把读取数据的处理函数设置成readSyncBulkPayload
+状态变成REPL_STATE_TRANSFER
+初始化server.repl_transfer_* 相关参数
 
 ** REPL_STATE_TRANSFER 状态
 从master接收.rdb文件
 
+
+
 ** REPL_STATE_CONNECTED 状态
 连接master成功
+
 
 
 * State of slaves from the POV of the master. 
@@ -61,5 +86,6 @@ to start the next background saving in order to send updates to it. */
 
 ** SLAVE_STATE_ONLINE
 RDB文件发送完成
+
 
 * replicationFeedSlaves
