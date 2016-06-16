@@ -14,8 +14,8 @@
 ** sentinelEvent
 记录日志，已经发送消息给订阅者
 
-* SRI_S_DOWN
+* SRI_S_DOWN   主观下线
 ** sentinelCheckSubjectivelyDown
 
-* SRI_O_DOWN
+* SRI_O_DOWN   客观下线
 ** sentinelCheckObjectivelyDown
