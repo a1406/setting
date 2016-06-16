@@ -61,7 +61,7 @@ connectWithMaster后状态变为REPL_STATE_CONNECTING
 
 ** REPL_STATE_TRANSFER 状态
 从master接收.rdb文件
-
+完成后，调用ordbLoad读取rdb文件，调用replicationCreateMasterClient把状态设置成REPL_STATE_CONNECTED, 并且启动AOF
 
 
 ** REPL_STATE_CONNECTED 状态
@@ -89,3 +89,4 @@ RDB文件发送完成
 
 
 * replicationFeedSlaves
+
