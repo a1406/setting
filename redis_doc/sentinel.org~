@@ -1,3 +1,0 @@
-* monitor  sentinel命令，指向master
-** createSentinelRedisInstance
-** 
