@@ -1,27 +1,40 @@
 * slaveof  配置master节点的地址
+读取配置，并把server的状态设置成REPL_STATE_CONNECT
 
 ** REPL_STATE_NONE 状态
+没有活动的replication
 
 ** REPL_STATE_CONNECT 状态
+需要连接master
 
 ** REPL_STATE_CONNECTING 状态
+正在连接master
 
 ** REPL_STATE_RECEIVE_PONG 状态
+等待 PING 的返回
 
 ** REPL_STATE_SEND_PORT 状态
+发送 REPLCONF 监听对应的端口
 
 ** REPL_STATE_RECEIVE_PORT 状态
+等待 REPLCONF 的返回
 
 ** REPL_STATE_SEND_CAPA 状态
+发送 REPLCONF 的数据
 
 ** REPL_STATE_RECEIVE_CAPA 状态
+等待 REPLCONF 数据的返回
 
 ** REPL_STATE_SEND_PSYNC 状态
+发送 PSYNC
 
 ** REPL_STATE_RECEIVE_PSYNC 状态
+等待 PSYNC 的返回
 
 ** REPL_STATE_TRANSFER 状态
+从master接收.rdb文件
 
 ** REPL_STATE_CONNECTED 状态
+连接master成功
 
-replicationFeedSlaves
+* replicationFeedSlaves
