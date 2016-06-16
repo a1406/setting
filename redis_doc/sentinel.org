@@ -13,3 +13,9 @@
 
 ** sentinelEvent
 记录日志，已经发送消息给订阅者
+
+* SRI_S_DOWN
+** sentinelCheckSubjectivelyDown
+
+* SRI_O_DOWN
+** sentinelCheckObjectivelyDown
