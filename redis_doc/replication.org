@@ -1,8 +1,14 @@
 * slaveof  配置master节点的地址
 读取配置，并把server的状态设置成REPL_STATE_CONNECT
 
+* Slave replication state. 
+Used in server.repl_state for slaves to remember what to do next.
+
 ** REPL_STATE_NONE 状态
 没有活动的replication
+*** createClient
+
+*** initServerConfig
 
 ** REPL_STATE_CONNECT 状态
 需要连接master
@@ -36,5 +42,24 @@
 
 ** REPL_STATE_CONNECTED 状态
 连接master成功
+
+
+* State of slaves from the POV of the master. 
+Used in client->replstate.
+In SEND_BULK and ONLINE state the slave receives new updates
+in its output queue. In the WAIT_BGSAVE states instead the server is waiting
+to start the next background saving in order to send updates to it. */
+
+** SLAVE_STATE_WAIT_BGSAVE_START
+需要生成新的RDB文件
+
+** SLAVE_STATE_WAIT_BGSAVE_END
+正在生成RDB文件
+
+** SLAVE_STATE_SEND_BULK
+发送RDB文件给slave
+
+** SLAVE_STATE_ONLINE
+RDB文件发送完成
 
 * replicationFeedSlaves
