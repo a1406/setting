@@ -38,3 +38,4 @@
 连接master成功
 
 * replicationFeedSlaves
+同步到slave
