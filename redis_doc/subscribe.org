@@ -1,0 +1,6 @@
+* subscribe
+
+
+* publish
+
+* freeClient 的时候会退订所有的频道
