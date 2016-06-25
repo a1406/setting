@@ -1,0 +1,17 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(#1=(#("tcpv6_prot" 0 10
+      (bmkp-full-record #1#))
+    (filename . "~/source/kernel/linux-3.13.0/net/ipv6/tcp_ipv6.c")
+    (buffer-name . "tcp_ipv6.c")
+    (front-context-string . "onnect,\n	.discon")
+    (rear-context-string . "nect		= tcp_v6_c")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(22353 37567 750824 147000))
+    (created . #2#)
+    (position . 49453))
+)
