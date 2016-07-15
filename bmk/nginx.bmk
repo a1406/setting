@@ -1,0 +1,29 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(#1=(#("ngx_rtmp_block" 0 14
+      (bmkp-full-record #1#))
+    (filename . "~/gitroot/nginx-rtmp-module/ngx_rtmp.c")
+    (buffer-name . "ngx_rtmp.c")
+    (front-context-string . "(ngx_conf_t *cf,")
+    (rear-context-string . "*\nngx_rtmp_block")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 2)
+    (time 22408 42211 660778 935000)
+    (created 22408 41150 908872 143000)
+    (position . 2491))
+#1=(#("ngx_rtmp_init_event_handlers" 0 28
+      (bmkp-full-record #1#))
+    (filename . "~/gitroot/nginx-rtmp-module/ngx_rtmp.c")
+    (buffer-name . "ngx_rtmp.c")
+    (front-context-string . "ngx_rtmp_init_ev")
+    (rear-context-string . "tatic ngx_int_t\n")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 2)
+    (time 22408 42203 397127 406000)
+    (created 22408 41002 132951 305000)
+    (position . 10497))
+)
