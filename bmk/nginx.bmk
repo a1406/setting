@@ -2,7 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("ngx_rtmp_live_commands" 0 22
+(#1=(#("ngx_rtmp_live_module" 0 20
+      (bmkp-full-record #1#))
+    (filename . "~/gitroot/nginx-rtmp-module/ngx_rtmp_live_module.c")
+    (buffer-name . "ngx_rtmp_live_module.c")
+    (front-context-string . "ngx_rtmp_live_mo")
+    (rear-context-string . "\n\nngx_module_t  ")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(22408 43428 917952 564000))
+    (created . #2#)
+    (position . 4345))
+#1=(#("ngx_rtmp_live_commands" 0 22
       (bmkp-full-record #1#))
     (filename . "~/gitroot/nginx-rtmp-module/ngx_rtmp_live_module.c")
     (buffer-name . "ngx_rtmp_live_module.c")
