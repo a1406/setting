@@ -2,7 +2,31 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("ngx_rtmp_block" 0 14
+(#1=(#("ngx_rtmp_live_commands" 0 22
+      (bmkp-full-record #1#))
+    (filename . "~/gitroot/nginx-rtmp-module/ngx_rtmp_live_module.c")
+    (buffer-name . "ngx_rtmp_live_module.c")
+    (front-context-string . "[] = {\n\n    { ng")
+    (rear-context-string . "mp_live_commands")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(22408 43161 109596 367000))
+    (created . #2#)
+    (position . 1004))
+#1=(#("ngx_rtmp_core_commands" 0 22
+      (bmkp-full-record #1#))
+    (filename . "~/gitroot/nginx-rtmp-module/ngx_rtmp_core_module.c")
+    (buffer-name . "ngx_rtmp_core_module.c")
+    (front-context-string . "rtmp_core_comman")
+    (rear-context-string . "_command_t  ngx_")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 1)
+    (time 22408 42978 893538 530000)
+    (created 22408 42900 253744 197000)
+    (position . 1031))
+#1=(#("ngx_rtmp_block" 0 14
       (bmkp-full-record #1#))
     (filename . "~/gitroot/nginx-rtmp-module/ngx_rtmp.c")
     (buffer-name . "ngx_rtmp.c")
