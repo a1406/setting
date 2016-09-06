@@ -1,0 +1,29 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(#1=(#("CPlayerViewCtrl.h" 0 17
+      (bmkp-full-record #1#))
+    (filename . "~/source/yulongzaitian/Server/zone/model/CPlayerViewCtrl.h")
+    (buffer-name . "CPlayerViewCtrl.h")
+    (front-context-string . "yerViewCtrl\n{\npu")
+    (rear-context-string . "L);\n\n\nclass CPla")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(22478 11761 650388 834000))
+    (created . #2#)
+    (position . 1408))
+#1=(#("CMapSearchArea.h" 0 16
+      (bmkp-full-record #1#))
+    (filename . "~/source/yulongzaitian/Server/zone/model/CMapSearchArea.h")
+    (buffer-name . "CMapSearchArea.h")
+    (front-context-string . "pSearchArea\n{\npu")
+    (rear-context-string . " \n    \nclass CMa")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(22478 11752 353981 765000))
+    (created . #2#)
+    (position . 614))
+)
