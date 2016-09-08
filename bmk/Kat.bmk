@@ -2,7 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("UpdateUnitSight" 0 15
+(#1=(#("脚本接口" 0 4
+      (bmkp-full-record #1#))
+    (filename . "~/source/Kat/Bin/work/SVN/Server_proj/101_StarZoneServer/ScriptEngine/ScriptCallback.hpp")
+    (buffer-name . "ScriptCallback.hpp")
+    (front-context-string . "ptCallback : pub")
+    (rear-context-string . "基本类型\nclass CScri")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 1)
+    (time 22478 33789 875968 522000)
+    (created 22478 33760 379740 584000)
+    (position . 259))
+#1=(#("UpdateUnitSight" 0 15
       (bmkp-full-record #1#))
     (filename . "~/source/Kat/Bin/work/SVN/Server_proj/101_StarZoneServer/ZoneServer/SceneSightManager.cpp")
     (buffer-name . "SceneSightManager.cpp")
@@ -14,7 +26,7 @@
     (time . #2=(22473 12579 467266 391000))
     (created . #2#)
     (position . 6942))
-#1=(#("ScenePathManager.hpp" 0 20
+#1=(#("寻路接口" 0 4
       (bmkp-full-record #1#))
     (filename . "~/source/Kat/Bin/work/SVN/Server_proj/102_StarConfigEngine/ScenePathManager.hpp")
     (buffer-name . "ScenePathManager.hpp")
@@ -22,22 +34,10 @@
     (rear-context-string . " CScenePathManag")
     (front-context-region-string)
     (rear-context-region-string)
-    (visits . 1)
-    (time 22472 59632 539589 817000)
+    (visits . 2)
+    (time 22478 44986 868366 495000)
     (created 22471 33639 335943 694000)
     (position . 1701))
-#1=(#("ScriptCallback.hpp" 0 18
-      (bmkp-full-record #1#))
-    (filename . "~/source/Kat/Bin/work/SVN/Server_proj/101_StarZoneServer/ScriptEngine/ScriptCallback.hpp")
-    (buffer-name . "ScriptCallback.hpp")
-    (front-context-string . "ptCallback : pub")
-    (rear-context-string . "基本类型\nclass CScri")
-    (front-context-region-string)
-    (rear-context-region-string)
-    (visits . 0)
-    (time . #2=(22471 33566 247209 930000))
-    (created . #2#)
-    (position . 259))
 #1=(#("UpdataCurrentPosition" 0 21
       (bmkp-full-record #1#))
     (filename . "~/source/Kat/Bin/work/SVN/Server_proj/101_StarZoneServer/ZoneServer/PositionCalculator.cpp")
@@ -50,7 +50,7 @@
     (time 22473 12461 299131 206000)
     (created 22470 45580 176428 790000)
     (position . 1243))
-#1=(#("ZoneMsgHelper.cpp" 0 17
+#1=(#("消息定义" 0 4
       (bmkp-full-record #1#))
     (filename . "~/source/Kat/Bin/work/SVN/Server_proj/101_StarZoneServer/ZoneServer/ZoneMsgHelper.cpp")
     (buffer-name . "ZoneMsgHelper.cpp")
@@ -58,8 +58,8 @@
     (rear-context-string . "false;\n\nvoid CZo")
     (front-context-region-string)
     (rear-context-region-string)
-    (visits . 2)
-    (time 22470 45487 977040 182000)
+    (visits . 3)
+    (time 22478 33422 844289 536000)
     (created 22470 17835 315341 671000)
     (position . 650))
 )
