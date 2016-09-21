@@ -2,7 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("地图读取和路径判断" 0 9
+(#1=(#("zone消息处理" 0 8
+      (bmkp-full-record #1#))
+    (filename . "~/source/yulongzaitian/Server/zone/framework/CZoneMgr.cpp")
+    (buffer-name . "CZoneMgr.cpp")
+    (front-context-string . "ZoneMgr::RegistM")
+    (rear-context-string . " liRet;\n}\n\nint C")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(22494 21914 338668 111000))
+    (created . #2#)
+    (position . 7779))
+#1=(#("地图读取和路径判断" 0 9
       (bmkp-full-record #1#))
     (filename . "~/source/yulongzaitian/Server/zone/model/CMapStatic.h")
     (buffer-name . "CMapStatic.h")
