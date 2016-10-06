@@ -25,3 +25,7 @@ execute_process (
 
 add_library  (hello ${SRC_LIST})
 
+#> link_libraries(game)
+#> link_libraries(event)
+#> link_libraries(log4c)
+#> add_executable  (game_srv ${SRC_LIST})
