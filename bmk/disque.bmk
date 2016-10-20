@@ -2,7 +2,31 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("命令列表" 0 4
+(#1=(#("集群消息ID" 0 6
+      (bmkp-full-record #1#))
+    (filename . "~/gitroot/disque/src/cluster.h")
+    (buffer-name . "cluster.h")
+    (front-context-string . "#define CLUSTERM")
+    (rear-context-string . "n the list). */\n")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(22532 29367 919924 165000))
+    (created . #2#)
+    (position . 4966))
+#1=(#("集群命令" 0 4
+      (bmkp-full-record #1#))
+    (filename . "~/gitroot/disque/src/cluster.c")
+    (buffer-name . "cluster.c")
+    (front-context-string . "void clusterComm")
+    (rear-context-string . "----------- */\n\n")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(22532 28878 670433 760000))
+    (created . #2#)
+    (position . 98423))
+#1=(#("命令列表" 0 4
       (bmkp-full-record #1#))
     (filename . "~/gitroot/disque/src/server.c")
     (buffer-name . "server.c")
@@ -10,8 +34,8 @@
     (rear-context-string . "struct serverCom")
     (front-context-region-string)
     (rear-context-region-string)
-    (visits . 4)
-    (time 22520 61361 245885 35000)
+    (visits . 6)
+    (time 22532 29118 282133 903000)
     (created 22520 59866 718443 392000)
     (position . 4530))
 )

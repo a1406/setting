@@ -2,7 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("脚本接口" 0 4
+(#1=(#("怪物AI" 0 4
+      (bmkp-full-record #1#))
+    (filename . "~/source/Kat/Bin/work/SVN/Server_proj/101_StarZoneServer/ZoneServer/MonsterAI.hpp")
+    (buffer-name . "MonsterAI.hpp")
+    (front-context-string . "AIS_CHASE   = 10")
+    (rear-context-string . "04,  // 逃跑\n    E")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(22532 18265 680501 713000))
+    (created . #2#)
+    (position . 581))
+#1=(#("脚本接口" 0 4
       (bmkp-full-record #1#))
     (filename . "~/source/Kat/Bin/work/SVN/Server_proj/101_StarZoneServer/ScriptEngine/ScriptCallback.hpp")
     (buffer-name . "ScriptCallback.hpp")
@@ -10,8 +22,8 @@
     (rear-context-string . "基本类型\nclass CScri")
     (front-context-region-string)
     (rear-context-region-string)
-    (visits . 1)
-    (time 22478 33789 875968 522000)
+    (visits . 2)
+    (time 22532 18182 719783 930000)
     (created 22478 33760 379740 584000)
     (position . 259))
 #1=(#("UpdateUnitSight" 0 15
