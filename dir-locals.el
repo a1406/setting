@@ -6,7 +6,6 @@
  "-I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"
  "-I/usr/include/x86_64-linux-gnu"
  "-I/usr/include"
- "-I/usr/include/linux"
  "-I/usr/include/diet"
  "-I/home/jacktang/svnroot/XGame/Server/comm_include"
  "-I/home/jacktang/svnroot/XGame/Server/comm_lib/include"
