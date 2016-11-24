@@ -2,7 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("zone消息处理" 0 8
+(#1=(#("判断目标是否在攻击区域内" 0 12
+      (bmkp-full-record #1#))
+    (filename . "~/source/yulongzaitian/Server/zone/spell/inc/SpellInst.h")
+    (buffer-name . "SpellInst.h")
+    (front-context-string . "CircleArea(XGPOS")
+    (rear-context-string . " bool IsTargetIn")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(22550 59278 341972 874000))
+    (created . #2#)
+    (position . 3003))
+#1=(#("zone消息处理" 0 8
       (bmkp-full-record #1#))
     (filename . "~/source/yulongzaitian/Server/zone/framework/CZoneMgr.cpp")
     (buffer-name . "CZoneMgr.cpp")
@@ -34,8 +46,8 @@
     (rear-context-string . "E   //预返回模式\n} ;\n")
     (front-context-region-string)
     (rear-context-region-string)
-    (visits . 3)
-    (time 22479 36285 430737 519000)
+    (visits . 4)
+    (time 22550 59047 105379 474000)
     (created 22479 34186 886828 272000)
     (position . 295))
 #1=(#("创建NPC,怪物" 0 8
