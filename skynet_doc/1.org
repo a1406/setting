@@ -15,8 +15,12 @@ monitor统一管理所有的skynet_monitor
 
 ** timer线程
 	create_thread(&pid[1], thread_timer, m);
+看起来似乎就是每隔一段时间唤醒空闲的工作线程
 
 ** socket线程
 	create_thread(&pid[2], thread_socket, m);
+处理网络消息，然后发送给消息队列
 
-** thread_worder 工作线程
+** thread_worker 工作线程
+多组消息队列，取出其中的一个来处理(skynet_globalmq_pop)，处理完了就换一个
+可是为什么用自旋锁?
