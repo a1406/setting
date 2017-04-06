@@ -6,5 +6,13 @@
 4. 开始监听    	return start_listen(g,binding);
 
 ** start_listen
+1.      g->listen_id = skynet_socket_listen(ctx, host, port, BACKLOG);
+2. 	skynet_socket_start(ctx, g->listen_id);
+
+** skynet_socket_listen
 
 
+* send_request 发送消息
+** socket_server_connect
+
+* ctrl_cmd 处理本地命令
