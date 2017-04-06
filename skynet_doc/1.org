@@ -3,18 +3,20 @@
 skynet_context_push: 把消息压入context
 skynet_context_message_dispatch: 取出消息来处理，比如thread_worker中
 
-** thread_worder 工作线程
-
-
 ** monitor 和 skynet_monitor
 每个线程创建一个skynet_monitor
 monitor统一管理所有的skynet_monitor
 
 ** monitor线程
 	create_thread(&pid[0], thread_monitor, m);
+工作原理是这样的：每次处理一个服务的一个消息时，都会在一个和服务相关的全局变量处自增 1 。
+而 monitor 是一个独立线程，它每隔一小段时间（5 秒左右）都检测一下所有的工作线程，看有没有
+长期没有自增的，若有就认为其正在处理的消息可能陷入死循环了。
 
 ** timer线程
 	create_thread(&pid[1], thread_timer, m);
 
 ** socket线程
 	create_thread(&pid[2], thread_socket, m);
+
+** thread_worder 工作线程
