@@ -1,0 +1,10 @@
+* gate 服务
+** gate_init
+1. 记录了watchdog的handle，不知道做什么用g->watchdog = skynet_queryname(ctx, watchdog);
+2. 记录了ctx  	g->ctx = ctx;
+3. 注册回调  	skynet_callback(ctx,g,_cb);
+4. 开始监听    	return start_listen(g,binding);
+
+** start_listen
+
+
