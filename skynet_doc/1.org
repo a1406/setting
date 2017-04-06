@@ -1,3 +1,20 @@
 * 基本
-skynet_server.h: 提供了context相关接口，用于收发消息
+** skynet_server.h: 提供了context相关接口，用于收发消息
+skynet_context_push: 把消息压入context
+skynet_context_message_dispatch: 取出消息来处理，比如thread_worker中
 
+** thread_worder 工作线程
+
+
+** monitor 和 skynet_monitor
+每个线程创建一个skynet_monitor
+monitor统一管理所有的skynet_monitor
+
+** monitor线程
+	create_thread(&pid[0], thread_monitor, m);
+
+** timer线程
+	create_thread(&pid[1], thread_timer, m);
+
+** socket线程
+	create_thread(&pid[2], thread_socket, m);
