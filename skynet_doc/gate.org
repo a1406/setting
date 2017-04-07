@@ -10,9 +10,25 @@
 2. 	skynet_socket_start(ctx, g->listen_id);
 
 ** skynet_socket_listen
+1. int fd = do_listen(addr, port, backlog);
+2. 发送 'L' listen_socket
 
-
-* send_request 发送消息
 ** socket_server_connect
 
+* send_request 发送消息
+header的前六个字节空着，为什么？
+第七个字节表示消息号，第八个字节表示长度
+后面又空了256个字节，为什么？
+
+
 * ctrl_cmd 处理本地命令
+返回-1就继续处理下一个, 否则clear_closed_event(ss, result, type);
+
+* socket_server_create
+1. 创建了epoll对象 	poll_fd efd = sp_create();
+2. 创建了管道  	if (pipe(fd)) {
+3. 把管道的读一端加入epoll事件  	if (sp_add(efd, fd[0], NULL)) {
+4. 创建 socket_server对象并返回
+
+
+* socket_server_poll
