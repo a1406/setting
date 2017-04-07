@@ -1,1 +1,8 @@
 * skynet_module_query
+调用到_open_sym, 使用了4个接口，用模块名字拼接
+_create:  可有可无，skynet_module_instance_create的时候调用, 返回值保存到ctx->instance里面
+_init: 必须有，skynet_module_instance_init调用，参数包括_create返回的instance
+_release: 可有可无，delete_context的时候调用，参数包括_create返回的instance
+_signal: 可有可无，cmd_signal的时候调用，参数包括_create返回的instance
+
+
