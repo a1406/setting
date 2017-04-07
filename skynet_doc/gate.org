@@ -32,3 +32,9 @@ header的前六个字节空着，为什么？
 
 
 * socket_server_poll
+
+
+* 注意
+C语言部分的gate是不完整的，比如accept之后没有调用sp_add(report_accept)，估计是想要等lua那边做一些准备工作之后才加入.
+需要自己在SKYNET_SOCKET_TYPE_ACCEPT:这里调用skynet_socket_start(ctx, uid)
+另外对收到的数据包也有包头等格式的处理。
