@@ -38,3 +38,5 @@ header的前六个字节空着，为什么？
 C语言部分的gate是不完整的，比如accept之后没有调用sp_add(report_accept)，估计是想要等lua那边做一些准备工作之后才加入.
 需要自己在SKYNET_SOCKET_TYPE_ACCEPT:这里调用skynet_socket_start(ctx, uid)
 另外对收到的数据包也有包头等格式的处理。
+网络线程是一个单独的线程，不要把他和context混淆了。网络线程不是一个context.所以，不能直接发消息给网络线程，只能通过管道发
+消息过去(send_request和ctrl_cmd)，但是网络线程是可以发消息给其他context的。
