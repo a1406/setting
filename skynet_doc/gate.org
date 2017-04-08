@@ -31,7 +31,7 @@ header的前六个字节空着，为什么？
 4. 创建 socket_server对象并返回
 
 
-* socket_server_poll
+* socket_server_poll 处理网络消息和ctrl_cmd的本地消息
 
 
 * 注意
