@@ -1,0 +1,2 @@
+* skynet_harbor_message_isremote(uint32_t handle)
+用来判断服务是远程还是本地
