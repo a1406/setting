@@ -31,7 +31,7 @@
 
 ** ngx_stream_core_generic_phase
    多个handle可以被依次调用，规则是
-   如果handle返回NGX_OK, 那么调用init里面注册的next, next是可以跳过数组里面多个handle的
+   如果handle返回NGX_OK, 那么调用init里面注册的next, next是NGX_STREAM_LOG_PHASE的数组里面的下一个
    如果handle返回NGX_DECLINED, 那么调用init里面注册的数组的下一个
    如果handle返回NGX_AGAIN或者NGX_DONE, 那么调用结束
    如果handle返回NGX_ERROR, 那么关闭连接，调用结束
