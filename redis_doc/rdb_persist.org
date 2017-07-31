@@ -38,7 +38,8 @@ save命令
                 return C_ERR;
             }
 
-** todo
+** dirty
     long long dirty;                /* Changes to DB from the last save */
     long long dirty_before_bgsave;  /* Used to restore dirty on failed BGSAVE */
+计算修改的字段数量，主要用来计算保存点要不要做保存
 
