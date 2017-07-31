@@ -1,0 +1,44 @@
+rdb 持久化
+
+* 核心函数 rdbLoad
+** debugCommand
+debug的reload命令
+先保存，然后清空，然后加载
+
+** readSyncBulkPayload
+*** todo syncWithMaster
+
+** loadDataFromDisk
+启动的时候，如果没有开启AOF，就load文件
+
+* 核心函数 rdbSave
+** flushallCommand
+flushall命令  
+清空数据库，如果需要的话，建立一个保存点(清空之后)
+
+** debugCommand
+debug的reload命令
+先保存，然后清空，然后加载
+
+** rdbSaveBackground
+*** bgsave命令
+*** startBgsaveForReplication
+*** 定时器里面检查保存点的设置什么的
+
+** saveCommand
+save命令
+
+** prepareForShutdown
+服务器关闭/重启的时候，如果没有特别的设置不保存，就保存一下数据
+*** todo
+            /* If we have AOF enabled but haven't written the AOF yet, don't
+             * shutdown or else the dataset will be lost. */
+            if (server.aof_state == AOF_WAIT_REWRITE) {
+                serverLog(LL_WARNING, "Writing initial AOF, can't exit.");
+                return C_ERR;
+            }
+
+** todo
+    long long dirty;                /* Changes to DB from the last save */
+    long long dirty_before_bgsave;  /* Used to restore dirty on failed BGSAVE */
+
