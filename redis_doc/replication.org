@@ -90,3 +90,17 @@ RDB文件发送完成
 
 * replicationFeedSlaves
 同步到slave
+
+* masterTryPartialResynchronization
+slave连上来，服务器检查能否使用增量更新同步过去, 这里主要检查的是两个slave发过来的参数，master_replid和psync_offset
+对应的是replid和reploff
+
+c->reploff = c->read_reploff - sdslen(c->querybuf);
+
+** replicationCreateMasterClient
+server.master->reploff = server.master_initial_offset;
+memcpy(server.master->replid, server.master_replid,
+
+slaveTryPartialResynchronization     全量更新的时候设置
+replicationCacheMasterUsingMyself    设置成slave的时候   server.master_initial_offset = server.master_repl_offset;
+addReplyReplicationBacklog           增量更新的时候，发送增量数据给slave
