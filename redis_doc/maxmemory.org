@@ -1,0 +1,23 @@
+* 回收算法 configEnum maxmemory_policy_enum
+    {"volatile-lru", MAXMEMORY_VOLATILE_LRU},
+    {"volatile-lfu", MAXMEMORY_VOLATILE_LFU},
+    {"volatile-random",MAXMEMORY_VOLATILE_RANDOM},
+    {"volatile-ttl",MAXMEMORY_VOLATILE_TTL},
+    {"allkeys-lru",MAXMEMORY_ALLKEYS_LRU},
+    {"allkeys-lfu",MAXMEMORY_ALLKEYS_LFU},
+    {"allkeys-random",MAXMEMORY_ALLKEYS_RANDOM},
+    {"noeviction",MAXMEMORY_NO_EVICTION},
+    {NULL, 0}
+
+* 回收算法相关配置
+server.maxmemory_policy   回收策略
+server.maxmemory_samples  lru算法取样参数
+
+* 访问数据的时候，更新lru, lfu对应的值
+lookupKey: val->lru = LRU_CLOCK();
+
+* 回收内存 freeMemoryIfNeeded
+根据策略选出bestkey，然后同步给slave，最后删除
+
+** evictionPoolPopulate
+其实只是随机挑几个，然后按策略选出要删除的
