@@ -41,5 +41,25 @@ save命令
 ** dirty
     long long dirty;                /* Changes to DB from the last save */
     long long dirty_before_bgsave;  /* Used to restore dirty on failed BGSAVE */
-计算修改的字段数量，主要用来计算保存点要不要做保存
+计算修改的字段数量，主要用来计算保存点以及AOF要不要做保存
 
+* 核心函数 
+** rewriteAppendOnlyFile  
+生成全量AOF文件
+
+** feedAppendOnlyFile 
+有修改操作的时候，这个函数把指令写入server.aof_buf
+
+** aofRewriteBufferAppend 
+如果有修改操作的时候，正在修改AOF文件，那么内容先不写入server.aof_buf, 而是先另外保存
+
+** bioProcessBackgroundJobs
+bio线程
+
+** flushAppendOnlyFile 
+每次修改，把指令写入server.aof_buf(feedAppendOnlyFile), 这个函数把server.aof_buf的内容写入aof文件
+
+** startAppendOnly 
+运行中开启AOF，会重新生成全量AOF文件
+
+* todo loadaof loadAppendOnlyFile
