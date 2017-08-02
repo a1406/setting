@@ -2,7 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("判断目标是否在攻击区域内" 0 12
+(#1=(#("切换地图的时候zone跳转" 0 13
+      (bmkp-full-record #1#))
+    (filename . "~/source/yulongzaitian/Server/zone/framework/ZoneMsgPlayer.cpp")
+    (buffer-name . "ZoneMsgPlayer.cpp")
+    (front-context-string . "断是否需要zone跳转\n    ")
+    (rear-context-string . "\n            //判")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(22913 33759 818213 914000))
+    (created . #2#)
+    (position . 72674))
+#1=(#("判断目标是否在攻击区域内" 0 12
       (bmkp-full-record #1#))
     (filename . "~/source/yulongzaitian/Server/zone/spell/inc/SpellInst.h")
     (buffer-name . "SpellInst.h")
@@ -10,9 +22,9 @@
     (rear-context-string . " bool IsTargetIn")
     (front-context-region-string)
     (rear-context-region-string)
-    (visits . 0)
-    (time . #2=(22550 59278 341972 874000))
-    (created . #2#)
+    (visits . 1)
+    (time 22913 32729 690138 770000)
+    (created 22550 59278 341972 874000)
     (position . 3003))
 #1=(#("zone消息处理" 0 8
       (bmkp-full-record #1#))
@@ -22,9 +34,9 @@
     (rear-context-string . " liRet;\n}\n\nint C")
     (front-context-region-string)
     (rear-context-region-string)
-    (visits . 0)
-    (time . #2=(22494 21914 338668 111000))
-    (created . #2#)
+    (visits . 3)
+    (time 22913 32775 298017 495000)
+    (created 22494 21914 338668 111000)
     (position . 7779))
 #1=(#("地图读取和路径判断" 0 9
       (bmkp-full-record #1#))
@@ -142,8 +154,8 @@
     (rear-context-string . "ayer::SearchView")
     (front-context-region-string)
     (rear-context-region-string)
-    (visits . 2)
-    (time 22479 27297 47956 644000)
+    (visits . 3)
+    (time 22913 32808 26107 177000)
     (created 22478 12861 73380 386000)
     (position . 126964))
 #1=(#("设置新坐标，更新视野" 0 10
@@ -178,8 +190,8 @@
     (rear-context-string . " \n    \nclass CMa")
     (front-context-region-string)
     (rear-context-region-string)
-    (visits . 1)
-    (time 22479 27189 640883 498000)
+    (visits . 2)
+    (time 22913 32583 721184 201000)
     (created 22478 11752 353981 765000)
     (position . 614))
 )
