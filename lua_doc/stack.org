@@ -1,0 +1,57 @@
+* lua源码中栈地址的计算
+ci->func就是栈底，L->top就是栈顶
+负数从栈顶向下, 正数从栈底向上
+#+BEGIN_SRC C
+static TValue *index2value (lua_State *L, int idx) {
+  CallInfo *ci = L->ci;
+  if (idx > 0) {
+    TValue *o = ci->func + idx;
+    api_check(L, idx <= ci->top - (ci->func + 1), "unacceptable index");
+    if (o >= L->top) return NONVALIDVALUE;
+    else return o;
+  }
+  else if (!ispseudo(idx)) {  /* negative index */
+    api_check(L, idx != 0 && -idx <= L->top - (ci->func + 1), "invalid index");
+    return L->top + idx;
+  }
+...
+#+END_SRC
+
+* 和栈操作相关的API
+
+
+* 遍历栈
+#+BEGIN_SRC  C
+void stack_dump(lua_State* L, char *head)
+{
+    int i;
+    int top = lua_gettop(L);
+    printf("stackDump(num=%d) %s:\n", top, head);
+    
+    for (i = 1; i <= top; i++) {  /* repeat for each level */
+        int t = lua_type(L, i);
+        switch (t) {
+                
+            case LUA_TSTRING:  /* strings */
+                printf("'%s'", lua_tostring(L, i));
+                break;
+                
+            case LUA_TBOOLEAN:  /* booleans */
+                printf(lua_toboolean(L, i) ? "true" : "false");
+                break;
+                
+            case LUA_TNUMBER:  /* numbers */
+                printf("%g", lua_tonumber(L, i));
+                break;
+            default:  /* other values */
+                printf("%s", lua_typename(L, t));
+                break;
+                
+        }
+        printf("  ");  /* put a separator */
+    }
+    printf("\n============\n");     /* end the listing */
+    
+}
+#+END_SRC
+
