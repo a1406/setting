@@ -41,7 +41,7 @@ type Skeleton struct {
 估计还是和线程有关，似乎是控制执行顺序
 
 ** AsynCall(server *chanrpc.Server, id interface{}, args ...interface{})
-异步的发送消息给client
+异步的发送消息给client, 感觉意义不是很大，这个server要外面传进来, 还要每次attach
 
 ** RegisterChanRPC(id interface{}, f interface{})
 注册消息回调
