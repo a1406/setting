@@ -1,0 +1,50 @@
+* 注册消息
+handler(&msg.Hello{}, handleHello)
+func handler(m interface{}, h interface{}) {
+	skeleton.RegisterChanRPC(reflect.TypeOf(m), h)
+}
+
+
+* 接收消息
+
+* 定时器
+
+* skeleton
+type Skeleton struct {
+	GoLen              int
+	TimerDispatcherLen int
+	AsynCallLen        int
+	ChanRPCServer      *chanrpc.Server     //接收game.ChanRPC消息, 和下面的server是同一个指针, 干嘛要搞两个？
+	g                  *g.Go              //不知道做什么用的，似乎是对线程的封装
+	dispatcher         *timer.Dispatcher    //定时器
+	client             *chanrpc.Client     //发送消息给gate
+	server             *chanrpc.Server    //接收game.ChanRPC消息, 和上面的ChanRPCServer是同一个指针
+	commandServer      *chanrpc.Server    //估计是console的debug命令接收
+}
+
+** Init()
+初始化skeleton结构，创建各个chanrpc，dispatch，go
+
+** Run(closeSig chan bool)
+主循环，从各个chan里面读信息，执行回调
+
+** AfterFunc(d time.Duration, cb func()) *timer.Timer
+应该是创建一个定时器
+
+** CronFunc(cronExpr *timer.CronExpr, cb func()) *timer.Cron
+应该是创建一个循环定时器
+
+** Go(f func(), cb func())
+应该是创建一个线程
+
+** NewLinearContext() *g.LinearContext
+估计还是和线程有关，似乎是控制执行顺序
+
+** AsynCall(server *chanrpc.Server, id interface{}, args ...interface{})
+异步的发送消息给client
+
+** RegisterChanRPC(id interface{}, f interface{})
+注册消息回调
+
+** RegisterCommand(name string, help string, f interface{})
+注册console的消息回调

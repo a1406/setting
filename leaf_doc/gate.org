@@ -82,7 +82,7 @@ tcpConn := newTCPConn(conn, server.PendingWriteNum, server.msgParser)
 开线程运行 func (a *agent) Run() {
 ** 读数据
 data, err := a.conn.ReadMsg()
-实际调用的是func (p *MsgParser) Read(conn *TCPConn) ([]byte, error) {   //看起来似乎会有粘包的问题
+实际调用的是func (p *MsgParser) Read(conn *TCPConn) ([]byte, error) {   
 ** 解包
 msg, err := a.gate.Processor.Unmarshal(data)
 ** 路由
