@@ -1,0 +1,103 @@
+* queue
+消息队列 queue := cellnet.NewEventQueue()
+type evQueue struct {
+	queue chan func()     //回调函数队列
+	exitSignal chan int   //退出信号, 并不能中止掉queue的线程
+	capturePanic bool
+}
+
+* 开启监听
+peer := socket.NewAcceptor(queue).Start("127.0.0.1:8801")
+
+* SessionManager
+cellnet.NewSessionManager()
+type SessionManagerImplement struct {
+	sesMap map[int64]Session            //ID -> session
+	sesIDAcc    int64                   //用来给session分配ID
+	sesMapGuard sync.RWMutex            //同步的锁
+}
+
+* PeerProfile
+type PeerProfileImplement struct {
+	// 基本信息
+	name    string
+	address string
+	tag     interface{}
+
+	// 运行状态
+	running      bool
+	runningGuard sync.RWMutex
+}
+
+* 会话 Ses
+有两种session，socket和websocket
+type socketSession struct {
+	OnClose func() // 关闭函数回调
+
+	id int64
+
+	p cellnet.Peer
+
+	endSync sync.WaitGroup
+
+	needNotifyWrite bool // 是否需要通知写线程关闭
+
+	sendList *eventList
+
+	conn net.Conn
+
+	tag interface{}
+
+	readChain *cellnet.HandlerChain
+
+	writeChain *cellnet.HandlerChain
+}
+
+
+* 端 Peer
+类似session，但是多封装了一层，socketPeer和wsPeer，最终对应的是
+socketConnector
+socketAcceptor
+wsAcceptor
+wsConnector
+
+* 会话事件 Event
+处理connect, accept, send, recv事件
+type Event struct {
+	UID int64
+	Type EventType // 事件类型
+	MsgID uint32      // 消息ID
+	Msg   interface{} // 消息对象
+	Data  []byte      // 消息序列化后的数据
+	Tag         interface{} // 事件的连接, 一个处理流程后被Reset
+	TransmitTag interface{} // 接收过程可以传递到发送过程, 不会被清空
+	Ses       Session       // 会话
+	ChainSend *HandlerChain // 发送handler override
+	r Result // 出现错误, 将结束ChainCall
+	chainid int64 // 所在链, 调试用
+}
+
+
+* HandlerChain
+type HandlerChain struct {
+	id   int64
+	list []EventHandler
+}
+
+
+* HandlerChainManager
+// Peer间的共享数据
+type HandlerChainManagerImplement struct {
+	recvChainByID      map[int64]*HandlerChain   //ID -> 接收处理链
+	recvChainGuard     sync.Mutex             //锁
+	chainIDAcc         int64              //记录/分配 接收处理链的ID
+	recvChainListDirty bool
+	recvChainList      HandlerChainList    //处理链数组
+
+	sendChain      *HandlerChain
+	sendChainGuard sync.RWMutex
+
+	readChainCreator  func() *HandlerChain
+	writeChainCreator func() *HandlerChain
+	rwChainGuard      sync.RWMutex
+}
