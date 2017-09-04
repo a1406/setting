@@ -1,0 +1,33 @@
+* 核心函数 newSocketPeer
+#+BEGIN_SRC go
+	// 设置默认发送链
+	self.SetChainSend(
+		cellnet.NewHandlerChain(
+			cellnet.StaticEncodePacketHandler(),
+		),
+	)
+
+	// 设置默认读写链
+	self.SetReadWriteChain(func() *cellnet.HandlerChain {
+		return cellnet.NewHandlerChain(
+			cellnet.NewFixedLengthFrameReader(10),
+			NewPrivatePacketReader(),
+		)
+	}, func() *cellnet.HandlerChain {
+		return cellnet.NewHandlerChain(NewPrivatePacketWriter(),
+			cellnet.NewFixedLengthFrameWriter(),
+		)
+	})
+#+END_SRC
+
+* 数据打包
+在默认发送链进行数据打包, 核心函数 EncodeMessage
+在RegisterCodec中注册了打包类，包括，包括binary, json, pb, sproto.
+在RegisterMessageMeta中注册了对应打包类的打包消息
+
+* 数据解包
+类似数据打包，核心函数是DecodeMessage
+通过消息ID找到对应的解包类, 然后调用解包类的Decode函数解包
+
+* 注册消息 RegisterMessage
+RegisterHandler -> AddChainRecv
