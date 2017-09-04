@@ -1,23 +1,28 @@
 * queue
 消息队列 queue := cellnet.NewEventQueue()
+#+BEGIN_SRC go
 type evQueue struct {
 	queue chan func()     //回调函数队列
 	exitSignal chan int   //退出信号, 并不能中止掉queue的线程
 	capturePanic bool
 }
+#+END_SRC
 
 * 开启监听
 peer := socket.NewAcceptor(queue).Start("127.0.0.1:8801")
 
 * SessionManager
 cellnet.NewSessionManager()
+#+BEGIN_SRC go
 type SessionManagerImplement struct {
 	sesMap map[int64]Session            //ID -> session
 	sesIDAcc    int64                   //用来给session分配ID
 	sesMapGuard sync.RWMutex            //同步的锁
 }
+#+END_SRC
 
 * PeerProfile
+#+BEGIN_SRC go
 type PeerProfileImplement struct {
 	// 基本信息
 	name    string
@@ -28,9 +33,11 @@ type PeerProfileImplement struct {
 	running      bool
 	runningGuard sync.RWMutex
 }
+#+END_SRC
 
 * 会话 Ses
 有两种session，socket和websocket
+#+BEGIN_SRC go
 type socketSession struct {
 	OnClose func() // 关闭函数回调
 
@@ -52,6 +59,7 @@ type socketSession struct {
 
 	writeChain *cellnet.HandlerChain
 }
+#+END_SRC
 
 
 * 端 Peer
@@ -63,6 +71,7 @@ wsConnector
 
 * 会话事件 Event
 处理connect, accept, send, recv事件
+#+BEGIN_SRC go
 type Event struct {
 	UID int64
 	Type EventType // 事件类型
@@ -76,16 +85,19 @@ type Event struct {
 	r Result // 出现错误, 将结束ChainCall
 	chainid int64 // 所在链, 调试用
 }
+#+END_SRC
 
 
 * HandlerChain
+#+BEGIN_SRC go
 type HandlerChain struct {
 	id   int64
 	list []EventHandler
 }
-
+#+END_SRC
 
 * HandlerChainManager
+#+BEGIN_SRC go
 // Peer间的共享数据
 type HandlerChainManagerImplement struct {
 	recvChainByID      map[int64]*HandlerChain   //ID -> 接收处理链
@@ -101,3 +113,4 @@ type HandlerChainManagerImplement struct {
 	writeChainCreator func() *HandlerChain
 	rwChainGuard      sync.RWMutex
 }
+#+END_SRC
