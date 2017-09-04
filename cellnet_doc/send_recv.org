@@ -31,3 +31,37 @@
 
 * 注册消息 RegisterMessage
 RegisterHandler -> AddChainRecv
+对每个消息注册了三个handle
+#+BEGIN_SRC go
+		p.AddChainRecv(NewHandlerChain(
+			NewMatchMsgIDHandler(meta.ID),      //打消息ID的日志用
+			StaticDecodePacketHandler(),        //消息解包
+			NewQueuePostHandler(p.Queue(), handlers...),   //用户自定义消息处理handle
+		))
+#+END_SRC
+
+* 发送线程 sendThread
+** 从队列取出数据，没有则阻塞
+writeList, willExit := self.sendList.Pick()
+** 数据打包
+ev.ChainSend.Call(ev)
+** 发送数据
+self.writeChain.Call(ev)
+之前注册了两个handle
+#+BEGIN_SRC go
+		return cellnet.NewHandlerChain(NewPrivatePacketWriter(),
+			cellnet.NewFixedLengthFrameWriter(),
+#+END_SRC
+
+* 接收线程 recvThread
+** self.readChain.Call(ev)
+之前注册了两个handle
+#+BEGIN_SRC go
+		return cellnet.NewHandlerChain(
+			cellnet.NewFixedLengthFrameReader(10),
+			NewPrivatePacketReader(),
+#+END_SRC
+
+** self.p.ChainListRecv().Call(ev)
+这个就是调用RegisterMessage注册的handle了
+
