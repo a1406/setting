@@ -1,8 +1,10 @@
 * 注册消息
+#+BEGIN_SRC go
 handler(&msg.Hello{}, handleHello)
 func handler(m interface{}, h interface{}) {
 	skeleton.RegisterChanRPC(reflect.TypeOf(m), h)
 }
+#+END_SRC
 
 
 * 接收消息
@@ -10,6 +12,7 @@ func handler(m interface{}, h interface{}) {
 * 定时器
 
 * skeleton
+#+BEGIN_SRC go
 type Skeleton struct {
 	GoLen              int
 	TimerDispatcherLen int
@@ -21,6 +24,7 @@ type Skeleton struct {
 	server             *chanrpc.Server    //接收game.ChanRPC消息, 和上面的ChanRPCServer是同一个指针
 	commandServer      *chanrpc.Server    //估计是console的debug命令接收
 }
+#+END_SRC
 
 ** Init()
 初始化skeleton结构，创建各个chanrpc，dispatch，go

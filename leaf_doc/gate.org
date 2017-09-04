@@ -6,6 +6,7 @@ var Processor = json.NewProcessor()
 
 * func (gate *Gate) Run(closeSig chan bool)
 ** 设置NewAgent接口
+#+BEGIN_SRC go
 tcpServer.NewAgent = func(conn *network.TCPConn) network.Agent {
 	a := &agent{conn: conn, gate: gate}
 	if gate.AgentChanRPC != nil {
@@ -13,21 +14,25 @@ tcpServer.NewAgent = func(conn *network.TCPConn) network.Agent {
 	}
 	return a
 }
+#+END_SRC
 ** 启动tcp服务器 tcpServer.Start()
 开线程 go server.run()
 
 ** func (server *TCPServer) run()
 *** 接受连接
+#+BEGIN_SRC go
 conn, err := server.ln.Accept()
 tcpConn := newTCPConn(conn, server.PendingWriteNum, server.msgParser)  //里面开了线程进行send操作
 agent := server.NewAgent(tcpConn)     //上面设置过
 go func() {
 	agent.Run()
-
+#+END_SRC
 * agent 的运行 
+#+BEGIN_SRC go
 func (a *agent) Run() {
 
 ** data, err := a.conn.ReadMsg()
+#+END_SRC
 
 * todo
 conn: tcpConn := newTCPConn(conn, server.PendingWriteNum, server.msgParser)
@@ -38,6 +43,7 @@ MsgParser: msgParser := NewMsgParser()
 有TCPServer和WSServer, 暂时只看TCPServer
 var tcpServer *network.TCPServer
 ** 定义了NewAgent的方法:
+#+BEGIN_SRC go
 		tcpServer.NewAgent = func(conn *network.TCPConn) network.Agent {
 			a := &agent{conn: conn, gate: gate}
 			if gate.AgentChanRPC != nil {
@@ -45,6 +51,7 @@ var tcpServer *network.TCPServer
 			}
 			return a
 		}
+#+END_SRC
 
 ** 调用start
 		tcpServer.Start()
@@ -58,22 +65,28 @@ var tcpServer *network.TCPServer
 创建conn        tcpConn := newTCPConn(conn, server.PendingWriteNum, server.msgParser)
 创建agent       agent := server.NewAgent(tcpConn)
 开线程运行agent
+#+BEGIN_SRC go
 		go func() {
 			agent.Run()
 			// cleanup
 			tcpConn.Close()
+#+END_SRC
 
 
 ** 等待关闭信号
+#+BEGIN_SRC go
 	<-closeSig
 	tcpServer.Close()
+#+END_SRC
 
 * conn
 ** 创建TCPConn
 tcpConn := newTCPConn(conn, server.PendingWriteNum, server.msgParser)
 *** 创建write队列，设置msgParser
+#+BEGIN_SRC go
 	tcpConn.writeChan = make(chan []byte, pendingWriteNum)
 	tcpConn.msgParser = msgParser
+#+END_SRC
 
 *** 开线程发送数据
 从writeChan读数据发送出去
