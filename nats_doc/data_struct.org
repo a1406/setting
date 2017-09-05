@@ -1,0 +1,64 @@
+* subscription
+#+BEGIN_SRC go
+type subscription struct {
+	client  *client
+	subject []byte
+	queue   []byte
+	sid     []byte
+	nm      int64
+	max     int64
+}
+#+END_SRC
+
+* SublistResult
+#+BEGIN_SRC go
+type SublistResult struct {
+	psubs []*subscription
+	qsubs [][]*subscription // don't make this a map, too expensive to iterate
+}
+#+END_SRC
+
+* Sublist
+#+BEGIN_SRC go
+type Sublist struct {
+	sync.RWMutex
+	genid     uint64
+	matches   uint64
+	cacheHits uint64
+	inserts   uint64
+	removes   uint64
+	cache     map[string]*SublistResult
+	root      *level
+	count     uint32
+}
+#+END_SRC
+用类似hash_map的算法维护
+主要接口: 
+** Insert 
+processSub: err = c.srv.sl.Insert(sub)
+** Remove 
+unsubscribe: c.srv.sl.Remove(sub)
+closeConnection: srv.sl.Remove(sub)
+** Match
+processMsg: r = srv.sl.Match(subject)
+
+* client
+
+* Server
+
+* todo
+#+BEGIN_SRC go
+// A node contains subscriptions and a pointer to the next level.
+type node struct {
+	next  *level
+	psubs []*subscription
+	qsubs [][]*subscription
+}
+
+// A level represents a group of nodes and special pointers to
+// wildcard nodes.
+type level struct {
+	nodes    map[string]*node
+	pwc, fwc *node
+}
+#+END_SRC
