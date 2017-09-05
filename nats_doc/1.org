@@ -61,3 +61,20 @@ func (s *Server) Start() {
 	// Stacksz
 	mux.HandleFunc(StackszPath, s.HandleStacksz)
 #+END_SRC
+** createClient
+#+BEGIN_SRC go
+	c.initClient()
+	c.sendInfo(info)
+	s.clients[c.cid] = c
+	c.setPingTimer()
+	s.startGoRoutine(func() { c.readLoop() })
+#+END_SRC
+
+* client.go
+** readLoop
+
+** processSub
+
+** processPub
+
+** processMsg
