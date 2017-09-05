@@ -1,0 +1,63 @@
+* main.go
+** main
+#+BEGIN_SRC go
+	s := server.New(opts)
+
+	// Configure the logger based on the flags
+	s.ConfigureLogger()
+
+	// Start things up. Block here until done.
+	if err := server.Run(s); err != nil {
+#+END_SRC
+
+* server.go
+** Start
+#+BEGIN_SRC go
+func (s *Server) Start() {
+...
+	// Start monitoring if needed
+	if err := s.StartMonitoring(); err != nil {
+		s.Fatalf("Can't start monitoring: %v", err)
+		return
+	}
+
+	// The Routing routine needs to wait for the client listen
+	// port to be opened and potential ephemeral port selected.
+	clientListenReady := make(chan struct{})
+
+	// Start up routing as well if needed.
+	if opts.Cluster.Port != 0 {
+		s.startGoRoutine(func() {
+			s.StartRouting(clientListenReady)
+		})
+	}
+
+	// Pprof http endpoint for the profiler.
+	if opts.ProfPort != 0 {
+		s.StartProfiler()
+	}
+
+	// Wait for clients.
+	s.AcceptLoop(clientListenReady)
+#+END_SRC
+
+** startMonitoring
+#+BEGIN_SRC go
+		hp = net.JoinHostPort(opts.HTTPHost, strconv.Itoa(port))
+		httpListener, err = net.Listen("tcp", hp)
+...
+	// Root
+	mux.HandleFunc(RootPath, s.HandleRoot)
+	// Varz
+	mux.HandleFunc(VarzPath, s.HandleVarz)
+	// Connz
+	mux.HandleFunc(ConnzPath, s.HandleConnz)
+	// Routez
+	mux.HandleFunc(RoutezPath, s.HandleRoutez)
+	// Subz
+	mux.HandleFunc(SubszPath, s.HandleSubsz)
+	// Subz alias for backwards compatibility
+	mux.HandleFunc("/subscriptionsz", s.HandleSubsz)
+	// Stacksz
+	mux.HandleFunc(StackszPath, s.HandleStacksz)
+#+END_SRC
