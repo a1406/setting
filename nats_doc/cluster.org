@@ -12,7 +12,24 @@
 #+END_SRC
 
 * 监听 routeAcceptLoop
+#+BEGIN_SRC go
+		s.startGoRoutine(func() {
+			s.createRoute(conn, nil)
+			s.grWG.Done()
+		})
+#+END_SRC
 
 * 收到连接 createRoute
+如果是主动连接的(didSolicit), 那么发送CONNECT协议
+#+BEGIN_SRC go
+c.initClient()
+s.startGoRoutine(func() { c.readLoop() })
+	if didSolicit {
+		c.Debugf("Route connect msg sent")
+		c.sendConnect(tlsRequired)
+	}
+c.sendInfo(infoJSON)
+#+END_SRC
 
 * 连接 connectToRoute
+-> s.createRoute(conn, rURL)
