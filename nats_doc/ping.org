@@ -1,0 +1,63 @@
+* setPingTimer
+#+BEGIN_SRC go
+func (c *client) processPingTimer() {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.ptmr = nil
+	// Check if connection is still opened
+	if c.nc == nil {
+		return
+	}
+
+	c.Debugf("%s Ping Timer", c.typeString())
+
+	// Check for violation
+	c.pout++
+	if c.pout > c.srv.getOpts().MaxPingsOut {
+		c.Debugf("Stale Client Connection - Closing")
+		c.sendProto([]byte(fmt.Sprintf("-ERR '%s'\r\n", "Stale Connection")), true)
+		c.clearConnection()
+		return
+	}
+
+	c.traceOutOp("PING", nil)
+
+	// Send PING
+	err := c.sendProto([]byte("PING\r\n"), true)
+	if err != nil {
+		c.Debugf("Error on Client Ping Flush, error %s", err)
+		c.clearConnection()
+	} else {
+		// Reset to fire again if all OK.
+		c.setPingTimer()
+	}
+}
+
+func (c *client) setPingTimer() {
+	if c.srv == nil {
+		return
+	}
+	d := c.srv.getOpts().PingInterval
+	c.ptmr = time.AfterFunc(d, c.processPingTimer)
+}
+
+// Lock should be held
+func (c *client) clearPingTimer() {
+	if c.ptmr == nil {
+		return
+	}
+	c.ptmr.Stop()
+	c.ptmr = nil
+}
+#+END_SRC
+
+* processPoing
+#+BEGIN_SRC go
+func (c *client) processPong() {
+	c.traceInOp("PONG", nil)
+	c.mu.Lock()
+	c.pout = 0
+	c.mu.Unlock()
+}
+
+#+END_SRC
