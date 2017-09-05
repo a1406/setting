@@ -1,0 +1,12 @@
+* configureClusterOpts
+对应的IP，端口的配置在这里处理
+
+* 开启cluster监听和连接
+#+BEGIN_SRC go
+	// Start up routing as well if needed.
+	if opts.Cluster.Port != 0 {
+		s.startGoRoutine(func() {
+			s.StartRouting(clientListenReady)
+		})
+	}
+#+END_SRC
