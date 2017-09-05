@@ -43,7 +43,39 @@ closeConnection: srv.sl.Remove(sub)
 processMsg: r = srv.sl.Match(subject)
 
 * client
+#+BEGIN_SRC go
+type client struct {
+	// Here first because of use of atomics, and memory alignment.
+	stats
+	mpay  int64
+	mu    sync.Mutex
+	typ   int                   //0是客户端，1是其他服务端
+	cid   uint64                //递增的ID，类似sessionid
+	opts  clientOpts
+	start time.Time
+	nc    net.Conn              //连接
+	ncs   string                //连接的字符串信息
+	bw    *bufio.Writer
+	srv   *Server
+	subs  map[string]*subscription    //所有的订阅
+	perms *permissions
+	cache readCache
+	pcd   map[*client]struct{}
+	atmr  *time.Timer                 //setAuthTimer
+	ptmr  *time.Timer                   //setPingTimer
+	pout  int                          //ping超时次数
+	wfc   int
+	msgb  [msgScratchSize]byte
+	last  time.Time
+	parseState
 
+	route *route
+	debug bool
+	trace bool
+
+	flags clientFlag // Compact booleans into a single field. Size will be increased when needed.
+}
+#+END_SRC
 * Server
 
 * todo
