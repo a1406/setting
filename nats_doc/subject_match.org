@@ -1,0 +1,13 @@
+* 通配符
+#+BEGIN_SRC go
+// Common byte variables for wildcards and token separator.
+const (
+	pwc   = '*'
+	fwc   = '>'
+	tsep  = "."
+	btsep = '.'
+)
+#+END_SRC
+
+* 流程
+processMsg -> Match -> matchLevel

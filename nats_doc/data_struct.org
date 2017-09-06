@@ -94,3 +94,23 @@ type level struct {
 	pwc, fwc *node
 }
 #+END_SRC
+
+* node
+#+BEGIN_SRC go
+// A node contains subscriptions and a pointer to the next level.
+type node struct {
+	next  *level              //可以进一步进行匹配的节点
+	psubs []*subscription
+	qsubs [][]*subscription    //匹配到该node所属的level为止时，主题对应的所有订阅者
+}
+#+END_SRC
+
+* level
+#+BEGIN_SRC go
+// A level represents a group of nodes and special pointers to
+// wildcard nodes.
+type level struct {
+	nodes    map[string]*node    //一个Hash，key是token，value是对应的node
+	pwc, fwc *node              //pwc:由*匹配的节点 fwc:由>指向的节点
+}
+#+END_SRC
