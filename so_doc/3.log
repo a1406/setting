@@ -1,0 +1,89 @@
+添加变量，函数后
+00000000001abd78 g     F .init	0000000000000000              _init
+00000000001abd78 l    d  .init	0000000000000000              .init
+00000000001abda0 l    d  .plt	0000000000000000              .plt
+00000000001d8720 l    d  .text	0000000000000000              .text
+00000000001d8720 l     F .text	0000000000000000              deregister_tm_clones
+00000000001d8750 l     F .text	0000000000000000              register_tm_clones
+00000000001d8790 l     F .text	0000000000000000              __do_global_dtors_aux
+00000000001d87d0 l     F .text	0000000000000000              frame_dummy
+00000000001d8805 g     F .text	000000000000002d              _Z5func1v
+00000000001d8832 g     F .text	000000000000002d              _Z5func2v
+00000000001d885f g     F .text	000000000000002d              _Z5func3v
+00000000001d888c g     F .text	000000000000002d              _Z5func4v
+00000000001d88b9 g     F .text	000000000000002d              _Z5func5v
+00000000001d88e6 g     F .text	000000000000002d              _Z5func6v
+00000000001d8913 g     F .text	000000000000002d              _Z5func7v
+00000000001d8940 g     F .text	000000000000002d              _Z5func8v
+00000000001d896d l     F .text	000000000000002d              _ZL6func11v
+00000000001d899a l     F .text	000000000000002d              _ZL6func12v
+00000000001d89c7 l     F .text	000000000000002d              _ZL6func13v
+00000000001d89f4 l     F .text	000000000000002d              _ZL6func14v
+00000000001d8a21 l     F .text	000000000000002d              _ZL6func15v
+00000000001d8a4e l     F .text	000000000000002d              _ZL6func16v
+00000000001d8a7b l     F .text	000000000000002d              _ZL6func17v
+00000000001d8aa8 l     F .text	000000000000002d              _ZL6func18v
+00000000001d8ad5 g     F .text	0000000000000031              _Z19xunbao_raid_ai_tickP11raid_struct
+00000000001d8b06 l     F .text	0000000000000035              _ZL19xunbao_raid_ai_initP11raid_structP13player_struct
+
+=================================================================================================================================================
+00400000-00562000 r-xp 00000000 08:02 27009499                           /home/jacktang/svnroot/Server/game_srv/game_srv
+00761000-00762000 r--p 00161000 08:02 27009499                           /home/jacktang/svnroot/Server/game_srv/game_srv
+00762000-00763000 rw-p 00162000 08:02 27009499                           /home/jacktang/svnroot/Server/game_srv/game_srv
+00763000-00c09000 rw-p 00000000 00:00 0 
+7f7f6ab62000-7f7f6b006000 r-xp 00000000 08:02 27002204                   /home/jacktang/svnroot/Server/game_srv/so_game_srv/libgamesrv.so
+7f7f6b006000-7f7f6b206000 ---p 004a4000 08:02 27002204                   /home/jacktang/svnroot/Server/game_srv/so_game_srv/libgamesrv.so
+7f7f6b206000-7f7f6b209000 r--p 004a4000 08:02 27002204                   /home/jacktang/svnroot/Server/game_srv/so_game_srv/libgamesrv.so
+7f7f6b209000-7f7f6b222000 rw-p 004a7000 08:02 27002204                   /home/jacktang/svnroot/Server/game_srv/so_game_srv/libgamesrv.so
+7f7f6b222000-7f7f6b576000 rw-p 00000000 00:00 0 
+7f7f6b576000-7f7f6b677000 rw-p 00000000 00:00 0 
+=================================================================================================================================================
+
+a:  7f7f6 ab62000-7f7f6 b006000 r-xp 00000000 08:02 27002204                   /home/jacktang/svnroot/Server/game_srv/so_game_srv/libgamesrv.so
+b:  7f7f6 b006000-7f7f6 b206000 ---p 004a4000 08:02 27002204                   /home/jacktang/svnroot/Server/game_srv/so_game_srv/libgamesrv.so
+c:  7f7f6 b206000-7f7f6 b209000 r--p 004a4000 08:02 27002204                   /home/jacktang/svnroot/Server/game_srv/so_game_srv/libgamesrv.so
+d:  7f7f6 b209000-7f7f6 b222000 rw-p 004a7000 08:02 27002204                   /home/jacktang/svnroot/Server/game_srv/so_game_srv/libgamesrv.so
+e:  7f7f6 b222000-7f7f6 b576000 rw-p 00000000 00:00 0 
+f:  7f7f6 b576000-7f7f6 b677000 rw-p 00000000 00:00 0 
+=================================================================================================================================================
+
+动态库中static函数
+static int handle_shop_buy_request
+0x7f7f6 af01d1f     ===>  a
+objdump -t game_srv/so_game_srv/libgamesrv.so  | grep handle_shop_buy_request
+000000000039fd1f l     F .text	00000000000008d0              _ZL23handle_shop_buy_requestP13player_structP11extern_data
+000000000039fd1f 就是到a起始地址的偏移
+
+动态库中非static函数
+int check_can_add_chengjie_task
+0x7f7f6 af0fd12     ===>  a
+断点则额外有个plt地址
+0x00007f7f6ad117c0 <check_can_add_chengjie_task(player_struct*, unsigned int, unsigned long, unsigned int)@plt>
+objdump -t game_srv/so_game_srv/libgamesrv.so  | grep check_can_add_chengjie_task
+00000000003add12 g     F .text	0000000000000204              _Z27check_can_add_chengjie_taskP13player_structjmj
+00000000003add12 就是到a起始地址的偏移
+
+动态库中的static变量
+static int cur_closed_array;
+0x7f7f6 b535a80   ===> e
+
+动态库中的非static变量
+GameHandleMap   m_game_handle_map;
+0x7f7f6 b535aa0   ===>  e
+
+动态库中的static常量
+static const int AWARD_QUESTION_ACTIVE_ID = 330100008;
+0x7f7f6 af765bc   ===>  a
+
+
+动态库中的非static常量
+const int MAX_HORSE_ATTR_NUM = 4;
+0x7f7f6 af765c4   ===> a
+
+其他
+void xunbao_raid_ai_tick(raid_struct *raid)
+0x7f7f6 ad3aad5    ====>  a
+func1
+0x7f7f6 ad3a805    ====>  a
+func11
+0x7f7f6 ad3a96d    ====>  a
