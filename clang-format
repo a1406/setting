@@ -53,7 +53,7 @@ BraceWrapping:
   AfterFunction: true
 #  AfterNamespace: true
 #  AfterObjCDeclaration: true
-#  AfterStruct: true
+  AfterStruct: true
 #  AfterUnion: true
 #  BeforeCatch: true
   BeforeElse: true
