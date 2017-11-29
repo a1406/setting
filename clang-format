@@ -1,5 +1,5 @@
 #基于那个配置文件
-BasedOnStyle: Google
+BasedOnStyle: GOOGLE
 #指针的*的挨着哪边
 PointerAlignment: Right
 #缩进宽度
@@ -47,7 +47,7 @@ UseTab: Never
 ColumnLimit: 160
 BreakBeforeBraces: Custom
 BraceWrapping:
-#  AfterClass: true
+  AfterClass: true
   AfterControlStatement: true
 #  AfterEnum: true
   AfterFunction: true
@@ -58,3 +58,5 @@ BraceWrapping:
 #  BeforeCatch: true
   BeforeElse: true
 #  IndentBraces: true
+
+AccessModifierOffset: -4
