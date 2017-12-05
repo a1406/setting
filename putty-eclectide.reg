@@ -43,6 +43,6 @@ Windows Registry Editor Version 5.00
 ; ANSI Cyan Bold
 "Colour19"="255,210,4"
 ; ANSI White
-"Colour20"="217,216,216"
+"Colour20"="0,0,0"
 ; ANSI White Bold
 "Colour21"="255,255,255"
