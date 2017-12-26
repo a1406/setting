@@ -12,3 +12,23 @@
     (gdb cmd2)
     )
   )
+
+
+(defun my_find-cscope-files ()
+(let ((i 0)
+      (pre "")
+      (bfind nil)
+      )
+  (while (< i 10)
+    (if (file-exists-p (format "%scscope.files" pre))
+        (and (+ i 10)
+             (setq bfind t))
+      (setq pre (format "../%s" pre))
+      )
+    (setq i (+ i 1)))
+;;  (message "bfind = %s pre = %s" bfind pre)
+  (if bfind
+      (format "%s/%s" default-directory pre)
+    "")
+  )
+)
