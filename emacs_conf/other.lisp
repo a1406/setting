@@ -59,6 +59,11 @@
     )
   )
 
+(defun my_show-current-dir ()
+  (interactive)
+  (message (kill-new default-directory))
+  )
+
 (defun ivy-completion-in-region (start end collection &optional predicate)
   "An Ivy function suitable for `completion-in-region-function'.
 The function completes the text between START and END using COLLECTION.
