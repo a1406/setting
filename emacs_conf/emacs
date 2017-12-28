@@ -14,6 +14,7 @@
 (if (file-exists-p "~/.emacs.conf/other.lisp")
     (load "~/.emacs.conf/other.lisp")
   )
+(load "~/.emacs.conf/spacemacs-func.lisp")
 (load "~/.emacs.conf/emacs_key.conf")
 
 
