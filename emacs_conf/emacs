@@ -1,3 +1,10 @@
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (custom-set-variables
   '(initial-frame-alist (quote ((fullscreen . fullscreen)))))
 ;; '(initial-frame-alist (quote ((fullscreen . maximized)))))
@@ -8,6 +15,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Source Code Pro" :foundry "adobe" :slant normal :weight normal :height 143 :width normal)))))
+
+(setq custom-file "~/.custom-file")
+(if (file-exists-p custom-file)
+    (load custom-file)
+  )
 
 (load "~/.emacs.conf/package.conf")
 (load "~/.emacs.conf/emacs.conf")
