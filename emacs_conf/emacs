@@ -1,9 +1,4 @@
 
-(setq custom-file "~/.custom-file")
-(if (file-exists-p custom-file)
-    (load custom-file)
-  )
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -30,4 +25,8 @@
 (load "~/.emacs.conf/spacemacs-func.lisp")
 (load "~/.emacs.conf/emacs_key.conf")
 
+(setq custom-file "~/.custom-file")
+(if (file-exists-p custom-file)
+    (load custom-file)
+  )
 
