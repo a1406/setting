@@ -44,7 +44,7 @@ SpaceAfterCStyleCast: false
 TabWidth: 4
 UseTab: Never
 
-ColumnLimit: 160
+ColumnLimit: 0
 BreakBeforeBraces: Custom
 BraceWrapping:
   AfterClass: true
