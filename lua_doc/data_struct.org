@@ -99,30 +99,41 @@ typedef union Node {
 #+END_SRC
 
 * 垃圾收集
+** 数据结构
 #+BEGIN_SRC C
-/*
-** Common Header for all collectable objects (in macro form, to be
-** included in other objects)
-*/
 #define CommonHeader	GCObject *next; lu_byte tt; lu_byte marked
-
-
-/*
-** Common type has only the common header
-*/
 struct GCObject {
   CommonHeader;
 };
+
+union GCUnion {
+  GCObject gc;  /* common header */
+  struct TString ts;
+  struct Udata u;
+  union Closure cl;
+  struct Table h;
+  struct Proto p;
+  struct lua_State th;  /* thread */
+  struct UpVal upv;
+};
 #+END_SRC
 
-
+** 创建一个GC对象
+#+BEGIN_SRC C
+GCObject *luaC_newobj (lua_State *L, int tt, size_t sz) {
+  global_State *g = G(L);
+  GCObject *o = cast(GCObject *, luaM_newobject(L, novariant(tt), sz));
+  o->marked = luaC_white(g);
+  o->tt = tt;
+  o->next = g->allgc;
+  g->allgc = o;
+  return o;
+}
+#+END_SRC
 
 * TString
+数据结构
 #+BEGIN_SRC C
-/*
-** Header for string value; string bytes follow the end of this structure
-** (aligned according to 'UTString'; see next).
-*/
 typedef struct TString {
   CommonHeader;
   lu_byte extra;  /* reserved words for short strings; "has hash" for longs */
@@ -133,6 +144,38 @@ typedef struct TString {
     struct TString *hnext;  /* linked list for hash table */
   } u;
 } TString;
+#+END_SRC
+
+** 创建string
+判断长度，短的会放在hash表里面
+#+BEGIN_SRC C
+TString *luaS_new (lua_State *L, const char *str) {
+  unsigned int i = point2uint(str) % STRCACHE_N;  /* hash */
+  int j;
+  TString **p = G(L)->strcache[i];
+  for (j = 0; j < STRCACHE_M; j++) {
+    if (strcmp(str, getstr(p[j])) == 0)  /* hit? */
+      return p[j];  /* that is it */
+  }
+  /* normal route */
+  for (j = STRCACHE_M - 1; j > 0; j--)
+    p[j] = p[j - 1];  /* move out last element */
+  /* new element is first in the list */
+  p[0] = luaS_newlstr(L, str, strlen(str));
+  return p[0];
+}
+TString *luaS_newlstr (lua_State *L, const char *str, size_t l) {
+  if (l <= LUAI_MAXSHORTLEN)  /* short string? */
+    return internshrstr(L, str, l);
+  else {
+    TString *ts;
+    if (l >= (MAX_SIZE - sizeof(TString))/sizeof(char))
+      luaM_toobig(L);
+    ts = luaS_createlngstrobj(L, l);
+    memcpy(getstr(ts), str, l * sizeof(char));
+    return ts;
+  }
+}
 #+END_SRC
 
 * TValue
