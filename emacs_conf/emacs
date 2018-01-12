@@ -20,6 +20,8 @@
  '(default ((t (:family "Source Code Pro" :foundry "adobe" :slant normal :weight normal :height 143 :width normal)))))
 
 (load "~/.emacs.conf/emacs.conf")
+(load "~/.emacs.conf/shell.conf")
+
 (if (file-exists-p "~/.emacs.conf/other.lisp")
     (load "~/.emacs.conf/other.lisp")
   )
