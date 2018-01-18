@@ -1,5 +1,5 @@
-alias mycscope find . -type f -name "*.[hc]pp" > cscope.files && find . -type f -name "*.[hc]" >> cscope.files && cscope -bq
-alias work cd /home/jacktang/svnroot/Server
-alias rmcmake rm -rf CMakeCache.txt CMakeFiles
-alias cmake cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+alias mycscope find . -type f -name "*.[hc]pp" > cscope.files && find . -type f -name *.[hc] >> cscope.files && cscope -bq >/dev/null 2>/dev/null
 alias b cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .
+alias cmake cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+alias rmcmake rm -rf CMakeCache.txt CMakeFiles
+alias work cd /home/jacktang/svnroot/Server
