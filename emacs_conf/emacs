@@ -21,6 +21,7 @@
 
 (load "~/.emacs.conf/emacs.conf")
 (load "~/.emacs.conf/shell.conf")
+(load "~/.emacs.conf/my-theme-theme.el")
 
 (if (file-exists-p "~/.emacs.conf/other.lisp")
     (load "~/.emacs.conf/other.lisp")
@@ -36,3 +37,4 @@
 (if (eq custom-enabled-themes nil)
 (custom-set-variables '(custom-enabled-themes (quote (hc-zenburn)))))
 
+(message "color = %s" (tty-display-color-cells))
