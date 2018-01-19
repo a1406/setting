@@ -35,6 +35,6 @@
   )
 
 (if (eq custom-enabled-themes nil)
-(custom-set-variables '(custom-enabled-themes (quote (hc-zenburn)))))
+(custom-set-variables '(custom-enabled-themes (quote (my-theme)))))
 
 (message "color = %s" (tty-display-color-cells))
