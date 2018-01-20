@@ -35,6 +35,8 @@
   )
 
 (if (eq custom-enabled-themes nil)
-(custom-set-variables '(custom-enabled-themes (quote (my-theme)))))
+    (if (true-color-p)
+	(custom-set-variables '(custom-enabled-themes (quote (my-theme-true-color))))
+	(custom-set-variables '(custom-enabled-themes (quote (my-theme))))))
 
-(message "color = %s" (tty-display-color-cells))
+(message "color = %s true-color = %s" (tty-display-color-cells) (true-color-p))

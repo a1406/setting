@@ -70,3 +70,10 @@
     (if file-name
         (message (kill-new file-name))
       (error "Buffer not visiting a file"))))
+
+
+(defun true-color-p ()
+  (or
+   (display-graphic-p)
+   (= (tty-display-color-cells) 16777216)))
+
