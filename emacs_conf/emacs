@@ -22,6 +22,7 @@
 (load "~/.emacs.conf/emacs.conf")
 (load "~/.emacs.conf/shell.conf")
 (load "~/.emacs.conf/my-theme-theme.el")
+(load "~/.emacs.conf/my-theme-true-color-theme.el")
 
 (if (file-exists-p "~/.emacs.conf/other.lisp")
     (load "~/.emacs.conf/other.lisp")
