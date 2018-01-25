@@ -1,0 +1,26 @@
+* 初始化
+** scriptingInit
+    lua_State *lua = lua_open();
+//加载常规库
+    luaLoadLibraries(lua);
+//删去了全局函数loadfile和dofile
+    luaRemoveUnsupportedFunctions(lua);
+//注册了两个库给lua调用
+    lua_setglobal(lua,"redis");
+    lua_setglobal(lua,"math");
+//禁止一些lua中内存的分配
+    scriptingEnableGlobalsProtection(lua);
+** 找lua_pcall的调用
+//脚本的回调
+luaSortArray
+//保存脚本命令
+luaCreateFunction
+//EVAL命令用
+evalGenericCommand
+//调试用
+ldbEval
+ldbRedis
+* EVAL 命令
+server.c：     {"eval",evalCommand,-3,"s",0,evalGetKeys,0,0,0,0,0},
+
+
