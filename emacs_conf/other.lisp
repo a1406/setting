@@ -128,3 +128,51 @@ See `completion-in-region' for further information."
                             :caller 'ivy-completion-in-region)
                   t))))))))
 
+
+(if my_use-rtags
+(defun my-rtags-find-file (tagname)
+  (let ((offset)
+          (line)
+          (column)
+	(prefer-exact rtags-find-file-prefer-exact-match))
+      (with-current-buffer (rtags-get-buffer)
+        (rtags-call-rc "-P" tagname
+                       (when rtags-find-file-absolute "-K")
+                       (when rtags-find-file-case-insensitive "-I")
+                       (when prefer-exact "-A"))
+        (and (= (point-min) (point-max))
+             (string-match "[^/]\\.\\.[^/]" tagname)
+             (rtags-call-rc "-P"
+                            (replace-regexp-in-string "\\([^/]\\)\\.\\.\\([^/]\\)" "\\1.\\2" tagname)
+                            (when rtags-find-file-absolute "-K")
+                            (when rtags-find-file-case-insensitive "-I")
+                            (when prefer-exact "-A")))
+
+        (cond (offset (rtags-append (format ",%d" offset)))
+              ((and line column) (rtags-append (format ":%d:%d" line column)))
+              ((and line) (rtags-append (format ":%d" line)))
+              (t nil))
+        ;; (message (format "Got lines and shit %d\n[%s]" (count-lines (point-min) (point-max)) (buffer-string)))
+        (goto-char (point-min))
+        (cond ((= (point-min) (point-max)) t)
+              ((= (count-lines (point-min) (point-max)) 1) (rtags-goto-location (buffer-substring-no-properties (point-at-bol) (point-at-eol))))
+              (t (rtags-switch-to-buffer rtags-buffer-name t)
+                 (shrink-window-if-larger-than-buffer)
+                 (rtags-mode))))))
+(defun my-rtags-find-file (tagname))
+)
+
+(defun my-rtags-open-other-file ()
+  (interactive)
+  (let* ((filename (replace-regexp-in-string ".*/" "" (buffer-file-name)))
+	 (ch-name))
+    (if (string-match "^.*\.h$" filename)
+	(setq ch-name (replace-regexp-in-string "\.h" "\.cpp" filename))
+      (setq ch-name (replace-regexp-in-string "\.cpp" "\.h" filename)))
+    (message "open file %s" ch-name)
+    (my-rtags-find-file ch-name)
+    (delete-window)
+    (ivy-rtags-read)
+    ))
+
+
