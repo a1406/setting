@@ -162,6 +162,7 @@ See `completion-in-region' for further information."
 (defun my-rtags-find-file (tagname))
 )
 
+
 (defun my-rtags-open-other-file ()
   (interactive)
   (let* ((filename (replace-regexp-in-string ".*/" "" (buffer-file-name)))
@@ -171,8 +172,11 @@ See `completion-in-region' for further information."
       (setq ch-name (replace-regexp-in-string "\.cpp" "\.h" filename)))
     (message "open file %s" ch-name)
     (my-rtags-find-file ch-name)
-    (delete-window)
-    (ivy-rtags-read)
+    (if (window-parent nil)
+      (progn (delete-window)
+	     (ivy-rtags-read)
+	     ))
     ))
+
 
 
