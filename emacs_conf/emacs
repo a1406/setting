@@ -36,9 +36,10 @@
     (load custom-file)
   )
 
-;;(if (eq custom-enabled-themes nil)
-;; (custom-set-variables '(custom-enabled-themes (quote (spacemacs-dark))))
-;;)
+(if (eq custom-enabled-themes nil)
+;;    (custom-set-variables '(custom-enabled-themes (quote (my-theme))))
+ (custom-set-variables '(custom-enabled-themes (quote (spacemacs-dark))))
+)
 
 ;;    (if (true-color-p)
 ;; 	(custom-set-variables '(custom-enabled-themes (quote (my-theme-true-color))))
