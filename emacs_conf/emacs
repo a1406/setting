@@ -19,10 +19,11 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Source Code Pro" :foundry "adobe" :slant normal :weight normal :height 143 :width normal)))))
 
+(require 'spacemacs-dark-theme)
 (load "~/.emacs.conf/emacs.conf")
 (load "~/.emacs.conf/shell.conf")
-(load "~/.emacs.conf/my-theme-theme.el")
-(load "~/.emacs.conf/my-theme-true-color-theme.el")
+;;(load "~/.emacs.conf/my-theme-theme.el")
+;;(load "~/.emacs.conf/my-theme-true-color-theme.el")
 
 (if (file-exists-p "~/.emacs.conf/other.lisp")
     (load "~/.emacs.conf/other.lisp")
@@ -35,9 +36,12 @@
     (load custom-file)
   )
 
-(if (eq custom-enabled-themes nil)
-    (if (true-color-p)
-	(custom-set-variables '(custom-enabled-themes (quote (my-theme-true-color))))
-	(custom-set-variables '(custom-enabled-themes (quote (my-theme))))))
+;;(if (eq custom-enabled-themes nil)
+;; (custom-set-variables '(custom-enabled-themes (quote (spacemacs-dark))))
+;;)
+
+;;    (if (true-color-p)
+;; 	(custom-set-variables '(custom-enabled-themes (quote (my-theme-true-color))))
+;; 	(custom-set-variables '(custom-enabled-themes (quote (my-theme))))))
 
 (message "color = %s true-color = %s" (tty-display-color-cells) (true-color-p))
