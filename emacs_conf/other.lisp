@@ -179,4 +179,37 @@ See `completion-in-region' for further information."
     ))
 
 
-
+(if my_use-rtags
+(defun my_rtags-set-current-project ()
+  "Set active project.
+Uses `completing-read' to ask for the project."
+  (interactive)
+  (let ((projects nil)
+        (project nil)
+        (current "")
+	(command)
+	)
+    (with-temp-buffer
+      (rtags-call-rc :path t "-w")
+      (goto-char (point-min))
+      (while (not (eobp))
+        (let ((line (buffer-substring-no-properties (point-at-bol) (point-at-eol))))
+          (cond ((string-match "^\\([^ ]+\\)[^<]*<=$" line)
+                 (let ((name (match-string-no-properties 1 line)))
+                   (push name projects)
+                   (setq current name)))
+                ((string-match "^\\([^ ]+\\)[^<]*$" line)
+                 (push (match-string-no-properties 1 line) projects))
+                (t)))
+        (forward-line)))
+    (setq project (completing-read
+                   (format "RTags select project (current is %s): " current)
+                   projects))
+    (when project
+      (with-temp-buffer
+      (setq command (format "-w %s" project))
+      (rtags-call-rc :path t command))
+      (message "change rtags project to %s" project)
+      )
+    ))
+(defun my_rtags-set-current-project ()))
