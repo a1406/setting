@@ -1,12 +1,19 @@
 
+(setq custom-file "~/.custom-file")
+(if (file-exists-p custom-file)
+    (load custom-file)
+  )
+
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
+(load "~/.emacs.conf/package.conf")
 
 (custom-set-variables
-  '(initial-frame-alist (quote ((fullscreen . fullscreen)))))
+ '(initial-frame-alist (quote ((fullscreen . fullscreen))))
+'(custom-enabled-themes (quote (hc-zenburn))))
 ;; '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
 (custom-set-faces
@@ -16,12 +23,6 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Source Code Pro" :foundry "adobe" :slant normal :weight normal :height 143 :width normal)))))
 
-(setq custom-file "~/.custom-file")
-(if (file-exists-p custom-file)
-    (load custom-file)
-  )
-
-(load "~/.emacs.conf/package.conf")
 (load "~/.emacs.conf/emacs.conf")
 (if (file-exists-p "~/.emacs.conf/other.lisp")
     (load "~/.emacs.conf/other.lisp")

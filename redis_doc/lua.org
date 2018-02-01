@@ -1,7 +1,7 @@
 * 初始化
 ** scriptingInit
     lua_State *lua = lua_open();
-//加载常规库
+//加载常规库, 类似luaL_openlibs
     luaLoadLibraries(lua);
 //删去了全局函数loadfile和dofile
     luaRemoveUnsupportedFunctions(lua);
