@@ -1,6 +1,6 @@
-alias sudo sudo -p "[sudo] password for %u: " $*
 alias b cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .
 alias cmake cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1
 alias rmcmake rm -rf CMakeCache.txt CMakeFiles
 alias work cd /home/jacktang/svnroot/Server
 alias mycscope find . -type f -name "*.[hc]pp" > cscope.files && find . -type f -name "*.[hc]" >> cscope.files && cscope -bq 2>/dev/null
+alias sudo eshell/sudo $*
