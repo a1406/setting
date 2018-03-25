@@ -29,7 +29,7 @@
 
 * 接收数据
 ** frame_recv_loop
-
+frame_read_cb和write_cb是连接并握手之后的逻辑处理
    #+BEGIN_SRC C
              bufferevent_setcb(conn->bev, frame_read_cb, write_cb, close_cb, conn);
              bufferevent_setwatermark(conn->bev, EV_READ, conn->ntoread, conn->ntoread);
@@ -37,8 +37,9 @@
              bufferevent_enable(conn->bev, EV_READ);
    #+END_SRC
 
+
 ** request_read_cb
-一个字节一个字节的读
+一个字节一个字节的读, 处理握手的协议
 
 #+BEGIN_SRC C
           char c;
@@ -61,6 +62,7 @@
 
 * 发送数据
 ** respond_websocket_request
+握手协议的数据发送
 
    #+BEGIN_SRC C
              ws_req_t ws_req;
@@ -78,4 +80,8 @@
                  ws_serve_exit(conn);
              }
    #+END_SRC
+
+** write_cb
+握手之后的数据发送
+
 
