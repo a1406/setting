@@ -1,0 +1,81 @@
+* listencb  接受连接
+#+BEGIN_SRC C
+	//create a user
+	user_t *user = user_create();
+	user->wscon->bev = bev;
+	user_vec.push_back(user);
+	//ws_conn_setcb(wscon, HANDSHAKE, testfunc, (void*)"haha");
+	ws_conn_setcb(user->wscon, FRAME_RECV, frame_recv_cb, user);
+	ws_conn_setcb(user->wscon, CLOSE, user_disconnect_cb, user);
+
+	ws_serve_start(user->wscon);
+#+END_SRC
+
+
+  #+BEGIN_SRC C
+    void accept_websocket_request(ws_conn_t *conn) {
+        if (conn && conn->bev) {
+            //read websocket request
+            bufferevent_setcb(conn->bev, request_read_cb, response_write_cb, close_cb, conn); 
+            bufferevent_setwatermark(conn->bev, EV_READ, 1, 1);
+            bufferevent_setwatermark(conn->bev, EV_WRITE, 0, 0);
+            bufferevent_enable(conn->bev, EV_READ);
+        } else {
+            ws_serve_exit(conn);
+        }
+    }
+  #+END_SRC
+
+
+* 接收数据
+** frame_recv_loop
+
+   #+BEGIN_SRC C
+             bufferevent_setcb(conn->bev, frame_read_cb, write_cb, close_cb, conn);
+             bufferevent_setwatermark(conn->bev, EV_READ, conn->ntoread, conn->ntoread);
+             bufferevent_setwatermark(conn->bev, EV_WRITE, 0, 0);
+             bufferevent_enable(conn->bev, EV_READ);
+   #+END_SRC
+
+** request_read_cb
+一个字节一个字节的读
+
+#+BEGIN_SRC C
+          char c;
+          bufferevent_read(bev, &c, 1);
+          conn->ws_req_str += c;
+          size_t n = conn->ws_req_str.size();
+          //TODO
+          //for security
+          //if (n > MAX_WS_REQ_LEN) {
+          //  ws_serve_exit();
+          //}
+
+          //receive request completely
+          if (n >= 4 && conn->ws_req_str.substr(n - 4) == "\r\n\r\n") {
+              bufferevent_disable(conn->bev, EV_READ); //stop reading before a valid handshake
+              respond_websocket_request(conn); //send websocket response
+          }
+#+END_SRC
+
+
+* 发送数据
+** respond_websocket_request
+
+   #+BEGIN_SRC C
+             ws_req_t ws_req;
+             parse_websocket_request(conn->ws_req_str.c_str(), &ws_req); //parse request
+             //TODO
+             //check if it is a websocket request
+             //if (!valid) {
+             //  ws_serve_exit(conn);
+             //  return;
+             //}
+             conn->ws_resp_str = generate_websocket_response(&ws_req); //generate response
+             if (!conn->ws_resp_str.empty()) {
+                 bufferevent_write(conn->bev, conn->ws_resp_str.c_str(), conn->ws_resp_str.length());
+             } else {
+                 ws_serve_exit(conn);
+             }
+   #+END_SRC
+
