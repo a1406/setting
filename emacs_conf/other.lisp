@@ -1,9 +1,11 @@
 (require 'gdb-mi)
 (defun gamesrv-gdb ()
   (interactive)
-  (let* ((srv_pid
+  (let* (
+	 (pid_path (format "%s/game_srv/pid.txt" cscope-initial-directory))
+	 (srv_pid
     (with-temp-buffer
-      (insert-file-contents "game_srv/pid.txt")
+      (insert-file-contents pid_path)
       (buffer-string)))
 	 (cmd1 (gud-val 'command-name 'gdb))
 	 (cmd2 (format "%s game_srv/game_srv -p %s" cmd1 srv_pid))
@@ -12,7 +14,6 @@
     (gdb cmd2)
     )
   )
-
 
 (defun remove_last (path)
   (let* ((len (- (length path) 1))
