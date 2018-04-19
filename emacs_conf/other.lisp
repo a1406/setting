@@ -241,3 +241,16 @@ Uses `completing-read' to ask for the project."
       (insert "#+END_SRC\n")
       (previous-line 2)
       (org-edit-src-code)))
+
+
+(if (not (functionp 'process-kill-without-query))
+(defun process-kill-without-query (process &optional _flag)
+  "Say no query needed if PROCESS is running when Emacs is exited.
+Optional second argument if non-nil says to require a query.
+Value is t if a query was formerly required."
+  (declare (obsolete
+            "use `process-query-on-exit-flag' or `set-process-query-on-exit-flag'."
+            "22.1"))
+  (let ((old (process-query-on-exit-flag process)))
+    (set-process-query-on-exit-flag process nil)
+    old)))
