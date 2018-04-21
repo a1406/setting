@@ -254,3 +254,46 @@ Value is t if a query was formerly required."
   (let ((old (process-query-on-exit-flag process)))
     (set-process-query-on-exit-flag process nil)
     old)))
+
+;;26以上版本gud补全后光标位置问题
+(defun completion--nth-completion (n string table pred point metadata)
+  "Call the Nth method of completion styles."
+  (unless metadata
+    (setq metadata
+          (completion-metadata (substring string 0 point) table pred)))
+  ;; We provide special support for quoting/unquoting here because it cannot
+  ;; reliably be done within the normal completion-table routines: Completion
+  ;; styles such as `substring' or `partial-completion' need to match the
+  ;; output of all-completions with the user's input, and since most/all
+  ;; quoting mechanisms allow several equivalent quoted forms, the
+  ;; completion-style can't do this matching (e.g. `substring' doesn't know
+  ;; that "\a\b\e" is a valid (quoted) substring of "label").
+  ;; The quote/unquote function needs to come from the completion table (rather
+  ;; than from completion-extra-properties) because it may apply only to some
+  ;; part of the string (e.g. substitute-in-file-name).
+  (message "%s" table)
+  (let ((requote
+         (when (and
+                (completion-metadata-get metadata 'completion--unquote-requote)
+                ;; Sometimes a table's metadata is used on another
+                ;; table (typically that other table is just a list taken
+                ;; from the output of `all-completions' or something equivalent,
+                ;; for progressive refinement).  See bug#28898 and bug#16274.
+                ;; FIXME: Rather than do nothing, we should somehow call
+                ;; the original table, in that case!
+                (functionp table))
+           (let ((new (funcall table string point 'completion--unquote)))
+             (setq string (pop new))
+             (setq table (pop new))
+             (setq point (pop new))
+	     (cl-assert (<= point (length string)))
+             (pop new))))
+        (result
+         (completion--some (lambda (style)
+                             (funcall (nth n (assq style
+                                                   completion-styles-alist))
+                                      string table pred point))
+                           (completion--styles metadata))))
+    (if requote
+        (funcall requote result n)
+      result)))
