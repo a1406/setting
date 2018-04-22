@@ -297,3 +297,49 @@ Value is t if a query was formerly required."
     (if requote
         (funcall requote result n)
       result)))
+
+
+
+
+;;   gud-gdb-completions-1
+;;    
+;;   Debugger entered--entering a function:
+;;   * gud-gdb-completions-1(("display" "disconnect" "disassemble" "disable" #("complete dis" 0 12 (face font-lock-warning-face))))
+;;     gud-gdbmi-completions("" "dis")
+;;     apply(gud-gdbmi-completions ("" "dis"))
+;;     #f(compiled-function (&rest args2) #<bytecode 0x103ffa5>)("dis")
+;;     #f(compiled-function (string pred action) #<bytecode 0x103ffb9>)("dis" nil t)
+;;     all-completions("dis" #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) nil)
+;;     completion-pcm--all-completions("" ("dis" point) #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) nil)
+;;     completion-basic-all-completions("dis" #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) nil 3)
+;;     funcall(completion-basic-all-completions "dis" #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) nil 3)
+;;     (lambda (style) (funcall (nth n (assq style completion-styles-alist)) string table pred point))(basic)
+;;     completion--some((lambda (style) (funcall (nth n (assq style completion-styles-alist)) string table pred point)) (basic partial-completion emacs22))
+;;     (let ((requote (if (and (completion-metadata-get metadata 'completion--unquote-requote) (functionp table)) (progn (let ((new (funcall table string point 
+;;    
+;;   'completion--unquote))) (setq stri$
+;;     completion--nth-completion(2 "dis" #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) nil 3 nil)
+;;     completion-all-completions("dis" #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) nil 3)
+;;     (let* ((enable-recursive-minibuffers t) (str (buffer-substring-no-properties start end)) (completion-ignore-case case-fold-search) (comps (completion-all-
+;;    
+;;   completions str collection predic$
+;;     ivy-completion-in-region(#<marker (moves after insertion) at 1438 in *gud-bashrc.conf*> 1441 #f(compiled-function (string pred action) #<bytecode 
+;;    
+;;   0x103ffb9>) nil)
+;;     completion-in-region(#<marker (moves after insertion) at 1438 in *gud-bashrc.conf*> 1441 #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) 
+;;    
+;;   nil)
+;;     completion-at-point()
+;;    
+;;    
+;;    
+;;    
+;;   completion-at-point-functions => gud-gdb-completion-at-point
+;;    
+;;   Debugger entered--entering a function:
+;;   * gud-gdb-completion-at-point()
+;;     completion--capf-wrapper(gud-gdb-completion-at-point all)
+;;     run-hook-wrapped(completion--capf-wrapper gud-gdb-completion-at-point all)
+;;     completion-at-point()
+;;    
+
