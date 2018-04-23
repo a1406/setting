@@ -7,11 +7,13 @@
     (with-temp-buffer
       (insert-file-contents pid_path)
       (buffer-string)))
-	 (cmd1 (gud-val 'command-name 'gdb))
+	 ;;	 (cmd1 (gud-val 'command-name 'gdb))
+	 (cmd1 gud-gud-gdb-command-name)
 	 (cmd2 (format "%s game_srv/game_srv -p %s" cmd1 srv_pid))
 	 )
+;;    (message "cmd2 %s"  cmd2)
 ;;    (setq gud-gdb-history (list cmd2))
-    (gdb cmd2)
+    (gud-gdb cmd2)
     )
   )
 
@@ -65,6 +67,7 @@
   (message (kill-new default-directory))
   )
 
+;;为了在ivy-read那里设置个sort
 (defun ivy-completion-in-region (start end collection &optional predicate)
   "An Ivy function suitable for `completion-in-region-function'.
 The function completes the text between START and END using COLLECTION.
@@ -254,92 +257,4 @@ Value is t if a query was formerly required."
   (let ((old (process-query-on-exit-flag process)))
     (set-process-query-on-exit-flag process nil)
     old)))
-
-;;26以上版本gud补全后光标位置问题
-(defun completion--nth-completion (n string table pred point metadata)
-  "Call the Nth method of completion styles."
-  (unless metadata
-    (setq metadata
-          (completion-metadata (substring string 0 point) table pred)))
-  ;; We provide special support for quoting/unquoting here because it cannot
-  ;; reliably be done within the normal completion-table routines: Completion
-  ;; styles such as `substring' or `partial-completion' need to match the
-  ;; output of all-completions with the user's input, and since most/all
-  ;; quoting mechanisms allow several equivalent quoted forms, the
-  ;; completion-style can't do this matching (e.g. `substring' doesn't know
-  ;; that "\a\b\e" is a valid (quoted) substring of "label").
-  ;; The quote/unquote function needs to come from the completion table (rather
-  ;; than from completion-extra-properties) because it may apply only to some
-  ;; part of the string (e.g. substitute-in-file-name).
-  (message "%s" table)
-  (let ((requote
-         (when (and
-                (completion-metadata-get metadata 'completion--unquote-requote)
-                ;; Sometimes a table's metadata is used on another
-                ;; table (typically that other table is just a list taken
-                ;; from the output of `all-completions' or something equivalent,
-                ;; for progressive refinement).  See bug#28898 and bug#16274.
-                ;; FIXME: Rather than do nothing, we should somehow call
-                ;; the original table, in that case!
-                (functionp table))
-           (let ((new (funcall table string point 'completion--unquote)))
-             (setq string (pop new))
-             (setq table (pop new))
-             (setq point (pop new))
-	     (cl-assert (<= point (length string)))
-             (pop new))))
-        (result
-         (completion--some (lambda (style)
-                             (funcall (nth n (assq style
-                                                   completion-styles-alist))
-                                      string table pred point))
-                           (completion--styles metadata))))
-    (if requote
-        (funcall requote result n)
-      result)))
-
-
-
-
-;;   gud-gdb-completions-1
-;;    
-;;   Debugger entered--entering a function:
-;;   * gud-gdb-completions-1(("display" "disconnect" "disassemble" "disable" #("complete dis" 0 12 (face font-lock-warning-face))))
-;;     gud-gdbmi-completions("" "dis")
-;;     apply(gud-gdbmi-completions ("" "dis"))
-;;     #f(compiled-function (&rest args2) #<bytecode 0x103ffa5>)("dis")
-;;     #f(compiled-function (string pred action) #<bytecode 0x103ffb9>)("dis" nil t)
-;;     all-completions("dis" #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) nil)
-;;     completion-pcm--all-completions("" ("dis" point) #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) nil)
-;;     completion-basic-all-completions("dis" #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) nil 3)
-;;     funcall(completion-basic-all-completions "dis" #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) nil 3)
-;;     (lambda (style) (funcall (nth n (assq style completion-styles-alist)) string table pred point))(basic)
-;;     completion--some((lambda (style) (funcall (nth n (assq style completion-styles-alist)) string table pred point)) (basic partial-completion emacs22))
-;;     (let ((requote (if (and (completion-metadata-get metadata 'completion--unquote-requote) (functionp table)) (progn (let ((new (funcall table string point 
-;;    
-;;   'completion--unquote))) (setq stri$
-;;     completion--nth-completion(2 "dis" #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) nil 3 nil)
-;;     completion-all-completions("dis" #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) nil 3)
-;;     (let* ((enable-recursive-minibuffers t) (str (buffer-substring-no-properties start end)) (completion-ignore-case case-fold-search) (comps (completion-all-
-;;    
-;;   completions str collection predic$
-;;     ivy-completion-in-region(#<marker (moves after insertion) at 1438 in *gud-bashrc.conf*> 1441 #f(compiled-function (string pred action) #<bytecode 
-;;    
-;;   0x103ffb9>) nil)
-;;     completion-in-region(#<marker (moves after insertion) at 1438 in *gud-bashrc.conf*> 1441 #f(compiled-function (string pred action) #<bytecode 0x103ffb9>) 
-;;    
-;;   nil)
-;;     completion-at-point()
-;;    
-;;    
-;;    
-;;    
-;;   completion-at-point-functions => gud-gdb-completion-at-point
-;;    
-;;   Debugger entered--entering a function:
-;;   * gud-gdb-completion-at-point()
-;;     completion--capf-wrapper(gud-gdb-completion-at-point all)
-;;     run-hook-wrapped(completion--capf-wrapper gud-gdb-completion-at-point all)
-;;     completion-at-point()
-;;    
 
