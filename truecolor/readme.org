@@ -18,3 +18,30 @@ $ tmux
 * 运行emacs
 TERM=xterm-24bits emacs-27.0.50
 
+* 其他
+** git
+ctags  
+https://github.com/universal-ctags/ctags.git
+rtags  
+https://github.com/Andersbakken/rtags.git
+setting  
+https://github.com/a1406/setting.git
+the_silver_searcher
+https://github.com/a1406/the_silver_searcher.git
+
+** apt
+sudo apt-get install gcc g++ gdb tmux  
+sudo apt-get install pkg-config        
+sudo apt-get install  libclang-dev     
+sudo apt-get install llvm              
+sudo apt-get install libpcre-dev       
+sudo apt-get install libpcre3-dev      
+sudo apt-get install liblzma-dev       
+sudo apt-get install libzlib-dev       
+sudo apt-get install zlib              
+sudo apt-get install libghc-zlib-dev   
+
+** emacs
+wget -c https://codeload.github.com/emacs-mirror/emacs/zip/master
+
+
