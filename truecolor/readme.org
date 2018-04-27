@@ -34,6 +34,7 @@ sudo apt-get install gcc g++ gdb tmux
 sudo apt-get install pkg-config        
 sudo apt-get install  libclang-dev     
 sudo apt-get install llvm              
+sudo apt-get install clang              
 sudo apt-get install libpcre-dev       
 sudo apt-get install libpcre3-dev      
 sudo apt-get install liblzma-dev       
