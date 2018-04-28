@@ -45,4 +45,4 @@ sudo apt-get install libghc-zlib-dev
 ** emacs
 wget -c https://codeload.github.com/emacs-mirror/emacs/zip/master
 
-
+** rm rtags.elc
