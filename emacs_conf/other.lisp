@@ -258,3 +258,14 @@ Value is t if a query was formerly required."
     (set-process-query-on-exit-flag process nil)
     old)))
 
+
+;;优先使用设置的tags file name
+(defun counsel-etags-locate-tags-file ()
+  "Find tags file: Search in parent directory or use `tags-file-name'."
+  (let ((dir))
+    (if (and tags-file-name (file-exists-p tags-file-name))
+	tags-file-name
+      (progn 
+	(setq dir (locate-dominating-file default-directory "TAGS"))
+	(concat dir "TAGS")))))
+	      
