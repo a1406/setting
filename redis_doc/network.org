@@ -1,0 +1,50 @@
+* 初始化
+aeCreateEventLoop
+
+* loop
+aeMain
+
+* 监听
+#+BEGIN_SRC 
+    for (p = servinfo; p != NULL; p = p->ai_next) {
+        if ((s = socket(p->ai_family,p->ai_socktype,p->ai_protocol)) == -1)
+            continue;
+
+        if (af == AF_INET6 && anetV6Only(err,s) == ANET_ERR) goto error;
+        if (anetSetReuseAddr(err,s) == ANET_ERR) goto error;
+        if (anetListen(err,s,p->ai_addr,p->ai_addrlen,backlog) == ANET_ERR) s = ANET_ERR;
+        goto end;
+    }
+#+END_SRC
+
+* 连接
+anetTcpGenericConnect
+
+* accept
+#+BEGIN_SRC 
+    /* Create an event handler for accepting new connections in TCP and Unix
+     * domain sockets. */
+    for (j = 0; j < server.ipfd_count; j++) {
+        if (aeCreateFileEvent(server.el, server.ipfd[j], AE_READABLE,
+            acceptTcpHandler,NULL) == AE_ERR)
+            {
+                serverPanic(
+                    "Unrecoverable error creating server.ipfd file event.");
+            }
+    }
+#+END_SRC
+
+* send
+aeCreateFileEvent
+
+* recv
+aeCreateFileEvent
+
+* 断开
+freeClient => unlinkClient
+
+* timeout
+只是简单的遍历，不能增加太多timeout
+但是也不需要反复添加，只要不返回AE_NOMORE就会自动添加
+aeCreateTimeEvent
+processTimeEvents

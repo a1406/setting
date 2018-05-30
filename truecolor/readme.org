@@ -10,13 +10,13 @@ xterm-24bits|xterm with 24-bit direct color mode,
 
 
 * 执行tic
-$ tic -x -o ~/.terminfo terminfo-24bit.src
+$ tic -x -o ~/.terminfo t1.src
 
 * 运行tmux
 $ tmux
 
 * 运行emacs
-TERM=xterm-24bits emacs-27.0.50
+TERM=xterm-t1 emacs-27.0.50
 
 * 其他
 ** git
@@ -41,6 +41,9 @@ sudo apt-get install liblzma-dev
 sudo apt-get install libzlib-dev       
 sudo apt-get install zlib              
 sudo apt-get install libghc-zlib-dev   
+
+** pacman
+sudo pacman -S emacs gcc g++ gdb tmux pkg-config clang llvm pcre zlib
 
 ** emacs
 wget -c https://codeload.github.com/emacs-mirror/emacs/zip/master
