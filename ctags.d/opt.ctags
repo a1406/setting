@@ -1,0 +1,4 @@
+--exclude=logs
+--exclude=CMakeFiles
+--exclude=makefile
+--exclude=Makefile
