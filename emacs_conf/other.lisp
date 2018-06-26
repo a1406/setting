@@ -258,7 +258,7 @@ Value is t if a query was formerly required."
     (set-process-query-on-exit-flag process nil)
     old)))
 
-
+(require 'counsel)
 ;;优先使用设置的tags file name
 (defun counsel-etags-locate-tags-file ()
   "Find tags file: Search in parent directory or use `tags-file-name'."
@@ -269,3 +269,31 @@ Value is t if a query was formerly required."
 	(setq dir (locate-dominating-file default-directory "TAGS"))
 	(concat dir "TAGS")))))
 	      
+;;去掉^M, 否则不能修改
+(defun counsel-grep-like-occur (cmd-template)
+  (unless (eq major-mode 'ivy-occur-grep-mode)
+    (ivy-occur-grep-mode)
+    (setq default-directory (ivy-state-directory ivy-last)))
+  (setq ivy-text
+        (and (string-match "\"\\(.*\\)\"" (buffer-name))
+             (match-string 1 (buffer-name))))
+  (let* ((command-args (counsel--split-command-args ivy-text))
+         (cmd (format cmd-template
+                      (concat
+                       (car command-args)
+                       (shell-quote-argument
+                        (counsel-unquote-regex-parens
+                         (ivy--regex (cdr command-args)))))))
+         (cands (split-string (shell-command-to-string cmd) "\n" t)))
+    ;; Need precise number of header lines for `wgrep' to work.
+    (insert (format "-*- mode:grep; default-directory: %S -*-\n\n\n"
+                    default-directory))
+    (insert (format "%d candidates:\n" (length cands)))
+    (ivy--occur-insert-lines
+     (mapcar
+      (lambda (cand)
+	(setq cand (replace-regexp-in-string "" "" cand))
+	(concat "./" cand)
+	)
+      cands))))
+
