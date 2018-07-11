@@ -277,13 +277,10 @@ Value is t if a query was formerly required."
   (setq ivy-text
         (and (string-match "\"\\(.*\\)\"" (buffer-name))
              (match-string 1 (buffer-name))))
-  (let* ((command-args (counsel--split-command-args ivy-text))
-         (cmd (format cmd-template
-                      (concat
-                       (car command-args)
-                       (shell-quote-argument
-                        (counsel-unquote-regex-parens
-                         (ivy--regex (cdr command-args)))))))
+  (let* ((cmd (format cmd-template
+                      (shell-quote-argument
+                       (counsel-unquote-regex-parens
+                        (ivy--regex ivy-text)))))
          (cands (split-string (shell-command-to-string cmd) "\n" t)))
     ;; Need precise number of header lines for `wgrep' to work.
     (insert (format "-*- mode:grep; default-directory: %S -*-\n\n\n"
@@ -292,8 +289,8 @@ Value is t if a query was formerly required."
     (ivy--occur-insert-lines
      (mapcar
       (lambda (cand)
-	(setq cand (replace-regexp-in-string "" "" cand))
-	(concat "./" cand)
-	)
+	(setq cand (replace-regexp-in-string "" "" cand))	
+	(concat "./" cand))
       cands))))
+
 
