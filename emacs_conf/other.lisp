@@ -1,5 +1,5 @@
 (require 'gdb-mi)
-(defun gamesrv-gdb ()
+(defun game-gdb ()
   (interactive)
   (let* (
 	 (pid_path (format "%s/game_srv/pid.txt" cscope-initial-directory))
@@ -16,6 +16,25 @@
     (gud-gdb cmd2)
     )
   )
+
+(defun conn-gdb ()
+  (interactive)
+  (let* (
+	 (pid_path (format "%s/conn_srv/pid.txt" cscope-initial-directory))
+	 (srv_pid
+    (with-temp-buffer
+      (insert-file-contents pid_path)
+      (buffer-string)))
+	 ;;	 (cmd1 (gud-val 'command-name 'gdb))
+	 (cmd1 gud-gud-gdb-command-name)
+	 (cmd2 (format "%s conn_srv/conn_srv -p %s" cmd1 srv_pid))
+	 )
+;;    (message "cmd2 %s"  cmd2)
+;;    (setq gud-gdb-history (list cmd2))
+    (gud-gdb cmd2)
+    )
+  )
+
 
 (defun remove_last (path)
   (let* ((len (- (length path) 1))
