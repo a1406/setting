@@ -2,14 +2,15 @@
 (defun game-gdb ()
   (interactive)
   (let* (
-	 (pid_path (format "%s/game_srv/pid.txt" cscope-initial-directory))
+	 (init_dir (file-name-as-directory cscope-initial-directory))
+	 (pid_path (format "%sgame_srv/pid.txt" init_dir))
 	 (srv_pid
     (with-temp-buffer
       (insert-file-contents pid_path)
       (buffer-string)))
 	 ;;	 (cmd1 (gud-val 'command-name 'gdb))
 	 (cmd1 gud-gud-gdb-command-name)
-	 (cmd2 (format "%s %s/game_srv/game_srv -p %s" cmd1 cscope-initial-directory srv_pid))
+	 (cmd2 (format "%s %sgame_srv/game_srv -p %s" cmd1 init_dir srv_pid))
 	 )
 ;;    (message "cmd2 %s"  cmd2)
 ;;    (setq gud-gdb-history (list cmd2))
@@ -20,14 +21,15 @@
 (defun conn-gdb ()
   (interactive)
   (let* (
-	 (pid_path (format "%s/conn_srv/pid.txt" cscope-initial-directory))
+	 (init_dir (file-name-as-directory cscope-initial-directory))
+	 (pid_path (format "%sconn_srv/pid.txt" init_dir))
 	 (srv_pid
     (with-temp-buffer
       (insert-file-contents pid_path)
       (buffer-string)))
 	 ;;	 (cmd1 (gud-val 'command-name 'gdb))
 	 (cmd1 gud-gud-gdb-command-name)
-	 (cmd2 (format "%s %s/conn_srv/conn_srv -p %s" cmd1 cscope-initial-directory srv_pid))
+	 (cmd2 (format "%s %sconn_srv/conn_srv -p %s" cmd1 init_dir srv_pid))
 	 )
 ;;    (message "cmd2 %s"  cmd2)
 ;;    (setq gud-gdb-history (list cmd2))
