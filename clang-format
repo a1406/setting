@@ -42,7 +42,7 @@ AllowAllParametersOfDeclarationOnNextLine: true
 SpaceAfterCStyleCast: false
 #tab键盘的宽度
 TabWidth: 4
-UseTab: Never
+UseTab: ForIndentation
 
 ColumnLimit: 0
 BreakBeforeBraces: Custom
