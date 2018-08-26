@@ -1,5 +1,10 @@
-alias mycscope sh ~/.emacs.conf/mycscope.sh
-alias b cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .
-alias rmcmake rm -rf CMakeCache.txt CMakeFiles
-alias work cd /home/jacktang/svnroot/Server
+alias ll ls -al
+alias clear aweshell-clear-buffer
+alias d dired $1
+alias fo find-file-other-window $1
+alias f find-file $1
 alias sudo eshell/sudo $*
+alias work cd /home/jacktang/svnroot/Server
+alias rmcmake rm -rf CMakeCache.txt CMakeFiles
+alias b cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .
+alias mycscope sh ~/.emacs.conf/mycscope.sh
