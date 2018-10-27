@@ -315,3 +315,6 @@ Value is t if a query was formerly required."
       cands))))
 
 
+(defun my-choose-num (beg end)
+  (interactive "r")
+  (message "beg = %s, end = %s, choose = %s" beg end (- end beg)))
