@@ -1,5 +1,18 @@
 (defvar point-stack nil)
 (defvar point-cur nil)
+
+(defun my-nth-remove (nth seq)
+  (let ((n -1))
+    (remove-if
+     #'(lambda (p1)
+	 ;;     (message "p1 = %s, n = %s" p1 n)
+	 (setq n (+ n 1))
+	 (if (eq n nth)
+	     t
+	   nil))
+     seq))
+  )
+
 (defun point-stack-push ()
   "Push current point in stack."
   (interactive)
@@ -68,20 +81,12 @@
 (defun point-stack-delete ()
   "delete current point from stack."
   (interactive)
-  (let ((l) (t1) (t2) (l1) (l2))
+  (let ((l))
   (if (or (null point-stack)
 	  (null point-cur))
       (message "Stack is empty.")
     (setq l (length point-stack))
     (if (<= l 1)
 	(point-stack-clear)
-;;      (message "aaaa l = %s" l)
-      (setq l1 (- l (- point-cur 0)))
-      (if (< l1 0)
-	  (setq t1 nil)
-	(setq t1 (butlast point-stack l1)))
-;;      (message "t1 = %s, l1 = %s" t1 l1)
-      (setq t2 (nthcdr (+ point-cur 1) point-stack))
-;;      (message "t2 = %s, point-cur = %s" t2 point-cur)      
-      (setq point-stack (append t1 t2)
-  )))))
+
+      (setq point-stack (my-nth-remove point-cur point-stack))))))
