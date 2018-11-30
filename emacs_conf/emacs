@@ -34,6 +34,10 @@
 (if (file-exists-p "~/.emacs.conf/other.lisp")
     (load "~/.emacs.conf/other.lisp")
   )
+(if (file-exists-p "~/.emacs.conf/jump_back.lisp")
+    (load "~/.emacs.conf/jump_back.lisp")
+  )
+
 (load "~/.emacs.conf/spacemacs-func.lisp")
 (load "~/.emacs.conf/emacs_key.conf")
 
