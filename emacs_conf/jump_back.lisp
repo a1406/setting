@@ -30,13 +30,19 @@
   (if (or (null point-stack)
 	  (null point-cur))
       (message "Stack is empty.")
-    (if (eq 0 point-cur)
-	(message "Stack at top")
-      (setq point-cur (- point-cur 1))
-      (setq tmp (nth point-cur point-stack))
-      (switch-to-buffer (car tmp))
-      (goto-char (cadr tmp))
-  ))))
+    (if (eq (length point-stack) 1)
+	(progn
+	  (setq tmp (nth 0 point-stack))
+	  (switch-to-buffer (car tmp))
+	  (goto-char (cadr tmp)))
+	  
+      (if (eq 0 point-cur)
+	  (message "Stack at top")
+	(setq point-cur (- point-cur 1))
+	(setq tmp (nth point-cur point-stack))
+	(switch-to-buffer (car tmp))
+	(goto-char (cadr tmp))
+	)))))
 
 (defun point-stack-backward ()
   "backward point from stack."
@@ -45,13 +51,19 @@
   (if (or (null point-stack)
 	  (null point-cur))
       (message "Stack is empty.")
+    (if (eq (length point-stack) 1)
+	(progn
+	  (setq tmp (nth 0 point-stack))
+	  (switch-to-buffer (car tmp))
+	  (goto-char (cadr tmp)))
+    
     (if (<= (length point-stack) (+ 1 point-cur))    
 	(message "Stack at bottom")
       (setq point-cur (+ point-cur 1))
       (setq tmp (nth point-cur point-stack))
       (switch-to-buffer (car tmp))
       (goto-char (cadr tmp))
-  ))))
+  )))))
 
 (defun point-stack-delete ()
   "delete current point from stack."
