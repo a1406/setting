@@ -36,6 +36,17 @@
   (setq point-cur nil)
   (setq point-stack nil))
 
+(defun point-stack-last ()
+  "forward last point from stack."
+  (interactive)
+  (if (or (null point-stack)
+	  (null point-cur))
+      (message "Stack is empty.")
+    (switch-to-buffer (caar point-stack))
+    (goto-char (cadar point-stack))
+    (setq point-cur 0)    
+))
+
 (defun point-stack-forward ()
   "forward point from stack."
   (interactive)
