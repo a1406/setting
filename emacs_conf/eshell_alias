@@ -10,4 +10,4 @@ alias fo find-file-other-window $1
 alias d dired $1
 alias clear aweshell-clear-buffer
 alias ll ls -al
-alias j eshell/z $*
+alias j my-eshell/z $*
