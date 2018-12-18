@@ -51,7 +51,7 @@
 (define-key evil-emacs-state-map " fs" (lambda() (interactive)(my-enter-shell)(delete-other-windows)))
 (define-key evil-emacs-state-map " fy" 'spacemacs/show-and-copy-buffer-filename)
 (define-key evil-emacs-state-map " fr" 'refresh-file)
-
+(define-key evil-emacs-state-map " fe" 'spacemacs/sudo-edit)
 ;;cscope
 (define-key evil-emacs-state-map " cg" 'cscope-find-global-definition)
 (define-key evil-emacs-state-map " ct" 'cscope-find-this-text-string)
