@@ -6,6 +6,15 @@
 (setq evil-want-integration nil)
 (setq evil-want-keybinding nil)
 (setq evil-want-minibuffer nil)
+(defun evil-generate-mode-line-tag (&optional state)
+  "Generate the evil mode-line tag for STATE."
+  (let ((tag (evil-state-property state :tag t)))
+    ;; prepare mode-line: add tooltip
+    (if (stringp tag)
+        (propertize tag		    
+                    'help-echo (evil-state-property state :name)
+                    'mouse-face 'mode-line-highlight 'face '(:foreground "red"))
+      tag)))
 
 (global-set-key "\M-;" 'evil-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;NORMAL-MODE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
