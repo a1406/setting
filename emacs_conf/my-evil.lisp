@@ -81,6 +81,7 @@
 (define-key evil-emacs-state-map "o" 'other-window)
 (define-key evil-emacs-state-map "x" 'save-buffers-kill-terminal)
 (define-key evil-emacs-state-map "u" 'undo)
+(define-key evil-emacs-state-map "r" 'undo-tree-redo)
 (define-key evil-emacs-state-map "y" 'yank)
 (define-key evil-emacs-state-map "m" 'set-mark-command)
 (define-key evil-emacs-state-map "a" 'beginning-of-line)
