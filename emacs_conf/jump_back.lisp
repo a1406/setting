@@ -16,7 +16,7 @@
 (defun point-stack-push ()
   "Push current point in stack."
   (interactive)
-  (message "Location marked.")
+  (message "Location marked. %s" (+ 1 (length point-stack)))
   (setq point-cur 0)
   (setq point-stack (cons (list (current-buffer) (point)) point-stack)))
 
@@ -44,7 +44,8 @@
       (message "Stack is empty.")
     (switch-to-buffer (caar point-stack))
     (goto-char (cadar point-stack))
-    (setq point-cur 0)    
+    (setq point-cur 0)
+  (message "point-stack. %s/%s" point-cur (length point-stack))
 ))
 
 (defun point-stack-forward ()
@@ -58,7 +59,9 @@
 	(progn
 	  (setq tmp (nth 0 point-stack))
 	  (switch-to-buffer (car tmp))
-	  (goto-char (cadr tmp)))
+	  (goto-char (cadr tmp))
+	  (message "point-stack. %s/%s" point-cur (length point-stack))	  
+	  )
 	  
       (if (eq 0 point-cur)
 	  (message "Stack at top")
@@ -66,6 +69,7 @@
 	(setq tmp (nth point-cur point-stack))
 	(switch-to-buffer (car tmp))
 	(goto-char (cadr tmp))
+	(message "point-stack. %s/%s" point-cur (length point-stack))
 	)))))
 
 (defun point-stack-backward ()
@@ -79,7 +83,9 @@
 	(progn
 	  (setq tmp (nth 0 point-stack))
 	  (switch-to-buffer (car tmp))
-	  (goto-char (cadr tmp)))
+	  (goto-char (cadr tmp))
+	  (message "point-stack. %s/%s" point-cur (length point-stack))
+	  )
     
     (if (<= (length point-stack) (+ 1 point-cur))    
 	(message "Stack at bottom")
@@ -87,6 +93,7 @@
       (setq tmp (nth point-cur point-stack))
       (switch-to-buffer (car tmp))
       (goto-char (cadr tmp))
+	  (message "point-stack. %s/%s" point-cur (length point-stack))	  
   )))))
 
 (defun point-stack-delete ()
@@ -99,5 +106,6 @@
     (setq l (length point-stack))
     (if (<= l 1)
 	(point-stack-clear)
-
-      (setq point-stack (my-nth-remove point-cur point-stack))))))
+    (setq point-stack (my-nth-remove point-cur point-stack))))
+  (message "point-stack. %s/%s" point-cur (length point-stack))  
+  ))
