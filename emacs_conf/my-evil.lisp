@@ -1,0 +1,90 @@
+(evil-mode 1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;NORMAL-MODE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(define-key evil-normal-state-map "  " (lambda() (interactive)(insert-char #x20)))
+(define-key evil-normal-state-map " p" 'point-to-register)
+(define-key evil-normal-state-map " j" 'jump-to-register)
+(define-key evil-normal-state-map " x" 'counsel-M-x)
+(define-key evil-normal-state-map " b" 'ivy-switch-buffer)
+(define-key evil-normal-state-map " s" 'swiper)
+(define-key evil-normal-state-map " t" (lambda() (interactive)(counsel-ag (thing-at-point 'symbol) cscope-initial-directory (format "-E %s/%s" cscope-initial-directory cscope-index-file) nil)))
+(define-key evil-normal-state-map "t" (lambda() (interactive)(counsel-ag (thing-at-point 'symbol) cscope-initial-directory (format "-E %s/%s" cscope-initial-directory cscope-index-file) nil)))
+
+;;rtags
+(define-key evil-normal-state-map " rp" 'rtags-location-stack-back)
+(define-key evil-normal-state-map " rn" 'rtags-location-stack-forward)
+(define-key evil-normal-state-map " rq" 'rtags-find-symbol)
+(define-key evil-normal-state-map " ri" 'rtags-symbol-info)
+;;ivy
+(define-key evil-normal-state-map " ir" 'ivy-resume)
+(define-key evil-normal-state-map " ii" 'counsel-imenu)
+;;etags
+(define-key evil-normal-state-map " es" 'my-etags-find-tag)
+(define-key evil-normal-state-map " ep" 'pop-tag-mark)
+;;file
+(define-key evil-normal-state-map " ff" 'counsel-find-file)
+(define-key evil-normal-state-map " fa" (lambda() (interactive)(switch-to-buffer "*scratch*")))
+(define-key evil-normal-state-map " fm" (lambda() (interactive)(switch-to-buffer "*Messages*")))
+(define-key evil-normal-state-map " fc" (lambda() (interactive)(find-file "~/.emacs.conf/emacs.conf")))
+(define-key evil-normal-state-map " fk" (lambda() (interactive)(find-file "~/.emacs.conf/my-evil.lisp")))
+(define-key evil-normal-state-map " fo" (lambda() (interactive)(find-file "~/.emacs.conf/other.lisp")))
+(define-key evil-normal-state-map " fp" (lambda() (interactive)(find-file "~/.emacs.conf/package.conf")))
+(define-key evil-normal-state-map " fs" (lambda() (interactive)(my-enter-shell)(delete-other-windows)))
+;;cscope
+(define-key evil-normal-state-map " cg" 'cscope-find-global-definition)
+(define-key evil-normal-state-map " ct" 'cscope-find-this-text-string)
+(define-key evil-normal-state-map " cs" 'cscope-find-this-symbol)
+(define-key evil-normal-state-map " cf" 'my-key/ivy-cscope-file)
+(define-key evil-normal-state-map " ce" 'cscope-find-egrep-pattern)
+(define-key evil-normal-state-map " ci" 'cscope-set-initial-directory)
+(define-key evil-normal-state-map " cc" 'cscope-find-functions-calling-this-function)
+(define-key evil-normal-state-map " cp" 'cscope-pop-mark)
+
+;; my-jump
+(define-key evil-normal-state-map " of" 'point-stack-forward)
+(define-key evil-normal-state-map " ol" 'point-stack-last)
+(define-key evil-normal-state-map " ob" 'point-stack-backward)
+(define-key evil-normal-state-map " on" 'point-stack-forward)
+(define-key evil-normal-state-map " op" 'point-stack-backward)
+(define-key evil-normal-state-map " oc" 'point-stack-clear)
+(define-key evil-normal-state-map " os" 'point-stack-push)
+(define-key evil-normal-state-map " od" 'point-stack-delete) 
+
+
+(define-key evil-normal-state-map "c" 'comment-or-uncomment-region)
+(define-key evil-normal-state-map "n" 'next-line)
+(define-key evil-normal-state-map "p" 'previous-line)
+;;(define-key evil-normal-state-map "i" ')
+(define-key evil-normal-state-map "f" 'forward-char)
+(define-key evil-normal-state-map "b" 'backward-char)
+(define-key evil-normal-state-map "F" 'forward-word)
+(define-key evil-normal-state-map "B" 'backward-word)
+(define-key evil-normal-state-map "v" 'scroll-up-command)
+(define-key evil-normal-state-map "V" 'scroll-down-command)
+(define-key evil-normal-state-map "w" 'kill-ring-save)
+(define-key evil-normal-state-map "M-w" 'kill-region)
+(define-key evil-normal-state-map "g" 'goto-line)
+(define-key evil-normal-state-map "s" 'save-buffer)
+(define-key evil-normal-state-map "d" 'delete-char)
+(define-key evil-normal-state-map "k" 'kill-line)
+(define-key evil-normal-state-map "o" 'other-window)
+(define-key evil-normal-state-map "x" 'save-buffers-kill-terminal)
+(define-key evil-normal-state-map "u" 'undo)
+(define-key evil-normal-state-map "y" 'yank)
+(define-key evil-normal-state-map "m" 'set-mark-command)
+(define-key evil-normal-state-map "a" 'beginning-of-line)
+(define-key evil-normal-state-map "e" 'move-end-of-line)
+(define-key evil-normal-state-map "," 'beginning-of-buffer)
+(define-key evil-normal-state-map "." 'end-of-buffer)
+(define-key evil-normal-state-map "l" 'recenter-top-bottom)
+(define-key evil-normal-state-map "j" 'avy-goto-word-1)
+(define-key evil-normal-state-map "(" (lambda() (interactive)
+					(insert-char #x28)
+					(yank)
+					(insert-char #x29)))
+
+
+
+
+;;(define-key evil-normal-state-map "" ')
+;;;;;;;;;;;;;;;;;;;;;;;;INSERT-MODE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
