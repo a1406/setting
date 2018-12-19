@@ -59,7 +59,12 @@
 	(switch-to-buffer (car tmp))
 	(goto-char (cadr tmp))
 	(message "point-stack. %s/%s" point-cur (length point-stack)))
-))
+  ))
+(defun adust-point-cur ()
+  ""
+  (if (>= point-cur (length point-stack))
+      (setq point-cur 0))
+)
 (defun point-stack-current ()
   "forward current point from stack."
   (interactive)
@@ -67,11 +72,12 @@
   (if (or (null point-stack)
 	  (null point-cur))
       (message "Stack is empty.")
+    (adust-point-cur)
 
-	(setq tmp (nth point-cur point-stack))
-	(switch-to-buffer (car tmp))
-	(goto-char (cadr tmp))
-	(message "point-stack. %s/%s" point-cur (length point-stack)))
+    (setq tmp (nth point-cur point-stack))
+    (switch-to-buffer (car tmp))
+    (goto-char (cadr tmp))
+    (message "point-stack. %s/%s" point-cur (length point-stack)))
 ))
 
 (defun point-stack-forward ()
