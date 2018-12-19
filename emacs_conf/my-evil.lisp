@@ -64,7 +64,9 @@
 
 ;; my-jump
 (define-key evil-emacs-state-map " of" 'point-stack-forward)
-(define-key evil-emacs-state-map " ol" 'point-stack-last)
+(define-key evil-emacs-state-map " ol" 'point-stack-current)
+(define-key evil-emacs-state-map " o," 'point-stack-first)
+(define-key evil-emacs-state-map " o." 'point-stack-last)
 (define-key evil-emacs-state-map " ob" 'point-stack-backward)
 (define-key evil-emacs-state-map " on" 'point-stack-forward)
 (define-key evil-emacs-state-map " op" 'point-stack-backward)

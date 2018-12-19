@@ -36,8 +36,8 @@
   (setq point-cur nil)
   (setq point-stack nil))
 
-(defun point-stack-last ()
-  "forward last point from stack."
+(defun point-stack-first ()
+  "forward first point from stack."
   (interactive)
   (if (or (null point-stack)
 	  (null point-cur))
@@ -46,6 +46,32 @@
     (goto-char (cadar point-stack))
     (setq point-cur 0)
   (message "point-stack. %s/%s" point-cur (length point-stack))
+))
+(defun point-stack-last ()
+  "forward last point from stack."
+  (interactive)
+  (let (tmp)    
+  (if (or (null point-stack)
+	  (null point-cur))
+      (message "Stack is empty.")
+	(setq point-cur (- (length point-stack) 1))
+	(setq tmp (nth point-cur point-stack))
+	(switch-to-buffer (car tmp))
+	(goto-char (cadr tmp))
+	(message "point-stack. %s/%s" point-cur (length point-stack)))
+))
+(defun point-stack-current ()
+  "forward current point from stack."
+  (interactive)
+  (let (tmp)  
+  (if (or (null point-stack)
+	  (null point-cur))
+      (message "Stack is empty.")
+
+	(setq tmp (nth point-cur point-stack))
+	(switch-to-buffer (car tmp))
+	(goto-char (cadr tmp))
+	(message "point-stack. %s/%s" point-cur (length point-stack)))
 ))
 
 (defun point-stack-forward ()
