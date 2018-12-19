@@ -53,6 +53,7 @@
 (define-key evil-emacs-state-map " fy" 'spacemacs/show-and-copy-buffer-filename)
 (define-key evil-emacs-state-map " fr" 'refresh-file)
 (define-key evil-emacs-state-map " fe" 'spacemacs/sudo-edit)
+(define-key evil-emacs-state-map " fw" 'kill-current-buffer)
 ;;cscope
 (define-key evil-emacs-state-map " cg" 'cscope-find-global-definition)
 (define-key evil-emacs-state-map " ct" 'cscope-find-this-text-string)
