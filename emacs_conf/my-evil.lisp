@@ -30,7 +30,8 @@
 ;;rtags
 (define-key evil-emacs-state-map " rp" 'rtags-location-stack-back)
 (define-key evil-emacs-state-map " rn" 'rtags-location-stack-forward)
-(define-key evil-emacs-state-map " rq" 'rtags-find-symbol)
+(define-key evil-emacs-state-map " rs" 'rtags-find-symbol)
+(define-key evil-emacs-state-map " rr" 'rtags-find-references)
 (define-key evil-emacs-state-map " ri" 'rtags-symbol-info)
 (define-key evil-emacs-state-map " rc" 'rtags-ivy-rc)
 (define-key evil-emacs-state-map " rk" 'irony-server-kill)
@@ -52,6 +53,7 @@
 (define-key evil-emacs-state-map " fy" 'spacemacs/show-and-copy-buffer-filename)
 (define-key evil-emacs-state-map " fr" 'refresh-file)
 (define-key evil-emacs-state-map " fe" 'spacemacs/sudo-edit)
+(define-key evil-emacs-state-map " fw" 'kill-current-buffer)
 ;;cscope
 (define-key evil-emacs-state-map " cg" 'cscope-find-global-definition)
 (define-key evil-emacs-state-map " ct" 'cscope-find-this-text-string)
@@ -64,7 +66,9 @@
 
 ;; my-jump
 (define-key evil-emacs-state-map " of" 'point-stack-forward)
-(define-key evil-emacs-state-map " ol" 'point-stack-last)
+(define-key evil-emacs-state-map " ol" 'point-stack-current)
+(define-key evil-emacs-state-map " o," 'point-stack-first)
+(define-key evil-emacs-state-map " o." 'point-stack-last)
 (define-key evil-emacs-state-map " ob" 'point-stack-backward)
 (define-key evil-emacs-state-map " on" 'point-stack-forward)
 (define-key evil-emacs-state-map " op" 'point-stack-backward)
