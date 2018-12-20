@@ -137,3 +137,4 @@
 (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
 ;; (add-hook 'c-mode-hook 'lsp)
 ;; (add-hook 'c++-mode-hook 'lsp)
+(setq ttt (start-file-process-shell-command "my-cquery" "*my-crqery*" "/home/jack/gitroot/cquery/cmake/release/bin/cquery "))
