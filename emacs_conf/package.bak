@@ -1,0 +1,139 @@
+(when (> emacs-major-version 23)
+  (require 'package)
+  (if (not package--initialized)
+      (package-initialize))
+;;  (setq package-archives '(("gnu"   . "http://elpa.zilongshanren.com/gnu/")
+;;			   ("melpa" . "http://elpa.zilongshanren.com/melpa/")))
+  (setq package-archives '(
+			   ("melpa" . "http://mirrors.163.com/elpa/melpa/")
+			   ("gnu"   . "http://mirrors.163.com/elpa/gnu/")
+			   ))
+  ;;	(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")))
+  )
+;;        (add-to-list 'package-archives 
+;;                     '("melpa" . "http://melpa.milkbox.net/packages/")
+;;                     'APPEND))
+
+
+;;; set up package syncing to allow for syncing between different machines
+
+;; list of packages to sync
+(setq pfl-packages
+      '(
+	company-anaconda
+	anaconda-mode
+	multiple-cursors
+	browse-kill-ring
+	yasnippet-snippets	
+	;;yasnippet
+	auto-yasnippet
+	;;bookmark+
+	xcscope
+	popup
+	;; rtags
+	company
+	flycheck
+	;; flycheck-irony	
+	company-c-headers
+	ace-jump-mode
+	;; ace-jump-helm-line
+	symbol-overlay
+	markdown-mode
+	w3m
+	web-mode
+	god-mode
+	hydra
+	;; helm-company
+	;; helm-cscope
+	;; helm-rtags
+	company-tern	
+	;; company-irony
+	company-go
+	;; company-irony-c-headers
+	;; irony-eldoc
+	;; irony
+	counsel
+	js2-mode
+	ivy
+	wgrep
+	avy
+	smex
+	swiper
+	ivy-hydra
+	;; dumb-jump
+	;; elpy
+	;; ace-isearch
+	;; ace-mc
+	;; auto-complete-clang
+	;; color-theme
+	;; hideif
+	;; company-jedi
+	expand-region
+	counsel-etags
+	counsel-gtags	
+	ace-window
+	;; bash-completion
+	itail
+	lua-mode
+	hc-zenburn-theme
+	spacemacs-theme
+	;;monokai-theme
+	clang-format
+;;	eshell-autojump
+	eshell-z
+	evil
+	cquery
+	lsp-mode
+	company-lsp
+	ivy-xref	
+	))
+
+;; refresh package list if it is not already available
+(when (not package-archive-contents) (package-refresh-contents))
+
+;; install packages from the list that are not yet installed
+(dolist (pkg pfl-packages)
+  (if (not (package-installed-p pkg))
+      (if (assoc pkg package-archive-contents)
+	  (package-install pkg)
+	(progn   (package-refresh-contents)
+		 (package-install pkg)))))
+
+(defun reinstall-all-package ()
+  (interactive)
+  (package-refresh-contents)
+  (dolist (pkg pfl-packages)
+  (when (assoc pkg package-archive-contents)
+    (package-install pkg)))
+  )
+
+(setq my_use-anaconda nil)
+(setq my_use-rtags nil)
+(setq my_use-irony nil)
+
+;; (let ((have_rc (shell-command "which rc")))
+;;   (if (eq have_rc 0)
+;;       (progn
+;;         (setq my_use-rtags t)
+;;         (setq my_use-irony t))))
+    
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'cquery)
+(setq cquery-executable "/home/jack/gitroot/cquery/cmake/release/bin/cquery")
+
+(with-eval-after-load 'projectile
+  (setq projectile-project-root-files-top-down-recurring
+        (append '("compile_commands.json"
+                  ".cquery")
+                projectile-project-root-files-top-down-recurring)))
+      
+
+(require 'lsp)
+;; in case you are using client which is available as part of lsp refer to the
+;; table bellow for the clients that are distributed as part of lsp-mode.el
+(require 'lsp-clients)
+(require 'ivy-xref)
+(setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
+;; (add-hook 'c-mode-hook 'lsp)
+;; (add-hook 'c++-mode-hook 'lsp)
