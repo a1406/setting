@@ -27,6 +27,15 @@
 (define-key evil-emacs-state-map " t" (lambda() (interactive)(counsel-ag (thing-at-point 'symbol) cscope-initial-directory (format "-E %s/%s" cscope-initial-directory cscope-index-file) nil)))
 (define-key evil-emacs-state-map "t" (lambda() (interactive)(counsel-ag (thing-at-point 'symbol) cscope-initial-directory (format "-E %s/%s" cscope-initial-directory cscope-index-file) nil)))
 
+;;lsp
+(define-key evil-emacs-state-map " lp" 'my-xref-pre)
+(define-key evil-emacs-state-map " ln" 'my-xref-next)
+(define-key evil-emacs-state-map " ls" 'xref-find-apropos)
+;;(define-key evil-emacs-state-map " lr" 'rtags-find-references)
+(define-key evil-emacs-state-map " li" 'lsp-describe-thing-at-point)
+;;(define-key evil-emacs-state-map " lc" 'rtags-ivy-rc)
+(define-key evil-emacs-state-map " lk" 'lsp-restart-workspace)
+
 ;;rtags
 (define-key evil-emacs-state-map " rp" 'rtags-location-stack-back)
 (define-key evil-emacs-state-map " rn" 'rtags-location-stack-forward)
@@ -116,6 +125,6 @@
 
 (define-key evil-emacs-state-map "i" 'evil-mode)
 (define-key evil-emacs-state-map "I" 'evil-mode)
-(define-key evil-emacs-state-map "q" 'evil-mode)
+;;(define-key evil-emacs-state-map "q" 'evil-mode)
 
 ;;(define-key evil-emacs-state-map "" ')
