@@ -13,9 +13,16 @@
                 (lsp))))
 
 
+(dolist (hook '(typescript-mode-hook js-mode-hook js2-mode-hook rjsx-mode-hook))
+  (add-hook hook
+            #'(lambda ()
+                (lsp))))
+
 (push 'company-lsp company-backends)
 (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
 (setq xref-prompt-for-identifier '(not xref-find-references xref-find-definitions xref-find-definitions-other-window xref-find-definitions-other-frame))
 ;;(add-hook 'lsp-mode-hook 'lsp-ui-mode)
 ;;(global-set-key (kbd "M-.") (function rtags-find-symbol-at-point))
 (global-set-key (kbd "M-,") (function xref-find-references))
+
+
