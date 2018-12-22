@@ -22,6 +22,7 @@
 (define-key evil-emacs-state-map " p" 'point-to-register)
 (define-key evil-emacs-state-map " j" 'jump-to-register)
 (define-key evil-emacs-state-map " x" 'counsel-M-x)
+(define-key evil-emacs-state-map "z" 'repeat)
 (define-key evil-emacs-state-map " b" 'ivy-switch-buffer)
 (define-key evil-emacs-state-map " s" 'swiper)
 (define-key evil-emacs-state-map " t" (lambda() (interactive)(counsel-ag (thing-at-point 'symbol) cscope-initial-directory (format "-E %s/%s" cscope-initial-directory cscope-index-file) nil)))
