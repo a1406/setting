@@ -4,6 +4,10 @@
 
 ;;(setq cquery-executable "/usr/local/bin/cquery")
 ;;(setq ccls-executable "/usr/local/bin/ccls")
+(setq lsp-prefer-flymake nil)
+
+(require 'flycheck-clangcheck)
+(setq flycheck-clangcheck-analyze t)
 
 (dolist (hook '(c-mode-hook c++-mode-hook))
   (add-hook hook
@@ -11,7 +15,8 @@
                 ;;              (require 'cquery)
                 (require 'ccls)
                 (lsp)
-		(flymake-mode-off)
+		(flycheck-select-checker 'c/c++-clangcheck)
+;;		(flymake-mode-off)
 		)))
 
 
@@ -24,7 +29,7 @@
   (add-hook hook
             #'(lambda ()
                 (lsp)
-		(flymake-mode-off)
+;;		(flymake-mode-off)
 		)))
 
 (push 'company-lsp company-backends)
