@@ -10,7 +10,9 @@
             #'(lambda ()
                 ;;              (require 'cquery)
                 (require 'ccls)
-                (lsp))))
+                (lsp)
+		(flymake-mode-off)
+		)))
 
 
 (dolist (hook '(typescript-mode-hook js-mode-hook js2-mode-hook rjsx-mode-hook))
