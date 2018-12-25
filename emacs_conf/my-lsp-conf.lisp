@@ -6,6 +6,7 @@
 ;;(setq cquery-executable "/usr/local/bin/cquery")
 ;;(setq ccls-executable "/usr/local/bin/ccls")
 (setq lsp-prefer-flymake nil)
+(push "cscope.files" projectile-project-root-files)
 
 (require 'flycheck-clangcheck)
 (setq flycheck-clangcheck-analyze t)
