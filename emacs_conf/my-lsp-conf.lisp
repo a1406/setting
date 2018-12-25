@@ -39,4 +39,4 @@
 ;;(global-set-key (kbd "M-.") (function rtags-find-symbol-at-point))
 (global-set-key (kbd "M-,") (function xref-find-references))
 
-
+(setq lsp-auto-guess-root nil)
