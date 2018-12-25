@@ -28,7 +28,7 @@ AG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
          (extra-ag-args (if args-end
                             (substring-no-properties extra-ag-args 0 args-end)
                           extra-ag-args)))
-    (setq counsel-ag-command (format "cat %s/%s | xargs %s" cscope-initial-directory cscope-index-file counsel-ag-command))
+    (setq counsel-ag-command (format "cat %s/%s | xargs %s" (my-cscope-guess-root-directory) cscope-index-file counsel-ag-command))
     (setq counsel-ag-command (format counsel-ag-command
                                       (concat extra-ag-args
                                               " -- "

@@ -1,6 +1,7 @@
 (require 'lsp)
 (require 'lsp-clients)
 (require 'ivy-xref)
+(require 'projectile)
 
 ;;(setq cquery-executable "/usr/local/bin/cquery")
 ;;(setq ccls-executable "/usr/local/bin/ccls")

@@ -2,7 +2,7 @@
 (defun game-gdb ()
   (interactive)
   (let* (
-	 (init_dir (file-name-as-directory cscope-initial-directory))
+	 (init_dir (file-name-as-directory (my-cscope-guess-root-directory)))
 	 (pid_path (format "%sgame_srv/pid.txt" init_dir))
 	 (srv_pid
     (with-temp-buffer
@@ -21,7 +21,7 @@
 (defun conn-gdb ()
   (interactive)
   (let* (
-	 (init_dir (file-name-as-directory cscope-initial-directory))
+	 (init_dir (file-name-as-directory (my-cscope-guess-root-directory)))
 	 (pid_path (format "%sconn_srv/pid.txt" init_dir))
 	 (srv_pid
     (with-temp-buffer

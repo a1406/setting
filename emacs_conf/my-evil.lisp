@@ -24,8 +24,8 @@
 (define-key evil-emacs-state-map " x" 'save-buffers-kill-terminal)
 (define-key evil-emacs-state-map " b" 'ivy-switch-buffer)
 (define-key evil-emacs-state-map " s" 'swiper)
-(define-key evil-emacs-state-map " t" (lambda() (interactive)(counsel-ag (thing-at-point 'symbol) cscope-initial-directory (format "-E %s/%s" cscope-initial-directory cscope-index-file) nil)))
-(define-key evil-emacs-state-map "t" (lambda() (interactive)(counsel-ag (thing-at-point 'symbol) cscope-initial-directory (format "-E %s/%s" cscope-initial-directory cscope-index-file) nil)))
+(define-key evil-emacs-state-map " t" (lambda() (interactive)(counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) (format "-E %s/%s" (my-cscope-guess-root-directory) cscope-index-file) nil)))
+(define-key evil-emacs-state-map "t" (lambda() (interactive)(counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) (format "-E %s/%s" (my-cscope-guess-root-directory) cscope-index-file) nil)))
 
 ;;lsp
 (define-key evil-emacs-state-map " lp" 'my-xref-pre)
