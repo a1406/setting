@@ -30,6 +30,8 @@
 ;;lsp
 (define-key evil-emacs-state-map " lp" 'my-xref-pre)
 (define-key evil-emacs-state-map " ln" 'my-xref-next)
+(define-key evil-emacs-state-map " ll" 'my-xref-cur)
+(define-key evil-emacs-state-map " lf" 'my-xref-first)
 (define-key evil-emacs-state-map " ls" 'xref-find-apropos)
 ;;(define-key evil-emacs-state-map " lr" 'rtags-find-references)
 (define-key evil-emacs-state-map " li" 'lsp-describe-thing-at-point)
