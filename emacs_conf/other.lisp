@@ -94,7 +94,8 @@
 (setq ivy-completing-sort t)
 (setq ivy-completing-in-region-sort nil)
 ;;为了eshell里面排序，比如tail -f game_srv/logs/game_srv.0
-(setq ivy-sort-functions-alist '((read-file-name-internal . ivy-sort-file-function-default) (internal-complete-buffer . ivy-sort-file-function-default) (ivy-completion-in-region . ivy-sort-file-function-default) (counsel-git-grep-function) (Man-goto-section) (org-refile) (t . ivy-string<) (ivy-completion-in-region . ivy-sort-file-function-default)))
+;;(setq ivy-sort-functions-alist '((read-file-name-internal . ivy-sort-file-function-default) (internal-complete-buffer . ivy-sort-file-function-default) (ivy-completion-in-region . ivy-sort-file-function-default) (counsel-git-grep-function) (Man-goto-section) (org-refile) (t . ivy-string<) (ivy-completion-in-region . ivy-sort-file-function-default)))
+(setf (cdr (assoc 'ivy-completion-in-region ivy-sort-functions-alist)) 'ivy-sort-file-function-default)
 
 ;;为了在ivy-read那里去掉sort, lsp 选择project的时候排序很讨厌
 (defun ivy-completing-read (prompt collection
