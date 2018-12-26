@@ -14,17 +14,21 @@
 (dolist (hook '(c-mode-hook c++-mode-hook))
   (add-hook hook
             #'(lambda ()
+		;;		(message "cur major mode = %s" major-mode)
+		(if (eq major-mode 'php-mode)
+		    nil
                 ;;              (require 'cquery)
                 (require 'ccls)
                 (lsp)
 		(flycheck-select-checker 'c/c++-clangcheck)
 ;;		(flymake-mode-off)
-		)))
+		))))
 
 
 (dolist (hook '(typescript-mode-hook js-mode-hook js2-mode-hook rjsx-mode-hook))
   (add-hook hook
             #'(lambda ()
+		(define-key js-mode-map [(meta ?.)] #'xref-find-definitions)
                 (lsp))))
 
 (dolist (hook '(python-mode-hook))
