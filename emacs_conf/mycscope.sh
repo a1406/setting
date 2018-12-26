@@ -6,4 +6,4 @@ find . -type f -name "*.lua" | grep -v CMakeFiles >> cscope.files
 find . -type f -name "*.php" | grep -v CMakeFiles >> cscope.files
 #dos2unix `cat cscope.files` >/dev/null 2>/dev/null
 cscope -bq
-#~/.emacs.conf/create_tags_file.sh < cscope.files
+~/.emacs.conf/create_cscopefile_tags.sh
