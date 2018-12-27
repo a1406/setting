@@ -17,7 +17,7 @@
 		;;		(message "cur major mode = %s" major-mode)
 		(if (eq major-mode 'php-mode)
 		    nil
-                ;;              (require 'cquery)
+                  ;;              (require 'cquery)
                   (require 'ccls)
 
 		  ;;eglot config
@@ -29,7 +29,8 @@
                 (lsp)
 		(flycheck-select-checker 'c/c++-clangcheck)
 		(flymake-mode-off)
-		(setq-local company-backends (add-to-list 'company-backends 'company-lsp))
+		(setq-local company-backends (add-to-list 'company-backends 'company-c-headers t))		
+		(setq-local company-backends (add-to-list 'company-backends 'company-files t))
 		))))
 
 (dolist (hook '(typescript-mode-hook js-mode-hook js2-mode-hook rjsx-mode-hook))
