@@ -37,13 +37,17 @@
 (dolist (hook '(typescript-mode-hook js-mode-hook js2-mode-hook rjsx-mode-hook))
   (add-hook hook
             #'(lambda ()
-		(define-key js-mode-map [(meta ?,)] #'xref-find-references)		
-		(define-key js-mode-map [(meta ?.)] #'xref-find-definitions)
+		(if (boundp 'js-mode-map)
+		    (progn
+		      (define-key js-mode-map [(meta ?,)] #'xref-find-references)		
+		      (define-key js-mode-map [(meta ?.)] #'xref-find-definitions)))
+		(setq-local ivy-completing-sort nil)
                 (lsp))))
 
 (dolist (hook '(python-mode-hook))
   (add-hook hook
             #'(lambda ()
+		(setq-local ivy-completing-sort nil)		
                 (lsp)
 ;;		(flymake-mode-off)
 		)))
