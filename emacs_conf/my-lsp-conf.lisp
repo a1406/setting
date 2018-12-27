@@ -26,6 +26,7 @@
 		  ;; (setq-local company-backends (add-to-list 'company-backends 'company-capf))
 
 		  ;;lsp config
+		  (setq-local ivy-completing-sort nil)
                 (lsp)
 		(flycheck-select-checker 'c/c++-clangcheck)
 		(flymake-mode-off)
