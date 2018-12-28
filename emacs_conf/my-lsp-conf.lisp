@@ -32,6 +32,9 @@
 		(flymake-mode-off)
 		(setq-local company-backends (add-to-list 'company-backends 'company-c-headers t))		
 		(setq-local company-backends (add-to-list 'company-backends 'company-files t))
+		;;头文件关闭flycheck，总是报错
+		(if (string-match "\\.h$" buffer-file-name)
+		    (flycheck-mode-off))
 		))))
 
 (dolist (hook '(typescript-mode-hook js-mode-hook js2-mode-hook rjsx-mode-hook))
@@ -61,7 +64,7 @@
 
 (setq lsp-auto-guess-root nil)
 
-
+;; 使用projectile来代替project选择项目目录
 (defun projectile-project-find-function (dir)
   (let* ((root (projectile-project-root dir)))
     (and root (cons 'transient root))))
