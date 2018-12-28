@@ -27,6 +27,7 @@
 
 		  ;;lsp config
 		  (setq-local ivy-completing-sort nil)
+		  (setq-local ivy-sort-functions-alist (append (list (list 'ivy-done)) ivy-sort-functions-alist))
                 (lsp)
 		(flycheck-select-checker 'c/c++-clangcheck)
 		(flymake-mode-off)

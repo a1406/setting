@@ -89,79 +89,78 @@
   )
 
 
-
-
-(setq ivy-completing-sort t)
-(setq ivy-completing-in-region-sort nil)
 ;;为了eshell里面排序，比如tail -f game_srv/logs/game_srv.0
 ;;(setq ivy-sort-functions-alist '((read-file-name-internal . ivy-sort-file-function-default) (internal-complete-buffer . ivy-sort-file-function-default) (ivy-completion-in-region . ivy-sort-file-function-default) (counsel-git-grep-function) (Man-goto-section) (org-refile) (t . ivy-string<) (ivy-completion-in-region . ivy-sort-file-function-default)))
 (setf (cdr (assoc 'ivy-completion-in-region ivy-sort-functions-alist)) 'ivy-sort-file-function-default)
 
+;; 通过在c++mode里面添加了ivy-done到ivy-sort-functions-alist结局
+;; (setq ivy-completing-sort t)
+;; (setq ivy-completing-in-region-sort nil)
 ;;为了在ivy-read那里去掉sort, lsp 选择project的时候排序很讨厌
-(defun ivy-completing-read (prompt collection
-                            &optional predicate require-match initial-input
-                              history def inherit-input-method)
-  "Read a string in the minibuffer, with completion.
+;; (defun ivy-completing-read1 (prompt collection
+;;                             &optional predicate require-match initial-input
+;;                               history def inherit-input-method)
+;;   "Read a string in the minibuffer, with completion.
 
-This interface conforms to `completing-read' and can be used for
-`completing-read-function'.
+;; This interface conforms to `completing-read' and can be used for
+;; `completing-read-function'.
 
-PROMPT is a string that normally ends in a colon and a space.
-COLLECTION is either a list of strings, an alist, an obarray, or a hash table.
-PREDICATE limits completion to a subset of COLLECTION.
-REQUIRE-MATCH is a boolean value.  See `completing-read'.
-INITIAL-INPUT is a string inserted into the minibuffer initially.
-HISTORY is a list of previously selected inputs.
-DEF is the default value.
-INHERIT-INPUT-METHOD is currently ignored."
-  (let ((handler
-         (and (< ivy-completing-read-ignore-handlers-depth (minibuffer-depth))
-              (assq this-command ivy-completing-read-handlers-alist))))
-    (if handler
-        (let ((completion-in-region-function #'completion--in-region)
-              (ivy-completing-read-ignore-handlers-depth (1+ (minibuffer-depth))))
-          (funcall (cdr handler)
-                   prompt collection
-                   predicate require-match
-                   initial-input history
-                   def inherit-input-method))
-      ;; See the doc of `completing-read'.
-      (when (consp history)
-        (when (numberp (cdr history))
-          (setq initial-input (nth (1- (cdr history))
-                                   (symbol-value (car history)))))
-        (setq history (car history)))
-      (when (consp def)
-        (setq def (car def)))
-      (let ((str (ivy-read
-                  prompt collection
-                  :predicate predicate
-                  :require-match (and collection require-match)
-                  :initial-input (cond ((consp initial-input)
-                                        (car initial-input))
-                                       ((and (stringp initial-input)
-                                             (not (eq collection #'read-file-name-internal))
-                                             (string-match-p "\\+" initial-input))
-                                        (replace-regexp-in-string
-                                         "\\+" "\\\\+" initial-input))
-                                       (t
-                                        initial-input))
-                  :preselect def
-                  :def def
-                  :history history
-                  :keymap nil
-                  :sort ivy-completing-sort
-                  :dynamic-collection ivy-completing-read-dynamic-collection
-                  :caller (if (and collection (symbolp collection))
-                              collection
-                            this-command))))
-        (if (string= str "")
-            ;; For `completing-read' compat, return the first element of
-            ;; DEFAULT, if it is a list; "", if DEFAULT is nil; or DEFAULT.
-            (or def "")
-          str)))))
+;; PROMPT is a string that normally ends in a colon and a space.
+;; COLLECTION is either a list of strings, an alist, an obarray, or a hash table.
+;; PREDICATE limits completion to a subset of COLLECTION.
+;; REQUIRE-MATCH is a boolean value.  See `completing-read'.
+;; INITIAL-INPUT is a string inserted into the minibuffer initially.
+;; HISTORY is a list of previously selected inputs.
+;; DEF is the default value.
+;; INHERIT-INPUT-METHOD is currently ignored."
+;;   (let ((handler
+;;          (and (< ivy-completing-read-ignore-handlers-depth (minibuffer-depth))
+;;               (assq this-command ivy-completing-read-handlers-alist))))
+;;     (if handler
+;;         (let ((completion-in-region-function #'completion--in-region)
+;;               (ivy-completing-read-ignore-handlers-depth (1+ (minibuffer-depth))))
+;;           (funcall (cdr handler)
+;;                    prompt collection
+;;                    predicate require-match
+;;                    initial-input history
+;;                    def inherit-input-method))
+;;       ;; See the doc of `completing-read'.
+;;       (when (consp history)
+;;         (when (numberp (cdr history))
+;;           (setq initial-input (nth (1- (cdr history))
+;;                                    (symbol-value (car history)))))
+;;         (setq history (car history)))
+;;       (when (consp def)
+;;         (setq def (car def)))
+;;       (let ((str (ivy-read
+;;                   prompt collection
+;;                   :predicate predicate
+;;                   :require-match (and collection require-match)
+;;                   :initial-input (cond ((consp initial-input)
+;;                                         (car initial-input))
+;;                                        ((and (stringp initial-input)
+;;                                              (not (eq collection #'read-file-name-internal))
+;;                                              (string-match-p "\\+" initial-input))
+;;                                         (replace-regexp-in-string
+;;                                          "\\+" "\\\\+" initial-input))
+;;                                        (t
+;;                                         initial-input))
+;;                   :preselect def
+;;                   :def def
+;;                   :history history
+;;                   :keymap nil
+;;                   :sort ivy-completing-sort
+;;                   :dynamic-collection ivy-completing-read-dynamic-collection
+;;                   :caller (if (and collection (symbolp collection))
+;;                               collection
+;;                             this-command))))
+;;         (if (string= str "")
+;;             ;; For `completing-read' compat, return the first element of
+;;             ;; DEFAULT, if it is a list; "", if DEFAULT is nil; or DEFAULT.
+;;             (or def "")
+;;           str)))))
 
-;; ;;为了在ivy-read那里设置个sort
+;; ;;为了在ivy-read那里设置个sort, eshell那里排序
 ;; (defun ivy-completion-in-region1 (start end collection &optional predicate)
 ;;   "An Ivy function suitable for `completion-in-region-function'.
 ;; The function completes the text between START and END using COLLECTION.
