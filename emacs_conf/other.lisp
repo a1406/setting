@@ -467,3 +467,32 @@ Value is t if a query was formerly required."
     (message "xref %s/%s" xref--cur-pos cur-len)    
   ))
 
+(defun my-find-cscope-other-file ()
+  ""
+  (interactive)
+  (let* ((cs-f (concat (my-cscope-guess-root-directory) "/cscope.files"))
+	 (cs-line (read-lines cs-f))
+	 (cs-len (length cs-line))
+	 (foo-name)
+	 (fname (file-name-nondirectory (buffer-file-name)))
+	 (base1)
+	 (base2)
+	 )
+    (string-match "[0-9a-zA-Z_]+" fname)
+    (setq base1
+	  (match-string 0 fname))
+    
+    (dolist (foo cs-line)
+      (setq foo-name (file-name-nondirectory foo))
+      (if (string-equal foo-name fname)
+	  nil
+	(string-match "[0-9a-zA-Z_]+" foo-name)
+	(setq base2
+	  (match-string 0 foo-name))
+	(if (string-equal base1 base2)
+	    (progn
+	      ;; (message "find file %s" foo)
+	      (find-file (concat (my-cscope-guess-root-directory) foo))
+	      (return nil)))
+      ))  
+    ))

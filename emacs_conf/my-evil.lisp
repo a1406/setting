@@ -74,6 +74,7 @@
 (define-key evil-emacs-state-map " ct" 'cscope-find-this-text-string)
 (define-key evil-emacs-state-map " cs" 'cscope-find-this-symbol)
 (define-key evil-emacs-state-map " cf" 'my-key/ivy-cscope-file)
+(define-key evil-emacs-state-map " co" 'my-find-cscope-other-file)
 (define-key evil-emacs-state-map " ce" 'cscope-find-egrep-pattern)
 (define-key evil-emacs-state-map " ci" 'cscope-set-initial-directory)
 (define-key evil-emacs-state-map " cc" 'cscope-find-functions-calling-this-function)
