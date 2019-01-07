@@ -31,10 +31,13 @@
                 (lsp)
 		;; (flycheck-select-checker 'c/c++-clangcheck)
 		(flymake-mode-off)
-		(setq-local company-backends (add-to-list 'company-backends 'company-c-headers t))		
+		(setq-local company-backends (add-to-list 'company-backends 'company-c-headers t))
 		(setq-local company-backends (add-to-list 'company-backends 'company-files t))
+
+		(setq-local company-c-headers-path-user (my-cscope-include-directory))
+		
 		;;头文件关闭flycheck，总是报错
-		(if (string-match "\\.h+$" buffer-file-name)
+		(if (string-match "\\.h" buffer-file-name)
 		    (flycheck-mode-off))
 		))))
 

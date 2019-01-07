@@ -496,3 +496,52 @@ Value is t if a query was formerly required."
 	      (return nil)))
       ))  
     ))
+
+(defun my-cscope-guess-root-directory ()
+  "Display the name of the directory containing the cscope database."
+  (interactive)
+  (let (info directory)
+    (setq info (cscope-find-info nil))
+    (if (= (length info) 1)
+	  (setq directory (car (car info)))
+"")))
+
+
+(defun my-cscope-include-directory (&optional dir)
+  ""
+  (interactive)
+  (let* ((root)
+	 (all-file)
+	(result '("."))
+	)
+    (if dir
+	(setq root dir)
+      (setq root  (my-cscope-guess-root-directory)))
+
+    (setq all-file (file-name-all-completions "" root))
+    
+    (dolist (file all-file)
+      (unless ;;(member file '("./" "../"))
+	  (or (string-match "^\\..*" file)
+	      (string-match "CMake.*" file))
+	(when (directory-name-p file)
+	  (let ((t1 (format "%s/%s" root file))
+		(t2))
+	    (add-to-list 'result (format "%s" t1))
+	  (unless (file-symlink-p t1)
+	      (setq t2 (my-cscope-include-directory t1))
+;;	       (setq result (nconc result tmp-result))
+	    ) ;;unless
+	  ));;when
+	);;unless
+      );;dolist
+    result
+    ))
+
+;; (defun ttt()
+;;   ""
+;;   (interactive)
+;;   (let ((tmp))
+;;     (setq tmp (my-cscope-include-directory))
+;;     (message "ttt result = [%s]" tmp)
+;;     ))
