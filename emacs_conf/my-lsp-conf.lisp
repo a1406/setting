@@ -19,7 +19,12 @@
 		    nil
                   ;;              (require 'cquery)
                   (require 'ccls)
+                  (require 'lsp-ui)		  
 
+		  (setq lsp-ui-doc-enable nil)
+		  (setq lsp-ui-peek-enable nil)
+		  (setq lsp-ui-sideline-enable nil)
+		  
 		  ;;eglot config
 		  ;; (eglot-ensure)
 		  ;; (company-mode)
@@ -29,7 +34,7 @@
 		  (setq-local ivy-completing-sort nil)
 		  (setq-local ivy-sort-functions-alist (append (list (list 'ivy-done)) ivy-sort-functions-alist))
                 (lsp)
-		;; (flycheck-select-checker 'c/c++-clangcheck)
+		(flycheck-select-checker 'lsp-ui)
 		(flymake-mode-off)
 		(setq-local company-backends (add-to-list 'company-backends 'company-c-headers t))
 		(setq-local company-backends (add-to-list 'company-backends 'company-files t))
@@ -37,8 +42,8 @@
 		(setq-local company-c-headers-path-user (my-cscope-include-directory))
 		
 		;;头文件关闭flycheck，总是报错
-		(if (string-match "\\.h" buffer-file-name)
-		    (flycheck-mode-off))
+		;; (if (string-match "\\.h" buffer-file-name)
+		;;     (flycheck-mode-off))
 		))))
 
 (dolist (hook '(typescript-mode-hook js-mode-hook js2-mode-hook rjsx-mode-hook))
