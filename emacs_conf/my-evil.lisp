@@ -140,3 +140,33 @@
 ;;(define-key evil-emacs-state-map "q" 'evil-mode)
 
 ;;(define-key evil-emacs-state-map "" ')
+
+
+;;使用ha  hb  hA  hB插入单个字符
+(let ((ii 97)
+      (ch)
+      )
+  (while (< ii (+ 97 26))
+    (setq ch (format "(define-key evil-emacs-state-map \"h%s\" (lambda() (interactive)(insert-char %s)))"
+		     (char-to-string ii) ii))
+    (with-temp-buffer    (insert ch)    (eval-buffer))
+    (setq ii (+ ii 1))
+    )
+  (setq ii 65)
+  (while (< ii (+ 65 26))
+    (setq ch (format "(define-key evil-emacs-state-map \"h%s\" (lambda() (interactive)(insert-char %s)))"
+		     (char-to-string ii) ii))
+    (with-temp-buffer    (insert ch)    (eval-buffer))
+    (setq ii (+ ii 1))
+    )
+
+  (setq ii 44)
+    (setq ch (format "(define-key evil-emacs-state-map \"h%s\" (lambda() (interactive)(insert-char %s)))"
+		     (char-to-string ii) ii))
+    (with-temp-buffer    (insert ch)    (eval-buffer))
+
+  (setq ii 46)
+    (setq ch (format "(define-key evil-emacs-state-map \"h%s\" (lambda() (interactive)(insert-char %s)))"
+		     (char-to-string ii) ii))
+    (with-temp-buffer    (insert ch)    (eval-buffer))
+  )
