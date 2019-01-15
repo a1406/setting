@@ -1,5 +1,6 @@
 (require 'lsp)
 (require 'lsp-clients)
+(require 'lsp-ui)
 (require 'ivy-xref)
 (require 'projectile)
 
@@ -11,6 +12,10 @@
 (require 'flycheck-clangcheck)
 (setq flycheck-clangcheck-analyze t)
 
+(setq lsp-ui-doc-enable nil)
+(setq lsp-ui-peek-enable nil)
+(setq lsp-ui-sideline-enable nil)
+
 (dolist (hook '(c-mode-hook c++-mode-hook))
   (add-hook hook
             #'(lambda ()
@@ -19,12 +24,7 @@
 		    nil
                   ;;              (require 'cquery)
                   (require 'ccls)
-                  (require 'lsp-ui)		  
 
-		  (setq lsp-ui-doc-enable nil)
-		  (setq lsp-ui-peek-enable nil)
-		  (setq lsp-ui-sideline-enable nil)
-		  
 		  ;;eglot config
 		  ;; (eglot-ensure)
 		  ;; (company-mode)
