@@ -467,6 +467,29 @@ Value is t if a query was formerly required."
     (message "xref %s/%s" xref--cur-pos cur-len)    
   ))
 
+(defun my-xref-last ()
+  (interactive)
+  (let ((ring xref--marker-ring)
+	(cur-len (ring-length xref--marker-ring)))
+    (when (ring-empty-p ring)
+      (user-error "Marker stack is empty"))
+    (setq xref--cur-pos (- cur-len 1))
+    
+    (let ((marker (ring-ref ring xref--cur-pos)))
+      (switch-to-buffer (or (marker-buffer marker)
+                            (user-error "The marked buffer has been deleted")))
+      (goto-char (marker-position marker)))
+    (message "xref %s/%s" xref--cur-pos cur-len)
+  ))
+
+(defun my-xref-clear ()
+  ""
+  (interactive)
+  (while (not (ring-empty-p xref--marker-ring))
+    (ring-remove xref--marker-ring)
+    )
+  )
+
 (defun my-find-cscope-other-file ()
   ""
   (interactive)
@@ -571,6 +594,16 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
   (if my_use-rg
 	(counsel-rg (thing-at-point 'symbol) (my-cscope-guess-root-directory))
     (counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) (format "-E %s/%s" (my-cscope-guess-root-directory) cscope-index-file) nil)))
+
+(defun my-counsel-proto (&optional initial-input initial-directory extra-rg-args rg-prompt)
+  "Grep for a string in the current directory using rg.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+EXTRA-RG-ARGS string, if non-nil, is appended to `counsel-rg-base-command'.
+RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
+  (interactive)
+  (counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) "--proto" nil)  
+  )
 
 (if my_use-rg
 (defun counsel-ag-function (string)
