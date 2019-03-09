@@ -104,7 +104,7 @@
 	(message "point-stack. %s/%s" point-cur (length point-stack))
 	)))))
 
-(defun point-stack-foward ()
+(defun point-stack-forward ()
   "backward point from stack."
   (interactive)
   (let (tmp)
