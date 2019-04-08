@@ -584,6 +584,12 @@ Value is t if a query was formerly required."
 ;; 	)
 ;;     (counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) (format "-E %s/%s" (my-cscope-guess-root-directory) cscope-index-file) nil)))
 
+(if my_use-rg
+(setq counsel-grep-base-command
+      "rg -i -M 120 --no-heading --line-number --color never %s %s")
+(setq counsel-grep-base-command
+      "ag -i --noheading --numbers --nocolor %s %s"))
+
 (defun my-counsel-rag (&optional initial-input initial-directory extra-rg-args rg-prompt)
   "Grep for a string in the current directory using rg.
 INITIAL-INPUT can be given as the initial minibuffer input.
