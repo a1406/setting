@@ -13,6 +13,34 @@
      seq))
   )
 
+(defun point-stack-show ()
+  "show current point in stack."
+  (interactive)
+(let* ((cur 0)
+	 (tmp)
+	 (t_str ""))
+  (while (< cur (length point-stack))
+    (setq tmp (nth cur point-stack))
+    (setq cur (+ cur 1))
+    (if (buffer-live-p (car tmp))
+    (save-excursion
+    (with-current-buffer (car tmp)
+      (goto-char (cadr tmp))
+      (if (eq cur (+ 1 point-cur))
+	  (setq t_str (concat t_str (format "*%s: %s\n" cur
+		    (buffer-substring-no-properties (line-beginning-position) (line-end-position) ))))
+	(setq t_str (concat t_str (format " %s: %s\n" cur
+		    (buffer-substring-no-properties (line-beginning-position) (line-end-position) )))))
+      ))
+    ;;else
+      (if (eq cur (+ 1 point-cur))    
+	  (setq t_str (concat t_str (format "*%s: deleted\n" cur)))
+	  (setq t_str (concat t_str (format " %s: deleted\n" cur))))	
+    );;if
+    );;while
+  (message "%s" t_str)
+))
+
 (defun point-stack-push ()
   "Push current point in stack."
   (interactive)
@@ -42,9 +70,9 @@
   (if (or (null point-stack)
 	  (null point-cur))
       (message "Stack is empty.")
+    (setq point-cur 0)    
     (switch-to-buffer (caar point-stack))
     (goto-char (cadar point-stack))
-    (setq point-cur 0)
   (message "point-stack. %s/%s" point-cur (length point-stack))
 ))
 (defun point-stack-last ()

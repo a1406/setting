@@ -84,6 +84,7 @@
 (define-key evil-emacs-state-map " cp" 'cscope-pop-mark)
 
 ;; my-jump
+(define-key evil-emacs-state-map " oo" 'point-stack-show)
 (define-key evil-emacs-state-map " of" 'point-stack-forward)
 (define-key evil-emacs-state-map " ol" 'point-stack-current)
 (define-key evil-emacs-state-map " o," 'point-stack-first)
