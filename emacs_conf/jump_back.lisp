@@ -21,23 +21,25 @@
 	 (t_str ""))
   (while (< cur (length point-stack))
     (setq tmp (nth cur point-stack))
-    (setq cur (+ cur 1))
     (if (buffer-live-p (car tmp))
     (save-excursion
     (with-current-buffer (car tmp)
       (goto-char (cadr tmp))
-      (if (eq cur (+ 1 point-cur))
+      (if (eq cur point-cur)
 	  (setq t_str (concat t_str (format "*%s: %s\n" cur
 		    (buffer-substring-no-properties (line-beginning-position) (line-end-position) ))))
 	(setq t_str (concat t_str (format " %s: %s\n" cur
 		    (buffer-substring-no-properties (line-beginning-position) (line-end-position) )))))
       ))
     ;;else
-      (if (eq cur (+ 1 point-cur))    
+      (if (eq cur point-cur)    
 	  (setq t_str (concat t_str (format "*%s: deleted\n" cur)))
 	  (setq t_str (concat t_str (format " %s: deleted\n" cur))))	
-    );;if
+      );;if
+    (setq cur (+ cur 1))    
     );;while
+  (if point-cur
+      (setq t_str (concat t_str (format "%s/%s" point-cur (length point-stack)))))
   (message "%s" t_str)
 ))
 
