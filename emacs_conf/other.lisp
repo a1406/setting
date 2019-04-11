@@ -430,6 +430,35 @@ Value is t if a query was formerly required."
     (message "xref %s/%s" xref--cur-pos cur-len)
   ))
 
+(defun my-xref-show ()
+  "show current point in stack."
+  (interactive)
+  (let* ((ring xref--marker-ring)
+	 (cur 0)
+	 (tmp)
+	 (t_str ""))
+  (while (< cur (ring-length xref--marker-ring))
+    (setq tmp (ring-ref ring cur))
+    (setq cur (+ cur 1))
+    (if (buffer-live-p (marker-buffer tmp))
+    (save-excursion
+    (with-current-buffer (marker-buffer tmp)
+      (goto-char (marker-position tmp))
+      (if (eq cur (+ 1 xref--cur-pos))
+	  (setq t_str (concat t_str (format "*%s: %s\n" cur
+		    (buffer-substring-no-properties (line-beginning-position) (line-end-position) ))))
+	(setq t_str (concat t_str (format " %s: %s\n" cur
+		    (buffer-substring-no-properties (line-beginning-position) (line-end-position) )))))
+      ))
+    ;;else
+      (if (eq cur (+ 1 xref--cur-pos))    
+	  (setq t_str (concat t_str (format "*%s: deleted\n" cur)))
+	  (setq t_str (concat t_str (format " %s: deleted\n" cur))))	
+    );;if
+    );;while
+  (message "%s" t_str)
+))
+
 (defun my-xref-cur ()
   (interactive)
   (let ((ring xref--marker-ring)

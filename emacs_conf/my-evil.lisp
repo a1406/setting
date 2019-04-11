@@ -29,6 +29,7 @@
 (define-key evil-emacs-state-map "t" 'my-counsel-rag)
 
 ;;lsp
+(define-key evil-emacs-state-map " lo" 'my-xref-show)
 (define-key evil-emacs-state-map " lp" 'my-xref-pre)
 (define-key evil-emacs-state-map " ln" 'my-xref-next)
 (define-key evil-emacs-state-map " ll" 'my-xref-cur)
