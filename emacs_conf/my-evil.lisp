@@ -22,7 +22,7 @@
 (define-key evil-emacs-state-map " p" 'point-to-register)
 (define-key evil-emacs-state-map " j" 'jump-to-register)
 (define-key evil-emacs-state-map " x" 'save-buffers-kill-terminal)
-(define-key evil-emacs-state-map " b" 'ivy-switch-buffer)
+(define-key evil-emacs-state-map " b" 'counsel-ibuffer)
 (define-key evil-emacs-state-map " s" 'swiper)
 (define-key evil-emacs-state-map " n" 'er/expand-region)
 (define-key evil-emacs-state-map " t" 'my-counsel-rag)
