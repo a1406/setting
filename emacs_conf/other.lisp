@@ -444,9 +444,9 @@ Value is t if a query was formerly required."
     (with-current-buffer (marker-buffer tmp)
       (goto-char (marker-position tmp))
       (if (eq cur xref--cur-pos)
-	  (setq t_str (concat t_str (format "*%s: %s\n" cur
+	  (setq t_str (concat t_str (format "*%s: [%s:%s]%s\n" cur (buffer-name) (line-number-at-pos)
 		    (buffer-substring-no-properties (line-beginning-position) (line-end-position) ))))
-	(setq t_str (concat t_str (format " %s: %s\n" cur
+	(setq t_str (concat t_str (format " %s: [%s:%s]%s\n" cur (buffer-name) (line-number-at-pos)
 		    (buffer-substring-no-properties (line-beginning-position) (line-end-position) )))))
       ))
     ;;else
