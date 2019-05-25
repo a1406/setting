@@ -363,6 +363,30 @@ Value is t if a query was formerly required."
 	(concat dir "TAGS")))))
 	      
 ;;去掉^M, 否则不能修改
+;; (defun counsel-grep-like-occur (cmd-template)
+;;   (unless (eq major-mode 'ivy-occur-grep-mode)
+;;     (ivy-occur-grep-mode)
+;;     (setq default-directory (ivy-state-directory ivy-last)))
+;;   (setq ivy-text
+;;         (and (string-match "\"\\(.*\\)\"" (buffer-name))
+;;              (match-string 1 (buffer-name))))
+;;   (let* ((cmd (format cmd-template
+;;                       (shell-quote-argument
+;;                        (counsel-unquote-regex-parens
+;;                         (ivy--regex ivy-text)))))
+;;          (cands (split-string (shell-command-to-string cmd) "\n" t)))
+;;     ;; Need precise number of header lines for `wgrep' to work.
+;;     (insert (format "-*- mode:grep; default-directory: %S -*-\n\n\n"
+;;                     default-directory))
+;;     (insert (format "%d candidates:\n" (length cands)))
+;;     (ivy--occur-insert-lines
+;;      (mapcar
+;;       (lambda (cand)
+;; 	(setq cand (replace-regexp-in-string "" "" cand))	
+;; 	(concat "./" cand)
+;; 	(counsel--normalize-grep-match cand)
+;; 	)
+;;       cands))))
 (defun counsel-grep-like-occur (cmd-template)
   (unless (eq major-mode 'ivy-occur-grep-mode)
     (ivy-occur-grep-mode)
@@ -370,11 +394,17 @@ Value is t if a query was formerly required."
   (setq ivy-text
         (and (string-match "\"\\(.*\\)\"" (buffer-name))
              (match-string 1 (buffer-name))))
-  (let* ((cmd (format cmd-template
-                      (shell-quote-argument
-                       (counsel-unquote-regex-parens
-                        (ivy--regex ivy-text)))))
-         (cands (split-string (shell-command-to-string cmd) "\n" t)))
+  (let* ((command-args (counsel--split-command-args ivy-text))
+         (regex (counsel--grep-regex (cdr command-args)))
+         (switches (concat (car command-args)
+                           (counsel--ag-extra-switches regex)))
+         (cmd (format cmd-template
+                      (concat
+                       switches
+                       (shell-quote-argument regex))))
+         (cands (split-string (shell-command-to-string cmd)
+                              counsel-async-split-string-re
+                              t)))
     ;; Need precise number of header lines for `wgrep' to work.
     (insert (format "-*- mode:grep; default-directory: %S -*-\n\n\n"
                     default-directory))
@@ -383,9 +413,11 @@ Value is t if a query was formerly required."
      (mapcar
       (lambda (cand)
 	(setq cand (replace-regexp-in-string "" "" cand))	
-	(concat "./" cand))
+	(concat "./" cand)
+	(counsel--normalize-grep-match cand)
+	)
       cands))))
-
+     ;; (mapcar #'counsel--normalize-grep-match cands))))
 
 (defun my-choose-num (beg end)
   (interactive "r")
