@@ -388,6 +388,13 @@ Value is t if a query was formerly required."
 ;; 	)
 ;;       cands))))
 (defun counsel-grep-like-occur (cmd-template)
+  ;; (message "cmd-template = %s" cmd-template)
+  (if my_use-rg
+      (progn
+	(setq rgfile (format "%s/rg.files"  (my-cscope-guess-root-directory)))
+	(if (f-exists-p rgfile)
+	    (setq process-environment (setenv-internal process-environment "RIPGREP_CONFIG_PATH" rgfile t)))))
+  
   (unless (eq major-mode 'ivy-occur-grep-mode)
     (ivy-occur-grep-mode)
     (setq default-directory (ivy-state-directory ivy-last)))
