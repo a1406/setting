@@ -28,6 +28,12 @@
 (define-key evil-emacs-state-map " t" 'my-counsel-rag)
 (define-key evil-emacs-state-map "t" 'my-counsel-rag)
 
+(define-key evil-emacs-state-map " \t" (lambda() (interactive)
+					 (if (region-active-p)
+					     (clang-format-region (region-beginning) (region-end)))))
+  
+
+
 ;;lsp
 (define-key evil-emacs-state-map " lo" 'my-xref-show)
 (define-key evil-emacs-state-map " lp" 'my-xref-pre)
