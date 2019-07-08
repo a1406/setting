@@ -16,6 +16,16 @@
 (setq lsp-ui-peek-enable nil)
 (setq lsp-ui-sideline-enable nil)
 
+;;(require 'ccls)
+;;(setq ccls-sem-highlight-method 'font-lock)
+;; alternatively, (setq ccls-sem-highlight-method 'overlay)
+
+;; For rainbow semantic highlighting
+;;(ccls-use-default-rainbow-sem-highlight)
+;;(face-spec-set 'ccls-sem-member-face
+;;              '((t :slant "normal"))
+;;               'face-defface-spec)
+
 (dolist (hook '(c-mode-hook c++-mode-hook))
   (add-hook hook
             #'(lambda ()
@@ -40,7 +50,16 @@
 		(setq-local company-backends (add-to-list 'company-backends 'company-files t))
 
 		(setq-local company-c-headers-path-user (my-cscope-include-directory))
-		
+
+		;; (setq ccls-sem-highlight-method 'font-lock)
+		;; ;; alternatively, (setq ccls-sem-highlight-method 'overlay)
+
+		;; ;; For rainbow semantic highlighting
+		;; (ccls-use-default-rainbow-sem-highlight)
+		;; (face-spec-set 'ccls-sem-member-face
+		;;              '((t :slant "normal"))
+		;;               'face-defface-spec)
+
 		;;头文件关闭flycheck，总是报错
 		;; (if (string-match "\\.h" buffer-file-name)
 		;;     (flycheck-mode-off))
