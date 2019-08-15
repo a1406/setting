@@ -137,10 +137,10 @@
 (define-key evil-emacs-state-map "." 'end-of-buffer)
 (define-key evil-emacs-state-map "l" 'recenter-top-bottom)
 (define-key evil-emacs-state-map "j" 'avy-goto-word-1)
-(define-key evil-emacs-state-map "(" (lambda() (interactive)
-					(insert-char #x28)
-					(yank)
-					(insert-char #x29)))
+;; (define-key evil-emacs-state-map "(" (lambda() (interactive)
+;; 					(insert-char #x28)
+;; 					(yank)
+;; 					(insert-char #x29)))
 
 
 ;;(define-key evil-emacs-state-map (kbd "<RET>") 'newline)
