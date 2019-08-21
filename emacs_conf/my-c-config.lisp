@@ -34,7 +34,7 @@
   ;; add my personal style and set it for the current buffer
   (hs-minor-mode t)
   (flycheck-mode t)
-  (enable-paredit-mode)
+  ;; (enable-paredit-mode)
   (c-add-style "PERSONAL" my-c-style t)
   ;; other customizations
   (setq tab-width 4)
