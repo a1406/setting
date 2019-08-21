@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+#cotributor: Henrique Jung <henriquenj@gmail.com>
+# name: null char
+# key: nc
+# group: doxygen
+# --
+'\0'

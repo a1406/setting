@@ -10,6 +10,7 @@
      (define-key paredit-mode-map (kbd "{")  'paredit-open-curly)
      (define-key paredit-mode-map (kbd "}")  nil)
      (define-key paredit-mode-map (kbd "]")  nil)
+     (define-key paredit-mode-map (kbd "\\")  nil)     
      (define-key paredit-mode-map (kbd ")")  nil)     
 ))
 
