@@ -25,6 +25,8 @@
 (define-key evil-emacs-state-map " b" 'counsel-ibuffer)
 (define-key evil-emacs-state-map " s" 'swiper)
 (define-key evil-emacs-state-map " n" 'er/expand-region)
+(define-key evil-emacs-state-map " u" 'backward-up-list)
+(define-key evil-emacs-state-map " d" 'forward-sexp)
 (define-key evil-emacs-state-map " t" 'my-counsel-rag)
 (define-key evil-emacs-state-map "t" 'my-counsel-rag)
 
