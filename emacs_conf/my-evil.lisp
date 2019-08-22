@@ -183,3 +183,8 @@
 		     (char-to-string ii) ii))
     (with-temp-buffer    (insert ch)    (eval-buffer))
   )
+
+
+;; evil match it
+(global-evil-matchit-mode 1)
+(define-key evil-emacs-state-map " m" 'evilmi-jump-items)
