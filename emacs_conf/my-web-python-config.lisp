@@ -64,6 +64,10 @@ to \"^python-\"."
   (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
   (add-to-list 'company-backends 'company-anaconda)))
 
+;;ein
+(setq ein:completion-backend 'ein:use-company-backend)
+(add-hook 'ein:notebook-mode-hook 'company-mode)
+
 ;;(defun my-python-mode-common-hook ()
 ;;  (define-key python-mode-map (kbd "TAB") 'tab-indent-or-complete)
 ;;  (message "my python mode hook")
@@ -92,4 +96,5 @@ to \"^python-\"."
 
 ;;(add-to-list 'auto-mode-alist '("\\.[jt]s\\'" . web-mode))
 ;;(define-key web-mode-map "\M-;" 'evil-mode)
+
 
