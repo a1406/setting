@@ -66,7 +66,11 @@ to \"^python-\"."
 
 ;;ein
 (setq ein:completion-backend 'ein:use-company-backend)
-(add-hook 'ein:notebook-mode-hook 'company-mode)
+(add-hook 'ein:notebook-mode-hook
+	  (lambda ()
+	    (setq indent-tabs-mode nil)
+	    (company-mode)
+	    ))
 
 ;;(defun my-python-mode-common-hook ()
 ;;  (define-key python-mode-map (kbd "TAB") 'tab-indent-or-complete)
@@ -93,6 +97,7 @@ to \"^python-\"."
 ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode))
 (add-hook 'js-mode-hook 'js2-minor-mode)
+
 
 ;;(add-to-list 'auto-mode-alist '("\\.[jt]s\\'" . web-mode))
 ;;(define-key web-mode-map "\M-;" 'evil-mode)
