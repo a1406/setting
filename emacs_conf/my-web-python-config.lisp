@@ -70,6 +70,8 @@ to \"^python-\"."
 	  (lambda ()
 	    (setq indent-tabs-mode nil)
 	    (company-mode)
+	    (define-key evil-emacs-state-local-map "s" 'ein:notebook-save-notebook-command)
+	    (define-key evil-emacs-state-local-map " c" 'ein:worksheet-execute-cell)
 	    ))
 
 ;;(defun my-python-mode-common-hook ()
