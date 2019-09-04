@@ -75,6 +75,7 @@ to \"^python-\"."
 	    (define-key evil-emacs-state-local-map " l" 'ein:worksheet-clear-output)
 	    (define-key evil-emacs-state-local-map " e" 'ein:worksheet-toggle-output)
 	    (define-key evil-emacs-state-local-map " h" 'ein:pytools-request-tooltip-or-help)
+	    (define-key evil-emacs-state-local-map " r" 'ein:notebook-rename-command)
 	    ))
 
 ;;(defun my-python-mode-common-hook ()
