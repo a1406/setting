@@ -21,6 +21,7 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php?\\'" . web-mode))
 (defun my-web-setup ()
   (setq indent-tabs-mode t)
   (if (functionp 'display-line-numbers-mode)
@@ -106,6 +107,6 @@ to \"^python-\"."
 
 
 ;;(add-to-list 'auto-mode-alist '("\\.[jt]s\\'" . web-mode))
-;;(define-key web-mode-map "\M-;" 'evil-mode)
+(define-key web-mode-map "\M-;" nil)
 
 
