@@ -1,0 +1,19 @@
+--languages=-lua
+--langdef=MYLUA 
+--langmap=MYLUA:.lua 
+##--regex-MYLUA=/^.*\s*function\s*(\w+):(\w+).*$/\2/f/
+##--regex-MYLUA=/^\s*(\w+)\s*=\s*[0-9]+.*$/\1/e/
+##--regex-MYLUA=/^.*\s*function\s*(\w+)\.(\w+).*$/\2/f/
+##--regex-MYLUA=/^.*\s*function\s*(\w+)\s*\(.*$/\1/f/
+##--regex-MYLUA=/^\s*(\w+)\s*=\s*\{.*$/\1/e/
+##--regex-MYLUA=/^\s*module\s+\"(\w+)\".*$/\1/m,module/
+##--regex-MYLUA=/^\s*module\s+\"[a-zA-Z0-9._]+\.(\w+)\".*$/\1/m,module/
+
+--regex-MYLUA=/^.*\s*function[ \t]*([a-zA-Z0-9_]+):([a-zA-Z0-9_]+).*$/\2/f,function/
+--regex-MYLUA=/^.*\s*function[ \t]*([a-zA-Z0-9_]+)\.([a-zA-Z0-9_]+).*$/\2/f,function/
+--regex-MYLUA=/^.*\s*function[ \t]*([a-zA-Z0-9_]+)\s*\(.*$/\1/f,function/
+--regex-MYLUA=/([a-zA-Z0-9_]+) = require[ (]"([^"]+)"/\1/r,require/
+--regex-MYLUA=/[ \t]{1}([a-zA-Z0-9_]+)[ \t]*[=][^=]/\1/v,variable/
+--regex-MYLUA=/[ \t]*([a-zA-Z0-9_]+)[ \t]*=[ \t]*module_define.*$/\1/m,module/
+--regex-MYLUA=/func_table\[ msg\.([A-Z_]+) \].+/\1/
+--regex-MYLUA=/\([ \t]*msg.([A-Z_]+)[ \t]*\)/\1/
