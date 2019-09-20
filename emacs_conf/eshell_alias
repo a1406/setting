@@ -9,5 +9,6 @@ alias sudo eshell/sudo $*
 alias work cd /home/jacktang/svnroot/Server
 alias b cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .
 alias mycscope sh ~/.emacs.conf/mycscope.sh
-alias pushall git push origin && git push origin2
+#alias pushall git push origin && git push origin2
+alias pushall bash ~/.emacs.conf/pushall.sh
 alias cmake cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 $*
