@@ -667,7 +667,7 @@ EXTRA-RG-ARGS string, if non-nil, is appended to `counsel-rg-base-command'.
 RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
   (interactive)
   (if my_use-rg
-	(counsel-rg (thing-at-point 'symbol) (my-cscope-guess-root-directory))
+	(counsel-rg (thing-at-point 'symbol) (my-cscope-guess-root-directory) "-i")
     (counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) (format "-E %s/%s" (my-cscope-guess-root-directory) cscope-index-file) nil)))
 
 (defun my-counsel-proto (&optional initial-input initial-directory extra-rg-args rg-prompt)
