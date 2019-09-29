@@ -5,6 +5,7 @@
 (setq lua-indent-level 4)
 (defun my-lua-setup ()
   (setq indent-tabs-mode t)
+  (company-mode)
   (if (functionp 'display-line-numbers-mode)
 	  (display-line-numbers-mode)
 	(linum-mode 1))
