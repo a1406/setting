@@ -702,3 +702,19 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
                                     (shell-quote-argument regex)))
            nil))))))
 
+;; 添加了thing-at-point symbol, 来设置预设的输入
+(defun xref-find-apropos (pattern)
+  "Find all meaningful symbols that match PATTERN.
+The argument has the same meaning as in `apropos'."
+  (interactive (list (read-string
+                      "Search for pattern (word list or regexp): "
+                      (thing-at-point 'symbol) 'xref--read-pattern-history)))
+  (require 'apropos)
+  (xref--find-xrefs pattern 'apropos
+                    (apropos-parse-pattern
+                     (if (string-equal (regexp-quote pattern) pattern)
+                         ;; Split into words
+                         (or (split-string pattern "[ \t]+" t)
+                             (user-error "No word list given"))
+                       pattern))
+                    nil))
