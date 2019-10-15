@@ -85,9 +85,9 @@
 
 ;; (push 'company-lsp company-backends)
 ;; (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
-(if (< emacs-major-version 27)
-            (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
-          (setq xref-show-definitions-function #'ivy-xref-show-defs))
+;; (if (< emacs-major-version 27)
+(setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
+(setq xref-show-definitions-function #'ivy-xref-show-defs)
 
 (setq xref-prompt-for-identifier '(not xref-find-references xref-find-definitions xref-find-definitions-other-window xref-find-definitions-other-frame))
 ;;(add-hook 'lsp-mode-hook 'lsp-ui-mode)

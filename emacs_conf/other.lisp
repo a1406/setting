@@ -387,6 +387,45 @@ Value is t if a query was formerly required."
 ;; 	(counsel--normalize-grep-match cand)
 ;; 	)
 ;;       cands))))
+;; (defun counsel-grep-like-occur (cmd-template)
+;;   ;; (message "cmd-template = %s" cmd-template)
+;;   (if my_use-rg
+;;       (progn
+;; 	(setq rgfile (format "%s/rg.files"  (my-cscope-guess-root-directory)))
+;; 	(if (f-exists-p rgfile)
+;; 	    (setq process-environment (setenv-internal process-environment "RIPGREP_CONFIG_PATH" rgfile t)))))
+  
+;;   (unless (eq major-mode 'ivy-occur-grep-mode)
+;;     (ivy-occur-grep-mode)
+;;     (setq default-directory (ivy-state-directory ivy-last)))
+;;   (setq ivy-text
+;;         (and (string-match "\"\\(.*\\)\"" (buffer-name))
+;;              (match-string 1 (buffer-name))))
+;;   (let* ((command-args (counsel--split-command-args ivy-text))
+;;          (regex (counsel--grep-regex (cdr command-args)))
+;;          (switches (concat (car command-args)
+;;                            (counsel--ag-extra-switches regex)))
+;;          (cmd (format cmd-template
+;;                       (concat
+;;                        switches
+;;                        (shell-quote-argument regex))))
+;;          (cands (split-string (shell-command-to-string cmd)
+;;                               counsel-async-split-string-re
+;;                               t)))
+;;     ;; Need precise number of header lines for `wgrep' to work.
+;;     (insert (format "-*- mode:grep; default-directory: %S -*-\n\n\n"
+;;                     default-directory))
+;;     (insert (format "%d candidates:\n" (length cands)))
+;;     (ivy--occur-insert-lines
+;;      (mapcar
+;;       (lambda (cand)
+;; 	(setq cand (replace-regexp-in-string "" "" cand))	
+;; 	(concat "./" cand)
+;; 	(counsel--normalize-grep-match cand)
+;; 	)
+;;       cands))))
+;; ;; (mapcar #'counsel--normalize-grep-match cands))))
+
 (defun counsel-grep-like-occur (cmd-template)
   ;; (message "cmd-template = %s" cmd-template)
   (if my_use-rg
@@ -394,29 +433,26 @@ Value is t if a query was formerly required."
 	(setq rgfile (format "%s/rg.files"  (my-cscope-guess-root-directory)))
 	(if (f-exists-p rgfile)
 	    (setq process-environment (setenv-internal process-environment "RIPGREP_CONFIG_PATH" rgfile t)))))
-  
   (unless (eq major-mode 'ivy-occur-grep-mode)
     (ivy-occur-grep-mode)
     (setq default-directory (ivy-state-directory ivy-last)))
   (setq ivy-text
         (and (string-match "\"\\(.*\\)\"" (buffer-name))
              (match-string 1 (buffer-name))))
-  (let* ((command-args (counsel--split-command-args ivy-text))
-         (regex (counsel--grep-regex (cdr command-args)))
-         (switches (concat (car command-args)
-                           (counsel--ag-extra-switches regex)))
-         (cmd (format cmd-template
+  (let* ((cmd
+          (if (functionp cmd-template)
+              (funcall cmd-template ivy-text)
+            (let* ((command-args (counsel--split-command-args ivy-text))
+                   (regex (counsel--grep-regex (cdr command-args)))
+                   (switches (concat (car command-args)
+                                     (counsel--ag-extra-switches regex))))
+              (format cmd-template
                       (concat
                        switches
-                       (shell-quote-argument regex))))
-         (cands (split-string (shell-command-to-string cmd)
-                              counsel-async-split-string-re
-                              t)))
-    ;; Need precise number of header lines for `wgrep' to work.
-    (insert (format "-*- mode:grep; default-directory: %S -*-\n\n\n"
-                    default-directory))
-    (insert (format "%d candidates:\n" (length cands)))
-    (ivy--occur-insert-lines
+                       (shell-quote-argument regex))))))
+         (cands (counsel--split-string (shell-command-to-string cmd))))
+    ;; (swiper--occur-insert-lines (mapcar #'counsel--normalize-grep-match cands))))
+    (swiper--occur-insert-lines
      (mapcar
       (lambda (cand)
 	(setq cand (replace-regexp-in-string "" "" cand))	
@@ -424,7 +460,6 @@ Value is t if a query was formerly required."
 	(counsel--normalize-grep-match cand)
 	)
       cands))))
-     ;; (mapcar #'counsel--normalize-grep-match cands))))
 
 (defun my-choose-num (beg end)
   (interactive "r")
