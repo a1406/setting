@@ -51,14 +51,20 @@
 ;;(define-key evil-emacs-state-map " lc" 'rtags-ivy-rc)
 (define-key evil-emacs-state-map " lk" 'lsp-restart-workspace)
 
-;;rtags
-(define-key evil-emacs-state-map " rp" 'rtags-location-stack-back)
-(define-key evil-emacs-state-map " rn" 'rtags-location-stack-forward)
-(define-key evil-emacs-state-map " rs" 'rtags-find-symbol)
-(define-key evil-emacs-state-map " rr" 'rtags-find-references)
-(define-key evil-emacs-state-map " ri" 'rtags-symbol-info)
-(define-key evil-emacs-state-map " rc" 'rtags-ivy-rc)
-(define-key evil-emacs-state-map " rk" 'irony-server-kill)
+;; ;;rtags
+;; (define-key evil-emacs-state-map " rp" 'rtags-location-stack-back)
+;; (define-key evil-emacs-state-map " rn" 'rtags-location-stack-forward)
+;; (define-key evil-emacs-state-map " rs" 'rtags-find-symbol)
+;; (define-key evil-emacs-state-map " rr" 'rtags-find-references)
+;; (define-key evil-emacs-state-map " ri" 'rtags-symbol-info)
+;; (define-key evil-emacs-state-map " rc" 'rtags-ivy-rc)
+;; (define-key evil-emacs-state-map " rk" 'irony-server-kill)
+
+;;narrowing
+(define-key evil-emacs-state-map " rn" 'narrow-to-region)
+(define-key evil-emacs-state-map " rw" 'widen)
+(define-key evil-emacs-state-map " rd" 'narrow-to-defun)
+
 ;;ivy
 (define-key evil-emacs-state-map " ir" 'ivy-resume)
 (define-key evil-emacs-state-map " ii" 'counsel-imenu)
