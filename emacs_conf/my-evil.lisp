@@ -34,7 +34,14 @@
 					 (if (region-active-p)
 					     (clang-format-region (region-beginning) (region-end)))))
   
-
+;;gtags
+(define-key evil-emacs-state-map " gs" 'counsel-gtags-find-symbol)
+(define-key evil-emacs-state-map " g," 'counsel-gtags-find-reference)
+(define-key evil-emacs-state-map " g." 'counsel-gtags-find-definition)
+(define-key evil-emacs-state-map " gp" 'counsel-gtags-go-backward)
+(define-key evil-emacs-state-map " gd" 'counsel-gtags-dwim)
+(define-key evil-emacs-state-map " gn" 'counsel-gtags-go-forward)
+(define-key evil-emacs-state-map " gf" 'counsel-gtags-find-file)
 
 ;;lsp
 (define-key evil-emacs-state-map " lo" 'my-xref-show)
