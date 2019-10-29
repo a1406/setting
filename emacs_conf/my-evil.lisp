@@ -38,10 +38,17 @@
 (define-key evil-emacs-state-map " gs" 'counsel-gtags-find-symbol)
 (define-key evil-emacs-state-map " g," 'counsel-gtags-find-reference)
 (define-key evil-emacs-state-map " g." 'counsel-gtags-find-definition)
-(define-key evil-emacs-state-map " gp" 'counsel-gtags-go-backward)
-(define-key evil-emacs-state-map " gd" 'counsel-gtags-dwim)
-(define-key evil-emacs-state-map " gn" 'counsel-gtags-go-forward)
-(define-key evil-emacs-state-map " gf" 'counsel-gtags-find-file)
+(define-key evil-emacs-state-map " gw" 'counsel-gtags-dwim)
+(define-key evil-emacs-state-map " gi" 'counsel-gtags-find-file)
+
+(define-key evil-emacs-state-map " gp" 'gtags-point-stack-backward)
+(define-key evil-emacs-state-map " gn" 'gtags-point-stack-forward)
+(define-key evil-emacs-state-map " ga" 'gtags-point-stack-first)
+(define-key evil-emacs-state-map " ge" 'gtags-point-stack-last)
+(define-key evil-emacs-state-map " gl" 'gtags-point-stack-current)
+(define-key evil-emacs-state-map " gd" 'gtags-point-stack-delete)
+(define-key evil-emacs-state-map " gc" 'gtags-point-stack-clear)
+(define-key evil-emacs-state-map " go" 'gtags-point-stack-show)
 
 ;;lsp
 (define-key evil-emacs-state-map " lo" 'my-xref-show)

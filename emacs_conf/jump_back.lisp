@@ -171,3 +171,6 @@
     (setq point-stack (my-nth-remove point-cur point-stack))))
   (message "point-stack. %s/%s" point-cur (length point-stack))  
   ))
+
+(load "~/.emacs.conf/gtags_jump_back.lisp")
+
