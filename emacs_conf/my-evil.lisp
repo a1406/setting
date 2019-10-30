@@ -35,6 +35,7 @@
 					     (clang-format-region (region-beginning) (region-end)))))
   
 ;;gtags
+(define-key evil-emacs-state-map " gu" 'my-gtags-set-default)
 (define-key evil-emacs-state-map " gs" 'counsel-gtags-find-symbol)
 (define-key evil-emacs-state-map " g," 'counsel-gtags-find-reference)
 (define-key evil-emacs-state-map " g." 'counsel-gtags-find-definition)
