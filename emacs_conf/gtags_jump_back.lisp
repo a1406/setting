@@ -10,7 +10,11 @@
 	(ggtags-mode 0)
 	)
     (progn
-      (ggtags-mode 1)      
+      (add-to-list 'xref-backend-functions 'ggtags--xref-backend)
+      (ggtags-mode 1)
+      (define-key ggtags-mode-map "\M-." nil)
+      (define-key ggtags-mode-map (kbd "M-]") nil)
+      (define-key ggtags-mode-map (kbd "C-M-.") nil)
       )
     )
   (message "xref backends = %s" xref-backend-functions)
