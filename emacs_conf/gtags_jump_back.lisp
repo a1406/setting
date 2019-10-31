@@ -1,22 +1,35 @@
-(load "~/.emacs.conf/global-tags.el")
+;; (load "~/.emacs.conf/global-tags.el")
 
 (setq my-use-gtags-default nil)
+
 (defun my-gtags-set-default ()
   "show current point in stack."
   (interactive)
-  (if my-use-gtags-default
+  (if (and (boundp 'ggtags-mode) ggtags-mode)
       (progn
-	(setq my-use-gtags-default nil)
-	(setq xref-backend-functions (delete 'global-tags-xref-backend xref-backend-functions))	
+	(ggtags-mode 0)
 	)
     (progn
-      (setq my-use-gtags-default t)
-      (add-to-list 'xref-backend-functions 'global-tags-xref-backend)
+      (ggtags-mode 1)      
       )
     )
   (message "xref backends = %s" xref-backend-functions)
   )
-
+;; (defun my-gtags-set-default ()
+;;   "show current point in stack."
+;;   (interactive)
+;;   (if my-use-gtags-default
+;;       (progn
+;; 	(setq my-use-gtags-default nil)
+;; 	(setq xref-backend-functions (delete 'global-tags-xref-backend xref-backend-functions))	
+;; 	)
+;;     (progn
+;;       (setq my-use-gtags-default t)
+;;       (add-to-list 'xref-backend-functions 'global-tags-xref-backend)
+;;       )
+;;     )
+;;   (message "xref backends = %s" xref-backend-functions)
+;;   )
 
 (defun gtags-point-stack-show ()
   "show current point in stack."
