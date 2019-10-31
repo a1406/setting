@@ -5,11 +5,15 @@
 (defun my-gtags-set-default ()
   "show current point in stack."
   (interactive)
-  (if (and (boundp 'ggtags-mode) ggtags-mode)
+  ;; (if (and (boundp 'ggtags-mode) ggtags-mode)
+  (if my-use-gtags-default
       (progn
+	(setq my-use-gtags-default nil)
 	(ggtags-mode 0)
+	(setq xref-backend-functions (delete 'ggtags--xref-backend xref-backend-functions))	
 	)
     (progn
+      (setq my-use-gtags-default t)      
       (add-to-list 'xref-backend-functions 'ggtags--xref-backend)
       (ggtags-mode 1)
       (define-key ggtags-mode-map "\M-." nil)
@@ -17,7 +21,7 @@
       (define-key ggtags-mode-map (kbd "C-M-.") nil)
       )
     )
-  (message "xref backends = %s" xref-backend-functions)
+  (message "ggtags-mode = %s my-gtags = %s xref backends = %s" ggtags-mode my-use-gtags-default xref-backend-functions)
   )
 ;; (defun my-gtags-set-default ()
 ;;   "show current point in stack."
