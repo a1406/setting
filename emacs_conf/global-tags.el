@@ -47,8 +47,8 @@
 (require 'subr-x)
 (require 'xref)
 
-(declare-function with-parsed-tramp-file-name 'tramp)
-(declare-function tramp-make-tramp-file-name 'tramp)
+(declare-function with-parsed-tramp-file-name "tramp" t t)
+(declare-function tramp-make-tramp-file-name "tramp" t t)
 
 ;;;; variables
 
@@ -56,7 +56,7 @@
   "global"
   "Name/path to Global executable."
   :type 'string
-  :group 'global)
+  :group 'global-tags)
 
 ;;;; utility functions:
 
@@ -148,16 +148,14 @@ If inner global command returns non-0, then this function returns nil."
 Adds (print0) to flags.
 
 If COMMAND is completion, no print0 is added (global ignores it underneath)."
-  (pcase command
-    (`completion
-     (split-string
-      (global-tags--get-as-string command (delete 'print0
-					     flags))
-      "\n" t))
-    (_ (split-string
-	(global-tags--get-as-string command (append '(print0)
-					       flags))
-	"\0" t))))
+  (pcase-let ((`(,separator . ,command-flags)
+	       (pcase command
+		 (`completion
+		  (cons "\n" (delete 'print0 flags)))
+		 (_
+		  (cons "\0" (append '(print0) flags))))))
+    (when-let* ((output (global-tags--get-as-string command command-flags)))
+      (split-string output separator t))))
 
 (defun global-tags--get-location (line)
   "Parse location from LINE.
@@ -165,18 +163,18 @@ If COMMAND is completion, no print0 is added (global ignores it underneath)."
 Assumes (:result \"grep\").
 Column is always 0."
   (save-match-data
-    (if (string-match (rx line-start
-			  (group (+ (any print))) ;; file
-			  ?: ;; separator
-			  (group (+ (any digit))) ;; line
-			  ?: ;; separator
-			  (group (* (any print))) ;; function
-			  line-end)
-		      line)
-	`((file . ,(match-string 1 line))
-	  (line . ,(string-to-number (match-string 2 line)))
-	  (description . ,(match-string 3 line))
-	  (column . 0)))))
+    (when (string-match (rx line-start
+			    (group (+ (any print))) ;; file
+			    ?: ;; separator
+			    (group (+ (any digit))) ;; line
+			    ?: ;; separator
+			    (group (* (any print blank))) ;; function or line with code
+			    line-end)
+			line)
+      `((file . ,(match-string 1 line))
+	(line . ,(string-to-number (match-string 2 line)))
+	(description . ,(match-string 3 line))
+	(column . 0)))))
 
 (defun global-tags--as-xref-location (location-description)
   "Map LOCATION-DESCRIPTION from `global-tags--get-locations' to xref's repr."
@@ -213,6 +211,7 @@ See `global-tags--get-locations'."
 	    (maybe-remote-dbpath
 	     (if (file-remote-p default-directory)
 		 (let (method user domain host port hop) ;; not recognized in some versions
+		   (ignore method user domain host port hop)
 		   (with-parsed-tramp-file-name default-directory nil
 		     (tramp-make-tramp-file-name
 		      method
@@ -274,7 +273,7 @@ See `project-roots' for 'transient."
 
 (cl-defmethod xref-backend-definitions ((_backend (eql global)) symbol)
   "See `global-tags--get-locations'."
-  (global-tags--get-xref-locations symbol 'tag))
+  (global-tags--get-xref-locations (substring-no-properties symbol) 'tag))
 
 (cl-defmethod xref-backend-identifier-at-point ((_backend (eql global)))
   (if-let ((symbol-str (thing-at-point 'symbol)))
@@ -284,10 +283,10 @@ See `project-roots' for 'transient."
   (global-tags--get-lines 'completion))
 
 (cl-defmethod xref-backend-references ((_backend (eql global)) symbol)
-  (global-tags--get-xref-locations symbol 'reference))
+  (global-tags--get-xref-locations (substring-no-properties symbol) 'reference))
 
 (cl-defmethod xref-backend-apropos ((_backend (eql global)) symbol)
-  (global-tags--get-xref-locations symbol 'grep))
+  (global-tags--get-xref-locations (substring-no-properties symbol) 'grep))
 
 ;;;; TODO
 ;;;; cache calls (see `tags-completion-table' @ etags.el)
