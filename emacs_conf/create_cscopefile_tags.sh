@@ -5,3 +5,4 @@ do
     # echo "read name = ${line}"
     ctags -ea ${line}
 done
+gtags -i -f cscope.files
