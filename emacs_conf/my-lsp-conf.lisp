@@ -17,7 +17,7 @@
 (setq lsp-ui-sideline-enable nil)
 
 ;;(require 'ccls)
-;;(setq ccls-sem-highlight-method 'font-lock)
+;; (setq ccls-sem-highlight-method 'font-lock)
 ;; alternatively, (setq ccls-sem-highlight-method 'overlay)
 
 ;; For rainbow semantic highlighting
@@ -25,6 +25,8 @@
 ;;(face-spec-set 'ccls-sem-member-face
 ;;              '((t :slant "normal"))
 ;;               'face-defface-spec)
+;;容易和expand-region颜色冲突，看不清楚
+(setq lsp-enable-symbol-highlighting nil)
 
 (dolist (hook '(c-mode-hook c++-mode-hook))
   (add-hook hook

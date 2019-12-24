@@ -23,6 +23,8 @@
     )
   (message "ggtags-mode = %s my-gtags = %s xref backends = %s" ggtags-mode my-use-gtags-default xref-backend-functions)
   )
+(my-gtags-set-default)
+
 ;; (defun my-gtags-set-default ()
 ;;   "show current point in stack."
 ;;   (interactive)
