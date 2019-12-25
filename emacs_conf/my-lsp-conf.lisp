@@ -16,6 +16,8 @@
 (setq lsp-ui-peek-enable nil)
 (setq lsp-ui-sideline-enable nil)
 
+(setq lsp-file-watch-threshold 10000)
+
 ;;(require 'ccls)
 ;; (setq ccls-sem-highlight-method 'font-lock)
 ;; alternatively, (setq ccls-sem-highlight-method 'overlay)

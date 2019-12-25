@@ -753,3 +753,9 @@ The argument has the same meaning as in `apropos'."
                              (user-error "No word list given"))
                        pattern))
                     nil))
+
+
+(define-key esc-map "%" (lambda() (interactive)
+			  (xref-push-marker-stack)
+			  (call-interactively 'query-replace)
+			  ))
