@@ -19,8 +19,8 @@
 (global-set-key "\M-;" 'evil-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;NORMAL-MODE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (define-key evil-emacs-state-map "  " (lambda() (interactive)(insert-char #x20)))
-(define-key evil-emacs-state-map " p" 'point-to-register)
-(define-key evil-emacs-state-map " j" 'jump-to-register)
+;; (define-key evil-emacs-state-map " p" 'point-to-register)
+;; (define-key evil-emacs-state-map " j" 'jump-to-register)
 (define-key evil-emacs-state-map " x" 'save-buffers-kill-terminal)
 (define-key evil-emacs-state-map " b" 'counsel-ibuffer)
 (define-key evil-emacs-state-map " s" 'swiper)
@@ -160,6 +160,7 @@
 (define-key evil-emacs-state-map "." 'end-of-buffer)
 (define-key evil-emacs-state-map "l" 'recenter-top-bottom)
 (define-key evil-emacs-state-map "j" 'avy-goto-word-1)
+(define-key evil-emacs-state-map " j" 'avy-goto-char-timer)
 ;; (define-key evil-emacs-state-map "(" (lambda() (interactive)
 ;; 					(insert-char #x28)
 ;; 					(yank)
