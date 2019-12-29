@@ -1,9 +1,12 @@
+(load "~/.emacs.conf/flycheck-luacheck.el")
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
 (setq lua-indent-level 4)
 (defun my-lua-setup ()
+  (flycheck-luacheck-setup)
+  ;; (flycheck-select-checker 'luacheck)
   (setq indent-tabs-mode t)
   (company-mode)
   (if (functionp 'display-line-numbers-mode)
