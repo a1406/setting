@@ -104,6 +104,8 @@
 (define-key evil-emacs-state-map " flf" 'flycheck-first-error)
 (define-key evil-emacs-state-map " flp" 'flycheck-previous-error)
 (define-key evil-emacs-state-map " fln" 'flycheck-next-error)
+(define-key evil-emacs-state-map " flb" 'flycheck-buffer)
+(define-key evil-emacs-state-map " flc" 'flycheck-clear)
 ;;cscope
 (define-key evil-emacs-state-map " cg" 'cscope-find-global-definition)
 (define-key evil-emacs-state-map " ct" 'cscope-find-this-text-string)
