@@ -108,3 +108,5 @@
 (define-key dired-mode-map "O" 'ora-dired-other-window)
 (define-key dired-mode-map "P" 'ora-dired-show-octal-permissions)
 (define-key dired-mode-map "I" 'dired-kill-subdir)
+(setq dired-bind-info nil)
+(define-key dired-mode-map "f" 'dired-filter-mode)
