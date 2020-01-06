@@ -99,6 +99,8 @@
       (kill-buffer buffer))))
 
 ;;* bind and hook
+(define-key dired-mode-map " " nil)
+(define-key dired-mode-map "o" nil)
 (define-key dired-mode-map "e" 'ora-ediff-files)
 (define-key dired-mode-map "h" 'dired-do-shell-command)
 (define-key dired-mode-map (kbd "C-j") 'dired-find-file)
@@ -110,3 +112,16 @@
 (define-key dired-mode-map "I" 'dired-kill-subdir)
 (setq dired-bind-info nil)
 (define-key dired-mode-map "f" 'dired-filter-mode)
+
+(define-key dired-mode-map "," 'beginning-of-buffer)
+(define-key dired-mode-map "." 'end-of-buffer)
+(define-key dired-mode-map "j" 'avy-goto-word-1)
+(define-key dired-mode-map " j" 'avy-goto-char-timer)
+(define-key dired-mode-map " fs" (lambda() (interactive)(my-enter-shell)(delete-other-windows)))
+(define-key dired-mode-map " b" 'counsel-ibuffer)
+(define-key dired-mode-map " s" 'swiper)
+(define-key dired-mode-map " ir" 'ivy-resume)
+(define-key dired-mode-map " ff" 'counsel-find-file)
+(define-key dired-mode-map " fw" 'kill-current-buffer)
+(define-key dired-mode-map "oo" 'other-window)
+(define-key dired-mode-map "of" 'delete-other-windows)
