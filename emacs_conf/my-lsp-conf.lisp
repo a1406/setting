@@ -17,6 +17,14 @@
 (setq lsp-ui-sideline-enable nil)
 
 (setq lsp-file-watch-threshold 10000)
+;; use `evil-matchit' instead
+(setq lsp-enable-folding nil)
+;; handle yasnippet by myself
+(setq lsp-enable-snippet nil)
+;; turn off for better performance
+(setq lsp-enable-symbol-highlighting nil)
+;; use ffip instead
+(setq lsp-enable-links nil)
 
 ;;(require 'ccls)
 ;; (setq ccls-sem-highlight-method 'font-lock)
