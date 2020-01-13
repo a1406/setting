@@ -29,6 +29,7 @@
 (define-key evil-emacs-state-map " d" 'forward-sexp)
 (define-key evil-emacs-state-map " t" 'my-counsel-rag)
 (define-key evil-emacs-state-map "t" 'my-counsel-rag)
+(define-key evil-emacs-state-map " a" 'aweshell-dedicated-toggle)
 
 (define-key evil-emacs-state-map " \t" (lambda() (interactive)
 					 (if (region-active-p)
