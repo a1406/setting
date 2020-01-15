@@ -63,7 +63,7 @@
 (define-key evil-emacs-state-map " l." 'my-xref-last)
 (define-key evil-emacs-state-map " lc" 'my-xref-clear)
 (define-key evil-emacs-state-map " la" 'xref-find-apropos)
-(define-key evil-emacs-state-map " ls" 'lsp-ivy-global-workspace-symbol)
+(define-key evil-emacs-state-map " ls" (lambda() (interactive)(lsp-ivy-global-workspace-symbol 1)))
 ;;(define-key evil-emacs-state-map " lr" 'rtags-find-references)
 (define-key evil-emacs-state-map " li" 'lsp-describe-thing-at-point)
 ;;(define-key evil-emacs-state-map " lc" 'rtags-ivy-rc)
