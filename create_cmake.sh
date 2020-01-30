@@ -15,7 +15,7 @@ echo "  )"
 
 echo ""
 
-inc=`find . -type f -name "*.h" | grep -v '\.ccls-cache'  | xargs dirname | uniq`
+inc=`find . -type f -name "*.h" | grep -v '\.ccls-cache'  | xargs dirname | sort | uniq`
 for t in ${inc}
 do
     echo "INCLUDE_DIRECTORIES(\"\${PROJECT_SOURCE_DIR}/${t}\")"
