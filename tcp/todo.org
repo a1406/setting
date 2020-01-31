@@ -1,3 +1,79 @@
+* TCP状态定义
+#+BEGIN_SRC C
+enum {
+	TCP_ESTABLISHED = 1,
+	TCP_SYN_SENT,
+	TCP_SYN_RECV,
+	TCP_FIN_WAIT1,
+	TCP_FIN_WAIT2,
+	TCP_TIME_WAIT,
+	TCP_CLOSE,
+	TCP_CLOSE_WAIT,
+	TCP_LAST_ACK,
+	TCP_LISTEN,
+	TCP_CLOSING,	/* Now a valid state */
+	TCP_NEW_SYN_RECV,
+
+	TCP_MAX_STATES	/* Leave at the end! */
+};
+#+END_SRC
+
+* 设置状态
+tcp_set_state
+
+* struct proto tcp_prot
+#+BEGIN_SRC C
+struct proto tcp_prot = {
+	.name			= "TCP",
+	.owner			= THIS_MODULE,
+	.close			= tcp_close,
+	.pre_connect		= tcp_v4_pre_connect,
+	.connect		= tcp_v4_connect,
+	.disconnect		= tcp_disconnect,
+	.accept			= inet_csk_accept,
+	.ioctl			= tcp_ioctl,
+	.init			= tcp_v4_init_sock,
+	.destroy		= tcp_v4_destroy_sock,
+	.shutdown		= tcp_shutdown,
+	.setsockopt		= tcp_setsockopt,
+	.getsockopt		= tcp_getsockopt,
+	.keepalive		= tcp_set_keepalive,
+	.recvmsg		= tcp_recvmsg,
+	.sendmsg		= tcp_sendmsg,
+	.sendpage		= tcp_sendpage,
+	.backlog_rcv		= tcp_v4_do_rcv,
+	.release_cb		= tcp_release_cb,
+	.hash			= inet_hash,
+	.unhash			= inet_unhash,
+	.get_port		= inet_csk_get_port,
+	.enter_memory_pressure	= tcp_enter_memory_pressure,
+	.leave_memory_pressure	= tcp_leave_memory_pressure,
+	.stream_memory_free	= tcp_stream_memory_free,
+	.sockets_allocated	= &tcp_sockets_allocated,
+	.orphan_count		= &tcp_orphan_count,
+	.memory_allocated	= &tcp_memory_allocated,
+	.memory_pressure	= &tcp_memory_pressure,
+	.sysctl_mem		= sysctl_tcp_mem,
+	.sysctl_wmem_offset	= offsetof(struct net, ipv4.sysctl_tcp_wmem),
+	.sysctl_rmem_offset	= offsetof(struct net, ipv4.sysctl_tcp_rmem),
+	.max_header		= MAX_TCP_HEADER,
+	.obj_size		= sizeof(struct tcp_sock),
+	.slab_flags		= SLAB_TYPESAFE_BY_RCU,
+	.twsk_prot		= &tcp_timewait_sock_ops,
+	.rsk_prot		= &tcp_request_sock_ops,
+	.h.hashinfo		= &tcp_hashinfo,
+	.no_autobind		= true,
+#ifdef CONFIG_COMPAT
+	.compat_setsockopt	= compat_tcp_setsockopt,
+	.compat_getsockopt	= compat_tcp_getsockopt,
+#endif
+	.diag_destroy		= tcp_abort,
+};
+#+END_SRC
+
+* 定时器
+tcp_init_xmit_timers
+
 * 178 18.3-连接建立的超时
 
 * 183 18.6.1-2MSL等待状态
