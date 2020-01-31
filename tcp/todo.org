@@ -84,13 +84,68 @@ void tcp_time_wait(struct sock *sk, int state, int timeo)
 * 195 18.11.4-呼入连接请求队列
 
 * 203 19.4-Nagle算法
+TCP_NODELAY TCP_CORK
+#+BEGIN_SRC C
+	case TCP_NODELAY:
+		if (val) {
+			/* TCP_NODELAY is weaker than TCP_CORK, so that
+			 * this option on corked socket is remembered, but
+			 * it is not activated until cork is cleared.
+			 *
+			 * However, when TCP_NODELAY is set we make
+			 * an explicit push, which overrides even TCP_CORK
+			 * for currently queued segments.
+			 */
+			tp->nonagle |= TCP_NAGLE_OFF|TCP_NAGLE_PUSH;
+			tcp_push_pending_frames(sk);
+		} else {
+			tp->nonagle &= ~TCP_NAGLE_OFF;
+		}
+		break;
+
+	case TCP_CORK:
+		/* When set indicates to always queue non-full frames.
+		 * Later the user clears this option and we transmit
+		 * any pending partial frames in the queue.  This is
+		 * meant to be used alongside sendfile() to get properly
+		 * filled frames when the user (for example) must write
+		 * out headers with a write() call first and then use
+		 * sendfile to send out the data parts.
+		 *
+		 * TCP_CORK can be set together with TCP_NODELAY and it is
+		 * stronger than TCP_NODELAY.
+		 */
+		if (val) {
+			tp->nonagle |= TCP_NAGLE_CORK;
+		} else {
+			tp->nonagle &= ~TCP_NAGLE_CORK;
+			if (tp->nonagle&TCP_NAGLE_OFF)
+				tp->nonagle |= TCP_NAGLE_PUSH;
+			tcp_push_pending_frames(sk);
+		}
+		break;
+
+#+END_SRC
 
 * 207 19.5-窗口大小通告
 ** 212 20.3-滑动窗口
+??? 
+#+BEGIN_SRC 
+	if (likely(!(tcb->tcp_flags & TCPHDR_SYN))) {
+		th->window      = htons(tcp_select_window(sk));
+		tcp_ecn_send(sk, skb, th, tcp_header_size);
+	} else {
+		/* RFC1323: The window in SYN & SYN/ACK segments
+		 * is never scaled.
+		 */
+		th->window	= htons(min(tp->rcv_wnd, 65535U));
+	}
+#+END_SRC
+
 
 * 延时发送的ACK
 void tcp_send_ack(struct sock *sk)
-
+__tcp_send_ack
 
 
 
