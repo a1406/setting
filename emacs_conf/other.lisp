@@ -738,21 +738,34 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
            nil))))))
 
 ;; 添加了thing-at-point symbol, 来设置预设的输入
+;; 
 (defun xref-find-apropos (pattern)
   "Find all meaningful symbols that match PATTERN.
 The argument has the same meaning as in `apropos'."
   (interactive (list (read-string
                       "Search for pattern (word list or regexp): "
                       (thing-at-point 'symbol) 'xref--read-pattern-history)))
-  (require 'apropos)
-  (xref--find-xrefs pattern 'apropos
-                    (apropos-parse-pattern
-                     (if (string-equal (regexp-quote pattern) pattern)
-                         ;; Split into words
-                         (or (split-string pattern "[ \t]+" t)
-                             (user-error "No word list given"))
-                       pattern))
-                    nil))
+
+;;  (message "bak backend = %s" xref-backend-functions)
+  (let ((bak-xref-backend (copy-list xref-backend-functions)))
+    (setq xref-backend-functions (delete 'global-tags-xref-backend xref-backend-functions))
+    (if my-use-gtags-default
+	(add-to-list 'xref-backend-functions 'global-tags-xref-backend)	
+	)
+
+;;  (message "bak backend = %s, xref backend = %s" bak-xref-backend xref-backend-functions)    
+    
+    (require 'apropos)
+    (xref--find-xrefs pattern 'apropos
+                      (apropos-parse-pattern
+                       (if (string-equal (regexp-quote pattern) pattern)
+                           ;; Split into words
+                           (or (split-string pattern "[ \t]+" t)
+                               (user-error "No word list given"))
+			   pattern))
+                      nil))
+  (setq xref-backend-functions (copy-list bak-xref-backend))
+  )
 
 
 (define-key esc-map "%" (lambda() (interactive)

@@ -38,6 +38,13 @@
 ;;容易和expand-region颜色冲突，看不清楚
 (setq lsp-enable-symbol-highlighting nil)
 
+(add-hook 'lsp-after-initialize-hook
+	  #'(lambda ()
+	      (if my-use-gtags-default
+		  (add-to-list 'xref-backend-functions 'global-tags-xref-backend)	
+		  )
+	      ))
+
 (dolist (hook '(c-mode-hook c++-mode-hook))
   (add-hook hook
             #'(lambda ()
@@ -45,17 +52,18 @@
 		(if (eq major-mode 'php-mode)
 		    nil
                   ;;              (require 'cquery)
-                  (require 'ccls)
-
 		  ;;eglot config
 		  ;; (eglot-ensure)
 		  ;; (company-mode)
 		  ;; (setq-local company-backends (add-to-list 'company-backends 'company-capf))
-
+		    (require 'ccls)
 		  ;;lsp config
 		  (setq-local ivy-completing-sort nil)
 		  (setq-local ivy-sort-functions-alist (append (list (list 'ivy-done)) ivy-sort-functions-alist))
-                (lsp)
+                  (lsp)
+		  (if my-use-gtags-default
+		      (add-to-list 'xref-backend-functions 'global-tags-xref-backend)	
+		      )
 		(flycheck-select-checker 'lsp-ui)
 		(flymake-mode-off)
 		(setq-local company-backends (add-to-list 'company-backends 'company-c-headers t))
