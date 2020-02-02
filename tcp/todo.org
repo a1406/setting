@@ -22,6 +22,44 @@ enum {
 tcp_set_state
 
 * struct proto tcp_prot
+#+BEGIN_SRC 
+const struct proto_ops inet_stream_ops = {
+	.family		   = PF_INET,
+	.owner		   = THIS_MODULE,
+	.release	   = inet_release,
+	.bind		   = inet_bind,
+	.connect	   = inet_stream_connect,
+	.socketpair	   = sock_no_socketpair,
+	.accept		   = inet_accept,
+	.getname	   = inet_getname,
+	.poll		   = tcp_poll,
+	.ioctl		   = inet_ioctl,
+	.gettstamp	   = sock_gettstamp,
+	.listen		   = inet_listen,
+	.shutdown	   = inet_shutdown,
+	.setsockopt	   = sock_common_setsockopt,
+	.getsockopt	   = sock_common_getsockopt,
+	.sendmsg	   = inet_sendmsg,
+	.recvmsg	   = inet_recvmsg,
+#ifdef CONFIG_MMU
+	.mmap		   = tcp_mmap,
+#endif
+	.sendpage	   = inet_sendpage,
+	.splice_read	   = tcp_splice_read,
+	.read_sock	   = tcp_read_sock,
+	.sendmsg_locked    = tcp_sendmsg_locked,
+	.sendpage_locked   = tcp_sendpage_locked,
+	.peek_len	   = tcp_peek_len,
+#ifdef CONFIG_COMPAT
+	.compat_setsockopt = compat_sock_common_setsockopt,
+	.compat_getsockopt = compat_sock_common_getsockopt,
+	.compat_ioctl	   = inet_compat_ioctl,
+#endif
+	.set_rcvlowat	   = tcp_set_rcvlowat,
+};
+#+END_SRC
+
+
 #+BEGIN_SRC C
 struct proto tcp_prot = {
 	.name			= "TCP",
@@ -82,6 +120,23 @@ void tcp_time_wait(struct sock *sk, int state, int timeo)
 * 187 18.7.2-异常终止一个连接
 
 * 195 18.11.4-呼入连接请求队列
+inet_listen
+#+BEGIN_SRC 
+static inline void sk_acceptq_removed(struct sock *sk)
+{
+	WRITE_ONCE(sk->sk_ack_backlog, sk->sk_ack_backlog - 1);
+}
+
+static inline void sk_acceptq_added(struct sock *sk)
+{
+	WRITE_ONCE(sk->sk_ack_backlog, sk->sk_ack_backlog + 1);
+}
+
+static inline bool sk_acceptq_is_full(const struct sock *sk)
+{
+	return READ_ONCE(sk->sk_ack_backlog) > READ_ONCE(sk->sk_max_ack_backlog);
+}
+#+END_SRC
 
 * 203 19.4-Nagle算法
 TCP_NODELAY TCP_CORK
@@ -142,7 +197,8 @@ TCP_NODELAY TCP_CORK
 	}
 #+END_SRC
 
-tcp_select_window
+接收窗口：tcp_select_window
+发送窗口：tcp_wnd_end
 
 * 延时发送的ACK
 void tcp_send_ack(struct sock *sk)
