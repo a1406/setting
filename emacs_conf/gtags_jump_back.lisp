@@ -46,6 +46,7 @@
       )
     )
   (my-gtags-show-use)
+  (force-mode-line-update)
   )
 
 (setq xref-backend-functions (delete 'etags--xref-backend xref-backend-functions))
