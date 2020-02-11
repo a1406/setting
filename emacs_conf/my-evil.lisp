@@ -30,7 +30,7 @@
 (define-key evil-emacs-state-map " t" 'my-counsel-rag)
 (define-key evil-emacs-state-map "t" 'my-counsel-rag)
 (define-key evil-emacs-state-map " a" 'aweshell-dedicated-toggle)
-
+(define-key evil-emacs-state-map " y" 'ivy-yasnippet)
 (define-key evil-emacs-state-map " \t" (lambda() (interactive)
 					 (if (region-active-p)
 					     (clang-format-region (region-beginning) (region-end)))))
