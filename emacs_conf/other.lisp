@@ -738,7 +738,7 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
            nil))))))
 
 ;; 添加了thing-at-point symbol, 来设置预设的输入
-;; 
+;;
 (defun xref-find-apropos (pattern)
   "Find all meaningful symbols that match PATTERN.
 The argument has the same meaning as in `apropos'."
@@ -747,7 +747,7 @@ The argument has the same meaning as in `apropos'."
                       (thing-at-point 'symbol) 'xref--read-pattern-history)))
 
 ;;  (message "bak backend = %s" xref-backend-functions)
-  (let ((bak-xref-backend (copy-list xref-backend-functions)))
+  (let ((bak-xref-backend (append xref-backend-functions)))
     (setq xref-backend-functions (delete 'global-tags-xref-backend xref-backend-functions))
     (if my-use-gtags-default
 	(add-to-list 'xref-backend-functions 'global-tags-xref-backend)	
@@ -764,7 +764,7 @@ The argument has the same meaning as in `apropos'."
                                (user-error "No word list given"))
 			   pattern))
                       nil))
-  (setq xref-backend-functions (copy-list bak-xref-backend))
+  (setq xref-backend-functions (append bak-xref-backend))
   )
 
 
