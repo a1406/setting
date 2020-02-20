@@ -3,7 +3,7 @@
 
 (defun my-nth-remove (nth seq)
   (let ((n -1))
-    (remove-if
+    (cl-remove-if
      #'(lambda (p1)
 	 ;;     (message "p1 = %s, n = %s" p1 n)
 	 (setq n (+ n 1))
