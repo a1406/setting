@@ -15,3 +15,12 @@
 ))
 
 
+(electric-pair-mode 1)
+(setq electric-pair-pairs (append electric-pair-pairs (list (cons ?` ?`) (cons ?' ?'))))
+(defun my-electric-pair-post-self-insert-function (&rest r)
+  (if (region-active-p)
+      t
+      nil)
+  )
+(advice-add 'electric-pair-post-self-insert-function :before-while #'my-electric-pair-post-self-insert-function)
+
