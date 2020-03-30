@@ -7,5 +7,10 @@ sh ~/.emacs.conf/mycscope.sh
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -Btmpbuild .
 cp tmpbuild/compile_commands.json .
 ~/gitroot/setting/create_ccls.sh > .ccls
-ccls --index=.
+if [ ${#} -gt 0 ]
+then
+    ccls --index=.    
+fi
+
+
 

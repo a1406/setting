@@ -25,6 +25,10 @@
 (setq lsp-enable-symbol-highlighting nil)
 ;; use ffip instead
 (setq lsp-enable-links nil)
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+(setq lsp-prefer-capf t)
+(setq lsp-idle-delay 0.500)
 
 ;;(require 'ccls)
 ;; (setq ccls-sem-highlight-method 'font-lock)
