@@ -694,6 +694,21 @@ Value is t if a query was formerly required."
 (setq counsel-grep-base-command
       "ag -i --noheading --numbers --nocolor %s %s"))
 
+(setq my-counsel-rag-sp nil)
+(defun my-counsel-rag-sp (&optional initial-input initial-directory extra-rg-args rg-prompt)
+  "Grep for a string in the current directory using rg.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+EXTRA-RG-ARGS string, if non-nil, is appended to `counsel-rg-base-command'.
+RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
+  (interactive)
+  (setq my-counsel-rag-sp t)  
+  (if my_use-rg
+      (counsel-rg (thing-at-point 'symbol) (my-cscope-guess-root-directory) "-i")
+      (counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) (format "-E %s/%s" (my-cscope-guess-root-directory) cscope-index-file) nil))
+  (setq my-counsel-rag-sp nil)  
+  )
+
 (defun my-counsel-rag (&optional initial-input initial-directory extra-rg-args rg-prompt)
   "Grep for a string in the current directory using rg.
 INITIAL-INPUT can be given as the initial minibuffer input.
@@ -701,6 +716,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
 EXTRA-RG-ARGS string, if non-nil, is appended to `counsel-rg-base-command'.
 RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
   (interactive)
+  (setq my-counsel-rag-sp nil)  
   (if my_use-rg
 	(counsel-rg (thing-at-point 'symbol) (my-cscope-guess-root-directory) "-i")
     (counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) (format "-E %s/%s" (my-cscope-guess-root-directory) cscope-index-file) nil)))
@@ -712,30 +728,35 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
 EXTRA-RG-ARGS string, if non-nil, is appended to `counsel-rg-base-command'.
 RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
   (interactive)
+  (setq my-counsel-rag-sp nil)  
   (counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) "--proto" nil)  
   )
 
 (if my_use-rg
 (defun counsel-ag-function (string)
   "Grep in the current directory for STRING."
-  (let ((command-args (counsel--split-command-args string)))
-    (let ((switches (car command-args))
-          (search-term (cdr command-args)))
-      (or
-       (let ((ivy-text search-term))
-         (ivy-more-chars))
-       (let ((default-directory (ivy-state-directory ivy-last))
-             (regex (counsel--grep-regex search-term))
-	     (process-environment)
-	     (rgfile)	     
-	     )
-	   (setq rgfile (format "%s/rg.files"  (my-cscope-guess-root-directory)))
-	   (if (f-exists-p rgfile)
-	       (setq process-environment (setenv-internal process-environment "RIPGREP_CONFIG_PATH" rgfile t)))
-           (counsel--async-command (counsel--format-ag-command
-                                    switches
-                                    (shell-quote-argument regex)))
-           nil))))))
+  (let* ((command-args (counsel--split-command-args string))
+         (search-term (cdr command-args))
+	 (cmd)
+	 )
+    (or
+     (let ((ivy-text search-term))
+       (ivy-more-chars))
+     (let* ((default-directory (ivy-state-directory ivy-last))
+            (regex (counsel--grep-regex search-term))
+            (switches (concat (car command-args)
+                              (counsel--ag-extra-switches regex)
+                              (if (ivy--case-fold-p string)
+                                  " -i "
+                                  " -s "))))
+       (setq cmd (counsel--format-ag-command
+                                switches
+                                (shell-quote-argument regex)))
+       (if my-counsel-rag-sp
+	   (setq cmd (format "%s | grep '\\(\\.h\\|::\\)'" cmd)))
+       (counsel--async-command cmd)
+       nil))))    
+)
 
 ;; 添加了thing-at-point symbol, 来设置预设的输入
 ;;
