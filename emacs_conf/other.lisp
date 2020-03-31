@@ -737,6 +737,7 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
   "Grep in the current directory for STRING."
   (let* ((command-args (counsel--split-command-args string))
          (search-term (cdr command-args))
+	 (rgfile (format "%s/rg.files"  (my-cscope-guess-root-directory)))
 	 (cmd)
 	 )
     (or
@@ -753,7 +754,10 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
                                 switches
                                 (shell-quote-argument regex)))
        (if my-counsel-rag-sp
-	   (setq cmd (format "%s | grep '\\(\\.h\\|::\\)'" cmd)))
+	   (setq cmd (format "%s | grep -i '\\(\\.h:[0-9]\\|::%s\\)'" cmd string)))
+       (if (f-exists-p rgfile)
+	   (setq process-environment (setenv-internal process-environment "RIPGREP_CONFIG_PATH" rgfile t)))
+       
        (counsel--async-command cmd)
        nil))))    
 )
