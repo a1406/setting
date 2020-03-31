@@ -689,10 +689,12 @@ Value is t if a query was formerly required."
 ;;     (counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) (format "-E %s/%s" (my-cscope-guess-root-directory) cscope-index-file) nil)))
 
 (if my_use-rg
-(setq counsel-grep-base-command
-      "rg -i -M 120 --no-heading --line-number --color never %s %s")
-(setq counsel-grep-base-command
-      "ag -i --noheading --numbers --nocolor %s %s"))
+    (setq counsel-grep-base-command
+	  "rg -i -M 120 --no-heading --line-number --color never %s %s")
+    (setq counsel-grep-base-command
+	  "ag -i --noheading --numbers --nocolor %s %s"))
+(setq counsel-rg-base-command
+      "rg -M 220 --with-filename --no-heading --line-number --color never %s")
 
 (setq my-counsel-rag-sp nil)
 (defun my-counsel-rag-sp (&optional initial-input initial-directory extra-rg-args rg-prompt)
@@ -754,10 +756,9 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
                                 switches
                                 (shell-quote-argument regex)))
        (if my-counsel-rag-sp
-	   (setq cmd (format "%s | grep -i '\\(\\.h:[0-9]\\|::%s\\)'" cmd string)))
+	   (setq cmd (format "%s | grep -i '\\(\\.h:[0-9]\\|::%s\\|Omitted long matching line\\)'" cmd string)))
        (if (f-exists-p rgfile)
 	   (setq process-environment (setenv-internal process-environment "RIPGREP_CONFIG_PATH" rgfile t)))
-       
        (counsel--async-command cmd)
        nil))))    
 )
