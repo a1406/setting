@@ -107,6 +107,14 @@
 ;;		(flymake-mode-off)
 		)))
 
+
+;; (add-hook 'prog-mode-hook
+;; 	  #'(lambda ()
+;; 	      (message "prog mode hook jack")
+;; 	      (setq company-backends (delete 'company-tabnine company-backends))
+;; 	      (push 'company-tabnine company-backends)
+;; 	      ))
+
 ;; (push 'company-lsp company-backends)
 ;; (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
 ;; (if (< emacs-major-version 27)

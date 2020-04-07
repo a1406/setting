@@ -110,15 +110,26 @@
 (define-key evil-emacs-state-map " flb" 'flycheck-buffer)
 (define-key evil-emacs-state-map " flc" 'flycheck-clear)
 ;;cscope
-(define-key evil-emacs-state-map " cg" 'cscope-find-global-definition)
-(define-key evil-emacs-state-map " ct" 'cscope-find-this-text-string)
-(define-key evil-emacs-state-map " cs" 'cscope-find-this-symbol)
+;; (define-key evil-emacs-state-map " cg" 'cscope-find-global-definition)
+;; (define-key evil-emacs-state-map " ct" 'cscope-find-this-text-string)
+;; (define-key evil-emacs-state-map " cs" 'cscope-find-this-symbol)
 (define-key evil-emacs-state-map " cf" 'my-key/ivy-cscope-file)
 (define-key evil-emacs-state-map " co" 'my-find-cscope-other-file)
-(define-key evil-emacs-state-map " ce" 'cscope-find-egrep-pattern)
-(define-key evil-emacs-state-map " ci" 'cscope-set-initial-directory)
-(define-key evil-emacs-state-map " cc" 'cscope-find-functions-calling-this-function)
-(define-key evil-emacs-state-map " cp" 'cscope-pop-mark)
+;; (define-key evil-emacs-state-map " ce" 'cscope-find-egrep-pattern)
+;; (define-key evil-emacs-state-map " ci" 'cscope-set-initial-directory)
+;; (define-key evil-emacs-state-map " cc" 'cscope-find-functions-calling-this-function)
+;; (define-key evil-emacs-state-map " cp" 'cscope-pop-mark)
+(define-key evil-emacs-state-map " c." 'company-tabnine)
+;; company
+(defun my-set-company-backend (backend)
+  (setq company-backends (delete backend company-backends))
+  (push backend company-backends)
+  (message "company backends: %s" company-backends)
+  )
+(define-key evil-emacs-state-map " cc" (lambda() (interactive)(my-set-company-backend 'company-capf)))
+(define-key evil-emacs-state-map " ct" (lambda() (interactive)(my-set-company-backend 'company-tabnine)))
+(define-key evil-emacs-state-map " cg" (lambda() (interactive)(my-set-company-backend 'company-gtags)))
+
 
 ;; my-jump
 (define-key evil-emacs-state-map " oo" 'point-stack-show)
