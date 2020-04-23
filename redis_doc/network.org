@@ -93,3 +93,16 @@ processTimeEvents
  * SO_REUSEADDR is being used. */
 #define REDIS_CONNECT_RETRIES  10
 #+END_SRC
+* 线程 （新版本引入）
+我现在来看是有两类线程，一类是网络线程IOThreadMain，一类是bio线程bioProcessBackgroundJobs
+线程使用了C11的关键字_Atomic来做原子操作
+** IOThreadMain
+要配置了server.io_threads_num才会启用
+io_threads_pending用来同步主线程和网络线程，确保不会同时操作网络事件队列io_threads_list
+然后网络线程在processInputBuffer中处理收到的数据
+
+*** handleClientsWithPendingReadsUsingThreads
+把任务交到网络线程去处理, 网络线程先设置CLIENT_PENDING_READ, 网络线程检查CLIENT_PENDING_READ标志后不再继续处理
+最后主线程(handleClientsWithPendingReadsUsingThreads函数结尾)再来具体处理以保证逻辑在单线程中运行
+
+** bioProcessBackgroundJobs
