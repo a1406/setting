@@ -36,7 +36,11 @@
 (define-key evil-emacs-state-map " \t" (lambda() (interactive)
 					 (if (region-active-p)
 					     (clang-format-region (region-beginning) (region-end)))))
-  
+
+;;
+(define-key evil-emacs-state-map " vp" 'previous-buffer)
+(define-key evil-emacs-state-map " vn" 'next-buffer)
+
 ;;gtags
 (define-key evil-emacs-state-map " gu" 'my-gtags-set-default)
 (define-key evil-emacs-state-map " go" 'my-gtags-show-use)
