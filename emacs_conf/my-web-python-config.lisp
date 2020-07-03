@@ -7,6 +7,7 @@
 (defun my-lua-setup ()
   (flycheck-luacheck-setup)
   ;; (flycheck-select-checker 'luacheck)
+  (flycheck-mode 1)
   (setq indent-tabs-mode nil)
   (setq tab-width 4)
   (company-mode)
