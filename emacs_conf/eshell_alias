@@ -1,15 +1,15 @@
-alias rmcmake rm -rf CMakeCache.txt CMakeFiles Makefile cmake_install.cmake
-alias j my-eshell/z $*
-alias ll ls -al
-alias clear aweshell-clear-buffer
-alias d dired $1
-alias fo find-file-other-window $1
-alias f find-file $1
-alias sudo eshell/sudo $*
-alias work cd /home/jacktang/svnroot/Server
-alias b cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .
-alias mycscope sh ~/.emacs.conf/mycscope.sh
-#alias pushall git push origin && git push origin2
-alias pushall bash ~/.emacs.conf/pushall.sh
-alias cmake cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 $*
+alias gdiff git diff  | sed 's/	/    /g'
 alias svn svn --username="tangpeilei" --password="8Il2sY9hLqz" $*
+alias cmake cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 $*
+alias pushall bash ~/.emacs.conf/pushall.sh
+alias mycscope sh ~/.emacs.conf/mycscope.sh
+alias b cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .
+alias work cd /home/jacktang/svnroot/Server
+alias sudo eshell/sudo $*
+alias f find-file $1
+alias fo find-file-other-window $1
+alias d dired $1
+alias clear aweshell-clear-buffer
+alias ll ls -al
+alias j my-eshell/z $*
+alias rmcmake rm -rf CMakeCache.txt CMakeFiles Makefile cmake_install.cmake

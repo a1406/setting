@@ -165,7 +165,11 @@
 (define-key evil-emacs-state-map "\M-w" 'kill-region)
 (define-key evil-emacs-state-map "z" 'repeat)
 (define-key evil-emacs-state-map "g" 'goto-line)
-(define-key evil-emacs-state-map "s" 'save-buffer)
+(define-key evil-emacs-state-map "s" (lambda() (interactive)
+				       (if (eq major-mode 'eshell-mode)
+					   (insert-char 115)
+					   (save-buffer))))
+
 (define-key evil-emacs-state-map "d" (lambda() (interactive)
 				       (if (region-active-p)
 					   (call-interactively #'kill-region)
