@@ -26,5 +26,25 @@ services:
     volumes:
       - /home/jack/docker-test/sharedata:/mnt/sharedata
       - ./www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./docker-php-ext-sodium.ini:/usr/local/etc/php/conf.d/docker-php-ext-sodium.ini
+      - ./extensions/redis.so:/usr/local/lib/php/extensions/no-debug-non-zts-20190902/redis.so
       - ./scripts:/var/www/html/scripts
+
+  mysql:
+    image: mysql
+    # restart: always
+    # hostname: zoo2
+    # ports:
+    #   - 2182:2181
+    environment:
+      MYSQL_ROOT_PASSWORD: 111111
+    #   ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zoo3:2888:3888;2181
+    volumes:
+      - /home/jack/docker-test/sharedata:/mnt/sharedata
+
+  redis:
+    image: redis
+    volumes:
+      - /home/jack/docker-test/sharedata:/mnt/sharedata
+      
 
