@@ -1,4 +1,7 @@
 (require 'gdb-mi)
+;; (setq gdb-mi-decode-strings 'utf-8)
+(setq gdb-mi-decode-strings t)
+
 (defun game-gdb ()
   (interactive)
   (let* (
