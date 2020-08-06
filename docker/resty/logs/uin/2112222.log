@@ -1,0 +1,10 @@
+21:07:28 utils.lua(397) -------- table --------
+21:07:28 utils.lua(398) {
+21:07:28 utils.lua(424)  time=234324, uin=2112222, act=upload_pre_photo, 
+21:07:28 utils.lua(428) }
+21:07:28 skin_func.lua(96) ----enter---- act=upload_pre_photo
+21:07:28 log.lua(348) [logs/miniw/auth_20200720.log] 21:07:28|172.28.0.1     |0|upload_pre_photo|no_s2t|2112222|/work/skin?act=upload_pre_photo&time=234324&uin=2112222
+21:07:28 skin_func.lua(163) call upload_pre_photo
+21:07:28 skin_func.lua(183) http://indevelop.mini1.cn:8080/miniw/upload/?type=photo&node=1&dir=20200720&token=b8354e441ff6985aacdf0d9d5a4692f0&uin=2112222
+21:07:28 time.lua(58) cost_time_all_0=0
+21:10:25 utils.lua(397) -------- table --------

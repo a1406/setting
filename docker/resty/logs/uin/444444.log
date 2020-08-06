@@ -1,0 +1,11 @@
+21:13:56 utils.lua(397) -------- table --------
+21:13:56 utils.lua(398) {
+21:13:56 utils.lua(424)  time=234324, uin=444444, act=upload_pre_photo, 
+21:13:56 utils.lua(428) }
+21:13:56 skin_func.lua(96) ----enter---- act=upload_pre_photo
+21:13:56 skin_gg.lua(88) create new skin ns_ssdbDcClient
+21:13:56 ssdbDcClient.lua(62) call ssdbDcClient:new
+21:13:56 log.lua(348) [logs/miniw/auth_20200720.log] 21:13:56|172.28.0.1     |0|upload_pre_photo|no_s2t|444444|/work/skin?act=upload_pre_photo&time=234324&uin=444444
+21:13:56 skin_func.lua(163) call upload_pre_photo
+21:13:56 skin_func.lua(183) http://indevelop.mini1.cn:8080/miniw/upload/?type=photo&node=1&dir=20200720&token=7a0adb9f85dfefb52f8fc0679a9ab64b&uin=444444
+21:13:56 time.lua(58) cost_time_all_0=0

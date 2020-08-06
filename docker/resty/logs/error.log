@@ -1,0 +1,6 @@
+2020/07/20 21:00:10 [notice] 19#19: signal process started
+2020/07/20 21:00:10 [error] 19#19: open() "/usr/local/openresty/nginx/logs/nginx.pid" failed (2: No such file or directory)
+2020/07/20 21:01:33 [notice] 7#7: signal process started
+2020/07/20 21:04:26 [notice] 24#24: signal process started
+2020/07/20 21:11:35 [notice] 31#31: signal process started
+2020/07/20 21:13:42 [notice] 33#33: signal process started
