@@ -148,20 +148,10 @@
 
 
 ;;避免太多的无用信息
-;; (defun lsp--imenu-create-index ()
-;;   "Create imenu index from document symbols."
-;;   (let ((symbols (lsp--get-document-symbols)))
-;;     ;; (if (lsp--imenu-hierarchical-p symbols)
-;;     ;;     (lsp--imenu-create-hierarchical-index symbols)
-;;       (mapcar (lambda (nested-alist)
-;;                 (cons (car nested-alist)
-;;                       (mapcar #'lsp--symbol-to-imenu-elem (cdr nested-alist))))
-;;               (seq-group-by #'lsp--get-symbol-type (lsp--imenu-filter-symbols symbols)))))
-;; )
-(defun lsp--imenu-hierarchical-p (symbols)
-  "Determine whether any element in SYMBOLS has children."
-  nil
-  )
+;; (defun lsp--imenu-hierarchical-p (symbols)
+;;   "Determine whether any element in SYMBOLS has children."
+;;   nil
+;;   )
 
 
 ;;避免flychecker弹出checker相关信息

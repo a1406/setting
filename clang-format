@@ -43,6 +43,7 @@ SpaceAfterCStyleCast: false
 #tab键盘的宽度
 TabWidth: 4
 UseTab: ForIndentation
+SortIncludes:    false
 
 ColumnLimit: 0
 BreakBeforeBraces: Custom
