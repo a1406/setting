@@ -1,4 +1,4 @@
-alias dock docker-compose
+alias dock docker-compose $*
 alias rmcmake rm -rf CMakeCache.txt CMakeFiles Makefile cmake_install.cmake
 alias j my-eshell/z $*
 alias ll ls -al

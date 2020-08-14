@@ -1,0 +1,162 @@
+* 收数据
+** rd_read
+#define rd_read(fd, buf, sz) read(fd, buf, sz)
+*** int rd_kafka_transport_poll(rd_kafka_transport_t *rktrans, int tmout)
+rd_kafka_transport_io_serve
+
+***  static void rd_kafka_mock_cluster_op_io(rd_kafka_mock_cluster_t *mcluster,
+rd_kafka_mock_cluster_thread_main
+rd_kafka_mock_cluster_new
+
+** recv
+***     rd_kafka_transport_socket_recv0(rd_kafka_transport_t *rktrans,
+rd_kafka_transport_socket_recv
+rd_kafka_transport_recv
+
+**** rd_kafka_transport_recv
+***** rd_kafka_transport_framed_recv
+
+***** rd_kafka_mock_connection_read_request
+rd_kafka_mock_connection_io
+rd_kafka_mock_connection_new
+#+BEGIN_SRC 
+	rd_kafka_mock_cluster_io_add(mrkb->cluster,
+	                             mconn->transport->rktrans_s,
+	                             POLLIN,
+	                             rd_kafka_mock_connection_io,
+	                             mconn);
+
+#+END_SRC
+rd_kafka_mock_broker_listen_io
+rd_kafka_mock_broker_new
+rd_kafka_mock_cluster_new
+rd_kafka_new
+
+***** rd_kafka_recv
+rd_kafka_transport_io_event
+rd_kafka_transport_io_serve
+rd_kafka_broker_ops_io_serve
+****** rd_kafka_broker_ops_io_serve
+rd_kafka_broker_serve 调用下述三个函数
+rd_kafka_broker_internal_serve
+rd_kafka_broker_producer_serve
+rd_kafka_broker_consumer_serve
+
+******* rd_kafka_broker_serve
+rd_kafka_broker_thread_main
+rd_kafka_broker_add
+
+* consume 调用栈
+#+BEGIN_SRC 
+  1    Thread 0x7ffff77d7500 (LWP 5757) "consumer"       0x00007ffff79bd158 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /usr/lib/libpthread.so.0
+* 2    Thread 0x7ffff7785700 (LWP 5761) "rdk:broker-1"   0x00007ffff78d005f in poll () from /usr/lib/libc.so.6
+  3    Thread 0x7ffff6df4700 (LWP 5762) "rdk:main"       0x00007ffff79bd158 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /usr/lib/libpthread.so.0
+  4    Thread 0x7ffff6463700 (LWP 5763) "rdk:broker-1"   0x00007ffff79bd158 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /usr/lib/libpthread.so.0
+  5    Thread 0x7ffff5ad2700 (LWP 5764) "rdk:broker1001" 0x00007ffff78d005f in poll () from /usr/lib/libc.so.6
+  6    Thread 0x7ffff5119700 (LWP 5765) "rdk:broker1003" 0x00007ffff79bd158 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /usr/lib/libpthread.so.0
+  7    Thread 0x7fffeffff700 (LWP 5766) "rdk:broker1002" 0x00007ffff79bd158 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /usr/lib/libpthread.so.0
+#+END_SRC
+
+** Thread 0x7ffff77d7500 (LWP 5757) "consumer" 
+#+BEGIN_SRC 
+#0  0x00007ffff79bd158 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /usr/lib/libpthread.so.0
+#1  0x00007ffff79c349d in cnd_timedwait () from /usr/lib/libpthread.so.0
+#2  0x0000555555611f17 in cnd_timedwait_abs (cnd=0x5555557399d8, mtx=0x5555557399b0, tspec=0x7fffffffe180) at tinycthread_extra.c:110
+#3  0x00005555555c5a0f in rd_kafka_q_pop_serve (rkq=0x5555557399b0, timeout_us=100000, version=0, cb_type=RD_KAFKA_Q_CB_RETURN, callback=0x0, opaque=0x0)
+    at rdkafka_queue.c:443
+#4  0x00005555555c5ac3 in rd_kafka_q_pop (rkq=0x5555557399b0, timeout_us=100000, version=0) at rdkafka_queue.c:470
+#5  0x000055555557d89c in rd_kafka_consume0 (rk=0x5555557382a0, rkq=0x5555557399b0, timeout_ms=100) at rdkafka.c:3034
+#6  0x000055555557db3c in rd_kafka_consumer_poll (rk=0x5555557382a0, timeout_ms=100) at rdkafka.c:3152
+#7  0x00005555555725fb in main (argc=5, argv=0x7fffffffe5d8) at consumer.c:241
+#+END_SRC
+
+** Thread 0x7ffff7785700 (LWP 5761) "rdk:broker-1"
+#+BEGIN_SRC 
+#0  0x00007ffff78d005f in poll () from /usr/lib/libc.so.6
+#1  0x00005555555bf60a in rd_kafka_transport_poll (rktrans=0x7fffd8001410, tmout=1000) at rdkafka_transport.c:1037
+#2  0x00005555555bed55 in rd_kafka_transport_io_serve (rktrans=0x7fffd8001410, timeout_ms=1000) at rdkafka_transport.c:849
+#3  0x0000555555592e55 in rd_kafka_broker_ops_io_serve (rkb=0x555555739bd0, abs_timeout=4356164600) at rdkafka_broker.c:3509
+#4  0x000055555559bb94 in rd_kafka_broker_consumer_serve (rkb=0x555555739bd0, abs_timeout=4356164600) at rdkafka_broker.c:5140
+#5  0x000055555559bd4c in rd_kafka_broker_serve (rkb=0x555555739bd0, timeout_ms=1000) at rdkafka_broker.c:5246
+#6  0x000055555559c325 in rd_kafka_broker_thread_main (arg=0x555555739bd0) at rdkafka_broker.c:5409
+#7  0x00007ffff79b64ea in start_thread () from /usr/lib/libpthread.so.0
+#8  0x00007ffff78dabf3 in clone () from /usr/lib/libc.so.6
+#+END_SRC
+
+** Thread 0x7ffff6df4700 (LWP 5762) "rdk:main"
+#+BEGIN_SRC 
+#0  0x00007ffff79bd158 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /usr/lib/libpthread.so.0
+#1  0x00007ffff79c349d in cnd_timedwait () from /usr/lib/libpthread.so.0
+#2  0x0000555555611f17 in cnd_timedwait_abs (cnd=0x5555557392c8, mtx=0x5555557392a0, tspec=0x7ffff6decf70) at tinycthread_extra.c:110
+#3  0x00005555555c5c2d in rd_kafka_q_serve (rkq=0x5555557392a0, timeout_ms=973, max_cnt=0, cb_type=RD_KAFKA_Q_CB_CALLBACK, callback=0x0, opaque=0x0)
+    at rdkafka_queue.c:518
+#4  0x000055555557b644 in rd_kafka_thread_main (arg=0x5555557382a0) at rdkafka.c:2075
+#5  0x00007ffff79b64ea in start_thread () from /usr/lib/libpthread.so.0
+#6  0x00007ffff78dabf3 in clone () from /usr/lib/libc.so.6
+#+END_SRC
+
+** Thread 0x7ffff6463700 (LWP 5763) "rdk:broker-1"
+#+BEGIN_SRC 
+#0  0x00007ffff79bd158 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /usr/lib/libpthread.so.0
+#1  0x00007ffff79c349d in cnd_timedwait () from /usr/lib/libpthread.so.0
+#2  0x0000555555611f17 in cnd_timedwait_abs (cnd=0x55555573b6c8, mtx=0x55555573b6a0, tspec=0x7ffff645be90) at tinycthread_extra.c:110
+#3  0x00005555555c5a0f in rd_kafka_q_pop_serve (rkq=0x55555573b6a0, timeout_us=1000000, version=0, cb_type=RD_KAFKA_Q_CB_RETURN, callback=0x0, opaque=0x0)
+    at rdkafka_queue.c:443
+#4  0x00005555555c5ac3 in rd_kafka_q_pop (rkq=0x55555573b6a0, timeout_us=1000000, version=0) at rdkafka_queue.c:470
+#5  0x0000555555592d66 in rd_kafka_broker_ops_serve (rkb=0x55555573ab00, timeout_us=1000000) at rdkafka_broker.c:3464
+#6  0x0000555555592e7f in rd_kafka_broker_ops_io_serve (rkb=0x55555573ab00, abs_timeout=4356132024) at rdkafka_broker.c:3517
+#7  0x000055555559345c in rd_kafka_broker_internal_serve (rkb=0x55555573ab00, abs_timeout=4356132024) at rdkafka_broker.c:3682
+#8  0x000055555559bcf7 in rd_kafka_broker_serve (rkb=0x55555573ab00, timeout_ms=1000) at rdkafka_broker.c:5242
+#9  0x000055555559bf59 in rd_kafka_broker_thread_main (arg=0x55555573ab00) at rdkafka_broker.c:5288
+#10 0x00007ffff79b64ea in start_thread () from /usr/lib/libpthread.so.0
+#11 0x00007ffff78dabf3 in clone () from /usr/lib/libc.so.6
+#+END_SRC
+
+** Thread 0x7ffff5ad2700 (LWP 5764) "rdk:broker1001"
+#+BEGIN_SRC 
+#0  0x00007ffff78d005f in poll () from /usr/lib/libc.so.6
+#1  0x00005555555bf60a in rd_kafka_transport_poll (rktrans=0x7fffe8001c50, tmout=816) at rdkafka_transport.c:1037
+#2  0x00005555555bed55 in rd_kafka_transport_io_serve (rktrans=0x7fffe8001c50, timeout_ms=816) at rdkafka_transport.c:849
+#3  0x0000555555592e55 in rd_kafka_broker_ops_io_serve (rkb=0x55555573b8c0, abs_timeout=4356150033) at rdkafka_broker.c:3509
+#4  0x000055555559bb94 in rd_kafka_broker_consumer_serve (rkb=0x55555573b8c0, abs_timeout=4356150033) at rdkafka_broker.c:5140
+#5  0x000055555559bd4c in rd_kafka_broker_serve (rkb=0x55555573b8c0, timeout_ms=1000) at rdkafka_broker.c:5246
+#6  0x000055555559c325 in rd_kafka_broker_thread_main (arg=0x55555573b8c0) at rdkafka_broker.c:5409
+#7  0x00007ffff79b64ea in start_thread () from /usr/lib/libpthread.so.0
+#8  0x00007ffff78dabf3 in clone () from /usr/lib/libc.so.6
+#+END_SRC
+
+** Thread 0x7ffff5119700 (LWP 5765) "rdk:broker1003"
+#+BEGIN_SRC 
+#0  0x00007ffff79bd158 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /usr/lib/libpthread.so.0
+#1  0x00007ffff79c349d in cnd_timedwait () from /usr/lib/libpthread.so.0
+#2  0x0000555555611f17 in cnd_timedwait_abs (cnd=0x555555736448, mtx=0x555555736420, tspec=0x7ffff5111d80) at tinycthread_extra.c:110
+#3  0x00005555555c5a0f in rd_kafka_q_pop_serve (rkq=0x555555736420, timeout_us=999998, version=0, cb_type=RD_KAFKA_Q_CB_RETURN, callback=0x0, opaque=0x0)
+    at rdkafka_queue.c:443
+#4  0x00005555555c5ac3 in rd_kafka_q_pop (rkq=0x555555736420, timeout_us=999998, version=0) at rdkafka_queue.c:470
+#5  0x0000555555592d66 in rd_kafka_broker_ops_serve (rkb=0x7ffff0002810, timeout_us=999998) at rdkafka_broker.c:3464
+#6  0x0000555555592e7f in rd_kafka_broker_ops_io_serve (rkb=0x7ffff0002810, abs_timeout=4356132075) at rdkafka_broker.c:3517
+#7  0x000055555559bb94 in rd_kafka_broker_consumer_serve (rkb=0x7ffff0002810, abs_timeout=4356132075) at rdkafka_broker.c:5140
+#8  0x000055555559bd4c in rd_kafka_broker_serve (rkb=0x7ffff0002810, timeout_ms=1000) at rdkafka_broker.c:5246
+#9  0x000055555559bf59 in rd_kafka_broker_thread_main (arg=0x7ffff0002810) at rdkafka_broker.c:5288
+#10 0x00007ffff79b64ea in start_thread () from /usr/lib/libpthread.so.0
+#11 0x00007ffff78dabf3 in clone () from /usr/lib/libc.so.6
+#+END_SRC
+
+** Thread 0x7fffeffff700 (LWP 5766) "rdk:broker1002"
+#+BEGIN_SRC 
+#0  0x00007ffff79bd158 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /usr/lib/libpthread.so.0
+#1  0x00007ffff79c349d in cnd_timedwait () from /usr/lib/libpthread.so.0
+#2  0x0000555555611f17 in cnd_timedwait_abs (cnd=0x7ffff00041c8, mtx=0x7ffff00041a0, tspec=0x7fffefff7d80) at tinycthread_extra.c:110
+#3  0x00005555555c5a0f in rd_kafka_q_pop_serve (rkq=0x7ffff00041a0, timeout_us=999999, version=0, cb_type=RD_KAFKA_Q_CB_RETURN, callback=0x0, opaque=0x0)
+    at rdkafka_queue.c:443
+#4  0x00005555555c5ac3 in rd_kafka_q_pop (rkq=0x7ffff00041a0, timeout_us=999999, version=0) at rdkafka_queue.c:470
+#5  0x0000555555592d66 in rd_kafka_broker_ops_serve (rkb=0x7ffff00035c0, timeout_us=999999) at rdkafka_broker.c:3464
+#6  0x0000555555592e7f in rd_kafka_broker_ops_io_serve (rkb=0x7ffff00035c0, abs_timeout=4356132039) at rdkafka_broker.c:3517
+#7  0x000055555559bb94 in rd_kafka_broker_consumer_serve (rkb=0x7ffff00035c0, abs_timeout=4356132039) at rdkafka_broker.c:5140
+#8  0x000055555559bd4c in rd_kafka_broker_serve (rkb=0x7ffff00035c0, timeout_ms=1000) at rdkafka_broker.c:5246
+#9  0x000055555559bf59 in rd_kafka_broker_thread_main (arg=0x7ffff00035c0) at rdkafka_broker.c:5288
+#10 0x00007ffff79b64ea in start_thread () from /usr/lib/libpthread.so.0
+#11 0x00007ffff78dabf3 in clone () from /usr/lib/libc.so.6
+#+END_SRC
+
+
