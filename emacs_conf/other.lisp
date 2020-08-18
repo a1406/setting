@@ -801,3 +801,14 @@ The argument has the same meaning as in `apropos'."
 			  (xref-push-marker-stack)
 			  (call-interactively 'query-replace)
 			  ))
+
+
+(defun my-pretty-lua ()
+  (interactive)
+  (let ((output "11")
+	(output2 "22")
+	)
+    (setq output2 (format-all--buffer-easy "lua" (expand-file-name "~/.emacs.conf/pretty.lua")))
+    (erase-buffer)
+    (insert (car output2))
+    ))
