@@ -803,6 +803,7 @@ The argument has the same meaning as in `apropos'."
 			  ))
 
 
+(require 'format-all)
 (defun my-pretty-lua ()
   (interactive)
   (let ((output "11")
