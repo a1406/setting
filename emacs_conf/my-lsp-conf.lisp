@@ -1,5 +1,5 @@
 (require 'lsp)
-(require 'lsp-clients)
+;;(require 'lsp-clients)
 (require 'lsp-ui)
 (require 'ivy-xref)
 (require 'projectile)
@@ -157,3 +157,23 @@
 ;;避免flychecker弹出checker相关信息
 (defun flycheck-verify-checker (checker)
   )
+
+;; (add-hook 'lsp-after-initialize-hook (lambda ()
+;; 	  (lsp-defun lsp-ivy--format-symbol-match
+;; 	      ((&SymbolInformation :name :kind :container-name? :location (&Location :uri))
+;; 	       project-root)
+;; 	    "Convert the match returned by `lsp-mode` into a candidate string."
+;; 	    (let* ((type (if (>= kind (length lsp-ivy-symbol-kind-to-face))
+;; 			     nil
+;; 			     (elt lsp-ivy-symbol-kind-to-face kind)))
+;; 		   (typestr (if lsp-ivy-show-symbol-kind
+;; 				(propertize (format "[%s] " (car type)) 'face (cdr type))
+;; 				""))
+		   
+;; 		   (pathstr (if lsp-ivy-show-symbol-filename
+;; 				(propertize (format " · %s" (file-relative-name (lsp--uri-to-path uri) project-root))
+;; 					    'face font-lock-comment-face) "")))
+;; 	      (concat typestr (if (or (null container-name?) (string-empty-p container-name?))
+;; 				  (format "%s" name)
+;; 				  (format "%s.%s" container-name? name)) pathstr))))
+;; 	  )
