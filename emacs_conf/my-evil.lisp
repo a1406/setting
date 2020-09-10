@@ -177,6 +177,10 @@
 (define-key evil-emacs-state-map "k" 'kill-line)
 (define-key evil-emacs-state-map "oo" 'other-window)
 (define-key evil-emacs-state-map "of" 'delete-other-windows)
+(define-key evil-emacs-state-map "om"
+  (lambda() (interactive)
+    (magit-status)
+    (turn-off-evil-mode)))
 (define-key evil-emacs-state-map "x" 'counsel-M-x)
 (define-key evil-emacs-state-map "u" 'undo)
 (define-key evil-emacs-state-map "r" 'undo-tree-redo)
