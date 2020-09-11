@@ -180,7 +180,7 @@
 (define-key evil-emacs-state-map "om"
   (lambda() (interactive)
     (magit-status)
-    (turn-off-evil-mode)))
+    (evil-mode -1)))
 (define-key evil-emacs-state-map "x" 'counsel-M-x)
 (define-key evil-emacs-state-map "u" 'undo)
 (define-key evil-emacs-state-map "r" 'undo-tree-redo)
