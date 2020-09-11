@@ -813,3 +813,12 @@ The argument has the same meaning as in `apropos'."
     (erase-buffer)
     (insert (car output2))
     ))
+
+(defun my-magit-mode-bury-buffer (orig-fun &rest args)
+  ;; (message "display-buffer called with args %S" args)
+  (let ((res (apply orig-fun args)))
+    ;; (message "display-buffer returned %S" res)
+    (evil-mode 1)
+    res))
+
+(advice-add 'magit-mode-bury-buffer :around #'my-magit-mode-bury-buffer)
