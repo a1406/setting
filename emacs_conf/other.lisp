@@ -356,14 +356,14 @@ Value is t if a query was formerly required."
 
 (require 'counsel)
 ;;优先使用设置的tags file name
-(defun counsel-etags-locate-tags-file ()
-  "Find tags file: Search in parent directory or use `tags-file-name'."
-  (let ((dir))
-    (if (and tags-file-name (file-exists-p tags-file-name))
-	tags-file-name
-      (progn 
-	(setq dir (locate-dominating-file default-directory "TAGS"))
-	(concat dir "TAGS")))))
+;; (defun counsel-etags-locate-tags-file ()
+;;   "Find tags file: Search in parent directory or use `tags-file-name'."
+;;   (let ((dir))
+;;     (if (and tags-file-name (file-exists-p tags-file-name))
+;; 	tags-file-name
+;;       (progn 
+;; 	(setq dir (locate-dominating-file default-directory "TAGS"))
+;; 	(concat dir "TAGS")))))
 	      
 ;;去掉^M, 否则不能修改
 ;; (defun counsel-grep-like-occur (cmd-template)
@@ -429,40 +429,55 @@ Value is t if a query was formerly required."
 ;;       cands))))
 ;; ;; (mapcar #'counsel--normalize-grep-match cands))))
 
-(defun counsel-grep-like-occur (cmd-template)
-  ;; (message "cmd-template = %s" cmd-template)
+;; (defun counsel-grep-like-occur (cmd-template)
+;;   ;; (message "cmd-template = %s" cmd-template)
+;;   (if my_use-rg
+;;       (progn
+;; 	(setq rgfile (format "%s/rg.files"  (my-cscope-guess-root-directory)))
+;; 	(if (f-exists-p rgfile)
+;; 	    (setq process-environment (setenv-internal process-environment "RIPGREP_CONFIG_PATH" rgfile t)))))
+;;   (unless (eq major-mode 'ivy-occur-grep-mode)
+;;     (ivy-occur-grep-mode)
+;;     (setq default-directory (ivy-state-directory ivy-last)))
+;;   (setq ivy-text
+;;         (and (string-match "\"\\(.*\\)\"" (buffer-name))
+;;              (match-string 1 (buffer-name))))
+;;   (let* ((cmd
+;;           (if (functionp cmd-template)
+;;               (funcall cmd-template ivy-text)
+;;             (let* ((command-args (counsel--split-command-args ivy-text))
+;;                    (regex (counsel--grep-regex (cdr command-args)))
+;;                    (switches (concat (car command-args)
+;;                                      (counsel--ag-extra-switches regex))))
+;;               (format cmd-template
+;;                       (concat
+;;                        switches
+;;                        (shell-quote-argument regex))))))
+;;          (cands (counsel--split-string (shell-command-to-string cmd))))
+;;     ;; (swiper--occur-insert-lines (mapcar #'counsel--normalize-grep-match cands))))
+;;     (swiper--occur-insert-lines
+;;      (mapcar
+;;       (lambda (cand)
+;; 	(setq cand (replace-regexp-in-string "" "" cand))	
+;; 	(concat "./" cand)
+;; 	(counsel--normalize-grep-match cand)
+;; 	)
+;;       cands))))
+(defun my-add-rg-env (orig-fun &rest args)
+  ;; (message "display-buffer called with args %S" args)
   (if my_use-rg
       (progn
 	(setq rgfile (format "%s/rg.files"  (my-cscope-guess-root-directory)))
 	(if (f-exists-p rgfile)
 	    (setq process-environment (setenv-internal process-environment "RIPGREP_CONFIG_PATH" rgfile t)))))
-  (unless (eq major-mode 'ivy-occur-grep-mode)
-    (ivy-occur-grep-mode)
-    (setq default-directory (ivy-state-directory ivy-last)))
-  (setq ivy-text
-        (and (string-match "\"\\(.*\\)\"" (buffer-name))
-             (match-string 1 (buffer-name))))
-  (let* ((cmd
-          (if (functionp cmd-template)
-              (funcall cmd-template ivy-text)
-            (let* ((command-args (counsel--split-command-args ivy-text))
-                   (regex (counsel--grep-regex (cdr command-args)))
-                   (switches (concat (car command-args)
-                                     (counsel--ag-extra-switches regex))))
-              (format cmd-template
-                      (concat
-                       switches
-                       (shell-quote-argument regex))))))
-         (cands (counsel--split-string (shell-command-to-string cmd))))
-    ;; (swiper--occur-insert-lines (mapcar #'counsel--normalize-grep-match cands))))
-    (swiper--occur-insert-lines
-     (mapcar
-      (lambda (cand)
-	(setq cand (replace-regexp-in-string "" "" cand))	
-	(concat "./" cand)
-	(counsel--normalize-grep-match cand)
-	)
-      cands))))
+  
+  (let ((res (apply orig-fun args)))
+    ;; (message "display-buffer returned %S" res)
+    res))
+
+(advice-add 'counsel-grep-like-occur :around #'my-add-rg-env)
+(advice-add 'counsel-ag-function :around #'my-add-rg-env)
+
 
 (defun my-choose-num (beg end)
   (interactive "r")
@@ -737,34 +752,34 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
   (counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) "--proto" nil)  
   )
 
-(if my_use-rg
-(defun counsel-ag-function (string)
-  "Grep in the current directory for STRING."
-  (let* ((command-args (counsel--split-command-args string))
-         (search-term (cdr command-args))
-	 (rgfile (format "%s/rg.files"  (my-cscope-guess-root-directory)))
-	 (cmd)
-	 )
-    (or
-     (let ((ivy-text search-term))
-       (ivy-more-chars))
-     (let* ((default-directory (ivy-state-directory ivy-last))
-            (regex (counsel--grep-regex search-term))
-            (switches (concat (car command-args)
-                              (counsel--ag-extra-switches regex)
-                              (if (ivy--case-fold-p string)
-                                  " -i "
-                                  " -s "))))
-       (setq cmd (counsel--format-ag-command
-                                switches
-                                (shell-quote-argument regex)))
-       (if my-counsel-rag-sp
-	   (setq cmd (format "%s | grep -i '\\(\\.h:[0-9]\\|::%s\\|Omitted long matching line\\)'" cmd string)))
-       (if (f-exists-p rgfile)
-	   (setq process-environment (setenv-internal process-environment "RIPGREP_CONFIG_PATH" rgfile t)))
-       (counsel--async-command cmd)
-       nil))))    
-)
+;; (if my_use-rg
+;; (defun counsel-ag-function (string)
+;;   "Grep in the current directory for STRING."
+;;   (let* ((command-args (counsel--split-command-args string))
+;;          (search-term (cdr command-args))
+;; 	 (rgfile (format "%s/rg.files"  (my-cscope-guess-root-directory)))
+;; 	 (cmd)
+;; 	 )
+;;     (or
+;;      (let ((ivy-text search-term))
+;;        (ivy-more-chars))
+;;      (let* ((default-directory (ivy-state-directory ivy-last))
+;;             (regex (counsel--grep-regex search-term))
+;;             (switches (concat (car command-args)
+;;                               (counsel--ag-extra-switches regex)
+;;                               (if (ivy--case-fold-p string)
+;;                                   " -i "
+;;                                   " -s "))))
+;;        (setq cmd (counsel--format-ag-command
+;;                                 switches
+;;                                 (shell-quote-argument regex)))
+;;        (if my-counsel-rag-sp
+;; 	   (setq cmd (format "%s | grep -i '\\(\\.h:[0-9]\\|::%s\\|Omitted long matching line\\)'" cmd string)))
+;;        (if (f-exists-p rgfile)
+;; 	   (setq process-environment (setenv-internal process-environment "RIPGREP_CONFIG_PATH" rgfile t)))
+;;        (counsel--async-command cmd)
+;;        nil))))    
+;; )
 
 ;; 添加了thing-at-point symbol, 来设置预设的输入
 ;;
