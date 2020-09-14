@@ -2,6 +2,12 @@
 ;; (setq gdb-mi-decode-strings 'utf-8)
 (setq gdb-mi-decode-strings t)
 
+(defun my-get-utf ()
+  (interactive)
+  (beginning-of-buffer)
+  (replace-regexp "\\\\\\u\\(....\\)" "&#x\\1;")
+  )
+
 (defun game-gdb ()
   (interactive)
   (let* (
