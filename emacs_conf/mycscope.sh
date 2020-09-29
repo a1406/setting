@@ -7,6 +7,7 @@ find . -type f -name "*.php" | grep -v CMakeFiles | grep -v "ccls-cache"  >> csc
 find . -type f -name "*.proto" | grep -v CMakeFiles | grep -v "ccls-cache"  >> cscope.files
 find . -type f -name "*.java" | grep -v CMakeFiles | grep -v "ccls-cache"  >> cscope.files
 find . -type f -name "*.scala" | grep -v CMakeFiles | grep -v "ccls-cache"  >> cscope.files
+find . -type f -name "*.go" | grep -v CMakeFiles | grep -v "ccls-cache"  >> cscope.files
 #dos2unix `cat cscope.files` >/dev/null 2>/dev/null
 #cscope -bq
 ~/.emacs.conf/create_cscopefile_tags.sh
