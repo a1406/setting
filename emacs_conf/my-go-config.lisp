@@ -17,8 +17,11 @@
   (define-key go-mode-map "\C-c\C-c"  'comment-or-uncomment-region)
   ;; (define-key go-mode-map (kbd "M-.") 'godef-jump)  
   (lsp)
-  (flycheck-select-checker 'lsp-ui)
+  (if my-use-gtags-default
+      (add-to-list 'xref-backend-functions 'global-tags-xref-backend)	
+      )
   (flymake-mode-off)
+  (flycheck-select-checker 'go-gofmt)
   )
 
 (add-hook 'go-mode-hook 'my-go-mode-common-hook)
