@@ -714,11 +714,11 @@ Value is t if a query was formerly required."
 
 (if my_use-rg
     (setq counsel-grep-base-command
-	  "rg -i -M 120 --no-heading --line-number --color never %s %s")
+	  "rg -i -L -M 120 --no-heading --line-number --color never %s %s")
     (setq counsel-grep-base-command
-	  "ag -i --noheading --numbers --nocolor %s %s"))
+	  "ag -i -f --noheading --numbers --nocolor %s %s"))
 (setq counsel-rg-base-command
-      "rg -M 220 --with-filename --no-heading --line-number --color never %s")
+      "rg -M 220 -L --with-filename --no-heading --line-number --color never %s")
 
 (setq my-counsel-rag-sp nil)
 (defun my-counsel-rag-sp (&optional initial-input initial-directory extra-rg-args rg-prompt)
@@ -731,7 +731,7 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
   (setq my-counsel-rag-sp t)  
   (if my_use-rg
       (counsel-rg (thing-at-point 'symbol) (my-cscope-guess-root-directory) "-i")
-      (counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) (format "-E %s/%s" (my-cscope-guess-root-directory) cscope-index-file) nil))
+      (counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) (format "-f -E %s/%s" (my-cscope-guess-root-directory) cscope-index-file) nil))
   (setq my-counsel-rag-sp nil)  
   )
 
@@ -745,7 +745,7 @@ RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument."
   (setq my-counsel-rag-sp nil)  
   (if my_use-rg
 	(counsel-rg (thing-at-point 'symbol) (my-cscope-guess-root-directory) "-i")
-    (counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) (format "-E %s/%s" (my-cscope-guess-root-directory) cscope-index-file) nil)))
+    (counsel-ag (thing-at-point 'symbol) (my-cscope-guess-root-directory) (format "-f -E %s/%s" (my-cscope-guess-root-directory) cscope-index-file) nil)))
 
 (defun my-counsel-proto (&optional initial-input initial-directory extra-rg-args rg-prompt)
   "Grep for a string in the current directory using rg.
