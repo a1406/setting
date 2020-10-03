@@ -17,6 +17,11 @@
   (define-key go-mode-map "\C-c\C-c"  'comment-or-uncomment-region)
   ;; (define-key go-mode-map (kbd "M-.") 'godef-jump)  
   (lsp)
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t)
+  (lsp-register-custom-settings
+   '(("gopls.completeUnimported" t t)
+     ("gopls.staticcheck" t t)))
   (if my-use-gtags-default
       (add-to-list 'xref-backend-functions 'global-tags-xref-backend)	
       )
