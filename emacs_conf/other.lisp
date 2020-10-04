@@ -849,6 +849,28 @@ The argument has the same meaning as in `apropos'."
     (call-process-shell-command command nil t t )
     ))
 
+(defun my-reload-symbol-file ()
+  (interactive)
+  (let* ((file-name (buffer-file-name))
+	 (flist (split-string file-name "/"))
+	 (t_path "")
+	 (t_path2 nil)
+	 )
+    (while flist
+      (setq t_path (format "%s/%s" t_path (car flist)))
+      (setq t_path2 (file-symlink-p t_path))
+
+      (if t_path2
+	  (message "symbol path %s to %s" t_path t_path2))
+      (if t_path2
+	  (setq t_path t_path2))
+      ;; (message "file path: %s" t_path)
+      (setq flist (cdr flist))
+      )
+    (kill-current-buffer)      
+    (find-file t_path)
+    ))
+
 (defun my-magit-mode-bury-buffer (orig-fun &rest args)
   ;; (message "display-buffer called with args %S" args)
   (let ((res (apply orig-fun args)))
