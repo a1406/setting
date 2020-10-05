@@ -13,7 +13,7 @@
 	  (display-line-numbers-mode)
 	(linum-mode 1))
 
-  (define-key go-mode-map (kbd "TAB") 'tab-indent-or-complete)
+  ;; (define-key go-mode-map (kbd "TAB") 'tab-indent-or-complete)
   (define-key go-mode-map "\C-c\C-c"  'comment-or-uncomment-region)
   ;; (define-key go-mode-map (kbd "M-.") 'godef-jump)  
   (lsp)
