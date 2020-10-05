@@ -855,6 +855,7 @@ The argument has the same meaning as in `apropos'."
 	 (flist (split-string file-name "/"))
 	 (t_path "")
 	 (t_path2 nil)
+	 (t_pos (point))
 	 )
     (while flist
       (setq t_path (format "%s/%s" t_path (car flist)))
@@ -869,6 +870,7 @@ The argument has the same meaning as in `apropos'."
       )
     (kill-current-buffer)      
     (find-file t_path)
+    (goto-char t_pos)
     ))
 
 (defun my-magit-mode-bury-buffer (orig-fun &rest args)
