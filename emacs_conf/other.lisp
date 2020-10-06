@@ -856,21 +856,28 @@ The argument has the same meaning as in `apropos'."
 	 (t_path "")
 	 (t_path2 nil)
 	 (t_pos (point))
+	 (t_car "")	 
 	 )
     (while flist
-      (setq t_path (format "%s/%s" t_path (car flist)))
-      (setq t_path2 (file-symlink-p t_path))
+      (setq t_car (car flist))
+      (if (equal "" t_car)
+	  nil
+	;; (message "t_car = %s" t_car)
+	(setq t_path (format "%s/%s" t_path t_car))
+	(setq t_path2 (file-symlink-p t_path))
 
-      (if t_path2
-	  (message "symbol path %s to %s" t_path t_path2))
-      (if t_path2
-	  (setq t_path t_path2))
+	(if t_path2
+	    (message "symbol path %s to %s" t_path t_path2))
+	(if t_path2
+	    (setq t_path t_path2))
+	)
       ;; (message "file path: %s" t_path)
       (setq flist (cdr flist))
       )
     (kill-current-buffer)      
     (find-file t_path)
     (goto-char t_pos)
+    ;; (message "t_path = %s" t_path)
     ))
 
 (defun my-magit-mode-bury-buffer (orig-fun &rest args)
