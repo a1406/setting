@@ -47,6 +47,9 @@
 	      (if my-use-gtags-default
 		  (add-to-list 'xref-backend-functions 'global-tags-xref-backend)	
 		  )
+	      (lsp-register-custom-settings
+	       '(("gopls.completeUnimported" t t)
+		 ("gopls.staticcheck" t t)))
 	      ))
 
 (dolist (hook '(c-mode-hook c++-mode-hook))

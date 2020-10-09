@@ -1,5 +1,3 @@
-
-;; Customizations for all modes in CC Mode.
 (defun my-go-mode-common-hook ()
   ;; add my personal style and set it for the current buffer
   (hs-minor-mode t)
