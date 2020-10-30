@@ -185,6 +185,7 @@
 (define-key evil-emacs-state-map "u" 'undo-fu-only-undo)
 (define-key evil-emacs-state-map "r" 'undo-fu-only-redo)
 (define-key evil-emacs-state-map "y" 'yank)
+(define-key evil-emacs-state-map " cy" 'counsel-yank-pop)
 (define-key evil-emacs-state-map "m" 'set-mark-command)
 (define-key evil-emacs-state-map "a" (lambda() (interactive)
 				       (if (functionp 'eshell-bol)
