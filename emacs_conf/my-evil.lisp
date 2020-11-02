@@ -135,7 +135,8 @@
 (define-key evil-emacs-state-map " cc" (lambda() (interactive)(my-set-company-backend 'company-capf)))
 (define-key evil-emacs-state-map " ct" (lambda() (interactive)(my-set-company-backend 'company-tabnine)))
 (define-key evil-emacs-state-map " cg" (lambda() (interactive)(my-set-company-backend 'company-gtags)))
-
+(define-key evil-emacs-state-map " cy" 'counsel-yank-pop)
+(define-key evil-emacs-state-map " cb" (lambda() (interactive)(erase-buffer)))
 
 ;; my-jump
 (define-key evil-emacs-state-map " oo" 'point-stack-show)
@@ -185,7 +186,6 @@
 (define-key evil-emacs-state-map "u" 'undo-fu-only-undo)
 (define-key evil-emacs-state-map "r" 'undo-fu-only-redo)
 (define-key evil-emacs-state-map "y" 'yank)
-(define-key evil-emacs-state-map " cy" 'counsel-yank-pop)
 (define-key evil-emacs-state-map "m" 'set-mark-command)
 (define-key evil-emacs-state-map "a" (lambda() (interactive)
 				       (if (functionp 'eshell-bol)
