@@ -241,7 +241,7 @@
 		     (char-to-string ii) ii))
     (with-temp-buffer    (insert ch)    (eval-buffer))
   )
-
+(define-key evil-emacs-state-map (kbd "h <RET>") (lambda() (interactive)(insert-char 10)))
 
 ;; evil match it
 (global-evil-matchit-mode 1)
