@@ -804,19 +804,20 @@ The argument has the same meaning as in `apropos'."
 	)
 
 ;;  (message "bak backend = %s, xref backend = %s" bak-xref-backend xref-backend-functions)    
-    
-    (require 'apropos)
-    (xref--find-xrefs pattern 'apropos
-                      (apropos-parse-pattern
-                       (if (string-equal (regexp-quote pattern) pattern)
-                           ;; Split into words
-                           (or (split-string pattern "[ \t]+" t)
-                               (user-error "No word list given"))
-			   pattern))
-                      nil))
-  (setq xref-backend-functions (append bak-xref-backend))
-  )
 
+  (require 'apropos)
+  (let* ((newpat
+          (if (and (version< emacs-version "28.0.50")
+                   (memq (xref-find-backend) '(elisp etags)))
+              ;; Handle backends in older Emacs.
+              (xref-apropos-regexp pattern)
+            ;; Delegate pattern handling to the backend fully.
+            ;; The old way didn't work for "external" backends.
+            pattern)))
+    (xref--find-xrefs pattern 'apropos newpat nil))
+  (setq xref-backend-functions (append bak-xref-backend))
+  ))
+(setq grep-program 'rg)
 
 (define-key esc-map "%" (lambda() (interactive)
 			  (xref-push-marker-stack)
