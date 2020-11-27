@@ -623,16 +623,27 @@ Value is t if a query was formerly required."
   (interactive)
   (let* ((cs-f (concat (my-cscope-guess-root-directory) "/cscope.files"))
 	 (cs-line (read-lines cs-f))
+	 (cs-f (concat (my-cscope-guess-root-directory) "/cscope2.files"))
 	 (cs-len (length cs-line))
 	 (foo-name)
 	 (fname (file-name-nondirectory (buffer-file-name)))
 	 (base1)
 	 (base2)
 	 )
+
+    (if (file-exists-p cs-f)
+	(progn
+	 (setq cs-line2 (read-lines cs-f))
+	 (setq cs-line (append cs-line cs-line2))
+	 (setq cs-len (length cs-line))
+	 )
+	)
+    
     (string-match "[0-9a-zA-Z_]+" fname)
     (setq base1
 	  (match-string 0 fname))
-    
+
+    (catch 'out
     (dolist (foo cs-line)
       (setq foo-name (file-name-nondirectory foo))
       (if (string-equal foo-name fname)
@@ -644,8 +655,8 @@ Value is t if a query was formerly required."
 	    (progn
 	      ;; (message "find file %s" foo)
 	      (find-file (concat (my-cscope-guess-root-directory) foo))
-	      (return nil)))
-      ))  
+	      (throw 'out nil)))
+      )))  
     ))
 
 (defun my-cscope-guess-root-directory ()
