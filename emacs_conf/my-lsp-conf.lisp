@@ -9,8 +9,9 @@
 (setq lsp-prefer-flymake nil)
 (push "cscope.files" projectile-project-root-files)
 
-(require 'flycheck-clangcheck)
-(setq flycheck-clangcheck-analyze t)
+;; 打开文件得时候卡
+;; (require 'flycheck-clangcheck)
+;; (setq flycheck-clangcheck-analyze t)
 
 (setq lsp-ui-doc-enable nil)
 (setq lsp-ui-peek-enable nil)
@@ -42,6 +43,8 @@
 ;;容易和expand-region颜色冲突，看不清楚
 (setq lsp-enable-symbol-highlighting nil)
 
+(setq my-use-lsp t)
+
 (add-hook 'lsp-after-initialize-hook
 	  #'(lambda ()
 	      (if my-use-gtags-default
@@ -67,11 +70,14 @@
 		  ;;lsp config
 		  (setq-local ivy-completing-sort nil)
 		  (setq-local ivy-sort-functions-alist (append (list (list 'ivy-done)) ivy-sort-functions-alist))
-                  (lsp)
+		  (if my-use-lsp
+                      (lsp))
 		  (if my-use-gtags-default
 		      (add-to-list 'xref-backend-functions 'global-tags-xref-backend)	
 		      )
-		(flycheck-select-checker 'lsp-ui)
+		  (if my-use-lsp		  
+		      (flycheck-select-checker 'lsp-ui)
+		      )
 		(flymake-mode-off)
 		(setq-local company-backends (add-to-list 'company-backends 'company-c-headers t))
 		(setq-local company-backends (add-to-list 'company-backends 'company-files t))
@@ -100,13 +106,16 @@
 		      (define-key js-mode-map [(meta ?,)] #'xref-find-references)		
 		      (define-key js-mode-map [(meta ?.)] #'xref-find-definitions)))
 		(setq-local ivy-completing-sort nil)
-                (lsp))))
+		(if my-use-lsp		  
+                    (lsp))
+		)))
 
 (dolist (hook '(python-mode-hook))
   (add-hook hook
             #'(lambda ()
-		(setq-local ivy-completing-sort nil)		
-                (lsp)
+		(setq-local ivy-completing-sort nil)
+		(if my-use-lsp		  
+                    (lsp))
 ;;		(flymake-mode-off)
 		)))
 
