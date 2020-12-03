@@ -4,7 +4,8 @@ echo "CMAKE_MINIMUM_REQUIRED(VERSION 2.8)"
 echo "project(XGame)"
 
 echo "set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} \"./cmake/\")"
-
+echo "add_compile_definitions(_WIN32 WIN32)"
+echo "ADD_DEFINITIONS(-D_WIN32 -DWIN32)"
 echo ""
 
 filtercmd=" | grep -v \"^\./tools/\" | grep -v \"^\./client/external/\" | grep -v \"^\./client/miniEngineSDK/\" | grep -v CMakeFiles | grep -v \"ccls-cache\" | grep -v \"to_lua.cpp\" | grep -v \".*\.pb\.h\" | grep -v \".*\.pb-c\.[hc]\" "
