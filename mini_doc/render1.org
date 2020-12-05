@@ -35,3 +35,7 @@ uniform看起来是来自materials.xml中的Params字段, 代码的SHADER_MACRO_
 
 ** 使用那个shader是哪里配置的
 
+** blockdef.csv
+
+** 渲染的层级
+
