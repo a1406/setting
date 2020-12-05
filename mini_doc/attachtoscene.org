@@ -3,4 +3,5 @@
 * todo
 添加和销毁block都没有attachtoscene，难道是直接存在world上就不需要加入scene么？
 又或者是通过父子节点的方式加入scene的么？
-估计需要从渲染的节点遍历那里看看, 先从m_pScene->onCull看起？
+估计需要从渲染的节点遍历那里看看, 先从m_pScene->onCull(BlockScene::onCull)看起？似乎确实如此，先睡觉
+摄像头是否就是NormalSceneRenderer::m_pRenderCamera
