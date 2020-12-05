@@ -1,0 +1,37 @@
+* ClientManager::doFrame
+** SceneManager::doFrame()
+*** SceneManager::doRender() 整理渲染对象
+遍历16个m_pRenderers做doRender(),  在doRender中做裁切后调用RenderResult
+
+*** SceneManager::doDraw() 处理渲染
+截屏也在这里绘制
+
+**** ShaderContextPool::draw
+
+***** ShaderContextPool::drawQueue 更新或加载shader文件, 进行排序，传入shader参数
+调用drawRange
+
+****** prepareDraw 获取对应的pipeline
+pipeline里面保存了vs fs
+对应的shader的文件名是CompiledShaderGroup::loadShaderCache的时候读取二进制文件解析出来的
+应该有生成该文件的工具
+
+****** drawRange
+******* ShaderContext::draw 调用applyShaderParam提交参数
+
+******** OGLRenderSystem::draw 最终调用glDrawArrays和glDrawElements来绘制
+
+* TextureRenderGen
+
+
+* TODO
+** uniform怎么传入shader中，比如TextureRenderGen时候的vs中使用的GrassColor
+OGLShaderProgram::cacheParamHandle() 
+OGLShaderProgram::setConstant
+
+使用glBufferData也可以传，不知道有没有用
+
+uniform看起来是来自materials.xml中的Params字段, 代码的SHADER_MACRO_NAMES里面预定义了一些, 这预定义的有什么不一样？
+
+** 使用那个shader是哪里配置的
+
