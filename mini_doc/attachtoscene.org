@@ -1,6 +1,8 @@
 * MovableObject::attachToScene
+销毁block时候的粒子动画(EffectManager::playBlockDestroyEffect)
 
-* session里面保存了一组block(16 * 16 * 16)，block上记录了resid，还有灯光信息, 而chunk里面保存了一组session(16个), 
+
+* section里面保存了一组block(16 * 16 * 16)，block上记录了resid，还有灯光信息, 而chunk里面保存了一组session(16个), 
 
 
 * todo

@@ -1,0 +1,16 @@
+* 动画模式
+	enum BIND_ANIM_MODE
+	{
+		BAM_SELF = 0,  //播放自己的动作
+		BAM_PARENT     //播放父entity的动作
+	};
+
+
+* 动画更新 AnimPlayTrack::update
+一个玩家可能有多个动画，所以使用AnimationPlayer::update(uint dtick)驱动AnimPlayTrack::update
+然后再调用Model::applyAnimation并驱动SkeletonInstance::applyAnimation（骨骼动画?）
+
+* TODO
+参考CameraModel::update中的m_HandModel
+
+
