@@ -34,8 +34,20 @@ OGLShaderProgram::setConstant
 uniform看起来是来自materials.xml中的Params字段, 代码的SHADER_MACRO_NAMES里面预定义了一些, 这预定义的有什么不一样？
 
 ** 使用那个shader是哪里配置的
+OGLESCache.dat
 
 ** blockdef.csv
+方块的一些定义
 
 ** 渲染的层级
+	//RenderUsage 下的渲染顺序
+	enum RenderLayer
+	{
+		RL_BACKGROUND ,//
+		RL_DETHP_PREPASS = 0,//预深度的PASS
+		RL_TERRAIN,  //地形
+		RL_SCENE,	//角色的
+		RL_SCENE_FRONT,
+		RL_FRONT
+	};
 
