@@ -1,0 +1,21 @@
+* question
+预写式日志（write-ahead logging），如果还没写回磁盘，这个时候的读取操作都是读的内存？
+
+show table status, 空表和有数据的时候，里面的值会怎么变化？
+
+** 慢日志
+slow_query_log
+slow_query_log_file
+sudo pt-query-digest  /mnt/mysql_data/jack-arch2-slow.log
+
+** profile
+show profiles;
+show profile ;  show variables like 'Prof%';
+show profile for query 1;
+
+** 文件IO
+show engine innodb status\G
+INNODB_BUFFER_POOL_STATS
+
+
+
