@@ -12,10 +12,14 @@ sudo pt-query-digest  /mnt/mysql_data/jack-arch2-slow.log
 show profiles;
 show profile ;  show variables like 'Prof%';
 show profile for query 1;
+show profile cpu, block io for query 4;
 
 ** 文件IO
 show engine innodb status\G
 INNODB_BUFFER_POOL_STATS
+show profile cpu, block io for query 4;
 
+** 优化策略
+optimizer_switch
 
 
