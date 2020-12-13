@@ -30,9 +30,9 @@ flags,unparsed=parse.parse_known_args(sys.argv[1:])
 
 conn= MySQLdb.connect(user='root',host='127.0.0.1', passwd='123456',db=flags.db)
 cur = conn.cursor()
-for var in range(int(flags.max / 100)):
+for var in range(int(flags.max / 10000)):
     sql = ("insert into %s (k,c,pad,country,sex) values") % (flags.table)
-    for var1 in range(10):
+    for var1 in range(10000):
         if var1 == 0:
             sql = sql + ("(%s, '%s', '%s', '%s', %s)" % (gen_rand_int(1,10000000),
                                                      gen_rand_str(110), gen_rand_str(50),
