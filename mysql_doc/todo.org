@@ -22,4 +22,7 @@ show profile cpu, block io for query 4;
 ** 优化策略
 optimizer_switch
 
+** 相关系统命令
+iostat
+lsof
 
