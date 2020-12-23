@@ -21,10 +21,12 @@ CREATE TABLE \`${tbname}\` (
   \`pad\` char(60) NOT NULL DEFAULT '',
   \`country\` char(50) NOT NULL DEFAULT '',
   \`sex\` tinyint NOT NULL DEFAULT 0,
+  \`id2\` int unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (\`id\`),
   KEY \`k_1\` (\`k\`),
   KEY \`country_1\` (\`country\`),
-  KEY \`sex_1\` (\`sex\`)
+  KEY \`sex_1\` (\`sex\`),
+  KEY \`id2_1\` (\`id2\`)
 ) ENGINE=InnoDB;
 EOF
 

@@ -34,11 +34,11 @@ for var in range(int(flags.max / 10000)):
     sql = ("insert into %s (k,c,pad,country,sex) values") % (flags.table)
     for var1 in range(10000):
         if var1 == 0:
-            sql = sql + ("(%s, '%s', '%s', '%s', %s)" % (gen_rand_int(1,10000000),
+            sql = sql + ("(%s, '%s', '%s', '%s', %s, id)" % (gen_rand_int(1,10000000),
                                                      gen_rand_str(110), gen_rand_str(50),
-                                                     gen_rand_str(45), gen_rand_int(0,1)))
+                                                             gen_rand_str(45), gen_rand_int(0,1)))
         else:
-            sql = sql + (",(%s, '%s', '%s', '%s', %s)" % (gen_rand_int(1,10000000),
+            sql = sql + (",(%s, '%s', '%s', '%s', %s, id)" % (gen_rand_int(1,10000000),
                                                      gen_rand_str(110), gen_rand_str(50),
                                                      gen_rand_str(45), gen_rand_int(0,1)))
                      
