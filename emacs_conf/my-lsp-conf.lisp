@@ -113,6 +113,7 @@
 (dolist (hook '(python-mode-hook))
   (add-hook hook
             #'(lambda ()
+		(require 'lsp-python-ms)
 		(setq-local ivy-completing-sort nil)
 		(if my-use-lsp		  
                     (lsp))

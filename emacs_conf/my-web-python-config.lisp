@@ -39,6 +39,7 @@
 (add-hook 'js-mode-hook 'my-web-setup)
 
 (require 'python)
+(setq lsp-python-ms-executable (executable-find "python-language-server"))
 (setq python-indent-guess-indent-offset-verbose nil)
 (setq python-shell-completion-native-enable nil)
 (setq python-shell-virtualenv-path (format "%s/pyenv" (getenv "HOME")))
