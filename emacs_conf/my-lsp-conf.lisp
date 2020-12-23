@@ -110,10 +110,13 @@
                     (lsp))
 		)))
 
+(require 'lsp-python-ms)
+(setq lsp-python-ms-auto-install-server t)
 (dolist (hook '(python-mode-hook))
   (add-hook hook
             #'(lambda ()
-		(require 'lsp-python-ms)
+		;; (add-to-list 'lsp-disabled-clients 'pyls)
+		;; (add-to-list 'lsp-enabled-clients 'mspyls)
 		(setq-local ivy-completing-sort nil)
 		(if my-use-lsp		  
                     (lsp))

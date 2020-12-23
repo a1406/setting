@@ -39,7 +39,12 @@
 (add-hook 'js-mode-hook 'my-web-setup)
 
 (require 'python)
-(setq lsp-python-ms-executable (executable-find "python-language-server"))
+;; 需要编译Microsoft.Python.LanguageServer
+;; https://vxlabs.com/2018/11/19/configuring-emacs-lsp-mode-and-microsofts-visual-studio-code-python-language-server/
+;; cd python-language-server/src/LanguageServer/Impl
+;; dotnet build -c Release
+;;(setq lsp-python-ms-executable (executable-find "python-language-server"))
+(setq lsp-python-ms-executable "/home/jack/tmp2/python-language-server/output/bin/Release/Microsoft.Python.LanguageServer")
 (setq python-indent-guess-indent-offset-verbose nil)
 (setq python-shell-completion-native-enable nil)
 (setq python-shell-virtualenv-path (format "%s/pyenv" (getenv "HOME")))
@@ -115,5 +120,4 @@ to \"^python-\"."
 
 ;;(add-to-list 'auto-mode-alist '("\\.[jt]s\\'" . web-mode))
 (define-key web-mode-map "\M-;" nil)
-
 
