@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: openresty2
+  name: openresty2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: openresty2
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: openresty2
+    spec:
+      containers:
+      - image: openresty/openresty
+        imagePullPolicy: IfNotPresent
+        name: openresty2
+        resources: {}
+status: {}
+
