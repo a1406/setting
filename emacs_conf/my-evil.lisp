@@ -75,6 +75,17 @@
 ;;(define-key evil-emacs-state-map " lc" 'rtags-ivy-rc)
 (define-key evil-emacs-state-map " lk" 'lsp-restart-workspace)
 
+;;hs-minor-mode
+(define-key evil-emacs-state-map " hm" 'hs-minor-mode)
+(define-key evil-emacs-state-map " hhb" 'hs-show-block)
+(define-key evil-emacs-state-map " hs" 'hs-show-all)
+(define-key evil-emacs-state-map " ht" 'hs-toggle-hiding)
+(define-key evil-emacs-state-map " ha" 'hs-hide-all)
+(define-key evil-emacs-state-map " hb" (lambda() (interactive)
+					  (xref-push-marker-stack)
+					  (call-interactively 'hs-hide-block)
+					  ))
+
 ;; ;;rtags
 ;; (define-key evil-emacs-state-map " rp" 'rtags-location-stack-back)
 ;; (define-key evil-emacs-state-map " rn" 'rtags-location-stack-forward)
