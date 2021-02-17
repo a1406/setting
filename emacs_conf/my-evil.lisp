@@ -188,6 +188,7 @@
 					 (call-interactively #'delete-char))))
 (define-key evil-emacs-state-map "k" 'kill-line)
 (define-key evil-emacs-state-map "oo" 'other-window)
+(define-key evil-emacs-state-map "or" 'redraw-display)
 (define-key evil-emacs-state-map "of" 'delete-other-windows)
 (define-key evil-emacs-state-map "om"
   (lambda() (interactive)
