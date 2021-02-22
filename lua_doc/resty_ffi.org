@@ -1,0 +1,8 @@
+* 内存泄漏和valgrind
+** resty -e 可以测试
+如下指令可以使用valgrind测试内存泄漏得信息
+/usr/local/openresty/bin/resty --valgrind --valgrind-opts "--suppressions=./gw.supp --leak-check=full"  -e "local ffi = require 'ffi'; ffi.cdef[[        void *malloc(size_t size); ]];local a = ffi.gc(ffi.C.malloc(1000), ffi.C.free)   a = nil; print('hello');"
+
+** supp文件得自动生成
+通过 --gen-suppressions=all 生成
+/usr/local/openresty/bin/resty --valgrind --valgrind-opts "--gen-suppressions=all --suppressions=./gw.supp --leak-check=full"  -e "local ffi = require 'ffi'; ffi.cdef[[        void *malloc(size_t size); ]];local a = ffi.C.malloc(1000); ffi.C.free(a);  a = nil; print('hello');"
