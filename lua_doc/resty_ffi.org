@@ -31,3 +31,12 @@ true
 
 ** table.clone
 
+* json 编码时无法区分 array 和 dict
+** 全局修改
+cjson.encode_empty_table_as_object(false)
+
+** 初始化
+local t = cjson.empty_array
+
+** metatable
+local t = {}setmetatable(t, cjson.empty_array_mt)

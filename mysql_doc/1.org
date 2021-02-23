@@ -1,0 +1,3 @@
+show engine innodb status
+show full processlist
+
