@@ -40,3 +40,60 @@ local t = cjson.empty_array
 
 ** metatable
 local t = {}setmetatable(t, cjson.empty_array_mt)
+
+* cosocket 使用连接池
+local ok, err = sock:setkeepalive(2 * 1000, 100)
+
+* 非阻塞得shell命令
+resty -e 'local shell = require "resty.shell"local ok, stdout, stderr, reason, status = shell.run([[echo "hello, world"]]) ngx.say(stdout)'
+
+* 其他文档
+除了阅读 lua-resty-core 首页文档外，你还需要把 lua-resty-core/lib/ngx/ 这个目录下的 .md 格式的文档也通读一遍才行。
+
+** balancer.md
+
+** base64.md 做BASE64
+#+begin_src lua
+local b64 = require("ngx.base64")
+local res, err
+
+res = b64.encode_base64url("foo")
+
+res, err = b64.decode_base64url(res)
+if not res then
+    -- invalid input
+    ngx.log(ngx.ERR, err)
+end
+
+assert(res == "foo")
+
+#+end_src
+
+** errlog.md
+
+** ocsp.md
+
+** pipe.md 无阻塞得shell命令
+
+** process.md nginx得进程相关得一些命令，包括特权进程，安全退出
+
+** re.md 做正则表达式，包括字符得分隔，查询等
+#+begin_src lua
+local ngx_re = require "ngx.re"
+
+-- split
+local res, err = ngx_re.split("a,b,c,d", ",")
+--> res is now {"a", "b", "c", "d"}
+
+-- opt
+ngx_re.opt("jit_stack_size", 128 * 1024)
+--> the PCRE jit stack can now handle more complex regular expressions
+#+end_src
+
+** req.md
+
+** resp.md
+
+** semaphore.md 线程, 协程同步用得信号量
+
+** ssl.md
