@@ -49,3 +49,4 @@
 
 (load "~/.emacs.conf/theme.conf")
 
+(put 'erase-buffer 'disabled nil)
