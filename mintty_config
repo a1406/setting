@@ -1,7 +1,7 @@
 msys2的配置文件，放在  C:\Users\tangpeilei\AppData\Roaming\mintty\config
 ====================================
-Font=Source Code Variable
-FontChoice=Han:2
+Font=JetBrains Mono ExtraLight
+FontChoice=Han:4
 Font2=等距更纱黑体 SC
 Font3=Source Code Variable
 Font4=微软雅黑
@@ -13,3 +13,4 @@ CursorBlinks=no
 BoldAsFont=yes
 WindowShortcuts=no
 AltFnShortcuts=no
+FontWeight=200
