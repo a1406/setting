@@ -1,6 +1,7 @@
-(setq lsp-log-io nil) ; if set to true can cause a performance hit
-(setq lsp-print-performance t)
-(setq lsp-auto-guess-root t) ; auto detect workspace and start lang server
+(setq-local lsp-enable-imenu nil)
+(setq-local lsp-log-io nil) ; if set to true can cause a performance hit
+(setq-local lsp-print-performance t)
+(setq-local lsp-auto-guess-root t) ; auto detect workspace and start lang server
 
 ;; lua
 ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-lua-language-server/
@@ -12,3 +13,6 @@
         )
 (require 'lsp-diagnostics)
 (add-to-list 'lsp-diagnostics-disabled-modes 'lua-mode)
+
+
+
