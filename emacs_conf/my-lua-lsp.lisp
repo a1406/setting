@@ -3,7 +3,10 @@
 (setq-local lsp-print-performance t)
 (setq-local lsp-auto-guess-root t) ; auto detect workspace and start lang server
 
-;; lua
+;; 
+;; lua-language-server会有soft lockup的报错
+;; 换https://github.com/EmmyLua/EmmyLua-LanguageServer
+;; 需要先安装jdk-openjdk jre-openjdk, 然后下载EmmyLua-LS-all.jar并拷贝到lsp-server-install-dir
 ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-lua-language-server/
 (setq lsp-clients-lua-language-server-install-dir (f-join (getenv "HOME") "gitroot/lua-language-server"); Default: ~/.emacs.d/.cache/lsp/lua-language-server/
         lsp-clients-lua-language-server-bin (f-join lsp-clients-lua-language-server-install-dir "bin/Linux/lua-language-server")
