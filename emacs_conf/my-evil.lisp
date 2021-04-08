@@ -190,6 +190,11 @@
 (define-key evil-emacs-state-map "oo" 'other-window)
 (define-key evil-emacs-state-map "or" 'redraw-display)
 (define-key evil-emacs-state-map "of" 'delete-other-windows)
+(define-key evil-emacs-state-map "o1" 'delete-other-windows)
+(define-key evil-emacs-state-map "o2" 'split-window-below)
+(define-key evil-emacs-state-map "o3" 'split-window-right)
+(define-key evil-emacs-state-map "o0" 'delete-window)
+
 (define-key evil-emacs-state-map "om"
   (lambda() (interactive)
     (magit-status)

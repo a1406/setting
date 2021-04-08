@@ -900,3 +900,33 @@ The argument has the same meaning as in `apropos'."
     res))
 
 (advice-add 'magit-mode-bury-buffer :around #'my-magit-mode-bury-buffer)
+
+
+;; eshell中ivy补全路径后会添加一个空格，暂时用个旧版ivy的函数换一下
+(defun ivy-completion-in-region-action (str)
+  "Insert STR, erasing the previous one.
+The previous string is between `ivy-completion-beg' and `ivy-completion-end'."
+  (when (consp str)
+    (setq str (cdr str)))
+  (when (stringp str)
+    (let ((fake-cursors (and (require 'multiple-cursors-core nil t)
+                             (mc/all-fake-cursors)))
+          (pt (point))
+          (beg ivy-completion-beg)
+          (end ivy-completion-end))
+      (when beg
+        (delete-region beg end))
+      (setq ivy-completion-beg (point))
+      (insert (substring-no-properties str))
+      (completion--done str 'exact)
+      (setq ivy-completion-end (point))
+      (save-excursion
+        (dolist (cursor fake-cursors)
+          (goto-char (overlay-start cursor))
+          (delete-region (+ (point) (- beg pt))
+                         (+ (point) (- end pt)))
+          (insert (substring-no-properties str))
+          ;; manually move the fake cursor
+          (move-overlay cursor (point) (1+ (point)))
+          (set-marker (overlay-get cursor 'point) (point))
+          (set-marker (overlay-get cursor 'mark) (point)))))))
