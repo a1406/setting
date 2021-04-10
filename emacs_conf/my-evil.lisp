@@ -21,7 +21,6 @@
 (define-key evil-emacs-state-map "  " (lambda() (interactive)(insert-char #x20)))
 ;; (define-key evil-emacs-state-map " p" 'point-to-register)
 ;; (define-key evil-emacs-state-map " j" 'jump-to-register)
-(define-key evil-emacs-state-map " x" 'save-buffers-kill-terminal)
 (define-key evil-emacs-state-map " b" 'counsel-ibuffer)
 (define-key evil-emacs-state-map " s" 'swiper)
 (define-key evil-emacs-state-map " n" 'er/expand-region)
@@ -272,3 +271,7 @@
 ;; evil match it
 (global-evil-matchit-mode 1)
 (define-key evil-emacs-state-map " m" 'evilmi-jump-items)
+
+(define-key evil-emacs-state-map " hhx" 'save-buffers-kill-terminal)
+(define-key evil-emacs-state-map " hhp" 'previous-buffer)
+(define-key evil-emacs-state-map " hhn" 'next-buffer)
