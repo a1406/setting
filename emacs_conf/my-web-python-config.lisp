@@ -16,6 +16,7 @@
 	(linum-mode 1))
   (local-set-key  "\C-c\C-c"  'comment-or-uncomment-region)
   (load "~/.emacs.conf/my-lua-lsp.lisp")
+  (load "~/.emacs.conf/my-lua.lisp")
   (lsp)
   (flycheck-select-checker 'luacheck)
   )
