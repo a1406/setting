@@ -63,7 +63,6 @@
 (define-key evil-emacs-state-map " lp" 'my-xref-pre)
 (define-key evil-emacs-state-map " ln" 'my-xref-next)
 (define-key evil-emacs-state-map " ll" 'my-xref-cur)
-(define-key evil-emacs-state-map " lf" 'my-xref-first)
 (define-key evil-emacs-state-map " l," 'my-xref-first)
 (define-key evil-emacs-state-map " l." 'my-xref-last)
 (define-key evil-emacs-state-map " lc" 'my-xref-clear)
@@ -275,3 +274,6 @@
 (define-key evil-emacs-state-map " hhx" 'save-buffers-kill-terminal)
 (define-key evil-emacs-state-map " hhp" 'previous-buffer)
 (define-key evil-emacs-state-map " hhn" 'next-buffer)
+
+(define-key evil-emacs-state-map " lf" 'my-cousel-lua-function)
+(define-key evil-emacs-state-map " hhf" 'my-cousel-lua-function)

@@ -40,6 +40,7 @@
 (load "~/.emacs.conf/my-lsp-conf.lisp")
 (load "~/.emacs.conf/spacemacs-func.lisp")
 (load "~/.emacs.conf/emacs_key.conf")
+(load "~/.emacs.conf/my-lua.lisp")
 (load "~/.emacs.conf/my-evil.lisp")
 
 (setq custom-file "~/.custom-file")

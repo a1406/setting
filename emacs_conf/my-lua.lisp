@@ -16,7 +16,7 @@
   (let* ((cmd (format "%s" this-command)))
     (if (string-equal "minibuffer-keyboard-quit" cmd)
 	(progn
-      (message "my-after-counsel-rag22, cmd = %s, last = %s, real last = %s" cmd last-command real-last-command)
+      ;; (message "my-after-counsel-rag22, cmd = %s, last = %s, real last = %s" cmd last-command real-last-command)
     (setq counsel-ag-function-hook nil)))
   ))
 
@@ -53,10 +53,10 @@
                                          regex)))
        nil))))
 
-
-(define-key evil-emacs-state-map " hhf" (lambda() (interactive)
-					  (setq counsel-ag-function-hook 'my-lua-function-hook-func)
-					  (my-counsel-rag)
-					  (setq counsel-ag-function-hook nil)
-					  ))
+(defun my-cousel-lua-function ()
+  (interactive)
+  (setq counsel-ag-function-hook 'my-lua-function-hook-func)
+  (my-counsel-rag)
+  (setq counsel-ag-function-hook nil)
+  )
 
