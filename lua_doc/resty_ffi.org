@@ -8,6 +8,7 @@
 /usr/local/openresty/bin/resty --valgrind --valgrind-opts "--gen-suppressions=all --suppressions=./gw.supp --leak-check=full"  -e "local ffi = require 'ffi'; ffi.cdef[[        void *malloc(size_t size); ]];local a = ffi.C.malloc(1000); ffi.C.free(a);  a = nil; print('hello');"
 
 * table得扩展
+openresty做了一些扩展，在https://github.com/openresty/luajit2 可以查看相关介绍  
 ** 预分配内存table.new table.clear
 table.new(narray, nhash) 可以预分配table得内存
 table.clear() 会清空内容，但是保留内存
