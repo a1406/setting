@@ -70,6 +70,23 @@ assert(res == "foo")
 
 #+end_src
 
+** 64位数
+luajit并不原生支持64位数，但是通过FFI可以支持64位数的运算和比较，但是要注意，如果用来做table的key，相同值的64位数可能是不同的key
+#+begin_src lua
+/usr/local/openresty/bin/resty -e '
+  local ffi = require("ffi")
+  local t3_ = ffi.cast("int64_t",0x4fffffffffffffff) 
+  local t2_ = t3_ + 100
+  t2_ = t2_ - 100
+  ngx.say(t3_ > t2_)
+  ngx.say(t3_ == t2_)
+  local t4_ = {}
+  t4_[t2_] = 100
+  ngx.say(t4_[t2_])
+  ngx.say(t4_[t3_])
+'  
+#+end_src
+
 ** errlog.md
 
 ** ocsp.md
