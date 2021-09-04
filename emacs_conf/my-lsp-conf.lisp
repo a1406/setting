@@ -18,6 +18,7 @@
 (setq lsp-ui-sideline-enable nil)
 
 (setq lsp-file-watch-threshold 10000)
+(setq lsp-enable-file-watchers nil)
 ;; use `evil-matchit' instead
 (setq lsp-enable-folding nil)
 ;; handle yasnippet by myself

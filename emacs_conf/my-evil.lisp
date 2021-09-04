@@ -72,6 +72,8 @@
 (define-key evil-emacs-state-map " li" 'lsp-describe-thing-at-point)
 ;;(define-key evil-emacs-state-map " lc" 'rtags-ivy-rc)
 (define-key evil-emacs-state-map " lk" 'lsp-restart-workspace)
+(define-key evil-emacs-state-map " ld" 'lsp-ui-peek-find-definitions)
+(define-key evil-emacs-state-map " lr" 'lsp-ui-peek-find-references)
 
 ;;hs-minor-mode
 (define-key evil-emacs-state-map " hm" 'hs-minor-mode)

@@ -46,7 +46,10 @@ local t = {}setmetatable(t, cjson.empty_array_mt)
 local ok, err = sock:setkeepalive(2 * 1000, 100)
 
 * 非阻塞得shell命令
-resty -e 'local shell = require "resty.shell"local ok, stdout, stderr, reason, status = shell.run([[echo "hello, world"]]) ngx.say(stdout)'
+resty -e 'local shell = require "resty.shell";local ok, stdout, stderr, reason, status = shell.run([[echo "hello, world"]]) ngx.say(stdout)'
+local ok, new_tab = pcall(require, "table.new")
+
+resty -e 'local ok, shell = pcall(require "resty.shell");print(type(shell));print(ok);'
 
 * 其他文档
 除了阅读 lua-resty-core 首页文档外，你还需要把 lua-resty-core/lib/ngx/ 这个目录下的 .md 格式的文档也通读一遍才行。
