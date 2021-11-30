@@ -1,0 +1,30 @@
+* 发送数据得流程有点长
+
+** RakPeer::Send
+   插入bufferedCommands，之后在函数RakPeer::RunUpdateCycle（线程 UpdateNetworkLoop ）中取出，并调用SendImmediate
+
+** RakPeer::SendImmediate
+   取到发送地址，并调用ReliabilityLayer::Send
+
+** ReliabilityLayer::Send
+   构建InternalPacket * internalPacket，处理分包，计算seq号, order号等, 最后插入outgoingPacketBuffer
+   outgoingPacketBuffer是个优先级队列，可以处理数据包得优先级问题
+   在函数ReliabilityLayer::Update中，从 outgoingPacketBuffer 中取出internalPacket进行处理
+
+** ReliabilityLayer::Update
+   ReliabilityLayer::Update被函数 RakPeer::RunUpdateCycle 调用, 说明他是属于UpdateNetworkLoop线程
+   但是需要加入activeSystemList才会被调用。activeSystemList由函数RakPeer::AddToActiveSystemList加入
+   这个函数得调用关系如下，这个参考连接相关文档
+    	libiworld_d.dll!RakNet::RakPeer::AddToActiveSystemList(unsigned int remoteSystemListIndex) 行 3970	C++
+ 	libiworld_d.dll!RakNet::RakPeer::AssignSystemAddressToRemoteSystemList(const RakNet::SystemAddress systemAddress, RakNet::RakPeer::RemoteSystemStruct::ConnectMode connectionMode, RakNet::RakNetSocket2 * incomingRakNetSocket, bool * thisIPConnectedRecently, RakNet::SystemAddress bindingAddress, int incomingMTU, RakNet::RakNetGUID guid, bool useSecurity) 行 3678	C++
+ 	libiworld_d.dll!RakNet::ProcessOfflineNetworkPacket(RakNet::SystemAddress systemAddress, const char * data, const int length, RakNet::RakPeer * rakPeer, RakNet::RakNetSocket2 * rakNetSocket, bool * isOfflineMessage, unsigned __int64 timeRead) 行 4977	C++
+ 	libiworld_d.dll!RakNet::ProcessNetworkPacket(const RakNet::SystemAddress systemAddress, const char * data, const int length, RakNet::RakPeer * rakPeer, RakNet::RakNetSocket2 * rakNetSocket, unsigned __int64 timeRead, RakNet::BitStream & updateBitStream) 行 5480	C++
+	libiworld_d.dll!RakNet::RakPeer::RunUpdateCycle(RakNet::BitStream & updateBitStream) 行 5651	C++
+
+   ReliabilityLayer::Update中, 做了很多其他得事情，和发送相关得是处理包头，插入一些重发之类得队列，然后调用PushPacket(time,internalPacket, isReliable);
+   插入 packetsToSendThisUpdate
+   同样是在该Update函数中，调用WriteToBitStreamFromInternalPacket( &updateBitStream, packetsToSendThisUpdate[msgIndex], time ); 从packetsToSendThisUpdate中取出数据，
+   构建到 updateBitStream 中, 最后再调用 SendBitStream( s, systemAddress, &updateBitStream, rnr, time ); 发送
+
+** ReliabilityLayer::SendBitStream
+   根据平台选择发送函数，比如 RNS2_Windows_Linux_360::Send_Windows_Linux_360NoVDP，基本上就是调用sendto发送了
