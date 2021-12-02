@@ -1,1 +1,12 @@
-*
+* 超时设置
+  m_rakpeerInterface->SetTimeoutTime(GAMENET_TIMEOUT, RakNet::UNASSIGNED_SYSTEM_ADDRESS);
+
+* 发送确认得回调
+  在收到ACK后，会构造一个 ID_SND_RECEIPT_ACKED 得包到接收队列, 具体是来自函数 ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer
+  <- ProcessNetworkPacket <- RakPeer::RunUpdateCycle <- UpdateNetworkLoop
+
+* 插件
+#+begin_src 
+  	// Threadsafe, and not thread safe
+  DataStructures::List<PluginInterface2*> pluginListTS, pluginListNTS;
+#+end_src

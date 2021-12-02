@@ -28,3 +28,6 @@
 
 ** ReliabilityLayer::SendBitStream
    根据平台选择发送函数，比如 RNS2_Windows_Linux_360::Send_Windows_Linux_360NoVDP，基本上就是调用sendto发送了
+
+** 发送失败
+   貌似没啥发送失败得, debug下有个packetloss，可以模拟丢包

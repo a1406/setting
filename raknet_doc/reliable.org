@@ -1,0 +1,49 @@
+* 发送数据得时候设置 reliableMessageNumber
+  记录重发的ID号，计算重发时间，加入重发队列resendLinkedListHead, 不过这里没做排序
+  ReliabilityLayer::Update
+#+begin_src 
+	internalPacket->reliableMessageNumber=sendReliableMessageNumberIndex;
+	internalPacket->retransmissionTime = congestionManager.GetRTOForRetransmission(internalPacket->timesSent+1);
+	internalPacket->nextActionTime = internalPacket->retransmissionTime+time;
+
+	InsertPacketIntoResendList( internalPacket, time, true, isReliable);
+#+end_src
+
+* 重发
+  ReliabilityLayer::Update  
+#+begin_src 
+				while ( IsResendQueueEmpty()==false )
+				{
+					internalPacket = resendLinkedListHead;
+					RakAssert(internalPacket->messageNumberAssigned==true);
+
+					//if ( internalPacket->nextActionTime < time )
+					if ( time - internalPacket->nextActionTime < (((CCTimeType)-1)/2) )
+					{
+						nextPacketBitLength = internalPacket->headerLength + internalPacket->dataBitLength;
+						if ( datagramSizeSoFar + nextPacketBitLength > GetMaxDatagramSizeExcludingMessageHeaderBits() )
+						{
+							// Gathers all PushPackets()
+							PushDatagram();
+							break;
+						}
+
+						PopListHead(false);
+
+						CC_DEBUG_PRINTF_2("Rs %i ", internalPacket->reliableMessageNumber.val);
+
+						bpsMetrics[(int) USER_MESSAGE_BYTES_RESENT].Push1(time,BITS_TO_BYTES(internalPacket->dataBitLength));
+
+						// Testing1
+// 						if (internalPacket->reliability==RELIABLE_ORDERED || internalPacket->reliability==RELIABLE_ORDERED_WITH_ACK_RECEIPT)
+// 							printf("RESEND reliableMessageNumber %i with datagram %i\n", internalPacket->reliableMessageNumber.val, congestionManager.GetNextDatagramSequenceNumber().val);
+
+						PushPacket(time,internalPacket,true); // Affects GetNewTransmissionBandwidth()
+						internalPacket->timesSent++;
+						congestionManager.OnResend(time, internalPacket->nextActionTime);
+						internalPacket->retransmissionTime = congestionManager.GetRTOForRetransmission(internalPacket->timesSent);
+						internalPacket->nextActionTime = internalPacket->retransmissionTime+time;
+#+end_src
+  
+* 收到reliable的回包
+  unsigned ReliabilityLayer::RemovePacketFromResendListAndDeleteOlderReliableSequenced( const MessageNumberType messageNumber, CCTimeType time, DataStructures::List<PluginInterface2*> &messageHandlerList, const SystemAddress &systemAddress )
