@@ -1,2 +1,68 @@
 * ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer
+
+* Ack
+  在函数 ReliabilityLayer::SendACKs 中集中发送
+
+* 从流数据转成数据包
+  ReliabilityLayer::CreateInternalPacketFromBitStream
   
+* RakPeer::packetReturnQueue
+** 保存在RakPeer中得vector，shutdown得时候遍历删除并clear
+** 在 RakPeer::Receive 函数中取出packet返回
+** 通过RakPeer::PushBackPacket 或 RakPeer::AddPacketToProducer 加入packet
+
+#+begin_src 
+						if ((data[0]>=(MessageID)ID_TIMESTAMP || data[0]==ID_SND_RECEIPT_ACKED || data[0]==ID_SND_RECEIPT_LOSS) &&
+							remoteSystem->isActive
+							)
+						{
+							packet=AllocPacket(byteSize, data, _FILE_AND_LINE_);
+							packet->bitSize = bitSize;
+							packet->systemAddress = systemAddress;
+							packet->systemAddress.systemIndex = remoteSystem->remoteSystemIndex;
+							packet->guid = remoteSystem->guid;
+							packet->guid.systemIndex=packet->systemAddress.systemIndex;
+							AddPacketToProducer(packet);
+						}  
+#+end_src
+
+* ReliabilityLayer::outputQueue
+** ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer 中收到ack得时候，添加一个ID_SND_RECEIPT_ACKED类型得消息
+
+** ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer 中插入数据包
+#+begin_src 
+outputQueue.Push( internalPacket, _FILE_AND_LINE_  );  
+#+end_src
+
+** ReliabilityLayer::Receive 中取出并返回数据
+** ReliabilityLayer::Update 中，构造ID_SND_RECEIPT_LOSS包, 具体参考ID_SND_RECEIPT_LOSS得说明
+** ReliabilityLayer::RemovePacketFromResendListAndDeleteOlderReliableSequenced 中， 构造ID_SND_RECEIPT_ACKED包
+** ReliabilityLayer::InsertIntoSplitPacketList 中，构造ID_DOWNLOAD_PROGRESS包
+
+#+begin_src 
+internalPacket = outputQueue.Pop();  
+#+end_src
+
+* RakPeer::bufferedPacketsQueue
+** RakPeer::PushBufferedPacket
+RNS2_Berkley::RecvFromLoopInt 中, 即 RecvFromLoop 线程
+#+begin_src 
+binding.eventHandler->OnRNS2Recv(recvFromStruct);     
+#+end_src
+
+** RakPeer::PopBufferedPacket
+RakPeer::RunUpdateCycle 中, 即 UpdateNetworkLoop 线程
+#+begin_src 
+while ((recvFromStruct=PopBufferedPacket())!=0)  
+#+end_src
+
+
+* 主要流程
+RakPeer::bufferedPacketsQueue -> ReliabilityLayer::outputQueue -> RakPeer::packetReturnQueue -> RakPeer::Receive
+
+** RNS2_Berkley::RecvFromLoopInt 中收包，调用 RakPeer::PushBufferedPacket 放入RakPeer::bufferedPacketsQueue
+** RakPeer::RunUpdateCycle 从 RakPeer::bufferedPacketsQueue 中取出数据包，调用 ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer
+** ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer 中放入 ReliabilityLayer::outputQueue
+** RakPeer::RunUpdateCycle 中, 放入 RakPeer::packetReturnQueue
+   调用 remoteSystem->reliabilityLayer.Receive，从 ReliabilityLayer::outputQueue 中取出，并调用 RakPeer::AddPacketToProducer 放入 RakPeer::packetReturnQueue
+** RakPeer::Receive 函数中取出packet返回

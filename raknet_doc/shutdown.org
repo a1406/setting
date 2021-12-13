@@ -1,0 +1,12 @@
+* RakPeer::Shutdown
+1: 发送 ID_DISCONNECTION_NOTIFICATION 并等待一段时间
+2: quitAndDataEvents.SetEvent(); 唤醒 UpdateNetworkLoop 线程
+3: endThreads 设置成true
+4: 把全部得socket 设置成 	endThreads=true;	binding.eventHandler = NULL;
+5: 死循环等待 UpdateNetworkLoop 线程退出
+6: 发送空数据唤醒 RecvFromLoop, 并等待最多1秒来等待 RecvFromLoop 线程退出
+7: 清理其他内存
+
+* RakPeer 得销毁
+
+* socket得close
