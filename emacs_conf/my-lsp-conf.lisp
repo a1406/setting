@@ -17,6 +17,9 @@
 (setq lsp-ui-peek-enable nil)
 (setq lsp-ui-sideline-enable nil)
 
+;;; 函数变量后面讨厌的ref显示
+(setq lsp-lens-enable nil)
+
 (setq lsp-file-watch-threshold 10000)
 (setq lsp-enable-file-watchers nil)
 ;; use `evil-matchit' instead
