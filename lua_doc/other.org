@@ -1,0 +1,18 @@
+获取某个函数的定义
+
+        local ttt_ = debug.getinfo(_G.print)
+        if ttt_ then
+        Log("jackdebug get info success");
+        Log("jackdebug show print:" .. tostring(ttt_.name));
+        Log("jackdebug show print:" .. tostring(ttt_.source));
+        Log("jackdebug show print:" .. tostring(ttt_.currentline));
+        Log("jackdebug show print:" .. tostring(ttt_.linedefined));
+        Log("jackdebug show print:" .. tostring(ttt_.lastlinedefined));
+        else
+        Log("jackdebug get info failed");
+        end
+
+	lua_Debug ar;
+     lua_getglobal(L, "f");  /* get global 'f' */
+     lua_getinfo(L, ">S", &ar);
+     printf("%d\n", ar.linedefined);
