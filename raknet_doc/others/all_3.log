@@ -1,0 +1,439 @@
+[2022-01-14 15:50:57]jackdebug: send1 dhf.datagramNumber = 0
+[2022-01-14 15:50:57]jackdebug: send2 size 24, sendtime 1, reliableMessageNumber 0, orderingIndex -842150451 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 2000000, nextActionTime 0
+[2022-01-14 15:50:57]jackdebug: send3, len = 28
+[2022-01-14 15:50:59]jackdebug: resend size 24, sendtime 1, reliableMessageNumber 0, orderingIndex -842150451 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 2000000, nextActionTime 0
+[2022-01-14 15:50:59]jackdebug: send1 dhf.datagramNumber = 1
+[2022-01-14 15:50:59]jackdebug: send2 size 24, sendtime 2, reliableMessageNumber 0, orderingIndex -842150451 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 2000000, nextActionTime 0
+[2022-01-14 15:50:59]jackdebug: send3, len = 28
+[2022-01-14 15:50:59]jackdebug: get ack, number = 1
+[2022-01-14 15:50:59]jackdebug: get nak, number = 0
+[2022-01-14 15:50:59]jackdebug: send1 dhf.datagramNumber = 2
+[2022-01-14 15:50:59]jackdebug: send2 size 104, sendtime 1, reliableMessageNumber 1, orderingIndex 0 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 71190, nextActionTime 0
+[2022-01-14 15:50:59]jackdebug: send2 size 12, sendtime 1, reliableMessageNumber 16777215, orderingIndex -842150451 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime -842150451, nextActionTime -842150451
+[2022-01-14 15:50:59]jackdebug: send3, len = 120
+[2022-01-14 15:50:59]jackdebug: send1 dhf.datagramNumber = 3
+[2022-01-14 15:50:59]jackdebug: send2 size 20, sendtime 1, reliableMessageNumber 16777215, orderingIndex -842150451 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime -842150451, nextActionTime -842150451
+[2022-01-14 15:50:59]jackdebug: send3, len = 24
+[2022-01-14 15:50:59]jackdebug: get ack, number = 2
+[2022-01-14 15:50:59]jackdebug: get ack, number = 3
+[2022-01-14 15:50:59][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 1001, len = 173
+[2022-01-14 15:50:59][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(1023)]GameNetManager::sendToPartner(): jackdebug: send1 dhf.datagramNumber = 4
+[2022-01-14 15:50:59]jackdebug: send2 size 198, sendtime 1, reliableMessageNumber 2, orderingIndex 1 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 75337, nextActionTime 0
+[2022-01-14 15:50:59][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(1030)]GameNetManager::sendToPartner(): jackdebug: send3, len = 202
+[2022-01-14 15:50:59]jackdebug: get ack, number = 4
+[2022-01-14 15:51:00]jackdebug: send1 dhf.datagramNumber = 5
+[2022-01-14 15:51:00]jackdebug: send2 size 20, sendtime 1, reliableMessageNumber 16777215, orderingIndex 55 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime -842150451, nextActionTime -842150451
+[2022-01-14 15:51:00]jackdebug: send3, len = 24
+[2022-01-14 15:51:00]jackdebug: get ack, number = 5
+[2022-01-14 15:51:00]jackdebug: send1 dhf.datagramNumber = 6
+[2022-01-14 15:51:00]jackdebug: send2 size 12, sendtime 1, reliableMessageNumber 16777215, orderingIndex 80 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime -842150451, nextActionTime -842150451
+[2022-01-14 15:51:00]jackdebug: send3, len = 16
+[2022-01-14 15:51:00]jackdebug: get ack, number = 6
+[2022-01-14 15:51:01][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 6194, len = 10
+[2022-01-14 15:51:01]jackdebug: send1 dhf.datagramNumber = 7
+[2022-01-14 15:51:01]jackdebug: send2 size 35, sendtime 1, reliableMessageNumber 3, orderingIndex 2 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 76389, nextActionTime 0
+[2022-01-14 15:51:01]jackdebug: send3, len = 39
+[2022-01-14 15:51:01]jackdebug: get ack, number = 7
+[2022-01-14 15:51:03]jackdebug: send1 dhf.datagramNumber = 8
+[2022-01-14 15:51:03]jackdebug: send2 size 20, sendtime 1, reliableMessageNumber 16777215, orderingIndex 115 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 76389, nextActionTime 0
+[2022-01-14 15:51:03]jackdebug: send3, len = 24
+[2022-01-14 15:51:03]jackdebug: get ack, number = 8
+[2022-01-14 15:51:03][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 7000, len = 57
+[2022-01-14 15:51:03]jackdebug: send1 dhf.datagramNumber = 9
+[2022-01-14 15:51:03]jackdebug: send2 size 82, sendtime 1, reliableMessageNumber 4, orderingIndex 3 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 77723, nextActionTime 0
+[2022-01-14 15:51:03]jackdebug: send3, len = 86
+[2022-01-14 15:51:03][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:03]jackdebug: send1 dhf.datagramNumber = 10
+[2022-01-14 15:51:03]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 5, orderingIndex 4 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 77723, nextActionTime 0
+[2022-01-14 15:51:03]jackdebug: send3, len = 55
+[2022-01-14 15:51:03]jackdebug: get ack, number = 9
+[2022-01-14 15:51:03]jackdebug: get ack, number = 10
+[2022-01-14 15:51:04]jackdebug: send1 dhf.datagramNumber = 11
+[2022-01-14 15:51:04]jackdebug: send2 size 12, sendtime 1, reliableMessageNumber 16777215, orderingIndex 117 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 77723, nextActionTime 0
+[2022-01-14 15:51:04]jackdebug: send3, len = 16
+[2022-01-14 15:51:04]jackdebug: get ack, number = 11
+[2022-01-14 15:51:04][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 6102, len = 12
+[2022-01-14 15:51:04]jackdebug: send1 dhf.datagramNumber = 12
+[2022-01-14 15:51:04]jackdebug: send2 size 37, sendtime 1, reliableMessageNumber 6, orderingIndex 5 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 79235, nextActionTime 0
+[2022-01-14 15:51:04]jackdebug: send3, len = 41
+[2022-01-14 15:51:04][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:04]jackdebug: send1 dhf.datagramNumber = 13
+[2022-01-14 15:51:04]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 7, orderingIndex 6 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 79235, nextActionTime 0
+[2022-01-14 15:51:04]jackdebug: send3, len = 55
+[2022-01-14 15:51:04]jackdebug: get ack, number = 12
+[2022-01-14 15:51:04]jackdebug: get ack, number = 13
+[2022-01-14 15:51:05][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 21
+[2022-01-14 15:51:05][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 3006, len = 6
+[2022-01-14 15:51:05][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:05]jackdebug: send1 dhf.datagramNumber = 14
+[2022-01-14 15:51:05]jackdebug: send2 size 46, sendtime 1, reliableMessageNumber 8, orderingIndex 7 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 80409, nextActionTime 0
+[2022-01-14 15:51:05]jackdebug: send2 size 31, sendtime 1, reliableMessageNumber 9, orderingIndex 8 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 80409, nextActionTime 0
+[2022-01-14 15:51:05]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 10, orderingIndex 9 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 80409, nextActionTime 0
+[2022-01-14 15:51:05]jackdebug: send3, len = 132
+[2022-01-14 15:51:05]jackdebug: get ack, number = 14
+[2022-01-14 15:51:05][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:05]jackdebug: send1 dhf.datagramNumber = 15
+[2022-01-14 15:51:05]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 11, orderingIndex 10 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84790, nextActionTime 0
+[2022-01-14 15:51:05]jackdebug: send3, len = 55
+[2022-01-14 15:51:05]jackdebug: get ack, number = 15
+[2022-01-14 15:51:05][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:05]jackdebug: send1 dhf.datagramNumber = 16
+[2022-01-14 15:51:05]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 12, orderingIndex 11 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 85106, nextActionTime 0
+[2022-01-14 15:51:05]jackdebug: send3, len = 55
+[2022-01-14 15:51:05]jackdebug: get ack, number = 16
+[2022-01-14 15:51:05][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:05]jackdebug: send1 dhf.datagramNumber = 17
+[2022-01-14 15:51:05]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 13, orderingIndex 12 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84917, nextActionTime 0
+[2022-01-14 15:51:05]jackdebug: send3, len = 55
+[2022-01-14 15:51:05][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 6002, len = 6
+[2022-01-14 15:51:05]jackdebug: resend size 51, sendtime 1, reliableMessageNumber 13, orderingIndex 12 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84917, nextActionTime 0
+[2022-01-14 15:51:05]jackdebug: send1 dhf.datagramNumber = 18
+[2022-01-14 15:51:05]jackdebug: send2 size 51, sendtime 2, reliableMessageNumber 13, orderingIndex 12 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84917, nextActionTime 0
+[2022-01-14 15:51:05]jackdebug: send3, len = 55
+[2022-01-14 15:51:05]jackdebug: send1 dhf.datagramNumber = 19
+[2022-01-14 15:51:05]jackdebug: send2 size 31, sendtime 1, reliableMessageNumber 14, orderingIndex 13 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84917, nextActionTime 0
+[2022-01-14 15:51:05]jackdebug: send3, len = 35
+[2022-01-14 15:51:05]jackdebug: get ack, number = 18
+[2022-01-14 15:51:05]jackdebug: get ack, number = 19
+[2022-01-14 15:51:05][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:05]jackdebug: send1 dhf.datagramNumber = 20
+[2022-01-14 15:51:05]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 15, orderingIndex 14 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84960, nextActionTime 0
+[2022-01-14 15:51:05]jackdebug: send3, len = 64
+[2022-01-14 15:51:06]jackdebug: resend size 60, sendtime 1, reliableMessageNumber 15, orderingIndex 14 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84960, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 21
+[2022-01-14 15:51:06]jackdebug: send2 size 60, sendtime 2, reliableMessageNumber 15, orderingIndex 14 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84960, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 64
+[2022-01-14 15:51:06]jackdebug: get ack, number = 21
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 22
+[2022-01-14 15:51:06]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 16, orderingIndex 15 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 85104, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 64
+[2022-01-14 15:51:06]jackdebug: resend size 60, sendtime 1, reliableMessageNumber 16, orderingIndex 15 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 85104, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 23
+[2022-01-14 15:51:06]jackdebug: send2 size 60, sendtime 2, reliableMessageNumber 16, orderingIndex 15 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 85104, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 64
+[2022-01-14 15:51:06]jackdebug: get ack, number = 23
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 24
+[2022-01-14 15:51:06]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 17, orderingIndex 16 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84846, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 64
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 25
+[2022-01-14 15:51:06]jackdebug: send2 size 20, sendtime 1, reliableMessageNumber 16777215, orderingIndex 124 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 85104, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 24
+[2022-01-14 15:51:06]jackdebug: resend size 60, sendtime 1, reliableMessageNumber 17, orderingIndex 16 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84846, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 26
+[2022-01-14 15:51:06]jackdebug: send2 size 60, sendtime 2, reliableMessageNumber 17, orderingIndex 16 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84846, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 64
+[2022-01-14 15:51:06]jackdebug: get nak, number = 25
+[2022-01-14 15:51:06]jackdebug: get ack, number = 26
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 27
+[2022-01-14 15:51:06]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 18, orderingIndex 17 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84489, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 64
+[2022-01-14 15:51:06]jackdebug: get ack, number = 27
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 28
+[2022-01-14 15:51:06]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 19, orderingIndex 18 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86743, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 55
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 21
+[2022-01-14 15:51:06]jackdebug: resend size 51, sendtime 1, reliableMessageNumber 19, orderingIndex 18 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86743, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 29
+[2022-01-14 15:51:06]jackdebug: send2 size 51, sendtime 2, reliableMessageNumber 19, orderingIndex 18 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86743, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 55
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 30
+[2022-01-14 15:51:06]jackdebug: send2 size 46, sendtime 1, reliableMessageNumber 20, orderingIndex 19 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86743, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 50
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 21
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 31
+[2022-01-14 15:51:06]jackdebug: send2 size 46, sendtime 1, reliableMessageNumber 21, orderingIndex 20 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86743, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 50
+[2022-01-14 15:51:06]jackdebug: get nak, number = 28
+[2022-01-14 15:51:06]jackdebug: resend size 51, sendtime 2, reliableMessageNumber 19, orderingIndex 18 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86743, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 32
+[2022-01-14 15:51:06]jackdebug: send2 size 51, sendtime 3, reliableMessageNumber 19, orderingIndex 18 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86743, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 55
+[2022-01-14 15:51:06]jackdebug: get ack, number = 29
+[2022-01-14 15:51:06]jackdebug: get ack, number = 31
+[2022-01-14 15:51:06]jackdebug: resend size 46, sendtime 1, reliableMessageNumber 20, orderingIndex 19 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86743, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 33
+[2022-01-14 15:51:06]jackdebug: send2 size 46, sendtime 2, reliableMessageNumber 20, orderingIndex 19 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 96844, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 50
+[2022-01-14 15:51:06]jackdebug: get nak, number = 32
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:06]jackdebug: get ack, number = 33
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 34
+[2022-01-14 15:51:06]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 22, orderingIndex 21 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 95317, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 55
+[2022-01-14 15:51:06]jackdebug: get ack, number = 34
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 21
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 35
+[2022-01-14 15:51:06]jackdebug: send2 size 46, sendtime 1, reliableMessageNumber 23, orderingIndex 22 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 93775, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 50
+[2022-01-14 15:51:06]jackdebug: get ack, number = 35
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 21
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 36
+[2022-01-14 15:51:06]jackdebug: send2 size 46, sendtime 1, reliableMessageNumber 24, orderingIndex 23 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 92632, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 50
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 37
+[2022-01-14 15:51:06]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 25, orderingIndex 24 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 92632, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 55
+[2022-01-14 15:51:06]jackdebug: get ack, number = 36
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 22
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 38
+[2022-01-14 15:51:06]jackdebug: send2 size 47, sendtime 1, reliableMessageNumber 26, orderingIndex 25 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 91281, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 51
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 22
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:06]jackdebug: resend size 51, sendtime 1, reliableMessageNumber 25, orderingIndex 24 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 92632, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 39
+[2022-01-14 15:51:06]jackdebug: send2 size 51, sendtime 2, reliableMessageNumber 25, orderingIndex 24 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 91281, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 55
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 40
+[2022-01-14 15:51:06]jackdebug: send2 size 47, sendtime 1, reliableMessageNumber 27, orderingIndex 26 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 91281, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 28, orderingIndex 27 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 91281, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 102
+[2022-01-14 15:51:06]jackdebug: get nak, number = 38
+[2022-01-14 15:51:06]jackdebug: resend size 47, sendtime 1, reliableMessageNumber 26, orderingIndex 25 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 91281, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 41
+[2022-01-14 15:51:06]jackdebug: send2 size 47, sendtime 2, reliableMessageNumber 26, orderingIndex 25 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 91281, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 51
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 22
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 42
+[2022-01-14 15:51:06]jackdebug: send2 size 47, sendtime 1, reliableMessageNumber 29, orderingIndex 28 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 91281, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 51
+[2022-01-14 15:51:06]jackdebug: get ack, number = 42
+[2022-01-14 15:51:06]jackdebug: resend size 51, sendtime 2, reliableMessageNumber 25, orderingIndex 24 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 91281, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: resend size 47, sendtime 1, reliableMessageNumber 27, orderingIndex 26 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 91281, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: resend size 51, sendtime 1, reliableMessageNumber 28, orderingIndex 27 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 91281, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: resend size 47, sendtime 2, reliableMessageNumber 26, orderingIndex 25 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 91281, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 43
+[2022-01-14 15:51:06]jackdebug: send2 size 51, sendtime 3, reliableMessageNumber 25, orderingIndex 24 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 90263, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send2 size 47, sendtime 2, reliableMessageNumber 27, orderingIndex 26 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 90263, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send2 size 51, sendtime 2, reliableMessageNumber 28, orderingIndex 27 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 90263, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send2 size 47, sendtime 3, reliableMessageNumber 26, orderingIndex 25 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 90263, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 200
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 22
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 44
+[2022-01-14 15:51:06]jackdebug: send2 size 47, sendtime 1, reliableMessageNumber 30, orderingIndex 29 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 90263, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 31, orderingIndex 30 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 90263, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 102
+[2022-01-14 15:51:06]jackdebug: get ack, number = 43
+[2022-01-14 15:51:06]jackdebug: get ack, number = 44
+[2022-01-14 15:51:06][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 21
+[2022-01-14 15:51:06]jackdebug: send1 dhf.datagramNumber = 45
+[2022-01-14 15:51:06]jackdebug: send2 size 46, sendtime 1, reliableMessageNumber 32, orderingIndex 31 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 89922, nextActionTime 0
+[2022-01-14 15:51:06]jackdebug: send3, len = 50
+[2022-01-14 15:51:07]jackdebug: get ack, number = 45
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 21
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 46
+[2022-01-14 15:51:07]jackdebug: send2 size 46, sendtime 1, reliableMessageNumber 33, orderingIndex 32 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 89576, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 34, orderingIndex 33 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 89576, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 101
+[2022-01-14 15:51:07]jackdebug: get ack, number = 46
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 21
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 47
+[2022-01-14 15:51:07]jackdebug: send2 size 46, sendtime 1, reliableMessageNumber 35, orderingIndex 34 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 88437, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 50
+[2022-01-14 15:51:07]jackdebug: get ack, number = 47
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 21
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 48
+[2022-01-14 15:51:07]jackdebug: send2 size 46, sendtime 1, reliableMessageNumber 36, orderingIndex 35 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 87630, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 37, orderingIndex 36 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 87630, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 101
+[2022-01-14 15:51:07]jackdebug: get ack, number = 48
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 21
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 49
+[2022-01-14 15:51:07]jackdebug: send2 size 46, sendtime 1, reliableMessageNumber 38, orderingIndex 37 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86852, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 50
+[2022-01-14 15:51:07]jackdebug: get ack, number = 49
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxUtils\net\HttpProxy.cpp(57)]HttpDownloadTask::downloading(): jackdebug: send1 dhf.datagramNumber = 50
+[2022-01-14 15:51:07]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 39, orderingIndex 38 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 85752, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 55
+[2022-01-14 15:51:07]jackdebug: get ack, number = 50
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 51
+[2022-01-14 15:51:07]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 40, orderingIndex 39 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84641, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 55
+[2022-01-14 15:51:07]jackdebug: get ack, number = 51
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 52
+[2022-01-14 15:51:07]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 41, orderingIndex 40 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 83629, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 64
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 2001, len = 21
+[2022-01-14 15:51:07]jackdebug: resend size 60, sendtime 1, reliableMessageNumber 41, orderingIndex 40 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 83629, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 53
+[2022-01-14 15:51:07]jackdebug: send2 size 60, sendtime 2, reliableMessageNumber 41, orderingIndex 40 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 83629, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 64
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 54
+[2022-01-14 15:51:07]jackdebug: send2 size 46, sendtime 1, reliableMessageNumber 42, orderingIndex 41 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 83629, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 50
+[2022-01-14 15:51:07]jackdebug: get nak, number = 52
+[2022-01-14 15:51:07]jackdebug: resend size 60, sendtime 2, reliableMessageNumber 41, orderingIndex 40 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 83629, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 55
+[2022-01-14 15:51:07]jackdebug: send2 size 60, sendtime 3, reliableMessageNumber 41, orderingIndex 40 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 83629, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 64
+[2022-01-14 15:51:07]jackdebug: get ack, number = 53
+[2022-01-14 15:51:07]jackdebug: get ack, number = 54
+[2022-01-14 15:51:07]jackdebug: get ack, number = 55
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 56
+[2022-01-14 15:51:07]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 43, orderingIndex 42 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84802, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 64
+[2022-01-14 15:51:07]jackdebug: get ack, number = 56
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 57
+[2022-01-14 15:51:07]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 44, orderingIndex 43 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86802, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 64
+[2022-01-14 15:51:07]jackdebug: resend size 60, sendtime 1, reliableMessageNumber 44, orderingIndex 43 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86802, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 58
+[2022-01-14 15:51:07]jackdebug: send2 size 60, sendtime 2, reliableMessageNumber 44, orderingIndex 43 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86802, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 64
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 59
+[2022-01-14 15:51:07]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 45, orderingIndex 44 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86802, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 64
+[2022-01-14 15:51:07]jackdebug: get ack, number = 58
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 60
+[2022-01-14 15:51:07]jackdebug: send2 size 12, sendtime 1, reliableMessageNumber 16777215, orderingIndex 141 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86802, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 16
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 61
+[2022-01-14 15:51:07]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 46, orderingIndex 45 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 85872, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 64
+[2022-01-14 15:51:07]jackdebug: get ack, number = 60
+[2022-01-14 15:51:07]jackdebug: get ack, number = 61
+[2022-01-14 15:51:07]jackdebug: resend size 60, sendtime 1, reliableMessageNumber 45, orderingIndex 44 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 86802, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 62
+[2022-01-14 15:51:07]jackdebug: send2 size 60, sendtime 2, reliableMessageNumber 45, orderingIndex 44 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84951, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 64
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 63
+[2022-01-14 15:51:07]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 47, orderingIndex 46 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 84951, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 64
+[2022-01-14 15:51:07]jackdebug: get ack, number = 62
+[2022-01-14 15:51:07]jackdebug: get ack, number = 63
+[2022-01-14 15:51:07][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:07]jackdebug: send1 dhf.datagramNumber = 64
+[2022-01-14 15:51:07]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 48, orderingIndex 47 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 83371, nextActionTime 0
+[2022-01-14 15:51:07]jackdebug: send3, len = 64
+[2022-01-14 15:51:08]jackdebug: get ack, number = 64
+[2022-01-14 15:51:08][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:08]jackdebug: send1 dhf.datagramNumber = 65
+[2022-01-14 15:51:08]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 49, orderingIndex 48 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 82576, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send3, len = 64
+[2022-01-14 15:51:08]jackdebug: get ack, number = 65
+[2022-01-14 15:51:08][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:08]jackdebug: send1 dhf.datagramNumber = 66
+[2022-01-14 15:51:08]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 50, orderingIndex 49 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 81878, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send3, len = 55
+[2022-01-14 15:51:08]jackdebug: get ack, number = 66
+[2022-01-14 15:51:08][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:08]jackdebug: send1 dhf.datagramNumber = 67
+[2022-01-14 15:51:08]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 51, orderingIndex 50 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 81153, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send3, len = 55
+[2022-01-14 15:51:08]jackdebug: resend size 51, sendtime 1, reliableMessageNumber 51, orderingIndex 50 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 81153, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send1 dhf.datagramNumber = 68
+[2022-01-14 15:51:08]jackdebug: send2 size 51, sendtime 2, reliableMessageNumber 51, orderingIndex 50 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 81153, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send3, len = 55
+[2022-01-14 15:51:08]jackdebug: get nak, number = 67
+[2022-01-14 15:51:08]jackdebug: resend size 51, sendtime 2, reliableMessageNumber 51, orderingIndex 50 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 81153, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send1 dhf.datagramNumber = 69
+[2022-01-14 15:51:08]jackdebug: send2 size 51, sendtime 3, reliableMessageNumber 51, orderingIndex 50 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 81153, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send3, len = 55
+[2022-01-14 15:51:08][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:08]jackdebug: send1 dhf.datagramNumber = 70
+[2022-01-14 15:51:08]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 52, orderingIndex 51 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 81153, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send3, len = 55
+[2022-01-14 15:51:08]jackdebug: get ack, number = 70
+[2022-01-14 15:51:08]jackdebug: resend size 51, sendtime 3, reliableMessageNumber 51, orderingIndex 50 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 81153, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send1 dhf.datagramNumber = 71
+[2022-01-14 15:51:08]jackdebug: send2 size 51, sendtime 4, reliableMessageNumber 51, orderingIndex 50 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 80376, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send3, len = 55
+[2022-01-14 15:51:08]jackdebug: get ack, number = 71
+[2022-01-14 15:51:08][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:08]jackdebug: send1 dhf.datagramNumber = 72
+[2022-01-14 15:51:08]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 53, orderingIndex 52 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 79653, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send3, len = 55
+[2022-01-14 15:51:08]jackdebug: get ack, number = 72
+[2022-01-14 15:51:08][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:08]jackdebug: send1 dhf.datagramNumber = 73
+[2022-01-14 15:51:08]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 54, orderingIndex 53 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 79262, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send3, len = 55
+[2022-01-14 15:51:08]jackdebug: get ack, number = 73
+[2022-01-14 15:51:08][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:08]jackdebug: send1 dhf.datagramNumber = 74
+[2022-01-14 15:51:08]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 55, orderingIndex 54 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 78621, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send3, len = 55
+[2022-01-14 15:51:08]jackdebug: get ack, number = 74
+[2022-01-14 15:51:08][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:08]jackdebug: send1 dhf.datagramNumber = 75
+[2022-01-14 15:51:08]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 56, orderingIndex 55 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 78016, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send3, len = 55
+[2022-01-14 15:51:08]jackdebug: get ack, number = 75
+[2022-01-14 15:51:08][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:08]jackdebug: send1 dhf.datagramNumber = 76
+[2022-01-14 15:51:08]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 57, orderingIndex 56 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 77441, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send3, len = 55
+[2022-01-14 15:51:08]jackdebug: get ack, number = 76
+[2022-01-14 15:51:08][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:08]jackdebug: send1 dhf.datagramNumber = 77
+[2022-01-14 15:51:08]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 58, orderingIndex 57 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 76931, nextActionTime 0
+[2022-01-14 15:51:08]jackdebug: send3, len = 55
+[2022-01-14 15:51:09]jackdebug: resend size 51, sendtime 1, reliableMessageNumber 58, orderingIndex 57 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 76931, nextActionTime 0
+[2022-01-14 15:51:09]jackdebug: send1 dhf.datagramNumber = 78
+[2022-01-14 15:51:09]jackdebug: send2 size 51, sendtime 2, reliableMessageNumber 58, orderingIndex 57 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 76931, nextActionTime 0
+[2022-01-14 15:51:09]jackdebug: send3, len = 55
+[2022-01-14 15:51:09]jackdebug: get nak, number = 77
+[2022-01-14 15:51:09]jackdebug: resend size 51, sendtime 2, reliableMessageNumber 58, orderingIndex 57 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 76931, nextActionTime 0
+[2022-01-14 15:51:09]jackdebug: send1 dhf.datagramNumber = 79
+[2022-01-14 15:51:09]jackdebug: send2 size 51, sendtime 3, reliableMessageNumber 58, orderingIndex 57 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 76931, nextActionTime 0
+[2022-01-14 15:51:09]jackdebug: send3, len = 55
+[2022-01-14 15:51:09]jackdebug: get ack, number = 78
+[2022-01-14 15:51:09]jackdebug: get ack, number = 79
+[2022-01-14 15:51:09][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:09]jackdebug: send1 dhf.datagramNumber = 80
+[2022-01-14 15:51:09]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 59, orderingIndex 58 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 78011, nextActionTime 0
+[2022-01-14 15:51:09]jackdebug: send3, len = 55
+[2022-01-14 15:51:09]jackdebug: get ack, number = 80
+[2022-01-14 15:51:09][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:09]jackdebug: send1 dhf.datagramNumber = 81
+[2022-01-14 15:51:09]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 60, orderingIndex 59 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 77685, nextActionTime 0
+[2022-01-14 15:51:09]jackdebug: send3, len = 55
+[2022-01-14 15:51:09]jackdebug: get ack, number = 81
+[2022-01-14 15:51:09][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:09]jackdebug: send1 dhf.datagramNumber = 82
+[2022-01-14 15:51:09]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 61, orderingIndex 60 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 77172, nextActionTime 0
+[2022-01-14 15:51:09]jackdebug: send3, len = 55
+[2022-01-14 15:51:09]jackdebug: get ack, number = 82
+[2022-01-14 15:51:09][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 26
+[2022-01-14 15:51:09]jackdebug: send1 dhf.datagramNumber = 83
+[2022-01-14 15:51:09]jackdebug: send2 size 51, sendtime 1, reliableMessageNumber 62, orderingIndex 61 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 76685, nextActionTime 0
+[2022-01-14 15:51:09]jackdebug: send3, len = 55
+[2022-01-14 15:51:09]jackdebug: get ack, number = 83
+[2022-01-14 15:51:09]jackdebug: send1 dhf.datagramNumber = 84
+[2022-01-14 15:51:09]jackdebug: send2 size 20, sendtime 1, reliableMessageNumber 16777215, orderingIndex 61 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 76685, nextActionTime 0
+[2022-01-14 15:51:09]jackdebug: send3, len = 24
+[2022-01-14 15:51:09][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:09]jackdebug: send1 dhf.datagramNumber = 85
+[2022-01-14 15:51:09]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 63, orderingIndex 62 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 76228, nextActionTime 0
+[2022-01-14 15:51:09]jackdebug: send3, len = 64
+[2022-01-14 15:51:09]jackdebug: get ack, number = 85
+[2022-01-14 15:51:09][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:09]jackdebug: send1 dhf.datagramNumber = 86
+[2022-01-14 15:51:09]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 64, orderingIndex 63 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 75774, nextActionTime 0
+[2022-01-14 15:51:09]jackdebug: send3, len = 64
+[2022-01-14 15:51:09]jackdebug: get ack, number = 86
+[2022-01-14 15:51:09][H:\gitroot\gn_client\windbuild\client\miniSandbox\sandboxPlay\gamenet\GameNetManager.cpp(704)]GameNetManager::sendToHost(): jackdebug: sendToHost, pbCode = 101, len = 35
+[2022-01-14 15:51:09]jackdebug: send1 dhf.datagramNumber = 87
+[2022-01-14 15:51:09]jackdebug: send2 size 60, sendtime 1, reliableMessageNumber 65, orderingIndex 64 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 75335, nextActionTime 0
+[2022-01-14 15:51:09]jackdebug: send3, len = 64
+[2022-01-14 15:51:09]jackdebug: get ack, number = 87
+[2022-01-14 15:51:12]jackdebug: send1 dhf.datagramNumber = 88
+[2022-01-14 15:51:12]jackdebug: send2 size 11, sendtime 1, reliableMessageNumber 66, orderingIndex 65 splitPacketCount 0, splitPacketId 0, splitPacketIndex 0, retransmissionTime 74978, nextActionTime 0
+[2022-01-14 15:51:12]jackdebug: send3, len = 15
+[2022-01-14 15:51:12]jackdebug: get ack, number = 88

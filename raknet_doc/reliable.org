@@ -44,6 +44,68 @@
 						internalPacket->retransmissionTime = congestionManager.GetRTOForRetransmission(internalPacket->timesSent);
 						internalPacket->nextActionTime = internalPacket->retransmissionTime+time;
 #+end_src
-  
+
+** resendBuffer
+
 * 收到reliable的回包
   unsigned ReliabilityLayer::RemovePacketFromResendListAndDeleteOlderReliableSequenced( const MessageNumberType messageNumber, CCTimeType time, DataStructures::List<PluginInterface2*> &messageHandlerList, const SystemAddress &systemAddress )
+
+
+* 几个数据包里的字段
+** datagramNumber
+包头上的字段，表示包的id, ack 和datagramNumber对应来表示包收到
+一个包里面可能包含多个逻辑上的数据包, 一个ack收到表示这些逻辑上的数据包都收到了
+   
+** reliability
+可靠性的类型
+
+** sendtime   
+发送的次数，或者说重发的次数
+   
+** sendReceiptSerial
+本地记录的一个号码，用来在比如RELIABLE_WITH_ACK_RECEIPT类型的回调上的。还是通过datagramNumber的ack来确认收报，然后取到本地的sendReceiptSerial做回调用
+
+** reliableMessageNumber   
+RELIABLE 相关类型的seq
+
+** orderingIndex
+收包方用来判断包是否是旧包
+每个orderingChannel会记录
+   
+** splitPacketCount splitPacketId splitPacketIndex
+分包相关的字段，表示分包的数量，分包的ID，该数据包在分包中的位置
+   
+** retransmissionTime nextActionTime   
+重发的时间
+
+
+* 滑动窗口
+#+begin_src 
+	// Maximum amount of bytes that the user can send, e.g. the size of one full datagram
+	uint32_t MAXIMUM_MTU_INCLUDING_UDP_HEADER;
+
+	double cwnd; // max bytes on wire
+	double ssThresh; // Threshhold between slow start and congestion avoidance
+
+	/// When we get an ack, if oldestUnsentAck==0, set it to the current time
+	/// When we send out acks, set oldestUnsentAck to 0
+	CCTimeType oldestUnsentAck;
+
+	CCTimeType GetSenderRTOForACK(void) const;
+
+	/// Every outgoing datagram is assigned a sequence number, which increments by 1 every assignment
+	DatagramSequenceNumberType nextDatagramSequenceNumber;
+	DatagramSequenceNumberType nextCongestionControlBlock;
+	bool backoffThisBlock, speedUpThisBlock;
+	/// Track which datagram sequence numbers have arrived.
+	/// If a sequence number is skipped, send a NAK for all skipped messages
+	DatagramSequenceNumberType expectedNextSequenceNumber;
+
+	bool _isContinuousSend;
+
+	bool IsInSlowStart(void) const;
+
+	double lastRtt, estimatedRTT, deviationRtt;
+#+end_src
+
+* NAK  
