@@ -873,7 +873,7 @@ bool ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer(
 	}
 	else
 	{
-		LOG_INFO("jackdebug recv1 dhf.datagramNumber = %d, len = %d", dhf.datagramNumber.val, length);
+		LOG_INFO("jackdebug recv1 dhf.datagramNumber = %d, len = %d, addr = %s", dhf.datagramNumber.val, length, systemAddress.ToString());
 		uint32_t skippedMessageCount;
 		if (!congestionManager.OnGotPacket(dhf.datagramNumber, dhf.isContinuousSend, timeRead, length, &skippedMessageCount))
 		{
@@ -2217,7 +2217,7 @@ void ReliabilityLayer::Update( RakNetSocket2 *s, SystemAddress &systemAddress, i
 			dhf.Serialize(&updateBitStream);
 			CC_DEBUG_PRINTF_2("S%i ",dhf.datagramNumber.val);
 
-			LOG_INFO("jackdebug: send1 dhf.datagramNumber = %d", dhf.datagramNumber.val);
+			LOG_INFO("jackdebug: send1 dhf.datagramNumber = %d, addr = %s", dhf.datagramNumber.val, systemAddress.ToString());
 
 			while (msgIndex < msgTerm)
 			{

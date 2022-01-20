@@ -107,5 +107,8 @@ RELIABLE 相关类型的seq
 
 	double lastRtt, estimatedRTT, deviationRtt;
 #+end_src
+滑动窗口可以让数据包不进入网络，但是发送方没有发送缓存的上限，可以一直发送成功
 
 * NAK  
+
+

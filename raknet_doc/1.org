@@ -10,3 +10,14 @@
   	// Threadsafe, and not thread safe
   DataStructures::List<PluginInterface2*> pluginListTS, pluginListNTS;
 #+end_src
+
+* 日志
+  通过插件可以打印日志, 以下是个示例
+#+begin_src 
+m_packetLogger = new PacketFileLogger;
+m_packetLogger->StartLog("miniRak");
+m_rakpeerInterface = RakPeerInterface::GetInstance();
+m_rakpeerInterface->AttachPlugin(m_packetLogger);  
+#+end_src
+
+  
