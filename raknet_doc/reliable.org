@@ -110,5 +110,9 @@ RELIABLE 相关类型的seq
 滑动窗口可以让数据包不进入网络，但是发送方没有发送缓存的上限，可以一直发送成功
 
 * NAK  
+** 在 ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer 里调用 CCRakNetSlidingWindow::OnGotPacket 来确定是否需要发送NAK
 
-
+** 在 ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer 里找到对应的InternalPacket, 并设置nextActionTime为当前时间来触发重发
+  
+* isPacketPair  
+** datagramsToSendThisUpdateIsPair

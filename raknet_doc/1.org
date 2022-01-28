@@ -20,4 +20,55 @@ m_rakpeerInterface = RakPeerInterface::GetInstance();
 m_rakpeerInterface->AttachPlugin(m_packetLogger);  
 #+end_src
 
-  
+* TODO
+** 滑动窗口是怎么计算得
+#+begin_src 
+		int transmissionBandwidth = congestionManager.GetTransmissionBandwidth(time, timeSinceLastTick, unacknowledgedBytes,dhf.isContinuousSend);
+		int retransmissionBandwidth = congestionManager.GetRetransmissionBandwidth(time, timeSinceLastTick, unacknowledgedBytes,dhf.isContinuousSend);  
+#+end_src
+发送得时候检查代码, 其实就是检查需要重发得字节数有没有超过cwnd
+#+begin_src 
+		((int)BITS_TO_BYTES(allDatagramSizesSoFar)<transmissionBandwidth ||  
+#+end_src
+
+*** cwnd
+初始化
+#+begin_src 
+congestionManager.Init(RakNet::GetTimeUS(), MTUSize - UDP_HEADER_SIZE);  
+#+end_src
+mtu 得默认值是defaultMTUSize得最后一个，也就是576
+也可以从 ID_OPEN_CONNECTION_REPLY_2 或者 ID_OPEN_CONNECTION_REQUEST_2 传过来
+ID_OPEN_CONNECTION_REPLY_1
+ID_OPEN_CONNECTION_REQUEST_1
+
+
+jackdebug: requestsMade = 1, MTUSizeIndex = 0, mtu = 1464
+jackdebug: ID_OPEN_CONNECTION_REPLY_1 mtu = 1492
+
+mtu= rakPeer->defaultMTUSize;
+
+jackdebug: ID_OPEN_CONNECTION_REPLY_2 mtu = 576
+
+握手过程中有交换mtu, 但是最后却没有使用，直接使用了一个最小值得默认值
+貌似原本得raknet不是这样，是我们自己改得？
+另外，握手过程得mtu交换应该是可以实现mtu探测得，但是没有设置DP标志位，所以实际上还缺少一下步骤
+#+begin_src 
+ 13     int sockopt_val = IP_PMTUDISC_DO;
+ 14     int ret         = setsockopt(fd, IPPROTO_IP, IP_MTU_DISCOVER,
+ 15                          &sockopt_val, sizeof(sockopt_val));
+#+end_src
+
+** 重发时间是怎么计算得，是否有拥塞控制相关得机制
+#+begin_src 
+	internalPacket->retransmissionTime = congestionManager.GetRTOForRetransmission(internalPacket->timesSent);
+	internalPacket->nextActionTime = internalPacket->retransmissionTime+time;
+#+end_src
+   
+** 怎么防止向已经关闭又重新打开得同样得端口发送数据
+因为是有握手过程得，会有activeSystemList之类得结构   
+** update执行得频率
+#+begin_src 
+rakPeer->quitAndDataEvents.WaitOnEvent(10);  
+#+end_src
+   
+
