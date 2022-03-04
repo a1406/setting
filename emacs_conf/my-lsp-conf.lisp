@@ -173,6 +173,14 @@
 ;;   nil
 ;;   )
 
+;; 避免lsp-mode弹出窗口显示警告
+(defun lsp-warn (message &rest args)
+  "Display a warning message made from (`format-message' MESSAGE ARGS...).
+This is equivalent to `display-warning', using `lsp-mode' as the type and
+`:warning' as the level."
+  ;; (apply #'format-message message args))
+  (make-hash-table :test 'equal))
+
 
 ;;避免flychecker弹出checker相关信息
 (defun flycheck-verify-checker (checker)
