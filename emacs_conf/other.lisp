@@ -469,22 +469,6 @@ Value is t if a query was formerly required."
 ;; 	(counsel--normalize-grep-match cand)
 ;; 	)
 ;;       cands))))
-(defun my-add-rg-env (orig-fun &rest args)
-  ;; (message "display-buffer called with args %S" args)
-  (if my_use-rg
-      (progn
-	(setq rgfile (format "%s/rg.files"  (my-cscope-guess-root-directory)))
-	(if (f-exists-p rgfile)
-	    (setq process-environment (setenv-internal process-environment "RIPGREP_CONFIG_PATH" rgfile t)))))
-  
-  (let ((res (apply orig-fun args)))
-    ;; (message "display-buffer returned %S" res)
-    res))
-
-(advice-add 'counsel-grep-like-occur :around #'my-add-rg-env)
-(advice-add 'counsel-ag-function :around #'my-add-rg-env)
-
-
 (defun my-choose-num (beg end)
   (interactive "r")
   (message "beg = %s, end = %s, choose = %s" beg end (- end beg)))

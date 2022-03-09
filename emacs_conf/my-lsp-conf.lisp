@@ -174,13 +174,29 @@
 ;;   )
 
 ;; 避免lsp-mode弹出窗口显示警告
-(defun lsp-warn (message &rest args)
+(defun my-lsp-warn (orig-fun &rest args)
   "Display a warning message made from (`format-message' MESSAGE ARGS...).
 This is equivalent to `display-warning', using `lsp-mode' as the type and
 `:warning' as the level."
   ;; (apply #'format-message message args))
   (make-hash-table :test 'equal))
 
+(advice-add 'lsp-warn :around #'my-lsp-warn)
+
+(defun my-add-rg-env (orig-fun &rest args)
+  ;; (message "display-buffer called with args %S" args)
+  (if my_use-rg
+      (progn
+	(setq rgfile (format "%s/rg.files"  (my-cscope-guess-root-directory)))
+	(if (f-exists-p rgfile)
+	    (setq process-environment (setenv-internal process-environment "RIPGREP_CONFIG_PATH" rgfile t)))))
+  
+  (let ((res (apply orig-fun args)))
+    ;; (message "display-buffer returned %S" res)
+    res))
+
+(advice-add 'counsel-grep-like-occur :around #'my-add-rg-env)
+(advice-add 'counsel-ag-function :around #'my-add-rg-env)
 
 ;;避免flychecker弹出checker相关信息
 (defun flycheck-verify-checker (checker)
