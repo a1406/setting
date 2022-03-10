@@ -1,0 +1,40 @@
+
+* ID_OPEN_CONNECTION_REQUEST_1
+** client
+  默认是尝试12次，间隔1S，如下：
+  virtual ConnectionAttemptResult Connect( const char* host, unsigned short remotePort, const char *passwordData, int passwordDataLength, PublicKey *publicKey=0, unsigned connectionSocketIndex=0, unsigned sendConnectionAttemptCount=12, unsigned timeBetweenSendConnectionAttemptsMS=1000, RakNet::TimeMS timeoutTime=0 )=0;
+  这个包会用mtu - 28(IP包头和UDP包头长度)填充满，用来探测MUT
+  如果send调用超过100毫秒，会直接跳到mut最小得值继续发送，这会导致发送次数变少
+
+** server  
+  除了一些简单校验，没有其他逻辑，直接发送ID_OPEN_CONNECTION_REPLY_1
+   
+* ID_OPEN_CONNECTION_REPLY_1,
+** client
+  获取mtu值，不加密得话也没什么其他逻辑，直接发送ID_OPEN_CONNECTION_REQUEST_2
+   
+* ID_OPEN_CONNECTION_REQUEST_2,
+** server
+  没太多逻辑，不加密得话就检查了下连接数有没有满，这个IP端口以及GUID有没有已经连上来了, 这个IP是不是最近一直在连
+  最重要得是调用 RakPeer::AssignSystemAddressToRemoteSystemList 来插入 remoteSystemList 和 activeSystemList
+  最后发送ID_OPEN_CONNECTION_REPLY_2
+   
+* ID_OPEN_CONNECTION_REPLY_2,
+** client
+  同样调用AssignSystemAddressToRemoteSystemList 来插入 remoteSystemList 和 activeSystemList
+  把weInitiatedTheConnection 设置成了true， connectMode 设置成了 REQUESTED_CONNECTION
+  最后发送 ID_CONNECTION_REQUEST
+  
+* ID_CONNECTION_REQUEST,
+** server
+   校验密码，没问题得话把 connectMode 设置成 HANDLING_CONNECTION_REQUEST;
+   最后发送 ID_CONNECTION_REQUEST_ACCEPTED
+  
+* ID_CONNECTION_REQUEST_ACCEPTED,
+** client
+  把connectMode 设置成 CONNECTED;
+  最后发送 ID_NEW_INCOMING_CONNECTION
+
+* ID_NEW_INCOMING_CONNECTION
+** server
+  把connectMode 设置成 CONNECTED;
