@@ -23,17 +23,17 @@
 ** client
   同样调用AssignSystemAddressToRemoteSystemList 来插入 remoteSystemList 和 activeSystemList
   把weInitiatedTheConnection 设置成了true， connectMode 设置成了 REQUESTED_CONNECTION
-  最后发送 ID_CONNECTION_REQUEST
+  最后发送 ID_CONNECTION_REQUEST (RELIABLE类型)
   
 * ID_CONNECTION_REQUEST,
 ** server
    校验密码，没问题得话把 connectMode 设置成 HANDLING_CONNECTION_REQUEST;
-   最后发送 ID_CONNECTION_REQUEST_ACCEPTED
+   最后发送 ID_CONNECTION_REQUEST_ACCEPTED (RELIABLE_ORDERED类型)
   
 * ID_CONNECTION_REQUEST_ACCEPTED,
 ** client
   把connectMode 设置成 CONNECTED;
-  最后发送 ID_NEW_INCOMING_CONNECTION
+  最后发送 ID_NEW_INCOMING_CONNECTION (RELIABLE_ORDERED类型)
 
 * ID_NEW_INCOMING_CONNECTION
 ** server
