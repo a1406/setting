@@ -15,9 +15,9 @@
 	  (display-line-numbers-mode)
 	(linum-mode 1))
   (local-set-key  "\C-c\C-c"  'comment-or-uncomment-region)
-  (if my-use-lsp (progn
-		   (load "~/.emacs.conf/my-lua-lsp.lisp")
-		   (lsp)))
+;;  (if my-use-lsp (progn
+;;		   (load "~/.emacs.conf/my-lua-lsp.lisp")
+;;		   ))
   (flycheck-select-checker 'luacheck)
   )
 (add-hook 'lua-mode-hook 'my-lua-setup)

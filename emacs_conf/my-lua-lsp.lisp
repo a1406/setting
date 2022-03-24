@@ -2,7 +2,7 @@
 (setq-local lsp-log-io nil) ; if set to true can cause a performance hit
 (setq-local lsp-print-performance t)
 (setq-local lsp-auto-guess-root t) ; auto detect workspace and start lang server
-
+ 
 ;; 
 ;; lua-language-server会有soft lockup的报错
 ;; 换https://github.com/EmmyLua/EmmyLua-LanguageServer
@@ -16,6 +16,5 @@
         )
 (require 'lsp-diagnostics)
 (add-to-list 'lsp-diagnostics-disabled-modes 'lua-mode)
-
-
+(lsp)
 
