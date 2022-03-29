@@ -74,6 +74,11 @@
 (define-key evil-emacs-state-map " lk" 'lsp-restart-workspace)
 (define-key evil-emacs-state-map " ld" 'lsp-ui-peek-find-definitions)
 (define-key evil-emacs-state-map " lr" 'lsp-ui-peek-find-references)
+(define-key evil-emacs-state-map " lg" (lambda() (interactive)
+					 (if (eq major-mode 'go-mode)
+					     (call-interactively  'godef-jump)
+					   (message "not in go mode")
+					 )))
 
 ;;hs-minor-mode
 (define-key evil-emacs-state-map " hm" 'hs-minor-mode)
