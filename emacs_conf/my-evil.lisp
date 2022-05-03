@@ -120,6 +120,7 @@
 (define-key evil-emacs-state-map " fo" (lambda() (interactive)(find-file "~/.emacs.conf/other.lisp")))
 (define-key evil-emacs-state-map " fp" (lambda() (interactive)(find-file "~/.emacs.conf/package.conf")))
 (define-key evil-emacs-state-map " fs" (lambda() (interactive)(my-enter-shell)(delete-other-windows)))
+(define-key evil-emacs-state-map " fv" (lambda() (interactive)(call-interactively #'vterm)(delete-other-windows)))
 (define-key evil-emacs-state-map " fy" 'spacemacs/show-and-copy-buffer-filename)
 (define-key evil-emacs-state-map " fr" 'refresh-file)
 
