@@ -16,6 +16,7 @@
 (setq lsp-ui-doc-enable nil)
 (setq lsp-ui-peek-enable nil)
 (setq lsp-ui-sideline-enable nil)
+(setq lsp-signature-auto-activate nil)
 
 ;;; 函数变量后面讨厌的ref显示
 (setq lsp-lens-enable nil)
