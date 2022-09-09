@@ -50,6 +50,11 @@
 
 (setq my-use-lsp t)
 
+(setq my-use-ccls nil)
+(defun my-clang-config ()
+  (setq lsp-clangd-version "14.0.6")
+  )
+
 (add-hook 'lsp-after-initialize-hook
 	  #'(lambda ()
 	      (if my-use-gtags-default
@@ -70,8 +75,12 @@
 		  ;;eglot config
 		  ;; (eglot-ensure)
 		  ;; (company-mode)
-		  ;; (setq-local company-backends (add-to-list 'company-backends 'company-capf))
-		    (require 'ccls)
+		    ;; (setq-local company-backends (add-to-list 'company-backends 'company-capf))
+		    (if my-use-ccls
+			(require 'ccls)
+			(my-clang-config)
+			)
+		    
 		  ;;lsp config
 		  (setq-local ivy-completing-sort nil)
 		  (setq-local ivy-sort-functions-alist (append (list (list 'ivy-done)) ivy-sort-functions-alist))
