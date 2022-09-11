@@ -80,6 +80,9 @@
 			(require 'ccls)
 			(my-clang-config)
 			)
+
+		    (setq-local comment-start "// ")
+		    (setq-local comment-end "")
 		    
 		  ;;lsp config
 		  (setq-local ivy-completing-sort nil)
