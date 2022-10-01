@@ -786,6 +786,20 @@ The previous string is between `ivy-completion-beg' and `ivy-completion-end'."
           (set-marker (overlay-get cursor 'point) (point))
           (set-marker (overlay-get cursor 'mark) (point)))))))
 
+(defun my/org-mode/load-prettify-symbols ()
+  (interactive)
+  (setq prettify-symbols-alist
+	'(("lambda" . "λ")
+	("|>" . "▷")
+	("<|" . "◁")
+	("->>" . "↠")
+	("->" . "→")
+	("<-" . "←")
+	("=>" . "⇒")
+	("<=" . "≤")
+	("!=" . "≠")	
+	(">=" . "≥")))
+  (prettify-symbols-mode 1))
 
 (load "~/.emacs.conf/my-xref-backpoint.lisp")
 
