@@ -1,3 +1,7 @@
+(if (not (package-installed-p 'xref '(1 5 1)))
+    (message "xref version too low, reinstall it")
+    )
+
 (defvar xref--cur-pos 0)
 
 (defun my-goto-xref-curpos ()
