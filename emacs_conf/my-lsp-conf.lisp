@@ -1,6 +1,8 @@
-(require 'lsp)
-;;(require 'lsp-clients)
-(require 'lsp-ui)
+(require 'eglot)
+
+;; (require 'lsp)
+;; ;;(require 'lsp-clients)
+;; (require 'lsp-ui)
 (require 'ivy-xref)
 (require 'projectile)
 
@@ -48,7 +50,7 @@
 ;;容易和expand-region颜色冲突，看不清楚
 (setq lsp-enable-symbol-highlighting nil)
 
-(setq my-use-lsp t)
+(setq my-use-lsp nil)
 
 (setq my-use-ccls nil)
 (defun my-clang-config ()

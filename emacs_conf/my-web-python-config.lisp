@@ -7,7 +7,11 @@
 (defun my-lua-setup ()
   (flycheck-luacheck-setup)
   ;; (flycheck-select-checker 'luacheck)
-  (flycheck-mode 1)
+  ;; (flycheck-mode 1)
+  (add-to-list 'eglot-stay-out-of 'imenu)
+  (add-to-list 'eglot-server-programs
+               '(lua-mode . ("/usr/bin/java" "-jar" "/home/jack/.emacs.d/.cache/lsp/EmmyLua-LS-all.jar")))
+  
   (setq indent-tabs-mode nil)
   (setq tab-width 4)
   (company-mode)
