@@ -92,14 +92,15 @@
 		  (if my-use-gtags-default
 		      (add-to-list 'xref-backend-functions 'global-tags-xref-backend)	
 		      )
-		  (if my-use-lsp		  
-		      (flycheck-select-checker 'lsp-ui)
-		      )
+		  ;; (if my-use-lsp		  
+		  ;;     (flycheck-select-checker 'lsp-ui)
+		  ;;     )
 		(flymake-mode-off)
 		(setq-local company-backends (add-to-list 'company-backends 'company-c-headers t))
 		(setq-local company-backends (add-to-list 'company-backends 'company-files t))
 
 		(setq-local company-c-headers-path-user (my-cscope-include-directory))
+		(funcall-interactively 'my/org-mode/load-prettify-symbols)
 
 		;; (setq ccls-sem-highlight-method 'font-lock)
 		;; ;; alternatively, (setq ccls-sem-highlight-method 'overlay)

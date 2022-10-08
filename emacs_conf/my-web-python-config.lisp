@@ -18,7 +18,8 @@
  (if my-use-lsp (progn
 		   (load "~/.emacs.conf/my-lua-lsp.lisp")
 		   ))
-  (flycheck-select-checker 'luacheck)
+ (flycheck-select-checker 'luacheck)
+ (my/org-mode/load-prettify-symbols)
   )
 (add-hook 'lua-mode-hook 'my-lua-setup)
 
