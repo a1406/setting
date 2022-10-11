@@ -97,7 +97,9 @@
 		  (if my-use-lsp		  
 		      (flycheck-select-checker 'lsp-ui)
 		      )
-		(flymake-mode-off)
+		  (flycheck-mode-off)
+		  ;; (call-interactively 'eglot)
+		  (eglot-ensure)
 		(setq-local company-backends (add-to-list 'company-backends 'company-c-headers t))
 		(setq-local company-backends (add-to-list 'company-backends 'company-files t))
 

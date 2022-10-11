@@ -11,7 +11,7 @@
   (add-to-list 'eglot-stay-out-of 'imenu)
   (add-to-list 'eglot-server-programs
                '(lua-mode . ("/usr/bin/java" "-jar" "/home/jack/.emacs.d/.cache/lsp/EmmyLua-LS-all.jar")))
-  
+  (eglot-ensure)
   (setq indent-tabs-mode nil)
   (setq tab-width 4)
   (company-mode)
@@ -22,7 +22,9 @@
  (if my-use-lsp (progn
 		   (load "~/.emacs.conf/my-lua-lsp.lisp")
 		   ))
-  (flycheck-select-checker 'luacheck)
+ (flycheck-select-checker 'luacheck)
+ (flymake-mode-off)
+ (flycheck-mode-on) 
   )
 (add-hook 'lua-mode-hook 'my-lua-setup)
 
