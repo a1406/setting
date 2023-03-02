@@ -1,0 +1,11 @@
+* 服务器视角
+** ID_OPEN_CONNECTION_REQUEST_1 ID_OPEN_CONNECTION_REPLY_1,
+     服务器没有分配内存，这个时候连接失败，服务器没有什么超时之类的检查
+
+** ID_OPEN_CONNECTION_REQUEST_2, ID_OPEN_CONNECTION_REPLY_2
+     服务器上插入activeSystemList，connectMode是UNVERIFIED_SENDER
+     这个时候会进行超时的检查，在RunUpdateCycle函数中遍历activeSystemList
+     如果 timeMS - remoteSystem->connectionTime > 10000
+     调用 CloseConnectionInternal( systemAddress, false, true, 0, LOW_PRIORITY ); 释放内存
+
+     
