@@ -9,3 +9,5 @@
      调用 CloseConnectionInternal( systemAddress, false, true, 0, LOW_PRIORITY ); 释放内存
 
      
+** ID_CONNECTION_REQUEST, ID_CONNECTION_REQUEST_ACCEPTED,
+     同上
