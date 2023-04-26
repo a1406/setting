@@ -1,0 +1,55 @@
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+;;(if (or (booleanp 'package--initialized) (not package--initialized))
+;;    (package-initialize))
+
+(setq MY_EMACS_CONF 2)
+(load "~/.emacs.conf/package.conf")
+
+(custom-set-variables
+ '(initial-frame-alist (quote ((fullscreen . fullscreen))))
+;;'(custom-enabled-themes (quote (hc-zenburn)))
+)
+;; '(initial-frame-alist (quote ((fullscreen . maximized)))))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Source Code Pro" :foundry "adobe" :slant normal :weight normal :height 143 :width normal)))))
+
+(load "~/.emacs.conf/emacs.conf")
+(load "~/.emacs.conf/shell.conf")
+;;(load "~/.emacs.conf/my-theme-theme.el")
+;;(load "~/.emacs.conf/my-theme-true-color-theme.el")
+
+(if (file-exists-p "~/.emacs.conf/other.lisp")
+    (load "~/.emacs.conf/other.lisp")
+  )
+(if (file-exists-p "~/.emacs.conf/jump_back.lisp")
+    (load "~/.emacs.conf/jump_back.lisp")
+  )
+;;(load "~/.emacs.conf/my-lsp-conf.lisp")
+;;(load "~/.emacs.conf/my-lsp-bridge.lisp")
+(load "~/.emacs.conf/spacemacs-func.lisp")
+(load "~/.emacs.conf/emacs_key.conf")
+(load "~/.emacs.conf/my-lua.lisp")
+(load "~/.emacs.conf/my-evil.lisp")
+
+(setq custom-file "~/.custom-file")
+(if (file-exists-p custom-file)
+    (load custom-file)
+  )
+
+(load "~/.emacs.conf/theme.conf")
+
+(put 'erase-buffer 'disabled nil)

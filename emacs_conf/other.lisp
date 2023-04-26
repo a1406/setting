@@ -802,7 +802,8 @@ The previous string is between `ivy-completion-beg' and `ivy-completion-end'."
 	  ("~=" . "≠")		  
 	  (">=" . "≥"))
 	)
-  (prettify-symbols-mode 1))
+  ;(prettify-symbols-mode 1)
+  )
 
 (load "~/.emacs.conf/my-xref-backpoint.lisp")
 
