@@ -128,3 +128,14 @@ to \"^python-\"."
 ;;(add-to-list 'auto-mode-alist '("\\.[jt]s\\'" . web-mode))
 (define-key web-mode-map "\M-;" nil)
 
+
+
+(defun my-shader-setup ()
+  (setq indent-tabs-mode nil)
+  (setq tab-width 4)
+  (company-mode)
+  (if (functionp 'display-line-numbers-mode)
+	  (display-line-numbers-mode)
+	(linum-mode 1))
+  )
+(add-hook 'shader-mode-hook 'my-shader-setup)
