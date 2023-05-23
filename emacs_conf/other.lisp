@@ -583,8 +583,9 @@ Value is t if a query was formerly required."
 	  "rg -i -L -M 120 --no-heading --line-number --color never %s %s")
     (setq counsel-grep-base-command
 	  "ag -i -f --noheading --numbers --nocolor %s %s"))
+
 (setq counsel-rg-base-command
-      "rg -M 240 -L --with-filename --no-heading --line-number --color never %s || echo \"ignore rg error\"")
+      "rg -M 240 -L --with-filename --no-ignore --no-heading --line-number --color never %s || echo \"ignore rg error\"")
 
 (setq my-counsel-rag-sp nil)
 (defun my-counsel-rag-sp (&optional initial-input initial-directory extra-rg-args rg-prompt)
