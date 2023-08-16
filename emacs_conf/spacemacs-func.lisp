@@ -68,9 +68,9 @@
   ;; list-buffers-directory is the variable set in dired buffers
   (let ((file-name (or (buffer-file-name) list-buffers-directory)))
     (if file-name
-        (message (kill-new file-name))
+	(progn (message file-name)
+        (kill-new file-name))
       (error "Buffer not visiting a file"))))
-
 
 (defun true-color-p ()
   (or
