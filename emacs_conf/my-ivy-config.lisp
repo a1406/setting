@@ -7,6 +7,11 @@
 					  (display-line-numbers-mode)
 					(linum-mode 1)
 					)))
+
+(add-hook 'protobuf-mode-hook (lambda ()
+				(add-to-list 'swiper-font-lock-exclude 'protobuf-mode)
+				))
+
 (define-key ivy-occur-grep-mode-map "a" nil)					
 (define-key ivy-occur-grep-mode-map "n" nil)
 (define-key ivy-occur-grep-mode-map "p" nil)
