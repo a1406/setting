@@ -5,6 +5,9 @@
 
 typedef uint32_t DWORD;
 
+void Float2Int1(int *pRet, float *pArray, DWORD dwCount);
+void Float2Int2(int *pRet, float *pArray, DWORD dwCount);
+
 void ScaleValue1(float *pRet, float *pArray, DWORD dwCount, float fScale);//乘法
 void ScaleValue2(float *pRet, float *pArray, DWORD dwCount, float fScale);
 
