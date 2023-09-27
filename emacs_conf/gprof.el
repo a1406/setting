@@ -157,7 +157,7 @@
   (gprof-make-link-overlays)
 
   ;;miscellaneous
-  (or buffer-read-only (toggle-read-only))
+  ;;(or buffer-read-only (toggle-read-only))
 
   ;;handle hook
   (run-hooks 'gprof-mode-hook))

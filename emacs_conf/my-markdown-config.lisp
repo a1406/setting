@@ -18,3 +18,47 @@
   (imp-set-user-filter 'markdown-html_v1)
   ;;  (imp-visit-buffer)
   )
+
+;;;;;;;;;;;;;;;;;;
+
+(setq grip-preview-host "0.0.0.0")
+(defun grip--address ()
+  "Return grip preview url."
+  (format "%s:%d" grip-preview-host grip--port))
+
+(defun my-grip-start-process (orig-fun &rest args)
+  "Render and preview with grip."
+  (unless (processp grip--process)
+    (unless (executable-find grip-binary-path)
+      (grip-mode -1)                    ; Force to disable
+      (user-error "The `grip' is not available in PATH environment"))
+
+    ;; Generat random port
+    (while (< grip--port 6419)
+      (setq grip--port (random 65535)))
+
+    ;; Start a new grip process
+    (when grip--preview-file
+      (setq grip--process
+            (start-process (format "grip-%d" grip--port)
+                           (format " *grip-%d*" grip--port)
+                           grip-binary-path
+                           (format "--api-url=%s" grip-github-api-url)
+                           (format "--user=%s" grip-github-user)
+                           (format "--pass=%s" grip-github-password)
+                           (format "--title=%s - Grip" (buffer-name))
+                           grip--preview-file
+			   (grip--address)))
+;;                           (number-to-string grip--port)))
+
+      (message "Preview `%s' on %s" buffer-file-name (grip--preview-url))
+      (sleep-for grip-sleep-time) ; Ensure the server has started
+;;      (grip--browse-url (grip--preview-url))
+      )))
+
+(advice-add 'grip-start-process :around #'my-grip-start-process)
+
+
+;; (add-hook 'markdown-mode-hook #'grip-mode)
+;; (add-hook 'org-mode-hook #'grip-mode)
+
