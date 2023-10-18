@@ -1,0 +1,93 @@
+* 修改线速度
+#+begin_src C++
+>	btRigidBody::setLinearVelocity(const btVector3 & lin_vel) 行 445	C++
+ 	btSequentialImpulseConstraintSolver::writeBackBodies(int iBegin, int iEnd, const btContactSolverInfo & infoGlobal) 行 1824	C++
+ 	btSequentialImpulseConstraintSolver::solveGroupCacheFriendlyFinish(btCollisionObject * * bodies, int numBodies, const btContactSolverInfo & infoGlobal) 行 1848	C++
+ 	btSequentialImpulseConstraintSolver::solveGroup(btCollisionObject * * bodies, int numBodies, btPersistentManifold * * manifoldPtr, int numManifolds, btTypedConstraint * * constraints, int numConstraints, const btContactSolverInfo & infoGlobal, btIDebugDraw * debugDrawer, btDispatcher * __formal) 行 1869	C++
+ 	InplaceSolverIslandCallback::processConstraints() 行 185	C++
+ 	btDiscreteDynamicsWorld::solveConstraints(btContactSolverInfo & solverInfo) 行 706	C++
+ 	btDiscreteDynamicsWorld::internalSingleStepSimulation(float timeStep) 行 486	C++
+ 	btDiscreteDynamicsWorld::stepSimulation(float timeStep, int maxSubSteps, float fixedTimeStep) 行 435	C++
+ 	CommonRigidBodyBase::stepSimulation(float deltaTime) 行 79	C++
+#+end_src
+
+* 修改坐标
+#+begin_src C++
+>	btRigidBody::setCenterOfMassTransform(const btTransform & xform) 行 411	C++
+ 	btRigidBody::proceedToTransform(const btTransform & newTrans) 行 224	C++
+ 	btDiscreteDynamicsWorld::integrateTransformsInternal(btRigidBody * * bodies, int numBodies, float timeStep) 行 1044	C++
+ 	btDiscreteDynamicsWorld::integrateTransforms(float timeStep) 行 1056	C++
+ 	btDiscreteDynamicsWorld::internalSingleStepSimulation(float timeStep) 行 489	C++
+ 	btDiscreteDynamicsWorld::stepSimulation(float timeStep, int maxSubSteps, float fixedTimeStep) 行 435	C++
+#+end_src
+
+* 重力的计算
+#+begin_src C++
+>	App_ExampleBrowser.exe!btRigidBody::applyCentralForce(const btVector3 & force) 行 276	C++
+ 	App_ExampleBrowser.exe!btRigidBody::applyGravity() 行 211	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::applyGravity() 行 332	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::stepSimulation(float timeStep, int maxSubSteps, float fixedTimeStep) 行 432	C++
+ 	App_ExampleBrowser.exe!CommonRigidBodyBase::stepSimulation(float deltaTime) 行 79	C++
+#+end_src
+
+* 力到速度的计算
+#+begin_src C++
+ 	// 当前速度
+ 	solverBody->m_linearVelocity = rb->getLinearVelocity();
+ 	// 当前的力计算timeStep里的位移
+ 	solverBody->m_externalForceImpulse = rb->getTotalForce() * rb->getInvMass() * timeStep;
+#+end_src
+
+#+begin_src C++
+>	btSequentialImpulseConstraintSolver::initSolverBody(btSolverBody * solverBody, btCollisionObject * collisionObject, float timeStep) 行 477	C++
+ 	btSequentialImpulseConstraintSolver::getOrInitSolverBody(btCollisionObject & body, float timeStep) 行 776	C++
+ 	btSequentialImpulseConstraintSolver::convertBodies(btCollisionObject * * bodies, int numBodies, const btContactSolverInfo & infoGlobal) 行 1377	C++
+ 	btSequentialImpulseConstraintSolver::solveGroupCacheFriendlySetup(btCollisionObject * * bodies, int numBodies, btPersistentManifold * * manifoldPtr, int numManifolds, btTypedConstraint * * constraints, int numConstraints, const btContactSolverInfo & infoGlobal, btIDebugDraw * debugDrawer) 行 1489	C++
+ 	btSequentialImpulseConstraintSolver::solveGroup(btCollisionObject * * bodies, int numBodies, btPersistentManifold * * manifoldPtr, int numManifolds, btTypedConstraint * * constraints, int numConstraints, const btContactSolverInfo & infoGlobal, btIDebugDraw * debugDrawer, btDispatcher * __formal) 行 1865	C++
+ 	InplaceSolverIslandCallback::processConstraints() 行 185	C++
+ 	btDiscreteDynamicsWorld::solveConstraints(btContactSolverInfo & solverInfo) 行 706	C++
+ 	btDiscreteDynamicsWorld::internalSingleStepSimulation(float timeStep) 行 486	C++
+ 	btDiscreteDynamicsWorld::stepSimulation(float timeStep, int maxSubSteps, float fixedTimeStep) 行 435	C++
+ 	CommonRigidBodyBase::stepSimulation(float deltaTime) 行 79	C++  
+#+end_src
+
+* 刚体创建
+createRigidBody
+
+* 碰撞检测 BroadphaseCollision
+#+begin_src C++
+>	App_ExampleBrowser.exe!btHashedOverlappingPairCache::needsBroadphaseCollision(btBroadphaseProxy * proxy0, btBroadphaseProxy * proxy1) 行 110	C++
+ 	App_ExampleBrowser.exe!btHashedOverlappingPairCache::addOverlappingPair(btBroadphaseProxy * proxy0, btBroadphaseProxy * proxy1) 行 123	C++
+ 	App_ExampleBrowser.exe!btDbvtTreeCollider::Process(const btDbvtNode * na, const btDbvtNode * nb) 行 117	C++
+ 	App_ExampleBrowser.exe!btDbvt::collideTTpersistentStack<btDbvtTreeCollider>(const btDbvtNode * root0, const btDbvtNode * root1, btDbvtTreeCollider & policy) 行 1074	C++
+ 	App_ExampleBrowser.exe!btDbvtBroadphase::setAabb(btBroadphaseProxy * absproxy, const btVector3 & aabbMin, const btVector3 & aabbMax, btDispatcher * __formal) 行 373	C++
+ 	App_ExampleBrowser.exe!btCollisionWorld::updateSingleAabb(btCollisionObject * colObj) 行 178	C++
+ 	App_ExampleBrowser.exe!btCollisionWorld::updateAabbs() 行 211	C++
+ 	App_ExampleBrowser.exe!btCollisionWorld::performDiscreteCollisionDetection() 行 228	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::internalSingleStepSimulation(float timeStep) 行 475	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::stepSimulation(float timeStep, int maxSubSteps, float fixedTimeStep) 行 435	C++
+ 	App_ExampleBrowser.exe!CommonRigidBodyBase::stepSimulation(float deltaTime) 行 79	C++
+#+end_src
+
+* 动态快速包围盒
+#+begin_src
+struct btDbvtNode
+struct btDbvtAabbMm
+struct btDbvtProxy : btBroadphaseProxy
+struct btDbvtBroadphase
+#+end_src
+
+** btDbvtProxy 创建
+#+begin_src C++
+>	App_ExampleBrowser.exe!btDbvtProxy::btDbvtProxy(const btVector3 & aabbMin, const btVector3 & aabbMax, void * userPtr, int collisionFilterGroup, int collisionFilterMask) 行 53	C++
+ 	App_ExampleBrowser.exe!btDbvtBroadphase::createProxy(const btVector3 & aabbMin, const btVector3 & aabbMax, int __formal, void * userPtr, int collisionFilterGroup, int collisionFilterMask, btDispatcher * __formal) 行 183	C++
+ 	App_ExampleBrowser.exe!btCollisionWorld::addCollisionObject(btCollisionObject * collisionObject, int collisionFilterGroup, int collisionFilterMask) 行 143	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::addCollisionObject(btCollisionObject * collisionObject, int collisionFilterGroup, int collisionFilterMask) 行 520	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::addRigidBody(btRigidBody * body) 行 561	C++
+ 	App_ExampleBrowser.exe!CommonRigidBodyBase::createRigidBody(float mass, const btTransform & startTransform, btCollisionShape * shape, const btVector4 & color) 行 436	C++
+#+end_src
+
+** btDbvt
+1个二叉树
+
+
