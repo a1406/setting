@@ -75,9 +75,26 @@ struct btDbvtNode
 struct btDbvtAabbMm
 struct btDbvtProxy : btBroadphaseProxy
 struct btDbvtBroadphase
+struct btDbvtTreeCollider : btDbvt::ICollide
 #+end_src
 
-** btDbvtProxy 创建
+** btDbvtBroadphase
+#+begin_src
+  btDbvt m_sets[2];  // 为啥要两个???
+  btDbvtProxy* m_stageRoots[STAGECOUNT + 1];
+#+end_src
+ printf("fixed(%u) dynamics(%u) pairs(%u)\r\n", m_sets[1].m_leaves, m_sets[0].m_leaves, m_paircache->getNumOverlappingPairs()); ?? 
+
+** btDbvtProxy
+被设置到碰撞体对象(btCollisionObject) 的m_broadphaseHandle中去
+#+begin_src 
+	btDbvtNode* leaf;
+	btDbvtProxy* links[2];
+	int stage;  
+#+end_src
+
+
+*** 创建
 #+begin_src C++
 >	App_ExampleBrowser.exe!btDbvtProxy::btDbvtProxy(const btVector3 & aabbMin, const btVector3 & aabbMax, void * userPtr, int collisionFilterGroup, int collisionFilterMask) 行 53	C++
  	App_ExampleBrowser.exe!btDbvtBroadphase::createProxy(const btVector3 & aabbMin, const btVector3 & aabbMax, int __formal, void * userPtr, int collisionFilterGroup, int collisionFilterMask, btDispatcher * __formal) 行 183	C++
@@ -88,6 +105,61 @@ struct btDbvtBroadphase
 #+end_src
 
 ** btDbvt
-1个二叉树
+1个二叉树, 里面的节点是btDbvtNode
+*** 插入操作
+#+begin_src C++
+>	App_ExampleBrowser.exe!insertleaf(btDbvt * pdbvt, btDbvtNode * root, btDbvtNode * leaf) 行 142	C++
+ 	App_ExampleBrowser.exe!btDbvt::insert(const btDbvtAabbMm & volume, void * data) 行 539	C++
+ 	App_ExampleBrowser.exe!btDbvtBroadphase::createProxy(const btVector3 & aabbMin, const btVector3 & aabbMax, int __formal, void * userPtr, int collisionFilterGroup, int collisionFilterMask, btDispatcher * __formal) 行 192	C++
+ 	App_ExampleBrowser.exe!btCollisionWorld::addCollisionObject(btCollisionObject * collisionObject, int collisionFilterGroup, int collisionFilterMask) 行 143	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::addCollisionObject(btCollisionObject * collisionObject, int collisionFilterGroup, int collisionFilterMask) 行 520	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::addRigidBody(btRigidBody * body) 行 561	C++
+ 	App_ExampleBrowser.exe!CommonRigidBodyBase::createRigidBody(float mass, const btTransform & startTransform, btCollisionShape * shape, const btVector4 & color) 行 436	C++
+#+end_src
 
+* btDbvtBroadphase::collide
+#+begin_src C++
+>	App_ExampleBrowser.exe!btDbvtBroadphase::collide(btDispatcher * dispatcher) 行 531	C++
+ 	App_ExampleBrowser.exe!btDbvtBroadphase::calculateOverlappingPairs(btDispatcher * dispatcher) 行 440	C++
+ 	App_ExampleBrowser.exe!btCollisionWorld::computeOverlappingPairs() 行 217	C++
+ 	App_ExampleBrowser.exe!btCollisionWorld::performDiscreteCollisionDetection() 行 230	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::internalSingleStepSimulation(float timeStep) 行 475	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::stepSimulation(float timeStep, int maxSubSteps, float fixedTimeStep) 行 435	C++
+ 	App_ExampleBrowser.exe!CommonRigidBodyBase::stepSimulation(float deltaTime) 行 79	C++
+#+end_src
+
+* btCollisionWorld::performDiscreteCollisionDetection
+#+begin_src C++
+void btCollisionWorld::performDiscreteCollisionDetection()
+{
+	BT_PROFILE("performDiscreteCollisionDetection");
+
+	btDispatcherInfo& dispatchInfo = getDispatchInfo();
+
+	updateAabbs();
+
+	computeOverlappingPairs();
+
+	btDispatcher* dispatcher = getDispatcher();
+	{
+		BT_PROFILE("dispatchAllCollisionPairs");
+		if (dispatcher)
+			dispatcher->dispatchAllCollisionPairs(m_broadphasePairCache->getOverlappingPairCache(), dispatchInfo, m_dispatcher1);
+	}
+}  
+#+end_src
+
+* 碰撞处理 processCollision
+#+begin_src C++
+>	App_ExampleBrowser.exe!btBoxBoxCollisionAlgorithm::processCollision(const btCollisionObjectWrapper * body0Wrap, const btCollisionObjectWrapper * body1Wrap, const btDispatcherInfo & dispatchInfo, btManifoldResult * resultOut) 行 50	C++
+ 	App_ExampleBrowser.exe!btCollisionDispatcher::defaultNearCallback(btBroadphasePair & collisionPair, btCollisionDispatcher & dispatcher, const btDispatcherInfo & dispatchInfo) 行 256	C++
+ 	App_ExampleBrowser.exe!btCollisionPairCallback::processOverlap(btBroadphasePair & pair) 行 212	C++
+ 	App_ExampleBrowser.exe!btHashedOverlappingPairCache::processAllOverlappingPairs(btOverlapCallback * callback, btDispatcher * dispatcher) 行 341	C++
+ 	App_ExampleBrowser.exe!btHashedOverlappingPairCache::processAllOverlappingPairs(btOverlapCallback * callback, btDispatcher * dispatcher, const btDispatcherInfo & dispatchInfo) 行 414	C++
+ 	App_ExampleBrowser.exe!btCollisionDispatcher::dispatchAllCollisionPairs(btOverlappingPairCache * pairCache, const btDispatcherInfo & dispatchInfo, btDispatcher * dispatcher) 行 224	C++
+ 	App_ExampleBrowser.exe!btCollisionWorld::performDiscreteCollisionDetection() 行 234	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::internalSingleStepSimulation(float timeStep) 行 475	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::stepSimulation(float timeStep, int maxSubSteps, float fixedTimeStep) 行 435	C++
+ 	App_ExampleBrowser.exe!CommonRigidBodyBase::stepSimulation(float deltaTime) 行 79	C++
+#+end_src
 
