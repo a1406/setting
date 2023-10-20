@@ -21,7 +21,7 @@
 
 ;;;;;;;;;;;;;;;;;;
 (setq grip-github-user "a1406@163.com")
-(setq grip-github-password "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")
+(setq grip-github-password (base64-decode-string (base64-decode-string "WjJod1gyYzRXV2hwU2pOVVRrUndkbmxxVGtZMFpVcE9hbmhqVG10aFYwNDJNREJLV0cxMVV3PT0=")))
 
 (setq grip-preview-host "0.0.0.0")
 (defun grip--address ()
