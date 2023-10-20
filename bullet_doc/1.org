@@ -69,6 +69,25 @@ createRigidBody
  	App_ExampleBrowser.exe!CommonRigidBodyBase::stepSimulation(float deltaTime) 行 79	C++
 #+end_src
 
+** collideTTpersistentStack
+遍历检查AABB相交，相交则调用process
+
+* 碰撞检测 boxbox
+#+begin_src C++
+>	App_ExampleBrowser.exe!btBoxBoxDetector::getClosestPoints(const btDiscreteCollisionDetectorInterface::ClosestPointInput & input, btDiscreteCollisionDetectorInterface::Result & output, btIDebugDraw * __formal, bool __formal) 行 732	C++
+ 	App_ExampleBrowser.exe!btBoxBoxCollisionAlgorithm::processCollision(const btCollisionObjectWrapper * body0Wrap, const btCollisionObjectWrapper * body1Wrap, const btDispatcherInfo & dispatchInfo, btManifoldResult * resultOut) 行 69	C++
+ 	App_ExampleBrowser.exe!btCollisionDispatcher::defaultNearCallback(btBroadphasePair & collisionPair, btCollisionDispatcher & dispatcher, const btDispatcherInfo & dispatchInfo) 行 256	C++
+ 	App_ExampleBrowser.exe!btCollisionPairCallback::processOverlap(btBroadphasePair & pair) 行 212	C++
+ 	App_ExampleBrowser.exe!btHashedOverlappingPairCache::processAllOverlappingPairs(btOverlapCallback * callback, btDispatcher * dispatcher) 行 341	C++
+ 	App_ExampleBrowser.exe!btHashedOverlappingPairCache::processAllOverlappingPairs(btOverlapCallback * callback, btDispatcher * dispatcher, const btDispatcherInfo & dispatchInfo) 行 414	C++
+ 	App_ExampleBrowser.exe!btCollisionDispatcher::dispatchAllCollisionPairs(btOverlappingPairCache * pairCache, const btDispatcherInfo & dispatchInfo, btDispatcher * dispatcher) 行 224	C++
+ 	App_ExampleBrowser.exe!btCollisionWorld::performDiscreteCollisionDetection() 行 234	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::internalSingleStepSimulation(float timeStep) 行 475	C++
+ 	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::stepSimulation(float timeStep, int maxSubSteps, float fixedTimeStep) 行 435	C++
+#+end_src
+processCollision 注册了各类碰撞检测
+
+
 * 动态快速包围盒
 #+begin_src
 struct btDbvtNode
@@ -116,6 +135,9 @@ struct btDbvtTreeCollider : btDbvt::ICollide
  	App_ExampleBrowser.exe!btDiscreteDynamicsWorld::addRigidBody(btRigidBody * body) 行 561	C++
  	App_ExampleBrowser.exe!CommonRigidBodyBase::createRigidBody(float mass, const btTransform & startTransform, btCollisionShape * shape, const btVector4 & color) 行 436	C++
 #+end_src
+
+*** insertleaf
+
 
 * btDbvtBroadphase::collide
 #+begin_src C++
