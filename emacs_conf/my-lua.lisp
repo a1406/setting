@@ -60,3 +60,12 @@
   (setq counsel-ag-function-hook nil)
   )
 
+
+(defun my-lua-disable-font-lock-function (&rest r)
+  ;; (message (format "jackdebug open file %s" (car r)))
+  (if (string-match "scriptserver_init.lua$" (car r))
+      (font-lock-mode -1)
+      )
+  t
+  )
+(advice-add 'find-file :after-while #'my-lua-disable-font-lock-function)
