@@ -1,0 +1,48 @@
+* AABBManager::updateAABBsAndBP
+** mAddedHandles.pushBack(handle);
+从 mAddedHandleMap 中取
+
+** mUpdatedHandles.pushBack(handle);
+从 mChangedHandleMap 和 mDirtyAggregates 中取
+
+** mRemovedHandles.pushBack(handle);
+从 mRemovedHandleMap 中取
+
+** 调用 AABBManager::finalizeUpdate 
+
+* AABBManager::finalizeUpdate
+调用 mBroadPhase.update ，即 BroadPhaseABP::update
+
+* BroadPhaseABP::update
+#+begin_src C++
+	setUpdateData(updateData);
+	update();
+	postUpdate();  
+#+end_src
+
+
+* processBPPairs
+
+* BroadPhaseABP::setUpdateData
+#+begin_src C++
+	removeObjects(updateData);
+	addObjects(updateData);
+	updateObjects(updateData);
+#+end_src
+
+* BroadPhaseABP::getCreatedPairs
+
+* Sc::Scene::finishBroadPhase
+
+* createOverlap
+overlaps[volumeType].pushBack
+#+begin_src C++
+>physx::Bp::createOverlap(physx::shdfnd::Array<physx::Bp::AABBOverlap,physx::shdfnd::ReflectionAllocator<physx::Bp::AABBOverlap>> * overlaps, const physx::shdfnd::Array<physx::Bp::VolumeData,physx::shdfnd::ReflectionAllocator<physx::Bp::VolumeData>> & volumeData, unsigned int id0, unsigned int id1) 行 1720	C++
+ physx::Bp::AABBManager::processBPCreatedPair(const physx::Bp::BroadPhasePair & pair) 行 1861	C++
+ physx::Bp::CreatedPairHandler::processPair(physx::Bp::AABBManager & manager, const physx::Bp::BroadPhasePair & pair) 行 1926	C++
+ physx::Bp::processBPPairs<physx::Bp::CreatedPairHandler>(unsigned int nbPairs, const physx::Bp::BroadPhasePair * pairs, physx::Bp::AABBManager & manager) 行 1952	C++
+ physx::Bp::AABBManager::postBpStage3(physx::PxBaseTask * __formal) 行 2363	C++
+#+end_src
+
+
+

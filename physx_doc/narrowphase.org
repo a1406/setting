@@ -1,0 +1,19 @@
+* discreteNarrowPhase
+processCms 函数中，从 mCmArray 中取出数据一次调用 discreteNarrowPhase
+在 PxsNphaseImplementationContext::processContactManager 中创建 PxsCMDiscreteUpdateTask，输入mNarrowPhasePairs.mContactManagerMapping 赋值给 mCmArray
+
+* PxsNphaseImplementationContext::processContactManager
+如上，创建 PxsCMDiscreteUpdateTask
+
+* PxsNphaseImplementationContext::appendContactManagers
+把 mNewNarrowPhasePairs 的数据添加到 mNarrowPhasePairs
+
+* PxsNphaseImplementationContext::registerContactManager
+mNewNarrowPhasePairs.mContactManagerMapping.pushBack(cm);
+
+* Sc::Scene::registerContactManagers
+从 mPreallocatedContactManagers 里面取出数据, 调用 registerContactManager
+
+* Sc::Scene::preallocateContactManagers
+
+* Sc::Scene::advanceStep
