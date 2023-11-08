@@ -15,5 +15,6 @@ mNewNarrowPhasePairs.mContactManagerMapping.pushBack(cm);
 从 mPreallocatedContactManagers 里面取出数据, 调用 registerContactManager
 
 * Sc::Scene::preallocateContactManagers
+把pair分组建立task(OnOverlapCreatedTask), 并且调用 processBatch 来驱动
 
 * Sc::Scene::advanceStep

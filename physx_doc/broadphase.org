@@ -1,3 +1,25 @@
+* AABBManager::mAddedHandleMap
+#+begin_src C++
+>physx::Bp::AABBManager::addBounds(unsigned int index, float contactDistance, physx::Bp::FilterGroup::Enum group, void * userData, unsigned int aggregateHandle, physx::Bp::ElementType::Enum volumeType) 行 1229	C++
+ physx::Sc::ElementSim::addToAABBMgr(float contactDistance, physx::Bp::FilterGroup::Enum group, int isTrigger) 行 111	C++
+ physx::Sc::ShapeSim::internalAddToBroadPhase() 行 156	C++
+ physx::Sc::ShapeSim::initSubsystemsDependingOnElementID() 行 88	C++
+ physx::Sc::ShapeSim::ShapeSim(physx::Sc::RigidSim & owner, const physx::Sc::ShapeCore & core) 行 130	C++
+ physx::Cm::PreallocatingPool<physx::Sc::ShapeSim>::construct<physx::Sc::RigidSim,physx::Sc::ShapeCore>(physx::Sc::RigidSim & a, physx::Sc::ShapeCore & b) 行 310	C++
+ physx::Sc::Scene::addShapes(void * const * shapes, unsigned int nbShapes, unsigned __int64 ptrOffset, physx::Sc::RigidSim & bodySim, physx::PxBounds3 * outBounds) 行 4810	C++
+ physx::Sc::Scene::addStatic(physx::Sc::StaticCore & ro, void * const * shapes, unsigned int nbShapes, unsigned __int64 shapePtrOffset, physx::PxBounds3 * uninflatedBounds) 行 4849	C++
+ addOrRemoveRigidObject<0,1,0,0,physx::Scb::RigidStatic>(physx::Sc::Scene & s, physx::Scb::RigidStatic & rigidObject, bool wakeOnLostTouch, physx::PxBounds3 * uninflatedBounds, const physx::Gu::BVHStructure * bvhStructure) 行 1267	C++
+ ScSceneFns<physx::Scb::RigidStatic>::insert(physx::Sc::Scene & s, physx::Scb::RigidStatic & v, physx::PxBounds3 * uninflatedBounds, const physx::Gu::BVHStructure * bvhStructure) 行 223	C++
+ physx::Scb::Scene::add<physx::Scb::RigidStatic>(physx::Scb::RigidStatic & v, physx::Scb::ObjectTracker & tracker, physx::PxBounds3 * uninflatedBounds, const physx::Gu::BVHStructure * bvhStructure) 行 388	C++
+ physx::Scb::Scene::addActorT<0,physx::Scb::RigidStatic>(physx::Scb::RigidStatic & actor, physx::Scb::ObjectTracker & tracker, bool noSim, physx::PxBounds3 * uninflatedBounds, const physx::Gu::BVHStructure * bvhStructure) 行 538	C++
+ physx::Scb::Scene::addActor(physx::Scb::RigidStatic & rigidStatic, bool noSim, physx::PxBounds3 * uninflatedBounds, const physx::Gu::BVHStructure * bvhStructure) 行 554	C++
+ addActorT<physx::NpRigidStatic,physx::Scb::RigidStatic>(physx::NpRigidStatic & actor, physx::Scb::RigidStatic & scbActor, physx::shdfnd::Array<physx::PxRigidActor *,physx::shdfnd::ReflectionAllocator<physx::PxRigidActor *>> & actors, physx::NpScene * scene, const physx::Gu::BVHStructure * bvhStructure, bool hasPrunerStructure) 行 750	C++
+ physx::NpScene::addRigidStatic(physx::NpRigidStatic & actor, const physx::Gu::BVHStructure * bvhStructure, bool hasPrunerStructure) 行 759	C++
+ physx::NpScene::addActorInternal(physx::PxActor & actor, const physx::PxBVHStructure * bvhStructure) 行 386	C++
+ physx::NpScene::addActor(physx::PxActor & actor, const physx::PxBVHStructure * bvhStructure) 行 358	C++
+#+end_src
+
+
 * AABBManager::updateAABBsAndBP
 ** mAddedHandles.pushBack(handle);
 从 mAddedHandleMap 中取
@@ -35,7 +57,7 @@
 * Sc::Scene::finishBroadPhase
 
 * createOverlap
-overlaps[volumeType].pushBack
+overlaps[volumeType].pushBack, 即 AABBManager 的 mCreatedOverlaps
 #+begin_src C++
 >physx::Bp::createOverlap(physx::shdfnd::Array<physx::Bp::AABBOverlap,physx::shdfnd::ReflectionAllocator<physx::Bp::AABBOverlap>> * overlaps, const physx::shdfnd::Array<physx::Bp::VolumeData,physx::shdfnd::ReflectionAllocator<physx::Bp::VolumeData>> & volumeData, unsigned int id0, unsigned int id1) 行 1720	C++
  physx::Bp::AABBManager::processBPCreatedPair(const physx::Bp::BroadPhasePair & pair) 行 1861	C++
@@ -44,5 +66,6 @@ overlaps[volumeType].pushBack
  physx::Bp::AABBManager::postBpStage3(physx::PxBaseTask * __formal) 行 2363	C++
 #+end_src
 
-
-
+* AABBManager::postBpStage3
+遍历 mAggPairTasks 中的 mCreatedPairs 添加到 mCreatedOverlaps , mDestroyedPairs 添加到 mDestroyedOverlaps 
+然后调用 processBPPairs
