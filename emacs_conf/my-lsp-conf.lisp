@@ -212,6 +212,9 @@ This is equivalent to `display-warning', using `lsp-mode' as the type and
 (advice-add 'counsel-grep-like-occur :around #'my-add-rg-env)
 (advice-add 'counsel-ag-function :around #'my-add-rg-env)
 
+(setq grep-command "RIPGREP_CONFIG_PATH=\"\" rg -nS --no-heading "
+      grep-use-null-device nil)
+
 ;;避免flychecker弹出checker相关信息
 (defun flycheck-verify-checker (checker)
   )
