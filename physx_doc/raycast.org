@@ -11,3 +11,61 @@ physx::NpSceneQueries::raycast(const physx::PxVec3 & origin, const physx::PxVec3
 CCDRaycast(physx::PxScene * scene, physx::PxRigidActor * actor, physx::PxShape * shape, const physx::PxVec3 & origin, const physx::PxVec3 & unitDir, const float distance, physx::PxRaycastHit & hit, bool dyna_dyna) 行 192	C++
 #+end_src
 
+* buildAABBTree
+#+begin_src C++
+Gu::buildAABBTree(physx::Gu::AABBTreeBuildParams & params, physx::Gu::NodeAllocator & nodeAllocator, physx::Gu::BuildStats & stats, unsigned int * & indices) 行 299	C++
+Sq::AABBTree::build(physx::Gu::AABBTreeBuildParams & params) 行 227	C++
+Sq::AABBPruner::fullRebuildAABBTree() 行 756	C++
+Sq::AABBPruner::commit() 行 404	C++
+Sq::SceneQueryManager::afterSync(physx::PxSceneQueryUpdateMode::Enum updateMode) 行 415	C++
+NpScene::fetchResultsPostContactCallbacks() 行 2119	C++
+NpScene::fetchResults(bool block, unsigned int * errorState) 行 2195	C++
+stepPhysics(bool __formal) 行 145	C++
+#+end_src
+
+
+* AABBPruner
+** Sq::AABBTree* mAABBTree
+*** class PxBounds3
+AABB 包围盒相关操作
+
+*** class BitArray
+位运算，支持任意长度得位操作
+
+*** class AABBTreeRuntimeNode
+#+begin_src C++
+PxBounds3	mBV;	// Global bounding-volume enclosing all the node-related primitives
+PxU32		mData;	// 27 bits node or prim index|4 bits #prims|1 bit leaf
+#+end_src
+mData 0位表示是否是叶子节点，1-4位表示primitives，1-31位表示pos_index
+
+*** class AABBTreeMergeData
+#+begin_src C++
+PxU32				mNbNodes;		//!< Number of nodes of AABB tree merge
+const AABBTreeRuntimeNode*	mNodes;	//!< Nodes of AABB tree merge
+
+PxU32				mNbIndices;		//!< Number of indices of AABB tree merge
+const PxU32*			mIndices;		//!< Indices of AABB tree merge
+
+PxU32				mIndicesOffset;	//!< Indices offset from pruning pool
+#+end_src
+
+
+*** class AABBTree
+#+begin_src C++
+PxU32*				mIndices;			//!< Indices in the app list. Indices are reorganized during build (permutation).
+PxU32				mNbIndices;			//!< Nb indices
+AABBTreeRuntimeNode*		mRuntimePool;		//!< Linear pool of nodes.
+Gu::NodeAllocator		mNodeAllocator;
+PxU32*				mParentIndices;		//!< PT: hot/cold split, keep parent data in separate array
+// Stats
+PxU32				mTotalNbNodes;		//!< Number of nodes in the tree.
+PxU32				mTotalPrims;		//!< Copy of final BuildStats::mTotalPrims
+
+// Progressive building
+FIFOStack*			mStack;
+BitArray			mRefitBitmask; //!< bit is set for each node index in markForRefit
+PxU32				mRefitHighestSetWord;
+#+end_src
+
+
