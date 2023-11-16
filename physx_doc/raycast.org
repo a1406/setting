@@ -11,7 +11,7 @@ physx::NpSceneQueries::raycast(const physx::PxVec3 & origin, const physx::PxVec3
 CCDRaycast(physx::PxScene * scene, physx::PxRigidActor * actor, physx::PxShape * shape, const physx::PxVec3 & origin, const physx::PxVec3 & unitDir, const float distance, physx::PxRaycastHit & hit, bool dyna_dyna) 行 192	C++
 #+end_src
 
-* buildAABBTree
+* AABBPruner::fullRebuildAABBTree
 #+begin_src C++
 Gu::buildAABBTree(physx::Gu::AABBTreeBuildParams & params, physx::Gu::NodeAllocator & nodeAllocator, physx::Gu::BuildStats & stats, unsigned int * & indices) 行 299	C++
 Sq::AABBTree::build(physx::Gu::AABBTreeBuildParams & params) 行 227	C++
@@ -23,8 +23,43 @@ NpScene::fetchResults(bool block, unsigned int * errorState) 行 2195	C++
 stepPhysics(bool __formal) 行 145	C++
 #+end_src
 
+* class PruningPool
+handle要重用，中间有空隙。index是连续得
+#+begin_src C++
+PxU32				mNbObjects;			//!< Current number of objects
+PxU32				mMaxNbObjects;		//!< Max. number of objects (capacity for mWorldBoxes, mObjects)
+
+//!< these arrays are parallel
+PxBounds3*			mWorldBoxes;		//!< List of world boxes, stores mNbObjects, capacity=mMaxNbObjects
+PrunerPayload*			mObjects;			//!< List of objects, stores mNbObjects, capacity=mMaxNbObjects
+//	private:			
+PoolIndex*			mHandleToIndex;		//!< Maps from PrunerHandle to internal index (payload index in mObjects)
+PrunerHandle*			mIndexToHandle;		//!< Inverse map from objectIndex to PrunerHandle
+
+// this is the head of a list of holes formed in mHandleToIndex
+// by removed handles
+// the rest of the list is stored in holes in mHandleToIndex (in place)
+PrunerHandle			mFirstRecycledHandle;
+#+end_src
+
+
 
 * AABBPruner
+| 变量名         | 类型                    | 描述                                                                           |
+| mRuntimePool   | Sq::AABBTree*           | 里面放当前已经排序好得数据，用来查询                                           |
+| mNodeAllocator | Gu::AABBTreeBuildParams | 正在进行排序得数据，排序完成后，在AABBTree::buildEnd函数里面拷贝到mRuntimePool |
+| mBuilder       | Gu::BuildStats          | 里面放将要进行排序得数据,数据来自于mPool                                       |
+| mPool          | PruningPool             |                                                                                |
+
+** AABBPruner::prepareBuild
+#+begin_src C++
+mBuilder.reset();
+mBuilder.mNbPrimitives	= mNbCachedBoxes;
+mBuilder.mAABBArray		= mCachedBoxes;
+mBuilder.mLimit			= NB_OBJECTS_PER_NODE;
+#+end_src
+
+
 ** Sq::AABBTree* mAABBTree
 *** class PxBounds3
 AABB 包围盒相关操作
@@ -68,4 +103,32 @@ BitArray			mRefitBitmask; //!< bit is set for each node index in markForRefit
 PxU32				mRefitHighestSetWord;
 #+end_src
 
+*** PruningPool	mPool;
+#+begin_src C++
+PxU32				mNbObjects;			//!< Current number of objects
+PxU32				mMaxNbObjects;		//!< Max. number of objects (capacity for mWorldBoxes, mObjects)
+//!< these arrays are parallel
+PxBounds3*			mWorldBoxes;		//!< List of world boxes, stores mNbObjects, capacity=mMaxNbObjects
+PrunerPayload*			mObjects;			//!< List of objects, stores mNbObjects, capacity=mMaxNbObjects
 
+PoolIndex*			mHandleToIndex;		//!< Maps from PrunerHandle to internal index (payload index in mObjects)
+PrunerHandle*			mIndexToHandle;		//!< Inverse map from objectIndex to PrunerHandle
+
+// this is the head of a list of holes formed in mHandleToIndex
+// by removed handles
+// the rest of the list is stored in holes in mHandleToIndex (in place)
+PrunerHandle			mFirstRecycledHandle;  
+#+end_src
+
+**** 添加object
+#+begin_src C++
+physx::Sq::PruningPool::addObjects(unsigned int * results, const physx::PxBounds3 * bounds, const physx::Sq::PrunerPayload * payload, unsigned int count) 行 119	C++
+physx::Sq::AABBPruner::addObjects(unsigned int * results, const physx::PxBounds3 * bounds, const physx::Sq::PrunerPayload * payload, unsigned int count, bool hasPruningStructure) 行 107	C++
+physx::Sq::SceneQueryManager::addPrunerShape(const physx::Scb::Shape & scbShape, const physx::Scb::Actor & scbActor, bool dynamic, unsigned int compoundId, const physx::PxBounds3 * bounds, bool hasPrunerStructure) 行 334	C++
+physx::NpShapeManager::addPrunerShape(physx::Sq::SceneQueryManager & sqManager, unsigned int index, const physx::NpShape & shape, const physx::PxRigidActor & actor, bool dynamic, const physx::PxBounds3 * bound, bool hasPrunerStructure) 行 385	C++
+physx::NpShapeManager::setupAllSceneQuery(physx::NpScene * scene, const physx::PxRigidActor & actor, bool hasPrunerStructure, const physx::PxBounds3 * bounds, const physx::Gu::BVHStructure * bvhStructure) 行 276	C++
+addActorT<physx::NpRigidStatic,physx::Scb::RigidStatic>(physx::NpRigidStatic & actor, physx::Scb::RigidStatic & scbActor, physx::shdfnd::Array<physx::PxRigidActor *,physx::shdfnd::ReflectionAllocator<physx::PxRigidActor *>> & actors, physx::NpScene * scene, const physx::Gu::BVHStructure * bvhStructure, bool hasPrunerStructure) 行 751	C++
+physx::NpScene::addRigidStatic(physx::NpRigidStatic & actor, const physx::Gu::BVHStructure * bvhStructure, bool hasPrunerStructure) 行 759	C++
+physx::NpScene::addActorInternal(physx::PxActor & actor, const physx::PxBVHStructure * bvhStructure) 行 386	C++
+physx::NpScene::addActor(physx::PxActor & actor, const physx::PxBVHStructure * bvhStructure) 行 358	C++
+#+end_src

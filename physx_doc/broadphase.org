@@ -69,3 +69,32 @@ overlaps[volumeType].pushBack, 即 AABBManager 的 mCreatedOverlaps
 * AABBManager::postBpStage3
 遍历 mAggPairTasks 中的 mCreatedPairs 添加到 mCreatedOverlaps , mDestroyedPairs 添加到 mDestroyedOverlaps 
 然后调用 processBPPairs
+
+* 添加数据到mActivePairs
+#+begin_src C++
+physx::Bp::PairManagerData::addPairInternal(unsigned int id0, unsigned int id1) 行 131	C++
+internalABP::ABP_PairManager::addPair(unsigned int index0, unsigned int index1) 行 1844	C++
+internalABP::outputPair(internalABP::ABP_PairManager & pairManager, unsigned int index0, unsigned int index1) 行 1904	C++
+internalABP::doCompleteBoxPruning_Leaf(internalABP::ABP_PairManager * pairManager, unsigned int nb, const internalABP::SIMD_AABB_X4 * boxes_X, const internalABP::SIMD_AABB_YZ4 * boxes_YZ, const unsigned int * remap, const internalABP::ABP_Object * objects) 行 2117	C++
+internalABP::doCompleteBoxPruning_(internalABP::ABP_MM & memoryManager, internalABP::ABP_PairManager * pairManager, const internalABP::ABP_Object * objects, const internalABP::BoxManager & mDBM) 行 2702	C++
+internalABP::findAllOverlaps(internalABP::ABP_MM & memoryManager, internalABP::ABP_PairManager & pairManager, const internalABP::ABP_SharedData & mShared, const internalABP::BoxManager & mSBM, const internalABP::BoxManager & mDBM, bool doComplete, bool doBipartite) 行 2735	C++
+internalABP::ABP::Region_findOverlaps(internalABP::ABP_PairManager & pairManager) 行 2787	C++
+internalABP::ABP::findOverlaps(const physx::Bp::FilterGroup::Enum * groups, const bool * lut) 行 3041	C++
+physx::Bp::BroadPhaseABP::update() 行 3282	C++
+physx::Bp::BroadPhaseABP::update(const unsigned int __formal, physx::PxcScratchAllocator * scratchAllocator, const physx::Bp::BroadPhaseUpdateData & updateData, physx::PxBaseTask * __formal, physx::PxBaseTask * narrowPhaseUnblockTask) 行 3130	C++
+physx::Bp::AABBManager::finalizeUpdate(unsigned int numCpuTasks, physx::PxcScratchAllocator * scratchAllocator, physx::PxBaseTask * continuation, physx::PxBaseTask * narrowPhaseUnlockTask) 行 1712	C++
+physx::Bp::FinalizeUpdateTask::runInternal() 行 1486	C++
+#+end_src
+
+* tmp
+** doCompleteBoxPruning_
+mDBM.getUpdatedBoxes();
+** AABBManager::finalizeUpdate
+mAddedHandles
+mUpdatedHandles
+mRemovedHandles
+
+** AABBManager::updateAABBsAndBP
+ScAfterIntegrationTask
+mChangedHandleMap
+mUpdatedHandles.pushBack
