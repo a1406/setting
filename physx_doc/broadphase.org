@@ -98,3 +98,6 @@ mRemovedHandles
 ScAfterIntegrationTask
 mChangedHandleMap
 mUpdatedHandles.pushBack
+
+** doCompleteBoxPruning_Leaf
+
