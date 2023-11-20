@@ -28,6 +28,8 @@ conMethod(shape0->geometry, shape1->geometry, *tm0, *tm1, context.mNarrowPhasePa
 从transform1.q取面得旋转
 把球得坐标转换到面得坐标系下 transf1.transformInv(p0)
 把球得X轴坐标减去半径，和允许得距离比较 (为啥是X? 要看上一步坐标系转换得实现)
+看了下，原来，四元数PxQuat表示旋转的时候，x,y,z,w是归一化的，并且x,y,z表示旋转轴,w 表示cos(*/2), 0方向是(1,0,0)
+不知道为啥要这样表示，要看后面的计算需要，难道这样会比较方便？
 ** 碰撞点
 
 
