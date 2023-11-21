@@ -1,3 +1,21 @@
+* PxQuat::rotateInv
+#+begin_src
+PX_CUDA_CALLABLE PX_FORCE_INLINE const PxVec3 rotateInv(const PxVec3& v) const
+{
+	const float vx = 2.0f * v.x;
+	const float vy = 2.0f * v.y;
+	const float vz = 2.0f * v.z;
+	const float w2 = w * w - 0.5f;	// 1/2 cos(x)
+	const float dot2 = (x * vx + y * vy + z * vz);	// 旋转轴和坐标得点乘 * 2
+	return PxVec3((vx * w2 - (y * vz - z * vy) * w + x * dot2), (vy * w2 - (z * vx - x * vz) * w + y * dot2),
+		      (vz * w2 - (x * vy - y * vx) * w + z * dot2));
+//   v * cos(*)
+// - (x,y,z) CROSS v * cos(*)
+// + (x,y,z) * 2 * ((x, y, z) DOT v)
+}  
+#+end_src
+
+
 * g_PCMContactMethodTable
 定义了各类型得碰撞检测函数
 #+begin_src C++
