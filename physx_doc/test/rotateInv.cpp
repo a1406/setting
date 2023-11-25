@@ -170,7 +170,7 @@ PxVec3 rotateInv4(float x, float y, float z, float w, PxVec3 v)
 	v2.y = 1.0f - 2.0f * x * x - 2.0f * z * z;
 	v2.z = 2.0f * y * z + 2.0f * x * w;
 
-	v3.x = 2.0f * x * z + 2.0f * y + w;
+	v3.x = 2.0f * x * z + 2.0f * y * w;
 	v3.y = 2.0f * y * z - 2.0f * x * w;
 	v3.z = 1.0f - 2.0f * x * x - 2.0f * y * y;
 
@@ -207,7 +207,13 @@ int main(int argc, char *argv[])
 	len = sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
 	v.x = v.x / len;
 	v.y = v.y / len;
-	v.z = v.z / len;	
+	v.z = v.z / len;
+
+//	"(-0.00447, 0.00953, 0.50002, 0.86595)"
+	// x = -0.00447;
+	// y = 0.00953;
+	// z = 0.50002;
+	// w = 0.86595;
 
 //	printf("sqrt(3) = %f, sqrt(3) / 2 = %f\n", sqrtf(3.0), sqrtf(3.0) / 2);
 	PxVec3 v2 = rotateInv(x, y, z, w, v);
