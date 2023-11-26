@@ -148,7 +148,8 @@ PxVec3 rotateInv3(float x, float y, float z, float w, PxVec3 v)
 	PxVec3 v12 = v - v11;
 	PxVec3 v11_ = v11;
 	PxVec3 v12_ = v12 * cos;
-	PxVec3 tmpv = U.cross(v12);
+	// PxVec3 tmpv = U.cross(v12);
+	PxVec3 tmpv = U.cross(v);	// 叉乘V和v12结果是一样的
 	v12_ += (tmpv * sin);
 	PxVec3 ret = v11_ + v12_;
 	return ret;
