@@ -94,20 +94,17 @@ PxVec4 vec4_cross(PxVec4 a, PxVec4 b)
 
 PxVec4 rotateInv2(float x, float y, float z, float w, PxVec3 v)
 {
-	float len = sqrtf(x * x + y * y + z * z);
-	x = x / len;
-	y = y / len;
-	z = z / len;
+	// float len = sqrtf(x * x + y * y + z * z);
+	// x = x / len;
+	// y = y / len;
+	// z = z / len;
+	PxVec3 u(x, y, z);
+	u.normalizeSafe();
+
 	float sin = sqrtf(1 - w * w);
-	PxVec4 pp = {
-		w, sin * x, sin * y, sin * z
-	};
-	PxVec4 pstar = {
-		w, -pp.x, -pp.y, -pp.z
-	};
-	PxVec4 vv = {
-		0, v.x, v.y, v.z
-	};
+	PxVec4 pp(sin * u.x, sin * u.y, sin * u.z, w);
+	PxVec4 pstar(-pp.x, -pp.y, -pp.z, w);
+	PxVec4 vv(v, 0);
 	PxVec4 r = vec4_cross(vv, pstar);
 	r = vec4_cross(pp, r);
 	return r;
@@ -115,6 +112,24 @@ PxVec4 rotateInv2(float x, float y, float z, float w, PxVec3 v)
 // v = [0, V]
 // p = [cos(1/2 @), sin(1/2 @) * U]
 	
+}
+
+PxVec4 rotateInv2_1(float x, float y, float z, float w, PxVec3 v)
+{
+//qvq∗ = [0, cos(θ)v + (1 − cos(θ))(u · v)u + sin(θ)(u × v)]
+
+	float cos = 2 * (w * w - 0.5f);
+	float sin = sqrtf(1 - cos * cos);
+
+	PxVec3 u(x, y, z);
+	u.normalizeSafe();
+
+	PxVec3 t1 = v * cos;
+	PxVec3 t2 = u * (u.dot(v)) * (1 - cos);
+	PxVec3 t3 = u.cross(v) * sin;
+	PxVec3 t4 = t1 + t2 + t3;
+	PxVec4 ret(t4, 0);
+	return ret;
 }
 
 
@@ -125,32 +140,40 @@ PxVec3 rotateInv3(float x, float y, float z, float w, PxVec3 v)
 	// v11_ = v11
 	// v12_ = cos * v12 + sin * ( U cross V12)
 	// v_ = v11_ + v12_
-	float len  = sqrtf(x * x + y * y + z * z);
-	x = x / len;
-	y = y / len;
-	z = z / len;
+	PxVec3 U(x, y, z);
+	U.normalize();
+	// float len  = sqrtf(x * x + y * y + z * z);
+	// x = x / len;
+	// y = y / len;
+	// z = z / len;
 	float cos = 2 * (w * w - 0.5f);
 	float sin = sqrtf(1 - cos * cos);
-	float t = (x * v.x + y * v.y + z * v.z);
-	PxVec3 v11 = {
-		x * t, y * t, z * t
-	};
-	PxVec3 v12 = {
-		v.x = v11.x, v.y - v11.y, v.z - v11.z
-	};
+	float t = U.dot(v);
+	PxVec3 v11 = U * t;
+	// 	{
+	// 	x * t, y * t, z * t
+	// };
+	PxVec3 v12 = v - v11;
+	// 	{
+	// 	v.x = v11.x, v.y - v11.y, v.z - v11.z
+	// };
 	PxVec3 v11_ = v11;
-	PxVec3 v12_ = {
-		v12.x * cos, v12.y * cos, v12.z * cos
-	};
-	PxVec3 tmpv = {
-		y * v12.z - z * v12.y, z * v12.x - x * v12.z, x * v12.y - y * v12.x
-	};
-	v12_.x += sin * tmpv.x;
-	v12_.y += sin * tmpv.y;
-	v12_.z += sin * tmpv.z;
-	PxVec3 ret = {
-	    v11_.x + v12_.x, v11_.y + v12_.y, v11_.z + v12_.z
-	};
+	PxVec3 v12_ = v12 * cos;
+	// 	{
+	// 	v12.x * cos, v12.y * cos, v12.z * cos
+	// };
+	PxVec3 tmpv = U.cross(v12);
+	// 	{
+	// 	y * v12.z - z * v12.y, z * v12.x - x * v12.z, x * v12.y - y * v12.x
+	// };
+	v12_ += (tmpv * sin);
+	// v12_.x += sin * tmpv.x;
+	// v12_.y += sin * tmpv.y;
+	// v12_.z += sin * tmpv.z;
+	PxVec3 ret = v11_ + v12_;
+	// 	{
+	//     v11_.x + v12_.x, v11_.y + v12_.y, v11_.z + v12_.z
+	// };
 	return ret;
 }
 
@@ -217,14 +240,18 @@ int main(int argc, char *argv[])
 
 //	printf("sqrt(3) = %f, sqrt(3) / 2 = %f\n", sqrtf(3.0), sqrtf(3.0) / 2);
 	PxVec3 v2 = rotateInv(x, y, z, w, v);
-	printf("(%f,  %f,   %f, %f)\n", v2.x, v2.y, v2.z, v2.x * v2.x + v2.y * v2.y + v2.z * v2.z);
+	printf("rotateInv: (%f,  %f,   %f, %f)\n", v2.x, v2.y, v2.z, v2.x * v2.x + v2.y * v2.y + v2.z * v2.z);
 	PxVec4 v3 = rotateInv2(x, y, z, w, v);
-	printf("(%f,  %f,   %f, %f)\n", v3.x, v3.y, v3.z, v3.x * v3.x + v3.y * v3.y + v3.z * v3.z);
+	printf("rotateInv2: (%f,  %f,   %f, %f)\n", v3.x, v3.y, v3.z, v3.x * v3.x + v3.y * v3.y + v3.z * v3.z);
+	v3 = rotateInv2_1(x, y, z, w, v);
+	printf("rotateInv2_1: (%f,  %f,   %f, %f)\n", v3.x, v3.y, v3.z, v3.x * v3.x + v3.y * v3.y + v3.z * v3.z);
+
+	
 	PxVec3 v4 = rotateInv3(x, y, z, w, v);
-	printf("(%f,  %f,   %f, %f)\n", v4.x, v4.y, v4.z, v4.x * v4.x + v4.y * v4.y + v4.z * v4.z);
+	printf("rotateInv3: (%f,  %f,   %f, %f)\n", v4.x, v4.y, v4.z, v4.x * v4.x + v4.y * v4.y + v4.z * v4.z);
 
 	PxVec3 v5 = rotateInv4(x, y, z, w, v);
-	printf("(%f,  %f,   %f, %f)\n", v5.x, v5.y, v5.z, v5.x * v5.x + v5.y * v5.y + v5.z * v5.z);
+	printf("rotateInv4: (%f,  %f,   %f, %f)\n", v5.x, v5.y, v5.z, v5.x * v5.x + v5.y * v5.y + v5.z * v5.z);
 	return 0;
 }
 //	gcc -g -O0 -o test rotateInv.c -lm
