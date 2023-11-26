@@ -92,7 +92,7 @@ PxVec4 vec4_cross(PxVec4 a, PxVec4 b)
 	return ret;
 }
 
-PxVec4 rotateInv2(float x, float y, float z, float w, PxVec3 v)
+PxVec3 rotateInv2(float x, float y, float z, float w, PxVec3 v)
 {
 	// float len = sqrtf(x * x + y * y + z * z);
 	// x = x / len;
@@ -107,14 +107,14 @@ PxVec4 rotateInv2(float x, float y, float z, float w, PxVec3 v)
 	PxVec4 vv(v, 0);
 	PxVec4 r = vec4_cross(vv, pstar);
 	r = vec4_cross(pp, r);
-	return r;
+	return r.getXYZ();
 // v' = p * v * (p*)
 // v = [0, V]
 // p = [cos(1/2 @), sin(1/2 @) * U]
 	
 }
 
-PxVec4 rotateInv2_1(float x, float y, float z, float w, PxVec3 v)
+PxVec3 rotateInv2_1(float x, float y, float z, float w, PxVec3 v)
 {
 //qvq∗ = [0, cos(θ)v + (1 − cos(θ))(u · v)u + sin(θ)(u × v)]
 
@@ -128,8 +128,7 @@ PxVec4 rotateInv2_1(float x, float y, float z, float w, PxVec3 v)
 	PxVec3 t2 = u * (u.dot(v)) * (1 - cos);
 	PxVec3 t3 = u.cross(v) * sin;
 	PxVec3 t4 = t1 + t2 + t3;
-	PxVec4 ret(t4, 0);
-	return ret;
+	return t4;
 }
 
 
@@ -142,38 +141,16 @@ PxVec3 rotateInv3(float x, float y, float z, float w, PxVec3 v)
 	// v_ = v11_ + v12_
 	PxVec3 U(x, y, z);
 	U.normalize();
-	// float len  = sqrtf(x * x + y * y + z * z);
-	// x = x / len;
-	// y = y / len;
-	// z = z / len;
 	float cos = 2 * (w * w - 0.5f);
 	float sin = sqrtf(1 - cos * cos);
 	float t = U.dot(v);
 	PxVec3 v11 = U * t;
-	// 	{
-	// 	x * t, y * t, z * t
-	// };
 	PxVec3 v12 = v - v11;
-	// 	{
-	// 	v.x = v11.x, v.y - v11.y, v.z - v11.z
-	// };
 	PxVec3 v11_ = v11;
 	PxVec3 v12_ = v12 * cos;
-	// 	{
-	// 	v12.x * cos, v12.y * cos, v12.z * cos
-	// };
 	PxVec3 tmpv = U.cross(v12);
-	// 	{
-	// 	y * v12.z - z * v12.y, z * v12.x - x * v12.z, x * v12.y - y * v12.x
-	// };
 	v12_ += (tmpv * sin);
-	// v12_.x += sin * tmpv.x;
-	// v12_.y += sin * tmpv.y;
-	// v12_.z += sin * tmpv.z;
 	PxVec3 ret = v11_ + v12_;
-	// 	{
-	//     v11_.x + v12_.x, v11_.y + v12_.y, v11_.z + v12_.z
-	// };
 	return ret;
 }
 
@@ -198,6 +175,25 @@ PxVec3 rotateInv4(float x, float y, float z, float w, PxVec3 v)
 	v3.z = 1.0f - 2.0f * x * x - 2.0f * y * y;
 
 	return Matrix33_Vec3(v1, v2, v3, v);
+}
+
+PxVec3 rotateInv10(float x, float y, float z, float w, PxVec3 v)
+{
+	PxVec3 v1(1, 0, 0);
+	PxVec3 v2(0, 1, 0);
+	PxVec3 v3(0, 0, 1);
+	PxVec3 v1_2 = rotateInv2(x, y, z, w, v1);
+	PxVec3 v2_2 = rotateInv2(x, y, z, w, v2);
+	PxVec3 v3_2 = rotateInv2(x, y, z, w, v3);
+
+	return PxVec3(v.dot(v1_2),
+		v.dot(v2_2),
+		v.dot(v3_2));
+}
+
+void print_result(const char *prefix, PxVec3 v)
+{
+	printf("%s (%f,  %f,   %f, %f)\n", prefix, v.x, v.y, v.z, v.x * v.x + v.y * v.y + v.z * v.z);	
 }
 
 #define PI (3.1415926)
@@ -240,18 +236,20 @@ int main(int argc, char *argv[])
 
 //	printf("sqrt(3) = %f, sqrt(3) / 2 = %f\n", sqrtf(3.0), sqrtf(3.0) / 2);
 	PxVec3 v2 = rotateInv(x, y, z, w, v);
-	printf("rotateInv: (%f,  %f,   %f, %f)\n", v2.x, v2.y, v2.z, v2.x * v2.x + v2.y * v2.y + v2.z * v2.z);
-	PxVec4 v3 = rotateInv2(x, y, z, w, v);
-	printf("rotateInv2: (%f,  %f,   %f, %f)\n", v3.x, v3.y, v3.z, v3.x * v3.x + v3.y * v3.y + v3.z * v3.z);
-	v3 = rotateInv2_1(x, y, z, w, v);
-	printf("rotateInv2_1: (%f,  %f,   %f, %f)\n", v3.x, v3.y, v3.z, v3.x * v3.x + v3.y * v3.y + v3.z * v3.z);
+	print_result("rotateInv: ", v2);
+	PxVec3 v10 = rotateInv10(x, y, z, w, v);
+	print_result("rotateInv10: ", v10);	
 
+	PxVec3 v3 = rotateInv2(x, y, z, w, v);
+	print_result("四元数1 rotateInv2: ", v3);
+	v3 = rotateInv2_1(x, y, z, w, v);
+	print_result("四元数2 rotateInv2_1: ", v3);
 	
 	PxVec3 v4 = rotateInv3(x, y, z, w, v);
-	printf("rotateInv3: (%f,  %f,   %f, %f)\n", v4.x, v4.y, v4.z, v4.x * v4.x + v4.y * v4.y + v4.z * v4.z);
+	print_result("几何方式 rotateInv3: ", v4);
 
 	PxVec3 v5 = rotateInv4(x, y, z, w, v);
-	printf("rotateInv4: (%f,  %f,   %f, %f)\n", v5.x, v5.y, v5.z, v5.x * v5.x + v5.y * v5.y + v5.z * v5.z);
+	print_result("旋转矩阵 rotateInv4: ", v5);
 	return 0;
 }
 //	gcc -g -O0 -o test rotateInv.c -lm
