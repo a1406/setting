@@ -102,7 +102,7 @@ PxVec3 rotateInv2(float x, float y, float z, float w, PxVec3 v)
 	u.normalizeSafe();
 
 	float sin = sqrtf(1 - w * w);
-	PxVec4 pp(sin * u.x, sin * u.y, sin * u.z, w);
+	PxVec4 pp(sin * u, w);
 	PxVec4 pstar(-pp.x, -pp.y, -pp.z, w);
 	PxVec4 vv(v, 0);
 	PxVec4 r = vec4_cross(vv, pstar);
