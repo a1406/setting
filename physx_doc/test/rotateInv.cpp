@@ -94,15 +94,18 @@ PxVec4 vec4_cross(PxVec4 a, PxVec4 b)
 
 PxVec3 rotateInv2(float x, float y, float z, float w, PxVec3 v)
 {
-	// float len = sqrtf(x * x + y * y + z * z);
-	// x = x / len;
-	// y = y / len;
-	// z = z / len;
-	PxVec3 u(x, y, z);
-	u.normalizeSafe();
+	// PxVec3 u(x, y, z);
+	// u.normalizeSafe();
 
-	float sin = sqrtf(1 - w * w);
-	PxVec4 pp(sin * u, w);
+	// float sin = sqrtf(1 - w * w);
+	// PxVec4 pp(sin * u, w);
+	// PxVec4 pstar(-pp.x, -pp.y, -pp.z, w);
+	// PxVec4 vv(v, 0);
+	// PxVec4 r = vec4_cross(vv, pstar);
+	// r = vec4_cross(pp, r);
+	// return r.getXYZ();
+
+	PxVec4 pp(x, y, z, w);
 	PxVec4 pstar(-pp.x, -pp.y, -pp.z, w);
 	PxVec4 vv(v, 0);
 	PxVec4 r = vec4_cross(vv, pstar);
