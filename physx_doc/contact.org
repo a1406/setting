@@ -52,13 +52,14 @@ conMethod(shape0->geometry, shape1->geometry, *tm0, *tm1, context.mNarrowPhasePa
 
 * PxcPCMContactSphereCapsule 球胶囊体
 ** 碰撞判断
-1. 调用QuatGetBasisVector0获取胶囊体的轴（todo）
+1. 调用QuatGetBasisVector0获取胶囊体的X旋转轴（todo）
 2. 取到球半径 + 胶囊体半径
 3. 取到球心到胶囊体轴的距离PxcDistancePointSegmentSquared（todo）
 4. 比较2和3的大小判断是否碰撞
 
-*** QuatGetBasisVector0 获取胶囊体的轴
-   
+*** QuatGetBasisVector0 获取胶囊体的X旋转轴
+可以参考test里面的rotateInv4函数里面的v1.x的计算，注意w * w = 1 - x * x - y * y - z * z. 本质上这里就是计算(1,0,0)旋转后的坐标
+
 *** PxcDistancePointSegmentSquared 点到线的距离
 设最近点是o
 #+begin_src C++
