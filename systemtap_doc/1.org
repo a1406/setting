@@ -1,0 +1,32 @@
+* 安装
+在archlinux上运行不起来，猜测或许是kernel版本太高了。但是在centos上很容易。安装如下
+
+** centos 安装
+简单使用Vagrant安装的，安装Vagrant后，在https://cloud.centos.org/centos/7/vagrant/ 下载了CentOS-7-x86_64-Vagrant-2004_01.VirtualBox.box
+然后用Vagrant 命令直接安装的, 大搞是这些命令(Vagrant box add; Vagrant init; Vagrant run)
+之后进入centos, 需要安装SCL源(yum install -y centos-release-scl centos-release-scl-rh)
+还可以装个epel源 (yum install epel-release.noarch)
+
+** systemtap 安装
+yum update
+重启一下
+yum install kernel-debuginfo kernel-debuginfo-common yum-utils kernel-devel
+uname -a
+debuginfo-install -y kernel-3.10.0-1127.el7.x86_64
+stap -ve 'probe begin { log("hello world") exit() }'
+
+* 常用命令
+** 运行
+stap -vv -d ./test2 ./test2.stp
+
+** 查询
+stap -L 'process("./test2").function("test1")'
+
+* 用户态体验
+** 用户态如果不用O0编译，经常打印不了变量(被优化了)，这个和gdb情况相似
+** clang编译的不能打印变量，stap会崩溃
+** 用户态的字符串要用user_string 转一下才能打印
+** clang 和 gcc 都可以打印调用堆栈，只不过显示的不是那么友好
+
+* 内核态体验
+内核态的体验还是很不错的

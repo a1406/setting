@@ -97,6 +97,8 @@ PX_FORCE_INLINE Ps::aos::FloatV PxcDistancePointSegmentSquared(const Ps::aos::Ve
 *** 不在长方体内
 
 * PxcPCMContactSphereConvex
+** 碰撞判断
+
 
 * PxcPCMContactSphereMesh
 
