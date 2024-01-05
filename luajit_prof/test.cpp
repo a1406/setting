@@ -28,16 +28,16 @@ void profile_cb(void *data, lua_State *L,
 	auto it = stacks.find(k);
 	if (it != stacks.end())
 	{
-		it->second = it->second + 1;
+		it->second = it->second + samples;
 	}
 	else
 	{
-		stacks[k] = 1;
+		stacks[k] = samples;
 	}
 
-	++cb_index;
+	cb_index += samples;
 	// (p[len]) = '\0';
-	// printf("======== %d: samples[%d]=========\n%s\n", ++index, samples, p);
+	// printf("======== %d: samples[%d]=========\n%s\n", ++cb_index, samples, p);
 	// if (cb_index == 1000)
 	// {
 	// 	luaJIT_profile_stop(L);
@@ -83,6 +83,38 @@ void signalHandler(int signo)
 		break;
 	}
 }
+int c_test_mod(lua_State* L)
+{
+	int N = 5000000;
+	for (int i = 1; i <= N; ++i)
+	{
+		int v = i;
+		int s = 0;
+		while (v > 0)
+		{
+            int x = v % 10;
+            s = s + x * x * x;
+            v = (v / 10);
+		}
+	}
+	return 0;
+}
+int c_test_mod2(lua_State* L)
+{
+	int N = 5000000 * 2;
+	for (int i = 1; i <= N; ++i)
+	{
+		int v = i;
+		int s = 0;
+		while (v > 0)
+		{
+            int x = v % 10;
+            s = s + x * x * x;
+            v = (v / 10);
+		}
+	}
+	return 0;
+}
 
 int C_Func(lua_State* L)
 {
@@ -104,7 +136,11 @@ int main(int argc, char *argv[])
 	L = luaL_newstate();
 	luaL_openlibs(L);
 	lua_register(L, "C_Func", C_Func);/*将C语言函数注册到Lua中*/
-	int retLoad = luaL_loadfile(L, "test2.lua");
+	lua_register(L, "c_test_mod", c_test_mod);/*将C语言函数注册到Lua中*/
+	lua_register(L, "c_test_mod2", c_test_mod2);/*将C语言函数注册到Lua中*/	
+	
+	// int retLoad = luaL_loadfile(L, "test3.lua");
+	int retLoad = luaL_loadfile(L, "test2.lua");	
 	if (retLoad == 0)
 	{
 		printf("load file success retLoad:%d\n", retLoad);
@@ -124,7 +160,7 @@ int main(int argc, char *argv[])
 	}
 
 	if (argc > 1)
-		luaJIT_profile_start(L, "ifl", profile_cb, NULL);
+		luaJIT_profile_start(L, "i10", profile_cb, NULL);
 
 	// signal(SIGPROF, signalHandler);
 	// signal(SIGINT, signalHandler);
