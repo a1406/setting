@@ -43,6 +43,7 @@
 (define-key evil-emacs-state-map " vac" 'aya-create)
 (define-key evil-emacs-state-map " vae" 'aya-expand)
 (define-key evil-emacs-state-map " vah" 'aya-expand-from-history)
+(define-key evil-emacs-state-map " vap" 'aya-persist-snippet)
 
 ;;gtags
 (define-key evil-emacs-state-map " gu" 'my-gtags-set-default)
