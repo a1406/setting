@@ -39,6 +39,9 @@
 ;;
 (define-key evil-emacs-state-map " vp" 'previous-buffer)
 (define-key evil-emacs-state-map " vn" 'next-buffer)
+;; auto-yasnippet
+(define-key evil-emacs-state-map " vac" 'aya-create)
+(define-key evil-emacs-state-map " vae" 'aya-expand)
 
 ;;gtags
 (define-key evil-emacs-state-map " gu" 'my-gtags-set-default)
