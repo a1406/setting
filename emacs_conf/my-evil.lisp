@@ -42,6 +42,7 @@
 ;; auto-yasnippet
 (define-key evil-emacs-state-map " vac" 'aya-create)
 (define-key evil-emacs-state-map " vae" 'aya-expand)
+(define-key evil-emacs-state-map " vah" 'aya-expand-from-history)
 
 ;;gtags
 (define-key evil-emacs-state-map " gu" 'my-gtags-set-default)
