@@ -1,11 +1,54 @@
+* 四元数
+q1q2 = [st − v · u, su + tv + v × u]
+
+Q = cos(θ/2) + sin(θ/2) * A
+QQ = [cos(θ/2) * cos(θ/2) - A · A, 2 * sin(θ/2) * A]
+   = [cos(θ/2) * cos(θ/2) - 1, 2 * sin(θ/2) * A]
+
 * 旋转得一般公式
-v′ = cos(θ)v + (1 − cos(θ))(u · v)u + sin(θ)(u × v)
-cos2θ = cos(θ + θ) = cosθ * cosθ - sinθ * sinθ = 2cosθ * cosθ - 1 = 1 - 2sinθ * sinθ
+v′ = cos(θ)v + sin(θ)(u × v) + (1 − cos(θ))(u · v)u
+cos2θ = cos(θ + θ) = cosθ * cosθ - sinθ * sinθ = 2 * cosθ * cosθ - 1 = 1 - 2 * sinθ * sinθ
+sin2θ = sin(θ + θ) = sinθ * cosθ + cosθ * sinθ = 2 * sinθ * cosθ
+#+begin_src C++
+  PX_CUDA_CALLABLE PX_FORCE_INLINE const PxVec3 rotate(const PxVec3& v) const
+  {
+  // q = [cos(θ/2), sin(θ/2) * A]
+  // x = sin(θ/2) * u.x
+  // w = cos(θ/2)
+  // vx = v.x * 2
+  // w2 = 1/2 * cos(θ)
+  // dot2 = 2 * sin(θ/2) * u.x * v.x + ... = 2 * sin(θ/2) * (u · v)
+
+  // vx * w2 = v.x * cos(θ)
+  // (y * vz - z * vy) * w = 2 * sin(θ/2) * (u × v) * cos(θ/2) = sinθ * (u × v)
+  // x * dot2 = sin(θ/2) * u.x * 2 * sin(θ/2) * (u · v) = 2 * sin(θ/2) * sin(θ/2) * (u · v) * u.x = (1 - cos(θ)) * (u · v) * u.x
+
+	  const float vx = 2.0f * v.x;
+	  const float vy = 2.0f * v.y;
+	  const float vz = 2.0f * v.z;
+	  const float w2 = w * w - 0.5f;
+	  const float dot2 = (x * vx + y * vy + z * vz);
+	  return PxVec3((vx * w2 + (y * vz - z * vy) * w + x * dot2), (vy * w2 + (z * vx - x * vz) * w + y * dot2),
+			(vz * w2 + (x * vy - y * vx) * w + z * dot2));
+  }
+#+end_src
+
 
 * PxQuat::rotateInv
 #+begin_src C++
 PX_CUDA_CALLABLE PX_FORCE_INLINE const PxVec3 rotateInv(const PxVec3& v) const
 {
+  // q = [cos(θ/2), -sin(θ/2) * A]
+  // x = -sin(θ/2) * u.x
+  // w = cos(θ/2)
+  // vx = v.x * 2
+  // w2 = 1/2 * cos(θ)
+  // dot2 = -2 * sin(θ/2) * u.x * v.x + ... = -2 * sin(θ/2) * (u · v)
+
+  // vx * w2 = v.x * cos(θ)
+  // (y * vz - z * vy) * w = -2 * sin(θ/2) * (u × v) * cos(θ/2) = -sinθ * (u × v)
+  // x * dot2 = -sin(θ/2) * u.x * -2 * sin(θ/2) * (u · v) = 2 * sin(θ/2) * sin(θ/2) * (u · v) * u.x = (1 - cos(θ)) * (u · v) * u.x
+
 	const float vx = 2.0f * v.x;
 	const float vy = 2.0f * v.y;
 	const float vz = 2.0f * v.z;
