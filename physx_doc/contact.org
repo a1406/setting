@@ -1,3 +1,7 @@
+* 旋转得一般公式
+v′ = cos(θ)v + (1 − cos(θ))(u · v)u + sin(θ)(u × v)
+cos2θ = cos(θ + θ) = cosθ * cosθ - sinθ * sinθ = 2cosθ * cosθ - 1 = 1 - 2sinθ * sinθ
+
 * PxQuat::rotateInv
 #+begin_src C++
 PX_CUDA_CALLABLE PX_FORCE_INLINE const PxVec3 rotateInv(const PxVec3& v) const
@@ -13,6 +17,22 @@ PX_CUDA_CALLABLE PX_FORCE_INLINE const PxVec3 rotateInv(const PxVec3& v) const
 // - (x,y,z) CROSS v * cos(*)
 // + (x,y,z) * 2 * ((x, y, z) DOT v)
 }  
+#+end_src
+
+* PsTransformV::transformInv
+#+begin_src C++
+PX_FORCE_INLINE PsTransformV transformInv(const PsTransformV& src) const
+{
+	PX_ASSERT(src.isSane());
+	PX_ASSERT(isFinite());
+	// src = [srct, srcr] -> [r^-1*(srct-t), r^-1*srcr]
+	/*PxQuat qinv = q.getConjugate();
+	return PxTransform(qinv.rotate(src.p - p), qinv*src.q);*/
+	const QuatV qinv = QuatConjugate(q);
+	const Vec3V v = QuatRotate(qinv, V3Sub(src.p, p));
+	const QuatV rot = QuatMul(qinv, src.q);
+	return PsTransformV(v, rot);
+}
 #+end_src
 
 
@@ -103,6 +123,9 @@ PX_FORCE_INLINE Ps::aos::FloatV PxcDistancePointSegmentSquared(const Ps::aos::Ve
 * PxcPCMContactSphereMesh
 
 * PxcPCMContactPlaneCapsule 面胶囊体
+** 碰撞判断
+
+** 碰撞点
 
 * PxcPCMContactPlaneBox
 

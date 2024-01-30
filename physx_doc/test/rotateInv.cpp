@@ -57,6 +57,11 @@ enum PxIDENTITY
 #include "vec3.h"
 #include "vec4.h"
 
+PX_FORCE_INLINE PxVec3 V3Sub(const PxVec3 a, const PxVec3 b)
+{
+	return PxVec3(a.x - b.x, a.y - b.y, a.z - b.z);
+}
+
 PxVec3 rotateInv(float x, float y, float z, float w, PxVec3 v)
 {
 	const float vx   = 2.0f * v.x;
@@ -74,6 +79,67 @@ PxVec3 rotateInv(float x, float y, float z, float w, PxVec3 v)
 	// - (x,y,z) CROSS v * cos(* / 2) * 2
 	// + (x,y,z) * 2 * ((x, y, z) DOT v)
 }
+
+PX_FORCE_INLINE PxVec3 QuatRotate(const PxVec4 q, const PxVec3 v)
+{
+	/*
+	const PxVec3 qv(x,y,z);
+	return (v*(w*w-0.5f) + (qv.cross(v))*w + qv*(qv.dot(v)))*2;
+	*/
+
+	const float two = (2.f);
+	// const FloatV half = FloatV_From_F32(0.5f);
+	const float nhalf = (-0.5f);
+	const PxVec3 u(q.x, q.y, q.z);// = Vec3V_From_Vec4V(q);
+	const float w = (q.w);
+	// const FloatV w2 = FSub(FMul(w, w), half);
+	const float w2 = w * w + nhalf;//FScaleAdd(w, w, nhalf);
+	const PxVec3 a = v * w2;//V3Scale(v, w2);
+	// const Vec3V b = V3Scale(V3Cross(u, v), w);
+	// const Vec3V c = V3Scale(u, V3Dot(u, v));
+	// return V3Scale(V3Add(V3Add(a, b), c), two);
+//	const PxVec3 temp = V3ScaleAdd(V3Cross(u, v), w, a);
+	const PxVec3 temp = u.cross(v) * w + a;//V3ScaleAdd(u.cross(v), w, a);
+	// return V3Scale(V3ScaleAdd(u, V3Dot(u, v), temp), two);
+	return (u * u.dot(v) + temp) * two;
+}
+
+PX_FORCE_INLINE PxVec4 QuatMul(const PxVec4 a, const PxVec4 b)
+{
+	const PxVec3 imagA(a.x, a.y, a.z);
+	const PxVec3 imagB(b.x, b.y, b.z);
+	const float rA = a.w;
+	const float rB = b.w;
+
+	// const float real = FSub(FMul(rA, rB), V3Dot(imagA, imagB));
+	const float real = rA * rB - imagA.dot(imagB);
+	const PxVec3 v0 = (imagA * rB);
+	const PxVec3 v1 = (imagB * rA);
+	// const PxVec3 v2 = V3Cross(imagA, imagB);
+	const PxVec3 v2 = imagA.cross(imagB);	
+	// const PxVec3 imag = V3Add(V3Add(v0, v1), v2);
+	const PxVec3 imag = ((v0 + v1) + v2);	
+
+	return PxVec4(imag.x, imag.y, imag.z, real);
+	// return V4SetW(Vec4V_From_Vec3V(imag), real);
+}
+
+PX_FORCE_INLINE void transformInv(PxVec3 p, PxVec4 q, PxVec3& pos, PxVec4& rot)
+{
+	// PX_ASSERT(src.isSane());
+	// PX_ASSERT(isFinite());
+	// src = [srct, srcr] -> [r^-1*(srct-t), r^-1*srcr]
+	/*PxQuat qinv = q.getConjugate();
+	return PxTransform(qinv.rotate(src.p - p), qinv*src.q);*/
+	PxVec4 qinv = (q);
+	qinv.x = -qinv.x;
+	qinv.y = -qinv.y;
+	qinv.z = -qinv.z;	
+	pos = QuatRotate(qinv, V3Sub(pos, p));
+	rot = QuatMul(qinv, rot);
+	// return PsTransformV(v, rot);
+}
+
 
 // typedef struct PxVec4_
 // {
@@ -241,6 +307,11 @@ int main(int argc, char *argv[])
 //	printf("sqrt(3) = %f, sqrt(3) / 2 = %f\n", sqrtf(3.0), sqrtf(3.0) / 2);
 	PxVec3 v2 = rotateInv(x, y, z, w, v);
 	print_result("rotateInv: ", v2);
+
+	PxVec3 pos = v;
+	PxVec4 rot;
+	transformInv(PxVec3(0,0,0), PxVec4(x, y, z, w), pos, rot);
+	
 	PxVec3 v10 = rotateInv10(x, y, z, w, v);
 	print_result("rotateInv10: ", v10);	
 
