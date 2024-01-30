@@ -122,6 +122,33 @@ conMethod(shape0->geometry, shape1->geometry, *tm0, *tm1, context.mNarrowPhasePa
 
 *** QuatGetBasisVector0 获取胶囊体的X旋转轴
 可以参考test里面的rotateInv4函数里面的v1.x的计算，注意w * w = 1 - x * x - y * y - z * z. 本质上这里就是计算(1,0,0)旋转后的坐标
+用(1,0,0)套一下rotate函数即可
+
+#+begin_src C++
+/** brief computes rotation of x-axis */
+PX_FORCE_INLINE Vec3V QuatGetBasisVector0(const QuatV q)
+{
+	/*const PxF32 x2 = x*2.0f;
+	const PxF32 w2 = w*2.0f;
+	return PxVec3(	(w * w2) - 1.0f + x*x2,
+	                (z * w2)        + y*x2,
+	                (-y * w2)       + z*x2);*/
+
+	const FloatV two = FLoad(2.f);
+	const FloatV w = V4GetW(q);
+	const Vec3V u = Vec3V_From_Vec4V(q);
+
+	const FloatV x2 = FMul(V3GetX(u), two);
+	const FloatV w2 = FMul(w, two);
+
+	const Vec3V a = V3Scale(u, x2);
+	const Vec3V tmp = V3Merge(w, V3GetZ(u), FNeg(V3GetY(u)));
+	// const Vec3V b = V3Scale(tmp, w2);
+	// const Vec3V ab = V3Add(a, b);
+	const Vec3V ab = V3ScaleAdd(tmp, w2, a);
+	return V3SetX(ab, FSub(V3GetX(ab), FOne()));
+}
+#+end_src
 
 *** PxcDistancePointSegmentSquared 点到线的距离
 设最近点是o
