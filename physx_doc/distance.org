@@ -1,0 +1,25 @@
+* PointBox
+先把点转到box得坐标系下
+然后x,y,z分别和box得长宽比较取到最近点和距离
+
+
+* PointTriangle
+
+** PointTriangleSIMD
+
+* SegmentBox
+
+* SegmentTriangle
+
+** SegmentTriangleSIMD
+
+* SegmentSegment
+
+** SegmentSegmentSIMD
+
+* PointSegment
+点到线段得距离，做个点乘
+然后用向量加减得到距离向量
+最后距离向量点乘自己返回距离得平方
+
+

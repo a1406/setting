@@ -115,9 +115,9 @@ conMethod(shape0->geometry, shape1->geometry, *tm0, *tm1, context.mNarrowPhasePa
 
 * PxcPCMContactSphereCapsule 球胶囊体
 ** 碰撞判断
-1. 调用QuatGetBasisVector0获取胶囊体的X旋转轴（todo）
+1. 调用QuatGetBasisVector0获取胶囊体的X旋转轴
 2. 取到球半径 + 胶囊体半径
-3. 取到球心到胶囊体轴的距离PxcDistancePointSegmentSquared（todo）
+3. 取到球心到胶囊体轴的距离PxcDistancePointSegmentSquared
 4. 比较2和3的大小判断是否碰撞
 
 *** QuatGetBasisVector0 获取胶囊体的X旋转轴
@@ -151,7 +151,7 @@ PX_FORCE_INLINE Vec3V QuatGetBasisVector0(const QuatV q)
 #+end_src
 
 *** PxcDistancePointSegmentSquared 点到线的距离
-设最近点是o
+点乘，裁剪
 #+begin_src C++
 PX_FORCE_INLINE Ps::aos::FloatV PxcDistancePointSegmentSquared(const Ps::aos::Vec3VArg a, const Ps::aos::Vec3VArg b, const Ps::aos::Vec3VArg p, Ps::aos::FloatV& param)
 {
@@ -194,7 +194,7 @@ PX_FORCE_INLINE Ps::aos::FloatV PxcDistancePointSegmentSquared(const Ps::aos::Ve
 
 * PxcPCMContactPlaneCapsule 面胶囊体
 ** 碰撞判断
-
+胶囊体转到面得坐标系，然后判断
 ** 碰撞点
 
 * PxcPCMContactPlaneBox
@@ -202,6 +202,13 @@ PX_FORCE_INLINE Ps::aos::FloatV PxcDistancePointSegmentSquared(const Ps::aos::Ve
 * PxcPCMContactPlaneConvex
 
 * PxcPCMContactCapsuleCapsule 胶囊体胶囊体
+** 碰撞判断
+和之前那些不同，这次没有转坐标系，而是取到两个胶囊体得中点当作坐标原点来计算(估计是避免世界坐标数字太大)
+取到两个胶囊体得中轴线，然后调用函数distanceSegmentSegmentSquared获取线线得最小距离
+用这个最小距离来和半径做比较
+
+*** distanceSegmentSegmentSquared
+在目录geomutils/src/distance/下有各种距离计算得文件，开一个distance.org来一个个看
 
 * PxcPCMContactCapsuleBox
 
