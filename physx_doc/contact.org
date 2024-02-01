@@ -211,12 +211,18 @@ PX_FORCE_INLINE Ps::aos::FloatV PxcDistancePointSegmentSquared(const Ps::aos::Ve
 在目录geomutils/src/distance/下有各种距离计算得文件，开一个distance.org来一个个看
 
 * PxcPCMContactCapsuleBox
+** 碰撞判断
+把胶囊体转换到box的坐标系
+获得胶囊体转换后得旋转矩阵
 
 * PxcPCMContactCapsuleConvex
 
 * PxcPCMContactCapsuleMesh
 
 * PxcPCMContactBoxBox 盒子盒子
+** 碰撞判断
+把box1 转换到box2得坐标系
+获得box1 转换后得旋转矩阵
 
 * PxcPCMContactBoxConvex
 

@@ -3,7 +3,7 @@
 raycast_box(const physx::PxGeometry & geom, const physx::PxTransform & pose, const physx::PxVec3 & rayOrigin, const physx::PxVec3 & rayDir, float maxDist, physx::PxFlags<enum physx::PxHitFlag::Enum,unsigned short> hitFlags, unsigned int maxHits, physx::PxRaycastHit * hits) 行 48	C++
 GeomQueryAny<physx::PxRaycastHit>::geomHit(const physx::NpSceneQueries & sceneQueries, const physx::MultiQueryInput & input, const physx::Gu::ShapeData & sd, const physx::PxGeometry & sceneGeom, const physx::PxTransform & pose, physx::PxFlags<enum physx::PxHitFlag::Enum,unsigned short> hitFlags, unsigned int maxHits, physx::PxRaycastHit * hits, const float shrunkMaxDistance, physx::PxBounds3 * precomputedBounds) 行 217	C++
 MultiQueryCallback<physx::PxRaycastHit>::invoke(float & aDist, const physx::Sq::PrunerPayload & aPayload) 行 441	C++
-physx::Gu::doLeafTest<0,physx::Sq::AABBTree,physx::Sq::AABBTreeRuntimeNode,physx::Sq::PrunerPayload,physx::Sq::PrunerCallback>(const physx::Sq::AABBTreeRuntimeNode * node, physx::Gu::RayAABBTest & test, float & md, float oldMaxDist, const physx::Sq::PrunerPayload * objects, const physx::PxBounds3 * boxes, const physx::Sq::AABBTree & tree, float & maxDist, physx::Sq::PrunerCallback & pcb) 行 150	C++
+physx::Gu::doLeafTest<0,physx::Sq::AABBTree,physx::Sq::AABBTreeRuntimeNode,physx::Sq::PrunerPayload,physx::Sq::PrunerCallback>(const physx::Sq::AABBTreeRuntimeNode * node, physx::Gu::RayAABBTest & test, float & md, float oldMaxDist, const physx::Sq::PrunerPayload * objects, const physx::PxBounds3 * boxes, const physx::Sq::AABBTree & tree, float & maxDist, physx::Sq::PrunerCallback & pcb) GuAABBTreeQuery.h:150	C++
 physx::Gu::AABBTreeRaycast<0,physx::Sq::AABBTree,physx::Sq::AABBTreeRuntimeNode,physx::Sq::PrunerPayload,physx::Sq::PrunerCallback>::operator()(const physx::Sq::PrunerPayload * objects, const physx::PxBounds3 * boxes, const physx::Sq::AABBTree & tree, const physx::PxVec3 & origin, const physx::PxVec3 & unitDir, float & maxDist, const physx::PxVec3 & inflation, physx::Sq::PrunerCallback & pcb) 行 225	C++
 physx::Sq::AABBPruner::raycast(const physx::PxVec3 & origin, const physx::PxVec3 & unitDir, float & inOutDistance, physx::Sq::PrunerCallback & pcb) 行 350	C++
 physx::NpSceneQueries::multiQuery<physx::PxRaycastHit>(const physx::MultiQueryInput & input, physx::PxHitCallback<physx::PxRaycastHit> & hits, physx::PxFlags<enum physx::PxHitFlag::Enum,unsigned short> hitFlags, const physx::PxQueryCache * cache, const physx::PxQueryFilterData & filterData, physx::PxQueryFilterCallback * filterCall, physx::BatchQueryFilterData * bfd) 行 780	C++
@@ -132,3 +132,10 @@ physx::NpScene::addRigidStatic(physx::NpRigidStatic & actor, const physx::Gu::BV
 physx::NpScene::addActorInternal(physx::PxActor & actor, const physx::PxBVHStructure * bvhStructure) 行 386	C++
 physx::NpScene::addActor(physx::PxActor & actor, const physx::PxBVHStructure * bvhStructure) 行 358	C++
 #+end_src
+
+
+* AABBTreeBuildNode::_buildHierarchy
+二叉树组织的层次包围盒
+每一层从x,y,z中选一个轴做切分(猜的, 待确认) const PxU32 axis = Ps::largestAxis(PxVec3(vars.x, vars.y, vars.z));
+有两棵AABB树，一棵用来处理逻辑，更新状态，另一棵在后台的数帧里更新层次包围盒，更新完以后两棵树交换(猜的，待确认)
+
